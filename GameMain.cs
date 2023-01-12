@@ -9,7 +9,7 @@ public class GameMain : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    public const uint WIDTH = 1080, HEIGHT = 1024;
+    public const int WIDTH = 1920, HEIGHT = 1080;
     World world;
 
     public GameMain()
@@ -17,7 +17,8 @@ public class GameMain : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        _graphics.PreferredBackBufferFormat
+        _graphics.PreferredBackBufferWidth = WIDTH;
+        _graphics.PreferredBackBufferHeight = HEIGHT;
     }
 
     protected override void Initialize()
