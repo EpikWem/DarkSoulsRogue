@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using DarkSoulsRogue.Core;
@@ -31,8 +32,9 @@ public class GameMain : Game
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-
         //Use this.Content to load your game content here
+        world.Texture = Content.Load<Texture2D>("bg");
+        world.Position = new Vector2(0, 0);
     }
 
     protected override void Update(GameTime gameTime)
@@ -47,10 +49,13 @@ public class GameMain : Game
 
     protected override void Draw(GameTime gameTime)
     {
-        GraphicsDevice.Clear(Color.CornflowerBlue);
-
+        GraphicsDevice.Clear(Color.Black);
+        
         //Add your drawing code here
-
+        _spriteBatch.Begin();
+        //world.Draw(_spriteBatch);
+        _spriteBatch.End();
+        
         base.Draw(gameTime);
     }
 }
