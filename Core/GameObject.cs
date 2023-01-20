@@ -3,11 +3,19 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core;
 
-public class GameObject
+public abstract class GameObject
 {
 
+    public readonly int DimX, DimY;
     public Vector2 Position;
     public Texture2D Texture;
+
+    public GameObject(Texture2D texture)
+    {
+        Texture = texture;
+        DimX = texture.Width;
+        DimY = texture.Height;
+    }
 
     public void Draw(SpriteBatch batch)
     {

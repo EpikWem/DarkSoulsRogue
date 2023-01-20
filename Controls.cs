@@ -28,8 +28,7 @@ public abstract class Controls
 
     public static void UpdateKeyListener()
     {
-        foreach (Control c in Array)
-        {
+        foreach (Control c in Array) {
             c.IsPressed = Keyboard.GetState().IsKeyDown(c.KeyCode);
         }
     }

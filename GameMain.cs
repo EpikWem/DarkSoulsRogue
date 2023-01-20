@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Linq;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using DarkSoulsRogue.Core;
@@ -14,6 +15,8 @@ public class GameMain : Game
     
     private World _world;
     private Character _character;
+    private Wall[] _walls;
+    private static GameObject[] _objects;
     
     
     
@@ -34,6 +37,13 @@ public class GameMain : Game
     {
         _world = new World(LoadTexture("bg"));
         _character = new Character(LoadTexture("character"));
+        _walls = new Wall[4] {
+            new Wall(LoadTexture("wall"), 0, 0),
+            new Wall(LoadTexture("wall"), 80, 80),
+            new Wall(LoadTexture("wall"), 100, 200),
+            new Wall(LoadTexture("wall"), 800, 400)
+        };
+        _objects = new GameObject[] { _world, _walls[0], _walls[1], _walls[2], _walls[3], _character };
         
         base.Initialize();
     }
@@ -62,7 +72,7 @@ public class GameMain : Game
             _character.Move(Character.Orientation.Left);
         
         // MODEL UPDATES
-        
+        //to do
 
         base.Update(gameTime);
     }
@@ -73,8 +83,9 @@ public class GameMain : Game
         
         //Add your drawing code here
         _spriteBatch.Begin();
-        _world.Draw(_spriteBatch);
-        _character.Draw(_spriteBatch);
+        foreach (GameObject o in _objects) {
+            o.Draw(_spriteBatch);
+        }
         _spriteBatch.End();
         
         base.Draw(gameTime);

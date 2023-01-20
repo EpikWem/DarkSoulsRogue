@@ -1,4 +1,3 @@
-using System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,11 +10,9 @@ public class Character : GameObject
     private const int Speed = 10;
     private Orientation _orientation;
     
-    public Character(Texture2D texture)
+    public Character(Texture2D texture) : base(texture)
     {
-        Texture = texture;
         Position = new Vector2(250, 200);
-
         _orientation = Orientation.Up;
     }
     
