@@ -7,43 +7,54 @@ namespace DarkSoulsRogue;
 
 public class GameMain : Game
 {
-    private GraphicsDeviceManager graphics;
-    private SpriteBatch spriteBatch;
-    public const int WIDTH = 960, HEIGHT = 720;
-    World world;
+
+    private GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    private const int Width = 960, Height = 720;
+    
+    private World _world;
+    private Character _character;
+    
+    
+    
+    /**=============================================================
+     *= BASIC METHODS ==============================================
+     *============================================================*/
 
     public GameMain()
     {
-        graphics = new GraphicsDeviceManager(this);
+        _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        graphics.PreferredBackBufferWidth = WIDTH;
-        graphics.PreferredBackBufferHeight = HEIGHT;
+        _graphics.PreferredBackBufferWidth = Width;
+        _graphics.PreferredBackBufferHeight = Height;
     }
 
     protected override void Initialize()
     {
-        //Add your initialization logic here
-        world = new World();
+        _world = new World(LoadTexture("bg"));
+        _character = new Character(LoadTexture("character"));
+        
         base.Initialize();
     }
 
     protected override void LoadContent()
     {
-        spriteBatch = new SpriteBatch(GraphicsDevice);
+        _spriteBatch = new SpriteBatch(GraphicsDevice);
         //Use this.Content to load your game content here
-        world.Texture = Content.Load<Texture2D>("images/bg");
-        world.Position = new Vector2(0, 0);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || KeyPressed(Keys.F10))
+        // KEY TESTS
+        Controls.UpdateKeyListener();
+        if (Controls.KillApp.IsPressed)
             Exit();
-        if (KeyPressed(Keys.F11))
-            graphics.ToggleFullScreen();
-
-        //Add your update logic here
+        if (Controls.ToggleFullscreen.IsPressed)
+            _graphics.ToggleFullScreen();
+        
+        // MODEL UPDATES
+        
 
         base.Update(gameTime);
     }
@@ -53,21 +64,23 @@ public class GameMain : Game
         GraphicsDevice.Clear(Color.Black);
         
         //Add your drawing code here
-        spriteBatch.Begin();
-        world.Draw(spriteBatch);
-        spriteBatch.End();
+        _spriteBatch.Begin();
+        _world.Draw(_spriteBatch);
+        _character.Draw(_spriteBatch);
+        _spriteBatch.End();
         
         base.Draw(gameTime);
     }
-
-    private bool KeyPressed(Keys key)
-    {
-        return Keyboard.GetState().IsKeyDown(key);
-    }
     
-    private bool KeyReleased(Keys key)
+    
+    
+    /**=============================================================
+     *= TEXTURES MANAGEMENT ========================================
+     *============================================================*/
+    
+    private Texture2D LoadTexture(string fileName)
     {
-        return Keyboard.GetState().IsKeyUp(key);
+        return Content.Load<Texture2D>("images/" + fileName);
     }
     
 }

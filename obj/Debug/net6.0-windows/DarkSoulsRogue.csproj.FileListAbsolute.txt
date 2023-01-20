@@ -72,6 +72,7 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\ru
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\obj\Debug\net6.0-windows\DarkSoulsRogue.csproj.CopyComplete
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\obj\Debug\net6.0-windows\DarkSoulsRogue.genruntimeconfig.cache
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\obj\Debug\net6.0-windows\ref\DarkSoulsRogue.dll
-C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\bg.png
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\bg.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\bg.png
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\bg.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\character.xnb
