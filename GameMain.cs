@@ -63,13 +63,13 @@ public class GameMain : Game
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
         if (Controls.Up.IsPressed)
-            _character.Move(Character.Orientation.Up);
+            _character.Move(Character.Orientation.Up, _walls);
         if (Controls.Down.IsPressed)
-            _character.Move(Character.Orientation.Down);
+            _character.Move(Character.Orientation.Down, _walls);
         if (Controls.Right.IsPressed)
-            _character.Move(Character.Orientation.Right);
+            _character.Move(Character.Orientation.Right, _walls);
         if (Controls.Left.IsPressed)
-            _character.Move(Character.Orientation.Left);
+            _character.Move(Character.Orientation.Left, _walls);
         
         // MODEL UPDATES
         //to do
