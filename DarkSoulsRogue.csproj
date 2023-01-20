@@ -16,11 +16,10 @@
     <PackageReference Include="MonoGame.Content.Builder.Task" Version="3.8.1.303" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\images" />
     <Folder Include="Content\sounds" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="Content\bg.png">
+    <None Update="Content\images\bg.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

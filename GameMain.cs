@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using DarkSoulsRogue.Core;
@@ -8,18 +7,18 @@ namespace DarkSoulsRogue;
 
 public class GameMain : Game
 {
-    private GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
-    public const int WIDTH = 1920, HEIGHT = 1080;
+    private GraphicsDeviceManager graphics;
+    private SpriteBatch spriteBatch;
+    public const int WIDTH = 960, HEIGHT = 720;
     World world;
 
     public GameMain()
     {
-        _graphics = new GraphicsDeviceManager(this);
+        graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        _graphics.PreferredBackBufferWidth = WIDTH;
-        _graphics.PreferredBackBufferHeight = HEIGHT;
+        graphics.PreferredBackBufferWidth = WIDTH;
+        graphics.PreferredBackBufferHeight = HEIGHT;
     }
 
     protected override void Initialize()
@@ -31,16 +30,18 @@ public class GameMain : Game
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
+        spriteBatch = new SpriteBatch(GraphicsDevice);
         //Use this.Content to load your game content here
-        world.Texture = Content.Load<Texture2D>("bg");
+        world.Texture = Content.Load<Texture2D>("images/bg");
         world.Position = new Vector2(0, 0);
     }
 
     protected override void Update(GameTime gameTime)
     {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || KeyPressed(Keys.F10))
             Exit();
+        if (KeyPressed(Keys.F11))
+            graphics.ToggleFullScreen();
 
         //Add your update logic here
 
@@ -52,10 +53,21 @@ public class GameMain : Game
         GraphicsDevice.Clear(Color.Black);
         
         //Add your drawing code here
-        _spriteBatch.Begin();
-        //world.Draw(_spriteBatch);
-        _spriteBatch.End();
+        spriteBatch.Begin();
+        world.Draw(spriteBatch);
+        spriteBatch.End();
         
         base.Draw(gameTime);
     }
+
+    private bool KeyPressed(Keys key)
+    {
+        return Keyboard.GetState().IsKeyDown(key);
+    }
+    
+    private bool KeyReleased(Keys key)
+    {
+        return Keyboard.GetState().IsKeyUp(key);
+    }
+    
 }
