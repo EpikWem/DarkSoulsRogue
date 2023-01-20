@@ -10,7 +10,7 @@ public class GameMain : Game
 
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    private const int Width = 960, Height = 720;
+    public const int Width = 960, Height = 720;
     
     private World _world;
     private Character _character;
@@ -52,6 +52,14 @@ public class GameMain : Game
             Exit();
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
+        if (Controls.Up.IsPressed)
+            _character.Move(Character.Orientation.Up);
+        if (Controls.Down.IsPressed)
+            _character.Move(Character.Orientation.Down);
+        if (Controls.Right.IsPressed)
+            _character.Move(Character.Orientation.Right);
+        if (Controls.Left.IsPressed)
+            _character.Move(Character.Orientation.Left);
         
         // MODEL UPDATES
         
