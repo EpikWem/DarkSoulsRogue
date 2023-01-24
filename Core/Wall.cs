@@ -6,10 +6,10 @@ namespace DarkSoulsRogue.Core;
 public class Wall : GameObject
 {
 
-    public Wall(Texture2D texture, int x, int y) : base(texture)
+    public Wall(Texture2D texture, int xInGrid, int yInGrid) : base(texture)
     {
-        Position.X = x;
-        Position.Y = y;
+        Position.X = xInGrid*GameMain.CellSize;
+        Position.Y = yInGrid*GameMain.CellSize;
     }
     
 }

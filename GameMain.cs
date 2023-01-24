@@ -9,10 +9,11 @@ namespace DarkSoulsRogue;
 public class GameMain : Game
 {
 
-    private GraphicsDeviceManager _graphics;
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-    public const int Width = 960, Height = 720;
-    
+    public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
+    public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
+
     private World _world;
     private Character _character;
     private Wall[] _walls;
@@ -35,16 +36,13 @@ public class GameMain : Game
 
     protected override void Initialize()
     {
+        _objects = new GameObject[] {};
         _world = new World(LoadTexture("bg"));
+        _objects[0] = _world;
         _character = new Character(LoadTexture("character"));
-        _walls = new Wall[4] {
-            new Wall(LoadTexture("wall"), 0, 0),
-            new Wall(LoadTexture("wall"), 80, 80),
-            new Wall(LoadTexture("wall"), 100, 200),
-            new Wall(LoadTexture("wall"), 800, 400)
-        };
-        _objects = new GameObject[] { _world, _walls[0], _walls[1], _walls[2], _walls[3], _character };
-        
+        _objects[1] = _character;
+        LoadMap();
+
         base.Initialize();
     }
 
@@ -89,6 +87,13 @@ public class GameMain : Game
         _spriteBatch.End();
         
         base.Draw(gameTime);
+    }
+
+
+
+    private void LoadMap(Maps.Map map)
+    {
+        
     }
     
     

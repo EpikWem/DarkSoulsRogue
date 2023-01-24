@@ -20,6 +20,7 @@ public class Character : GameObject
 
     public void Move(Orientation orientation, Wall[] walls)
     {
+        Vector2 oldPosition = new Vector2(Position.X, Position.Y);
         _orientation = orientation;
         switch (_orientation) {
             case Orientation.Up: Position.Y -= Speed; if (Position.Y < 0) Position.Y = 0; break;
@@ -30,7 +31,11 @@ public class Character : GameObject
         foreach (Wall w in walls)
         {
             if (w.GetHitbox().Intersects(GetHitbox()))
-                Position = new Vector2(250, 200);
+            {
+                Position.X = oldPosition.X;
+                Position.Y = oldPosition.Y;
+            }
+                
         }
     }
 
