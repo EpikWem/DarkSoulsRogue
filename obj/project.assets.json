@@ -7532,19 +7532,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Lucas\\.nuget\\packages\\": {}
+    "C:\\Users\\lucas\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Lucas\\Documents\\2_DEVELOP\\CS\\DarkSoulsRogue\\DarkSoulsRogue.csproj",
+      "projectUniqueName": "C:\\Users\\lucas\\Documents\\$_DIVERS\\Code\\CS\\DarkSoulsRogue\\DarkSoulsRogue.csproj",
       "projectName": "DarkSoulsRogue",
-      "projectPath": "C:\\Users\\Lucas\\Documents\\2_DEVELOP\\CS\\DarkSoulsRogue\\DarkSoulsRogue.csproj",
-      "packagesPath": "C:\\Users\\Lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Lucas\\Documents\\2_DEVELOP\\CS\\DarkSoulsRogue\\obj\\",
+      "projectPath": "C:\\Users\\lucas\\Documents\\$_DIVERS\\Code\\CS\\DarkSoulsRogue\\DarkSoulsRogue.csproj",
+      "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\lucas\\Documents\\$_DIVERS\\Code\\CS\\DarkSoulsRogue\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0-windows"
@@ -7614,7 +7614,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Users\\lucas\\.dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

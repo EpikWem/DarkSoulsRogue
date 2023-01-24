@@ -1,1 +1,4 @@
 Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/bg.png","C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/bg.xnb","TextureProcessor","Texture2DContent",306400,2957397,0,7801932
+"C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/character.png","C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/character.xnb","TextureProcessor","Texture2DContent",10146,19285,0,0114756
+"C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/wall.png","C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/wall.xnb","TextureProcessor","Texture2DContent",5490,16469,0,0121718
