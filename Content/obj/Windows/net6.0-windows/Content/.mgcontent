@@ -6,7 +6,7 @@
   <SourceFiles>
     <File>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/bg.png</File>
     <File>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/character.png</File>
-    <File>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/wall.png</File>
+    <File>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/walls/wall1.png</File>
   </SourceFiles>
   <DestFiles>
     <File xsi:nil="true" />

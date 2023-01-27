@@ -37,11 +37,11 @@ public class GameMain : Game
     protected override void Initialize()
     {
         _objects = new GameObject[] {};
-        _world = new World(LoadTexture("bg"));
+        /*_world = new World(LoadTexture("bg"));
         _objects[0] = _world;
         _character = new Character(LoadTexture("character"));
-        _objects[1] = _character;
-        LoadMap();
+        _objects[1] = _character;*/
+        //LoadMap(Maps.UndeadAsylum1);
 
         base.Initialize();
     }
@@ -93,7 +93,19 @@ public class GameMain : Game
 
     private void LoadMap(Maps.Map map)
     {
-        
+        int[] wt = map.WallsIds;
+        int wi = 0;
+        for (int i = 0; i < wt.Length; i++)
+        {
+            if (wt[i] != 0)
+            {
+                _walls[wi] = new Wall(
+                    LoadWallTexture(i),
+                    i % GridWidth,
+                    (int)(i / GridWidth));
+                wi++;
+            }
+        }
     }
     
     
@@ -101,10 +113,14 @@ public class GameMain : Game
     /**=============================================================
      *= TEXTURES MANAGEMENT ========================================
      *============================================================*/
-    
     private Texture2D LoadTexture(string fileName)
     {
         return Content.Load<Texture2D>("images/" + fileName);
+    }
+
+    private Texture2D LoadWallTexture(int wallId)
+    {
+        return LoadTexture("walls/wall1");
     }
     
 }
