@@ -110,7 +110,7 @@ public class GameMain : Game
 
     private Texture2D LoadWallTexture(int wallId)
     {
-        return LoadTexture("walls/wall1");
+        return LoadTexture("walls/wall" + wallId);
     }
     
 }

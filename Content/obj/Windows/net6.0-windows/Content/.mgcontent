@@ -7,8 +7,14 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/bg.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/character.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/walls/wall1.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/walls/wall2.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor1.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor2.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
