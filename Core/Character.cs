@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,27 +7,25 @@ namespace DarkSoulsRogue.Core;
 public class Character : GameObject
 {
 
-    private const int MarginX = 4, MarginY = 6;
+    private const int MarginS = 4, MarginU = 12, MarginD = 6;
     private const int Speed = 4;
     private Orientation _orientation;
     
     public Character(Texture2D texture) : base(texture)
     {
-        Position = new Vector2(250, 200);
+        Position = new Vector2(GameMain.CellSize*7, GameMain.CellSize*4);
         _orientation = Orientation.Up;
     }
-    
-    public enum Orientation { Up, Down, Right, Left }
 
-    public void Move(Orientation orientation, Wall[] walls)
+    public void Move(Orientation orientation, List<Wall> walls)
     {
         Vector2 oldPosition = new Vector2(Position.X, Position.Y);
         _orientation = orientation;
         switch (_orientation) {
-            case Orientation.Up: Position.Y -= Speed; if (Position.Y < 0) Position.Y = 0; break;
-            case Orientation.Down: Position.Y += Speed; if (Position.Y > GameMain.Height - Height) Position.Y = GameMain.Height - Height; break;
-            case Orientation.Right: Position.X += Speed; if (Position.X > GameMain.Width - Width) Position.X = GameMain.Width - Width; break;
-            case Orientation.Left: Position.X -= Speed; if (Position.X < 0) Position.X = 0; break;
+            case Orientation.Up: Position.Y -= Speed; break;
+            case Orientation.Down: Position.Y += Speed; break;
+            case Orientation.Right: Position.X += Speed; break;
+            case Orientation.Left: Position.X -= Speed; break;
         }
         foreach (Wall w in walls)
         {
@@ -41,7 +40,7 @@ public class Character : GameObject
 
     private new Rectangle GetHitbox()
     {
-        return new Rectangle((int)Position.X + MarginX, (int)Position.Y + MarginY, Width - MarginX*2, Height - MarginY*2);
+        return new Rectangle((int)Position.X + MarginS, (int)Position.Y + MarginU, Width - MarginS*2, Height - MarginU - MarginD);
     }
 
 }

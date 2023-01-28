@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,8 +17,7 @@ public class GameMain : Game
 
     private World _world;
     private Character _character;
-    private Wall[] _walls;
-    private static GameObject[] _objects;
+    private List<Wall> _walls = new List<Wall>();
     
     
     
@@ -36,12 +36,9 @@ public class GameMain : Game
 
     protected override void Initialize()
     {
-        _objects = new GameObject[] {};
-        /*_world = new World(LoadTexture("bg"));
-        _objects[0] = _world;
+        _world = new World(LoadTexture("bg"));
         _character = new Character(LoadTexture("character"));
-        _objects[1] = _character;*/
-        //LoadMap(Maps.UndeadAsylum1);
+        LoadMap(Maps.UndeadAsylum1);
 
         base.Initialize();
     }
@@ -61,13 +58,13 @@ public class GameMain : Game
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
         if (Controls.Up.IsPressed)
-            _character.Move(Character.Orientation.Up, _walls);
+            _character.Move(Orientation.Up, _walls);
         if (Controls.Down.IsPressed)
-            _character.Move(Character.Orientation.Down, _walls);
+            _character.Move(Orientation.Down, _walls);
         if (Controls.Right.IsPressed)
-            _character.Move(Character.Orientation.Right, _walls);
+            _character.Move(Orientation.Right, _walls);
         if (Controls.Left.IsPressed)
-            _character.Move(Character.Orientation.Left, _walls);
+            _character.Move(Orientation.Left, _walls);
         
         // MODEL UPDATES
         //to do
@@ -81,9 +78,11 @@ public class GameMain : Game
         
         //Add your drawing code here
         _spriteBatch.Begin();
-        foreach (GameObject o in _objects) {
-            o.Draw(_spriteBatch);
+        _world.Draw(_spriteBatch);
+        foreach (Wall w in _walls) {
+            w.Draw(_spriteBatch);
         }
+        _character.Draw(_spriteBatch);
         _spriteBatch.End();
         
         base.Draw(gameTime);
@@ -93,19 +92,10 @@ public class GameMain : Game
 
     private void LoadMap(Maps.Map map)
     {
-        int[] wt = map.WallsIds;
-        int wi = 0;
-        for (int i = 0; i < wt.Length; i++)
-        {
-            if (wt[i] != 0)
-            {
-                _walls[wi] = new Wall(
-                    LoadWallTexture(i),
-                    i % GridWidth,
-                    (int)(i / GridWidth));
-                wi++;
-            }
-        }
+        for (int y = 0; y < map.Height; y++)
+            for (int x = 0; x < map.Width; x++)
+                if (map.WallsIds[y][x] != 0)
+                    _walls.Add(new Wall(LoadWallTexture(map.WallsIds[y][x]), x, y));
     }
     
     
