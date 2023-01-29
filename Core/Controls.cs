@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace DarkSoulsRogue;
+namespace DarkSoulsRogue.Core;
 
 public abstract class Controls
 {

@@ -11,12 +11,18 @@ public class Character : GameObject
     private const int Speed = 4;
     private Orientation _orientation;
     private readonly Texture2D[] _textures;
+    private readonly Attributes _attributes;
+    public int Life, Stamina, Souls;
+
+    
     
     public Character(Texture2D[] textures) : base(textures[0])
     {
         Position = new Vector2(GameMain.CellSize*7, GameMain.CellSize*4);
         _orientation = Orientation.Up;
         _textures = textures;
+        _attributes = new Attributes();
+        HealMax();
     }
 
     public void Move(Orientation orientation, List<Wall> walls, bool run)
@@ -61,6 +67,23 @@ public class Character : GameObject
             Orientation.Left => _textures[3],
             _ => _textures[0]
         };
+    }
+
+    private int MaxLife()
+    {
+        return _attributes.Get(Attributes.Attribute.Vitality) * 10;
+    }
+
+    public void Heal(int hp)
+    {
+        Life += hp;
+        if (Life > MaxLife())
+            Life = MaxLife();
+    }
+
+    public void HealMax()
+    {
+        Life = MaxLife();
     }
 
 }

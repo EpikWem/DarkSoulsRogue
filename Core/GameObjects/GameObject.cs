@@ -10,15 +10,14 @@ public abstract class GameObject
     protected Vector2 Position;
     private readonly Texture2D _texture;
 
+    protected GameObject() {}
     protected GameObject(Texture2D texture)
     {
         _texture = texture;
         Width = texture.Width;
         Height = texture.Height;
     }
-
-    protected GameObject() {}
-
+    
     public void Draw(SpriteBatch batch)
     {
         batch.Draw(_texture, Position, Color.White);

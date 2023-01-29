@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using DarkSoulsRogue.Core;
-using DarkSoulsRogue.Core.GameObjects;
 
-namespace DarkSoulsRogue;
+namespace DarkSoulsRogue.Core;
 
 public class GameMain : Game
 {
@@ -14,9 +16,12 @@ public class GameMain : Game
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
 
+    private Textures _textures;
+
     private World _world;
     private Character _character;
-    private List<Wall> _walls = new List<Wall>();
+    private List<Wall> _walls = new ();
+    private List<InteractiveObject> _objects = new ();
     
     
     
@@ -35,9 +40,10 @@ public class GameMain : Game
 
     protected override void Initialize()
     {
-        _world = new World(LoadTexture("bg"));
-        _character = new Character(LoadCharacterTexture("debug"));
-        LoadMap(Maps.UndeadAsylum1);
+        _textures = new Textures(Content);
+        _world = new World(_textures.BgT);
+        _character = new Character(_textures.CharacterDebugT);
+        LoadMap(Maps.UndeadAsylum2);
 
         base.Initialize();
     }
@@ -51,9 +57,20 @@ public class GameMain : Game
     private void LoadMap(Maps.Map map)
     {
         for (int y = 0; y < map.Height; y++)
-        for (int x = 0; x < map.Width; x++)
-            if (map.WallsIds[y][x] != 0)
-                _walls.Add(new Wall(LoadWallTexture(map.WallsIds[y][x]), x, y));
+            for (int x = 0; x < map.Width; x++)
+                if (map.WallsIds[y][x] != 0)
+                    _walls.Add(new Wall(_textures.WallsT[map.WallsIds[y][x]], x, y));
+        for (int y = 0; y < map.Height; y++)
+            for (int x = 0; x < map.Width; x++)
+                if (map.ObjectsIds[y][x] != 0)
+                {
+                    _objects.Add( map.ObjectsIds[y][x] switch
+                    {
+                        1 => new Bonfire(_textures.BonfireT, x, y),
+                        //2 => new Chest(, x, y),
+                        //3 => new Door(, x, y)
+                    } );
+                }
     }
     
     
@@ -95,6 +112,9 @@ public class GameMain : Game
         foreach (Wall w in _walls) {
             w.Draw(_spriteBatch);
         }
+        foreach (Wall o in _objects) {
+            o.Draw(_spriteBatch);
+        }
         _character.Draw(_spriteBatch);
         _spriteBatch.End();
         
@@ -103,35 +123,12 @@ public class GameMain : Game
     
     private bool MoveCharacter(Orientation orientation)
     {
-        _character.Move(orientation, _walls, Controls.Run.IsPressed);
+        _character.Move(orientation, _walls.Concat(_objects).ToList(), Controls.Run.IsPressed);
         return false;
     }
     
     
     
-    /**=============================================================
-     *= TEXTURES MANAGEMENT ========================================
-     *============================================================*/
     
-    private Texture2D LoadTexture(string fileName)
-    {
-        return Content.Load<Texture2D>("images/" + fileName);
-    }
-
-    private Texture2D[] LoadCharacterTexture(string character)
-    {
-        return new[]
-        {
-            LoadTexture("characters/" + character + "/up"),
-            LoadTexture("characters/" + character + "/down"),
-            LoadTexture("characters/" + character + "/right"),
-            LoadTexture("characters/" + character + "/left")
-        };
-    }
-
-    private Texture2D LoadWallTexture(int wallId)
-    {
-        return LoadTexture("walls/wall" + wallId);
-    }
     
 }

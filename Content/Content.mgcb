@@ -27,7 +27,11 @@ images/characters/link/left.png
 images/floors/floor1.png
 images/floors/floor2.png
 
-images/objects/fire.png
+images/objects/bonfire/0.png
+images/objects/bonfire/1.png
+images/objects/bonfire/2.png
+images/objects/bonfire/3.png
+images/objects/bonfire/4.png
 
 images/walls/wall1.png
 images/walls/wall2.png
