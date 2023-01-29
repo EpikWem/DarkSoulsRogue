@@ -1,6 +1,6 @@
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.GameObjects;
 
 public class Mob : GameObject
 {

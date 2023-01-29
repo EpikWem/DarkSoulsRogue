@@ -2,6 +2,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using DarkSoulsRogue.Core;
+using DarkSoulsRogue.Core.GameObjects;
 
 namespace DarkSoulsRogue;
 
@@ -35,7 +36,7 @@ public class GameMain : Game
     protected override void Initialize()
     {
         _world = new World(LoadTexture("bg"));
-        _character = new Character(LoadTexture("character"));
+        _character = new Character(LoadCharacterTexture("debug"));
         LoadMap(Maps.UndeadAsylum1);
 
         base.Initialize();
@@ -115,6 +116,17 @@ public class GameMain : Game
     private Texture2D LoadTexture(string fileName)
     {
         return Content.Load<Texture2D>("images/" + fileName);
+    }
+
+    private Texture2D[] LoadCharacterTexture(string character)
+    {
+        return new[]
+        {
+            LoadTexture("characters/" + character + "/up"),
+            LoadTexture("characters/" + character + "/down"),
+            LoadTexture("characters/" + character + "/right"),
+            LoadTexture("characters/" + character + "/left")
+        };
     }
 
     private Texture2D LoadWallTexture(int wallId)

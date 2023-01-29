@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.GameObjects;
 
 public abstract class GameObject
 {
@@ -16,6 +16,8 @@ public abstract class GameObject
         Width = texture.Width;
         Height = texture.Height;
     }
+
+    protected GameObject() {}
 
     public void Draw(SpriteBatch batch)
     {

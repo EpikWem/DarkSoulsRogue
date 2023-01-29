@@ -1,7 +1,7 @@
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.GameObjects;
 
 public class World : GameObject
 {

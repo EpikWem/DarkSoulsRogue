@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/character.png</SourceFile>
-  <SourceTime>2023-01-20T22:12:46.0565518+01:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/character.xnb</DestFile>
-  <DestTime>2023-01-28T20:13:08.2498427+01:00</DestTime>
+  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/characters/link/down.png</SourceFile>
+  <SourceTime>2023-01-29T15:11:15.1865246+01:00</SourceTime>
+  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/characters/link/down.xnb</DestFile>
+  <DestTime>2023-01-29T15:30:14.6302211+01:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

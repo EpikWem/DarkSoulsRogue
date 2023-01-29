@@ -14,8 +14,20 @@
 #---------------------------------- Content ---------------------------------#
 
 images/bg.png
-images/character.png
-images/walls/wall1.png
-images/walls/wall2.png
+
+images/characters/debug/up.png
+images/characters/debug/down.png
+images/characters/debug/right.png
+images/characters/debug/left.png
+images/characters/link/up.png
+images/characters/link/down.png
+images/characters/link/right.png
+images/characters/link/left.png
+
 images/floors/floor1.png
 images/floors/floor2.png
+
+images/objects/fire.png
+
+images/walls/wall1.png
+images/walls/wall2.png
