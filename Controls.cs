@@ -19,12 +19,15 @@ public abstract class Controls
     public static readonly Control
         KillApp = new Control(Keys.F10),
         ToggleFullscreen = new Control(Keys.F11),
+        Pause = new Control(Keys.Escape),
         Up = new Control(Keys.Up),
         Down = new Control(Keys.Down),
         Right = new Control(Keys.Right),
-        Left = new Control(Keys.Left);
+        Left = new Control(Keys.Left),
+        Interact = new Control(Keys.E),
+        Run = new Control(Keys.Space);
     
-    public static Control[] Array = { KillApp, ToggleFullscreen, Up, Down, Right, Left };
+    public static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run };
 
     public static void UpdateKeyListener()
     {

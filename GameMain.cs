@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 using DarkSoulsRogue.Core;
 
 namespace DarkSoulsRogue;
@@ -22,7 +20,7 @@ public class GameMain : Game
     
     
     /**=============================================================
-     *= BASIC METHODS ==============================================
+     *= INITIALIZATION METHODS =====================================
      *============================================================*/
 
     public GameMain()
@@ -49,6 +47,20 @@ public class GameMain : Game
         //Use this.Content to load your game content here
     }
 
+    private void LoadMap(Maps.Map map)
+    {
+        for (int y = 0; y < map.Height; y++)
+        for (int x = 0; x < map.Width; x++)
+            if (map.WallsIds[y][x] != 0)
+                _walls.Add(new Wall(LoadWallTexture(map.WallsIds[y][x]), x, y));
+    }
+    
+    
+    
+    /**=============================================================
+     *= UPDATES METHODS ============================================
+     *============================================================*/
+    
     protected override void Update(GameTime gameTime)
     {
         // KEY TESTS
@@ -58,13 +70,13 @@ public class GameMain : Game
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
         if (Controls.Up.IsPressed)
-            _character.Move(Orientation.Up, _walls);
+            MoveCharacter(Orientation.Up);
         if (Controls.Down.IsPressed)
-            _character.Move(Orientation.Down, _walls);
+            MoveCharacter(Orientation.Down);
         if (Controls.Right.IsPressed)
-            _character.Move(Orientation.Right, _walls);
+            MoveCharacter(Orientation.Right);
         if (Controls.Left.IsPressed)
-            _character.Move(Orientation.Left, _walls);
+            MoveCharacter(Orientation.Left);
         
         // MODEL UPDATES
         //to do
@@ -87,15 +99,11 @@ public class GameMain : Game
         
         base.Draw(gameTime);
     }
-
-
-
-    private void LoadMap(Maps.Map map)
+    
+    private bool MoveCharacter(Orientation orientation)
     {
-        for (int y = 0; y < map.Height; y++)
-            for (int x = 0; x < map.Width; x++)
-                if (map.WallsIds[y][x] != 0)
-                    _walls.Add(new Wall(LoadWallTexture(map.WallsIds[y][x]), x, y));
+        _character.Move(orientation, _walls, Controls.Run.IsPressed);
+        return false;
     }
     
     
@@ -103,6 +111,7 @@ public class GameMain : Game
     /**=============================================================
      *= TEXTURES MANAGEMENT ========================================
      *============================================================*/
+    
     private Texture2D LoadTexture(string fileName)
     {
         return Content.Load<Texture2D>("images/" + fileName);

@@ -17,15 +17,16 @@ public class Character : GameObject
         _orientation = Orientation.Up;
     }
 
-    public void Move(Orientation orientation, List<Wall> walls)
+    public void Move(Orientation orientation, List<Wall> walls, bool run)
     {
         Vector2 oldPosition = new Vector2(Position.X, Position.Y);
         _orientation = orientation;
+        int speed = Speed * (run ? 2 : 1);
         switch (_orientation) {
-            case Orientation.Up: Position.Y -= Speed; break;
-            case Orientation.Down: Position.Y += Speed; break;
-            case Orientation.Right: Position.X += Speed; break;
-            case Orientation.Left: Position.X -= Speed; break;
+            case Orientation.Up: Position.Y -= speed; break;
+            case Orientation.Down: Position.Y += speed; break;
+            case Orientation.Right: Position.X += speed; break;
+            case Orientation.Left: Position.X -= speed; break;
         }
         foreach (Wall w in walls)
         {
