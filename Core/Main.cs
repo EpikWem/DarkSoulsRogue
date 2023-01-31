@@ -22,6 +22,7 @@ public class Main : Game
     private Character _character;
     private readonly List<Wall> _walls = new ();
     private readonly List<InteractiveObject> _objects = new ();
+    private Maps.Map _currentMap;
     
     
     
@@ -43,7 +44,7 @@ public class Main : Game
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
-        LoadMap(Maps.GetConnectedMap(Maps.UndeadAsylum1, Orientation.Down));
+        LoadMap(Maps.UndeadAsylum1);
 
         base.Initialize();
     }
@@ -56,15 +57,20 @@ public class Main : Game
 
     private void LoadMap(Maps.Map map)
     {
-        for (int y = 0; y < map.Height; y++)
-            for (int x = 0; x < map.Width; x++)
-                if (map.WallsIds[y][x] != 0)
-                    _walls.Add(new Wall(_textures.WallsT[map.WallsIds[y][x]], x, y));
-        for (int y = 0; y < map.Height; y++)
-            for (int x = 0; x < map.Width; x++)
-                if (map.ObjectsIds[y][x] != 0)
+        _currentMap = map;
+        
+        _walls.Clear();
+        for (int y = 0; y < _currentMap.Height; y++)
+            for (int x = 0; x < _currentMap.Width; x++)
+                if (_currentMap.WallsIds[y][x] != 0)
+                    _walls.Add(new Wall(_textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
+        
+        _objects.Clear();
+        for (int y = 0; y < _currentMap.Height; y++)
+            for (int x = 0; x < _currentMap.Width; x++)
+                if (_currentMap.ObjectsIds[y][x] != 0)
                 {
-                    _objects.Add( map.ObjectsIds[y][x] switch
+                    _objects.Add( _currentMap.ObjectsIds[y][x] switch
                     {
                         1 => new Bonfire(_textures.BonfireT, x, y),
                         //2 => new Chest(, x, y),
@@ -132,14 +138,15 @@ public class Main : Game
         base.Draw(gameTime);
     }
     
-    private bool MoveCharacter(Orientation orientation)
+    private void MoveCharacter(Orientation orientation)
     {
         _character.Move(orientation, _walls.Concat(_objects).ToList(), Controls.Run.IsPressed);
-        return false;
+        if (_character.TestOutOfMap() != Orientation.Null)
+        {
+            Orientation o = _character.TestOutOfMap();
+            LoadMap(Maps.GetConnectedMap(_currentMap, o));
+            _character.TransitMap(o);
+        }
     }
-    
-    
-    
-    
-    
+
 }

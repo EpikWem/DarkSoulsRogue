@@ -1,3 +1,3 @@
 ﻿namespace DarkSoulsRogue.Core;
 
-public enum Orientation { Up, Down, Right, Left }
+public enum Orientation { Up, Down, Right, Left, Null }

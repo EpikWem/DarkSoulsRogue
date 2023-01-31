@@ -90,6 +90,37 @@ public class Character : GameObject
         return v;
     }
 
+    public Orientation TestOutOfMap()
+    {
+        Vector2 cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
+        if (cp.Y < 0)
+            return Orientation.Up;
+        if (cp.Y > Main.Height-1)
+            return Orientation.Down;
+        if (cp.X > Main.Width-1)
+            return Orientation.Right;
+        if (cp.X < 0)
+            return Orientation.Left;
+        return Orientation.Null;
+    }
+
+    public void TransitMap(Orientation orientation)
+    {
+        switch (orientation)
+        {
+            case Orientation.Up:
+                Position.Y = Main.Height - Height; break;
+            case Orientation.Down:
+                Position.Y = 0; break;
+            case Orientation.Right:
+                Position.X = 0; break;
+            case Orientation.Left:
+                Position.X = Main.Width - Width; break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(orientation), orientation, null);
+        }
+    }
+
     private int MaxLife()
     {
         return _attributes.Get(Attributes.Attribute.Vitality) * 10;
