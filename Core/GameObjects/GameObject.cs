@@ -8,7 +8,7 @@ public abstract class GameObject
 
     protected readonly int Width, Height;
     protected Vector2 Position;
-    private readonly Texture2D _texture;
+    private Texture2D _texture;
 
     protected GameObject() {}
     protected GameObject(Texture2D texture)
@@ -26,6 +26,16 @@ public abstract class GameObject
     public Rectangle GetHitbox()
     {
         return new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
+    }
+
+    public Vector2 GetPositionOnGrid()
+    {
+        return new Vector2((int)(Position.X / Main.CellSize), (int)(Position.Y / Main.CellSize));
+    }
+
+    protected void SetTexture(Texture2D texture)
+    {
+        _texture = texture;
     }
 
 }

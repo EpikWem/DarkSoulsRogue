@@ -8,11 +8,13 @@ public abstract class Controls
     {
         public readonly Keys KeyCode;
         public bool IsPressed;
+        public bool IsOnePressed;
 
         public Control(Keys keyCode)
         {
             KeyCode = keyCode;
             IsPressed = false;
+            IsOnePressed = false;
         }
     }
     
@@ -26,13 +28,22 @@ public abstract class Controls
         Left = new Control(Keys.Left),
         Interact = new Control(Keys.E),
         Run = new Control(Keys.Space);
-    
-    public static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run };
+    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run };
 
     public static void UpdateKeyListener()
     {
-        foreach (Control c in Array) {
-            c.IsPressed = Keyboard.GetState().IsKeyDown(c.KeyCode);
+        foreach (Control c in Array)
+        {
+            if (Keyboard.GetState().IsKeyDown(c.KeyCode))
+            {
+                c.IsOnePressed = !c.IsPressed;
+                c.IsPressed = true;
+            }
+            else // key is down
+            {
+                c.IsPressed = false;
+                c.IsOnePressed = false;
+            }
         }
     }
 

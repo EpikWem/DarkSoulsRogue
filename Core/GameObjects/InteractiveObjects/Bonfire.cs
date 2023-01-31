@@ -13,7 +13,7 @@ public class Bonfire : InteractiveObject
         
     }
 
-    protected override void Interaction(Character character)
+    public override void Interact(Character character)
     {
         character.HealMax();
         Lit();
@@ -23,6 +23,7 @@ public class Bonfire : InteractiveObject
     {
         if (State != 4)
             State++;
+        UpdateTexture();
     }
     
 }

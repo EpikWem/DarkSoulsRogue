@@ -13,7 +13,7 @@ public class Lever : InteractiveObject
         
     }
 
-    protected override void Interaction(Character character)
+    public override void Interact(Character character)
     {
         
     }

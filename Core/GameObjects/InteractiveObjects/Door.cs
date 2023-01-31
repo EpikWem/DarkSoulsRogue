@@ -13,7 +13,7 @@ public class Door : InteractiveObject
         
     }
 
-    protected override void Interaction(Character character)
+    public override void Interact(Character character)
     {
         if (State == 0)
             State = 1;

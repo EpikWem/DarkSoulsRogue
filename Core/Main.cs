@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core;
 
-public class GameMain : Game
+public class Main : Game
 {
 
     private readonly GraphicsDeviceManager _graphics;
@@ -20,8 +20,8 @@ public class GameMain : Game
 
     private World _world;
     private Character _character;
-    private List<Wall> _walls = new ();
-    private List<InteractiveObject> _objects = new ();
+    private readonly List<Wall> _walls = new ();
+    private readonly List<InteractiveObject> _objects = new ();
     
     
     
@@ -29,11 +29,11 @@ public class GameMain : Game
      *= INITIALIZATION METHODS =====================================
      *============================================================*/
 
-    public GameMain()
+    public Main()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
         _graphics.PreferredBackBufferWidth = Width;
         _graphics.PreferredBackBufferHeight = Height;
     }
@@ -95,6 +95,17 @@ public class GameMain : Game
             MoveCharacter(Orientation.Right);
         if (Controls.Left.IsPressed)
             MoveCharacter(Orientation.Left);
+        if (Controls.Interact.IsOnePressed)
+        {
+            foreach (InteractiveObject o in _objects)
+            {
+                if (o.GetPositionOnGrid() == _character.GetLookingCell())
+                {
+                    o.Interact(_character);
+                }
+            }
+        }
+            
         
         // MODEL UPDATES
         //to do
@@ -112,7 +123,7 @@ public class GameMain : Game
         foreach (Wall w in _walls) {
             w.Draw(_spriteBatch);
         }
-        foreach (Wall o in _objects) {
+        foreach (InteractiveObject o in _objects) {
             o.Draw(_spriteBatch);
         }
         _character.Draw(_spriteBatch);

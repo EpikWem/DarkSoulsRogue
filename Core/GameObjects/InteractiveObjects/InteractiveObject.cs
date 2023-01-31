@@ -16,11 +16,11 @@ public abstract class InteractiveObject : Wall
         _textures = textures;
     }
 
-    protected abstract void Interaction(Character character);
-    
-    public new void Draw(SpriteBatch batch)
+    public abstract void Interact(Character character);
+
+    protected void UpdateTexture()
     {
-        batch.Draw(_textures[State], Position, Color.White);
+        SetTexture(_textures[State]);
     }
     
 }

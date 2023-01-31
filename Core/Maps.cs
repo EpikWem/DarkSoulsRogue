@@ -65,14 +65,14 @@ public abstract class Maps
     {
         public readonly int[][] WallsIds;
         public readonly int[][] ObjectsIds;
-        public readonly int[][] MobsIds;
+        //public readonly int[][] MobsIds;
         public readonly int Width, Height;
 
         public Map(int[][] walls, int[][] objects)
         {
             WallsIds = walls;
             ObjectsIds = objects;
-            MobsIds = null;
+            //MobsIds = null;
             Width = WallsIds[0].Length;
             Height = WallsIds.Length;
         }

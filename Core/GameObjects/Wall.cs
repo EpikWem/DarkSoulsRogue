@@ -7,8 +7,8 @@ public class Wall : GameObject
 
     public Wall(Texture2D texture, int xInGrid, int yInGrid) : base(texture)
     {
-        Position.X = xInGrid*GameMain.CellSize;
-        Position.Y = yInGrid*GameMain.CellSize;
+        Position.X = xInGrid*Main.CellSize;
+        Position.Y = yInGrid*Main.CellSize;
     }
     
 }
