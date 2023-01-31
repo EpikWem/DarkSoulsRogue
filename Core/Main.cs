@@ -43,7 +43,7 @@ public class Main : Game
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
-        LoadMap(Maps.UndeadAsylum2);
+        LoadMap(Maps.GetConnectedMap(Maps.UndeadAsylum1, Orientation.Down));
 
         base.Initialize();
     }

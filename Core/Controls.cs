@@ -4,6 +4,7 @@ namespace DarkSoulsRogue.Core;
 
 public abstract class Controls
 {
+    
     public class Control
     {
         public readonly Keys KeyCode;
