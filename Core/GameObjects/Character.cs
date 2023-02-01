@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -23,7 +25,8 @@ public class Character : GameObject
         _orientation = Orientation.Up;
         _textures = textures;
         _attributes = new Attributes();
-        HealMax();
+        Life = MaxLife();
+        Stamina = MaxStamina();
     }
 
     public void Move(Orientation orientation, List<Wall> walls, bool run)
@@ -37,14 +40,10 @@ public class Character : GameObject
             case Orientation.Right: Position.X += speed; break;
             case Orientation.Left: Position.X -= speed; break;
         }
-        foreach (Wall w in walls)
+        foreach (Wall w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
         {
-            if (w.GetHitbox().Intersects(GetHitbox()))
-            {
-                Position.X = oldPosition.X;
-                Position.Y = oldPosition.Y;
-            }
-                
+            Position.X = oldPosition.X;
+            Position.Y = oldPosition.Y;
         }
     }
 
@@ -84,10 +83,9 @@ public class Character : GameObject
     
     public Vector2 GetLookingCell()
     {
-        Vector2 v = new Vector2(
+        return new Vector2(
             (int)(GetLookingPoint().X / Main.CellSize),
             (int)(GetLookingPoint().Y / Main.CellSize));
-        return v;
     }
 
     public Orientation TestOutOfMap()
@@ -121,9 +119,13 @@ public class Character : GameObject
         }
     }
 
-    private int MaxLife()
+    public int MaxLife()
     {
         return _attributes.Get(Attributes.Attribute.Vitality) * 10;
+    }
+    public int MaxStamina()
+    {
+        return _attributes.Get(Attributes.Attribute.Endurance) * 10;
     }
 
     public void Heal(int hp)

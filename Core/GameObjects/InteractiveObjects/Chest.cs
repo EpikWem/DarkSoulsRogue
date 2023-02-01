@@ -6,8 +6,8 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 public class Chest : InteractiveObject
 {
     
-    public new static string Name = "chest";
-    public new static int StateNumber = 2; 
+    internal new const string Name = "chest";
+    internal new const int StateNumber = 2; 
 
     private readonly Item _item;
     

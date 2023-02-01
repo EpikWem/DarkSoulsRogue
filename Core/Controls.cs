@@ -48,4 +48,9 @@ public abstract class Controls
         }
     }
 
+    public static bool TestForMovementKey()
+    {
+        return Up.IsPressed || Down.IsPressed || Right.IsPressed || Left.IsPressed;
+    } 
+
 }

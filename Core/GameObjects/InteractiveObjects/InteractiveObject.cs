@@ -1,12 +1,12 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public abstract class InteractiveObject : Wall
 {
-    public static string Name;
-    public static int StateNumber; 
+    public const string Name = "";
+    public const int StateNumber = 1; 
     protected int State;
     private readonly Texture2D[] _textures;
 

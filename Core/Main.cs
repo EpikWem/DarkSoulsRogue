@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -17,6 +17,7 @@ public class Main : Game
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
 
     private Textures _textures;
+    private Ath _ath;
 
     private World _world;
     private Character _character;
@@ -44,7 +45,8 @@ public class Main : Game
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
-        LoadMap(Maps.UndeadAsylum1);
+        _ath = new Ath(_character, GraphicsDevice);
+        LoadMap(Maps.GetMap(101));
 
         base.Initialize();
     }
@@ -74,7 +76,7 @@ public class Main : Game
                     {
                         1 => new Bonfire(_textures.BonfireT, x, y),
                         //2 => new Chest(, x, y),
-                        //3 => new Door(, x, y)
+                        3 => new Door(_textures.DoorT, x, y)
                     } );
                 }
     }
@@ -93,25 +95,32 @@ public class Main : Game
             Exit();
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
-        if (Controls.Up.IsPressed)
-            MoveCharacter(Orientation.Up);
-        if (Controls.Down.IsPressed)
-            MoveCharacter(Orientation.Down);
-        if (Controls.Right.IsPressed)
-            MoveCharacter(Orientation.Right);
-        if (Controls.Left.IsPressed)
-            MoveCharacter(Orientation.Left);
+        if (Controls.TestForMovementKey())
+        {
+            if (Controls.Up.IsPressed)
+                MoveCharacter(Orientation.Up);
+            if (Controls.Down.IsPressed)
+                MoveCharacter(Orientation.Down);
+            if (Controls.Right.IsPressed)
+                MoveCharacter(Orientation.Right);
+            if (Controls.Left.IsPressed)
+                MoveCharacter(Orientation.Left);
+            _character.Stamina--;
+        }
         if (Controls.Interact.IsOnePressed)
         {
-            foreach (InteractiveObject o in _objects)
+            foreach (InteractiveObject o in _objects
+                         .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
             {
-                if (o.GetPositionOnGrid() == _character.GetLookingCell())
-                {
-                    o.Interact(_character);
-                }
+                o.Interact(_character);
             }
         }
+        if (Controls.Pause.IsOnePressed)
+        {
+            _character.Heal(-20);
+        }
             
+        
         
         // MODEL UPDATES
         //to do
@@ -125,6 +134,7 @@ public class Main : Game
         
         //Add your drawing code here
         _spriteBatch.Begin();
+        
         _world.Draw(_spriteBatch);
         foreach (Wall w in _walls) {
             w.Draw(_spriteBatch);
@@ -133,6 +143,8 @@ public class Main : Game
             o.Draw(_spriteBatch);
         }
         _character.Draw(_spriteBatch);
+        _ath.Draw(_spriteBatch);
+        
         _spriteBatch.End();
         
         base.Draw(gameTime);
