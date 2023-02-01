@@ -11,11 +11,11 @@ public class Character : GameObject
 {
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
-    private const int Speed = 4;
     private Orientation _orientation;
     private readonly Texture2D[] _textures;
     private readonly Attributes _attributes;
     public int Life, Stamina, Souls;
+    private int _exhaustingTime;
 
     
     
@@ -27,21 +27,60 @@ public class Character : GameObject
         _attributes = new Attributes();
         Life = MaxLife();
         Stamina = MaxStamina();
+        _exhaustingTime = 0;
     }
 
-    public void Move(Orientation orientation, List<Wall> walls, bool run)
+    public void Move(List<Wall> walls)
     {
-        Vector2 oldPosition = new Vector2(Position.X, Position.Y);
-        _orientation = orientation;
-        int speed = Speed * (run ? 2 : 1);
-        switch (_orientation) {
-            case Orientation.Up: Position.Y -= speed; break;
-            case Orientation.Down: Position.Y += speed; break;
-            case Orientation.Right: Position.X += speed; break;
-            case Orientation.Left: Position.X -= speed; break;
-        }
-        foreach (Wall w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
+        var oldPosition = new Vector2(Position.X, Position.Y);
+        var speed = 3;
+        
+        // Running and Stamina control
+        if (Controls.Run.IsPressed
+            && (Controls.Up.IsPressed || Controls.Down.IsPressed || Controls.Right.IsPressed || Controls.Left.IsPressed))
         {
+            if (Stamina < 0)
+                _exhaustingTime = 300;
+            if (_exhaustingTime == 0)
+            {
+                speed = 5;
+                AddStamina(-3);
+            }
+            else
+            {
+                _exhaustingTime--;
+            }
+        }
+        else
+        {
+            AddStamina(5);
+        }
+        
+        // Real Movement
+        if (Controls.Up.IsPressed)
+        {
+            _orientation = Orientation.Up;
+            Position.Y -= speed;
+        }
+        if (Controls.Down.IsPressed)
+        {
+            _orientation = Orientation.Down;
+            Position.Y += speed;
+        }
+        if (Controls.Right.IsPressed)
+        {
+            _orientation = Orientation.Right;
+            Position.X += speed;
+        }
+        if (Controls.Left.IsPressed)
+        {
+            _orientation = Orientation.Left;
+            Position.X -= speed;
+        }
+
+        // Collision control
+        foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
+        { //TODO: Collisions are raw for now
             Position.X = oldPosition.X;
             Position.Y = oldPosition.Y;
         }
@@ -121,14 +160,14 @@ public class Character : GameObject
 
     public int MaxLife()
     {
-        return _attributes.Get(Attributes.Attribute.Vitality) * 10;
+        return _attributes.Get(Attributes.Attribute.Vitality) * 100;
     }
     public int MaxStamina()
     {
-        return _attributes.Get(Attributes.Attribute.Endurance) * 10;
+        return _attributes.Get(Attributes.Attribute.Endurance) * 100;
     }
 
-    public void Heal(int hp)
+    public void AddLife(int hp)
     {
         Life += hp;
         if (Life > MaxLife())
@@ -138,6 +177,18 @@ public class Character : GameObject
     public void HealMax()
     {
         Life = MaxLife();
+    }
+
+    public void AddStamina(int sp)
+    {
+        Stamina += sp;
+        if (Stamina > MaxStamina())
+            Stamina = MaxStamina();
+    }
+
+    public bool IsExhausted()
+    {
+        return Stamina < 0;
     }
 
 }

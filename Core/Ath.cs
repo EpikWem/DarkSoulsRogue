@@ -13,8 +13,8 @@ public class Ath
     public Ath(Character character, GraphicsDevice graphicsDevice)
     {
         _character = character;
-        _life = new Bar(graphicsDevice, 500, new Vector2(20, 20), 20, Color.Red);
-        _stamina = new Bar(graphicsDevice, 400, new Vector2(20, 40), 20, Color.DarkGreen);
+        _life = new Bar(graphicsDevice, 400, new Vector2(20, 20), 20, Color.Red);
+        _stamina = new Bar(graphicsDevice, 300, new Vector2(20, 40), 20, Color.DarkGreen);
     }
 
     public void Draw(SpriteBatch spriteBatch)

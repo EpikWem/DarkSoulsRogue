@@ -91,22 +91,13 @@ public class Main : Game
     {
         // KEY TESTS
         Controls.UpdateKeyListener();
+        
+        MoveCharacter();
+        
         if (Controls.KillApp.IsPressed)
             Exit();
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
-        if (Controls.TestForMovementKey())
-        {
-            if (Controls.Up.IsPressed)
-                MoveCharacter(Orientation.Up);
-            if (Controls.Down.IsPressed)
-                MoveCharacter(Orientation.Down);
-            if (Controls.Right.IsPressed)
-                MoveCharacter(Orientation.Right);
-            if (Controls.Left.IsPressed)
-                MoveCharacter(Orientation.Left);
-            _character.Stamina--;
-        }
         if (Controls.Interact.IsOnePressed)
         {
             foreach (InteractiveObject o in _objects
@@ -117,7 +108,7 @@ public class Main : Game
         }
         if (Controls.Pause.IsOnePressed)
         {
-            _character.Heal(-20);
+            _character.AddLife(-20);
         }
             
         
@@ -150,9 +141,9 @@ public class Main : Game
         base.Draw(gameTime);
     }
     
-    private void MoveCharacter(Orientation orientation)
+    private void MoveCharacter()
     {
-        _character.Move(orientation, _walls.Concat(_objects).ToList(), Controls.Run.IsPressed);
+        _character.Move(_walls.Concat(_objects).ToList());
         if (_character.TestOutOfMap() != Orientation.Null)
         {
             Orientation o = _character.TestOutOfMap();
