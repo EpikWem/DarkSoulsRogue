@@ -160,11 +160,11 @@ public class Character : GameObject
 
     public int MaxLife()
     {
-        return _attributes.Get(Attributes.Attribute.Vitality) * 100;
+        return _attributes.Get(Attributes.Attribute.Vitality) * 50;
     }
     public int MaxStamina()
     {
-        return _attributes.Get(Attributes.Attribute.Endurance) * 100;
+        return _attributes.Get(Attributes.Attribute.Endurance) * 30;
     }
 
     public void AddLife(int hp)
@@ -174,21 +174,16 @@ public class Character : GameObject
             Life = MaxLife();
     }
 
-    public void HealMax()
-    {
-        Life = MaxLife();
-    }
-
     public void AddStamina(int sp)
     {
         Stamina += sp;
         if (Stamina > MaxStamina())
             Stamina = MaxStamina();
     }
-
-    public bool IsExhausted()
+    
+    public void AddSouls(int souls)
     {
-        return Stamina < 0;
+        Souls += souls;
     }
 
 }

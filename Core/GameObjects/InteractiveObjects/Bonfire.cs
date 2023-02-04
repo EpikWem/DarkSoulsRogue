@@ -14,7 +14,8 @@ public class Bonfire : InteractiveObject
 
     public override void Interact(Character character)
     {
-        character.HealMax();
+        character.AddLife(character.MaxLife());
+        character.AddStamina(character.MaxStamina());
         Lit();
     }
 

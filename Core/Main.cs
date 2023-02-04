@@ -16,8 +16,9 @@ public class Main : Game
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
 
-    private Textures _textures;
-    private Ath _ath;
+    public static SpriteFont Font, FontBold;
+    private static Textures _textures;
+    private static Ath _ath;
 
     private World _world;
     private Character _character;
@@ -42,6 +43,8 @@ public class Main : Game
 
     protected override void Initialize()
     {
+        Font = Content.Load<SpriteFont>("fonts/font");
+        FontBold = Content.Load<SpriteFont>("fonts/font_bold");
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
@@ -108,7 +111,7 @@ public class Main : Game
         }
         if (Controls.Pause.IsOnePressed)
         {
-            _character.AddLife(-20);
+            _character.AddSouls(100);
         }
             
         
