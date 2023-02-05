@@ -56,7 +56,7 @@ public class Character : GameObject
             AddStamina(5);
         }
         
-        // Real Movement
+        // Real Movement Vertical
         if (Controls.Up.IsPressed)
         {
             _orientation = Orientation.Up;
@@ -67,6 +67,10 @@ public class Character : GameObject
             _orientation = Orientation.Down;
             Position.Y += speed;
         }
+        foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
+            Position.Y = oldPosition.Y;
+        
+        // Real Movement Horizontal
         if (Controls.Right.IsPressed)
         {
             _orientation = Orientation.Right;
@@ -77,13 +81,9 @@ public class Character : GameObject
             _orientation = Orientation.Left;
             Position.X -= speed;
         }
-
-        // Collision control
         foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
-        { //TODO: Collisions are raw for now
             Position.X = oldPosition.X;
-            Position.Y = oldPosition.Y;
-        }
+        
     }
 
     private new Rectangle GetHitbox()
@@ -112,10 +112,10 @@ public class Character : GameObject
     {
         return _orientation switch
         {
-            Orientation.Up => new Vector2(Position.X + Width/2, Position.Y),
-            Orientation.Down => new Vector2(Position.X + Width/2, Position.Y + Height),
-            Orientation.Right => new Vector2(Position.X + Width, Position.Y + Height/2),
-            Orientation.Left => new Vector2(Position.X, Position.Y + Height/2),
+            Orientation.Up => new Vector2(Position.X + (float)Width/2, Position.Y),
+            Orientation.Down => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
+            Orientation.Right => new Vector2(Position.X + Width, Position.Y + (float)Height/2),
+            Orientation.Left => new Vector2(Position.X, Position.Y + (float)Height/2),
             _ => new Vector2(0, 0)
         };
     }

@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.GameObjects;
+﻿using System;
+using DarkSoulsRogue.Core.GameObjects;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -40,7 +41,7 @@ public class Ath
             _position = position;
             _thickness = thickness;
             _texture = new Texture2D(graphicsDevice, 1, 1);
-            _texture.SetData(new Color[] { color });
+            _texture.SetData(new [] { color });
         }
 
         public void Draw(SpriteBatch spriteBatch, int value, int maxValue)
@@ -55,9 +56,9 @@ public class Ath
     private class SoulCounter
     {
 
-        private const int Width = 64, Height = 24;
+        private const int CellWidth = 18, Width = CellWidth*7, Height = 28, Margin = 8;
         private static Texture2D _blackTexture;
-        private static readonly Vector2 Position = new (Main.Width - Width - 10, Main.Height - Height - 5);
+        private static readonly Vector2 Position = new (Main.Width - Width - Margin, Main.Height - Height - Margin);
         private static readonly Rectangle Rectangle = new ((int)Position.X, (int)Position.Y, Width, Height);
 
         public SoulCounter(GraphicsDevice graphicsDevice)
@@ -68,10 +69,17 @@ public class Ath
 
         public static void Draw(SpriteBatch spriteBatch, int souls)
         {
-            spriteBatch.Draw(_blackTexture, Position, Rectangle, Color.White);
-            spriteBatch.DrawString(Main.FontBold, souls.ToString(), new Vector2(Position.X, Position.Y), Color.White);
+            spriteBatch.Draw(_blackTexture, Rectangle, Color.Black);
+            spriteBatch.DrawString(Main.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
         }
-        
+
+        private static int XForDisplay(int souls)
+        {
+            var i = (souls == 0 ? 0 : Math.Truncate(Math.Log10(souls))) + 1;
+            var r = (int)(Main.Width - CellWidth - (i * CellWidth)/2);
+            return r;
+        }
+
     }
     
 }
