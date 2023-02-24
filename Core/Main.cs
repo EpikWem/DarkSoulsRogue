@@ -23,7 +23,7 @@ public class Main : Game
     private World _world;
     private Character _character;
     private readonly List<Wall> _walls = new ();
-    private readonly List<InteractiveObject> _objects = new ();
+    private List<InteractiveObject> _objects = new ();
     private Maps.Map _currentMap;
     
     
@@ -70,19 +70,8 @@ public class Main : Game
             for (int x = 0; x < _currentMap.Width; x++)
                 if (_currentMap.WallsIds[y][x] != 0)
                     _walls.Add(new Wall(_textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
-        
-        _objects.Clear();
-        for (int y = 0; y < _currentMap.Height; y++)
-            for (int x = 0; x < _currentMap.Width; x++)
-                if (_currentMap.ObjectsIds[y][x] != 0)
-                {
-                    _objects.Add( _currentMap.ObjectsIds[y][x] switch
-                    {
-                        1 => new Bonfire(_textures.BonfireT, x, y),
-                        //2 => new Chest(, x, y),
-                        3 => new Door(_textures.DoorT, x, y)
-                    } );
-                }
+
+        _objects = _currentMap.Objects;
     }
     
     
@@ -104,18 +93,14 @@ public class Main : Game
             _graphics.ToggleFullScreen();
         if (Controls.Interact.IsOnePressed)
         {
-            foreach (InteractiveObject o in _objects
-                         .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
-            {
+            foreach (var o in _objects
+            .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
                 o.Interact(_character);
-            }
         }
         if (Controls.Pause.IsPressed)
         {
-            _character.AddSouls(1000);
+            _character.AddSouls(3000);
         }
-            
-        
         
         // MODEL UPDATES
         //to do
@@ -148,12 +133,6 @@ public class Main : Game
     private void MoveCharacter()
     {
         _character.Move(_walls.Concat(_objects).ToList());
-        if (_character.TestOutOfMap() != Orientation.Null)
-        {
-            Orientation o = _character.TestOutOfMap();
-            LoadMap(Maps.GetConnectedMap(_currentMap, o));
-            _character.TransitMap(o);
-        }
     }
 
 }

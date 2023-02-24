@@ -1,23 +1,16 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using DarkSoulsRogue.Core.Utilities;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
-public class Ladder : InteractiveObject
+public class Ladder : Door
 {
     
     internal new const string Name = "ladder";
-    internal new const int StateNumber = 1; 
-
-    private readonly int _destinationMap;
+    internal new const int StateNumber = 1;
     
-    public Ladder(Texture2D[] textures, int xInGrid, int yInGrid, int destinationMap) : base(textures, xInGrid, yInGrid)
-    {
-        _destinationMap = destinationMap;
-    }
-
-    public override void Interact(Character character)
+    public Ladder(int xInGrid, int yInGrid, Destination destination) : base(xInGrid, yInGrid, destination)
     {
         
     }
-    
+
 }

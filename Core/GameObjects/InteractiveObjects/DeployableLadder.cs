@@ -1,4 +1,4 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using DarkSoulsRogue.Core.Utilities;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
@@ -13,7 +13,7 @@ public class DeployableLadder : Ladder
     internal new const string Name = "deployableladder";
     internal new const int StateNumber = 2; 
     
-    public DeployableLadder(Texture2D[] textures, int xInGrid, int yInGrid, int destinationMap) : base(textures, xInGrid, yInGrid, destinationMap)
+    public DeployableLadder(int xInGrid, int yInGrid, Destination destination) : base(xInGrid, yInGrid, destination)
     {
         
     }
@@ -23,10 +23,7 @@ public class DeployableLadder : Ladder
         if (State == 0)
             State = 1;
         else
-        {
             base.Interact(character);
-        }
-
     }
     
 }

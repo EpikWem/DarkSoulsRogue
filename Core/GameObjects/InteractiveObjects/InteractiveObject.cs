@@ -5,22 +5,27 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public abstract class InteractiveObject : Wall
 {
-    public const string Name = "";
-    public const int StateNumber = 1; 
+    public string Name;
+    public int StateNumber; 
     protected int State;
-    private readonly Texture2D[] _textures;
+    protected Texture2D[] Textures;
 
-    protected InteractiveObject(Texture2D[] textures, int xInGrid, int yInGrid) : base(textures[0], xInGrid, yInGrid)
+    protected InteractiveObject(int xInGrid, int yInGrid) : base(null, xInGrid, yInGrid)
     {
         State = 0;
-        _textures = textures;
     }
 
     public abstract void Interact(Character character);
 
+    public void SetTextures(Texture2D[] textures)
+    {
+        Textures = textures;
+        UpdateTexture();
+    }
+
     protected void UpdateTexture()
     {
-        SetTexture(_textures[State]);
+        SetTexture(Textures[State]);
     }
     
 }

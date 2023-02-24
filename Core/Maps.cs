@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
+using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Utilities;
+using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core;
 
@@ -10,30 +13,22 @@ public abstract class Maps
     {
         public readonly int Id;
         public readonly int[][] WallsIds;
-        public readonly int[][] ObjectsIds;
-        //public readonly int[][] MobsIds;
-        public readonly int[] Connections;
+        public readonly List<InteractiveObject> Objects;
         public readonly int Width, Height;
 
-        public Map(int id, int[][] walls, int[][] objects, int[] connections)
+        public Map(int id, int[][] walls, List<InteractiveObject> objects)
         {
             Id = id;
             WallsIds = walls;
-            ObjectsIds = objects;
-            //MobsIds = null;
-            Connections = connections;
+            Objects = objects;
             Width = WallsIds[0].Length;
             Height = WallsIds.Length;
         }
         
     }
 
-    /**
-     * OBJECTS IDS :
-     *      1: Bonfire, 2: Chest, 3: Door
-     */
     private static readonly Map
-        UndeadAsylum1 = new Map(101,
+        UndeadAsylum1 = new (101,
             new[]
             {
                 new[] { 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 },
@@ -45,24 +40,14 @@ public abstract class Maps
                 new[] { 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1 },
                 new[] { 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1 },
                 new[] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
-                new[] { 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1 }
-            }, new[]
-            {
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0 }
-            }, new[] { 102, 0, 0, 0 }
+                new[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
+            }, new List<InteractiveObject> (new [] {
+                new Door(null, 7, 0, new Destination(102, new Vector2(7, 8)))
+            })
         ),
-        UndeadAsylum2 = new Map( 102,
+        UndeadAsylum2 = new ( 102,
             new[] {
-                new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
+                new[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -72,18 +57,9 @@ public abstract class Maps
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
-            },new[] {
-                new[] {0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-            },new [] { 0, 101, 0, 0 }
+            }, new List<InteractiveObject> (new [] {
+                new Door(7, 9, new Destination(101, new Vector2(7, 1)))
+            })
         );
 
     private static readonly Map[] Array = { UndeadAsylum1, UndeadAsylum2 };
@@ -91,11 +67,6 @@ public abstract class Maps
     public static Map GetMap(int id)
     {
         return Array.First(m => m.Id == id);
-    }
-    
-    public static Map GetConnectedMap(Map from, Orientation orientation)
-    {
-        return GetMap(from.Connections[(int)orientation]);
     }
 
 }

@@ -24,7 +24,7 @@ public class Ath
     {
         _life.Draw(spriteBatch, _character.Life, _character.MaxLife());
         _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
-        SoulCounter.Draw(spriteBatch, _character.Souls);
+        _soulCounter.Draw(spriteBatch, _character.Souls);
     }
 
     private class Bar
@@ -56,7 +56,7 @@ public class Ath
     private class SoulCounter
     {
 
-        private const int CellWidth = 18, Width = CellWidth*7, Height = 28, Margin = 8;
+        private const int CellWidth = 18, Width = CellWidth*6, Height = 28, Margin = 8;
         private static Texture2D _blackTexture;
         private static readonly Vector2 Position = new (Main.Width - Width - Margin, Main.Height - Height - Margin);
         private static readonly Rectangle Rectangle = new ((int)Position.X, (int)Position.Y, Width, Height);
@@ -67,7 +67,7 @@ public class Ath
             _blackTexture.SetData(new [] { Color.Black });
         }
 
-        public static void Draw(SpriteBatch spriteBatch, int souls)
+        public void Draw(SpriteBatch spriteBatch, int souls)
         {
             spriteBatch.Draw(_blackTexture, Rectangle, Color.Black);
             spriteBatch.DrawString(Main.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
