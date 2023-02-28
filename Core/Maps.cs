@@ -42,7 +42,7 @@ public abstract class Maps
                 new[] { 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 },
                 new[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 }
             }, new List<InteractiveObject> (new [] {
-                new Door(null, 7, 0, new Destination(102, new Vector2(7, 8)))
+                new Door(7, 0, new Destination(102, new Vector2(7, 8)))
             })
         ),
         UndeadAsylum2 = new ( 102,

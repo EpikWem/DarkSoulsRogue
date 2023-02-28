@@ -66,12 +66,21 @@ public class Main : Game
         _currentMap = map;
         
         _walls.Clear();
-        for (int y = 0; y < _currentMap.Height; y++)
-            for (int x = 0; x < _currentMap.Width; x++)
+        for (var y = 0; y < _currentMap.Height; y++)
+            for (var x = 0; x < _currentMap.Width; x++)
                 if (_currentMap.WallsIds[y][x] != 0)
                     _walls.Add(new Wall(_textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
 
         _objects = _currentMap.Objects;
+        foreach (var o in _objects)
+        {
+            if (o.GetType() == typeof(Bonfire))
+                o.SetTextures(_textures.BonfireT);
+            /*if (o.GetType() == typeof(Chest))
+                o.SetTextures(_textures.ChestT);*/
+            if (o.GetType() == typeof(Door))
+                o.SetTextures(_textures.DoorT);
+        }
     }
     
     
@@ -95,7 +104,11 @@ public class Main : Game
         {
             foreach (var o in _objects
             .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
+            {
                 o.Interact(_character);
+                if (o.GetType() == typeof(Door))
+                    _objects.Remove(o);
+            }
         }
         if (Controls.Pause.IsPressed)
         {

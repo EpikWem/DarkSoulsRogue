@@ -7,7 +7,7 @@ public class Bonfire : InteractiveObject
     internal new const string Name = "bonfire";
     internal new const int StateNumber = 5; 
     
-    public Bonfire(Texture2D[] textures, int xInGrid, int yInGrid) : base(textures, xInGrid, yInGrid)
+    public Bonfire(Texture2D[] textures, int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
     {
         
     }

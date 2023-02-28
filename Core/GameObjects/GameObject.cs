@@ -10,7 +10,12 @@ public abstract class GameObject
     protected Vector2 Position;
     private Texture2D _texture;
 
-    protected GameObject() {}
+    protected GameObject()
+    {
+        Width = Main.CellSize;
+        Height = Main.CellSize;
+    }
+    
     protected GameObject(Texture2D texture)
     {
         _texture = texture;

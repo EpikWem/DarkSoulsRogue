@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
@@ -8,24 +9,28 @@ public abstract class InteractiveObject : Wall
     public string Name;
     public int StateNumber; 
     protected int State;
-    protected Texture2D[] Textures;
+    private Texture2D[] _textures;
 
-    protected InteractiveObject(int xInGrid, int yInGrid) : base(null, xInGrid, yInGrid)
+    protected InteractiveObject(int xInGrid, int yInGrid)
     {
         State = 0;
+        Position.X = xInGrid*Main.CellSize;
+        Position.Y = yInGrid*Main.CellSize;
     }
 
     public abstract void Interact(Character character);
 
     public void SetTextures(Texture2D[] textures)
     {
-        Textures = textures;
+        _textures = textures;
         UpdateTexture();
     }
 
     protected void UpdateTexture()
     {
-        SetTexture(Textures[State]);
+        SetTexture(_textures[State]);
     }
+
+    public int GetState() => State;
     
 }

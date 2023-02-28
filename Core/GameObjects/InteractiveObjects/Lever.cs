@@ -8,7 +8,7 @@ public class Lever : InteractiveObject
     internal new const string Name = "lever";
     internal new const int StateNumber = 2; 
 
-    public Lever(Texture2D[] textures, int xInGrid, int yInGrid) : base(textures, xInGrid, yInGrid)
+    public Lever(Texture2D[] textures, int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
     {
         
     }

@@ -11,7 +11,7 @@ public class Chest : InteractiveObject
 
     private readonly Item _item;
     
-    public Chest(Texture2D[] textures, int xInGrid, int yInGrid, Item item) : base(textures, xInGrid, yInGrid)
+    public Chest(Texture2D[] textures, int xInGrid, int yInGrid, Item item) : base(xInGrid, yInGrid)
     {
         _item = item;
     }
