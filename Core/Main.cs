@@ -16,7 +16,7 @@ public class Main : Game
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
 
-    public static SpriteFont Font, FontBold, FontSoulCounter;
+    public static SpriteFont Font, FontBold, FontHumanityCounter, FontSoulCounter;
     private static Textures _textures;
     private static Ath _ath;
 
@@ -45,6 +45,7 @@ public class Main : Game
     {
         Font = Content.Load<SpriteFont>("fonts/font");
         FontBold = Content.Load<SpriteFont>("fonts/font_bold");
+        FontHumanityCounter = Content.Load<SpriteFont>("fonts/humanity_counter");
         FontSoulCounter = Content.Load<SpriteFont>("fonts/soul_counter");
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
@@ -117,7 +118,7 @@ public class Main : Game
                     o.Interact(_character);
             }
         }
-        if (Controls.Pause.IsPressed)
+        if (Controls.Pause.IsOnePressed)
         {
             _character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
         }

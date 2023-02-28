@@ -116,3 +116,4 @@ C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-window
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\door\0.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\door\1.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\walls\1.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\humanity_counter.xnb

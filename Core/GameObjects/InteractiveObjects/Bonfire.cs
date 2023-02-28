@@ -19,20 +19,37 @@ public class Bonfire : InteractiveObject
 
     private void Lit(Character character)
     {
-        if (character.IsHuman)
+        if (State != 0)
         {
-            if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
+            if (character.IsHuman)
             {
-                if (State == 2 && !character.HasRiteOfKindling)
-                    return;
-                if (State != 4)
+                if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
                 {
-                    character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
-                    IncreaseState();
+                    if (State == 1 || ((State == 2 || State == 3) && character.HasRiteOfKindling))
+                    {
+                        character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
+                        IncreaseState();
+                    }
+                    else{
+                        return; // impossible d'embraser plus
+                    }
+                    
+                }
+                else
+                {
+                    return; // pas assez d'humanité
                 }
             }
+            else
+            {
+                RetrieveHumanity(character);
+                return; // impossible d'embraser sous forme de carcasse
+            }
         }
-        
+        else
+        {
+            IncreaseState(); // Fire Lit!
+        }
     }
 
     private void RetrieveHumanity(Character character)

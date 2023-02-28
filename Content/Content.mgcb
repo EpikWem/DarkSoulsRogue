@@ -27,6 +27,13 @@
 /processorParam:TextureFormat=Compressed
 /build:fonts/font_bold.spritefont
 
+#begin fonts/humanity_counter.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/humanity_counter.spritefont
+
 #begin fonts/soul_counter.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor

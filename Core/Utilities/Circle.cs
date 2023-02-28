@@ -37,4 +37,12 @@ public class Circle
         return (cornerDistanceSq <= (Radius^2));
     }
 
+    public void Draw(SpriteBatch spriteBatch, Texture2D pixel, Color color)
+    {
+        for(int y = (int)Center.Y-Radius; y < (int)Center.Y+Radius; y++)
+            for(int x = (int)Center.X-Radius; x < (int)Center.X+Radius; x++)
+                if (Contains(new Vector2(x, y)))
+                    spriteBatch.Draw(pixel, new Rectangle(x, y, 1, 1), color);
+    }
+
 }
