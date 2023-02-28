@@ -5,8 +5,8 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 public class Door : InteractiveObject
 {
     
-    internal new const string Name = "door";
-    internal new const int StateNumber = 2;
+    public const string Name = "door";
+    public const int StateNumber = 2;
 
     public readonly Destination Destination;
     
@@ -17,12 +17,7 @@ public class Door : InteractiveObject
 
     public override void Interact(Character character)
     {
-        switch (State)
-        {
-            case 0: State = 1; break;
-            case 1: return;
-        }
-        UpdateTexture();
+        IncreaseState();
     }
     
 }

@@ -1,13 +1,9 @@
-﻿using System.Collections.Generic;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public abstract class InteractiveObject : Wall
 {
-    public string Name;
-    public int StateNumber; 
     protected int State;
     private Texture2D[] _textures;
 
@@ -26,7 +22,13 @@ public abstract class InteractiveObject : Wall
         UpdateTexture();
     }
 
-    protected void UpdateTexture()
+    public void IncreaseState()
+    {
+        State++;
+        UpdateTexture();
+    }
+    
+    private void UpdateTexture()
     {
         SetTexture(_textures[State]);
     }

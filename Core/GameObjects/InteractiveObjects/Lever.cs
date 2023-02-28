@@ -5,17 +5,26 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 public class Lever : InteractiveObject
 {
     
-    internal new const string Name = "lever";
-    internal new const int StateNumber = 2; 
+    public const string Name = "lever";
+    public const int StateNumber = 2;
 
-    public Lever(Texture2D[] textures, int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
+    private bool _isLocked;
+
+    public Lever(int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
     {
-        
+        _isLocked = false;
+    }
+    
+    public Lever(int xInGrid, int yInGrid, bool isLocked) : base(xInGrid, yInGrid)
+    {
+        _isLocked = isLocked;
     }
 
     public override void Interact(Character character)
     {
         
     }
-    
+
+    public bool IsLocked() => _isLocked;
+
 }

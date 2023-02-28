@@ -11,40 +11,45 @@ public class Character : GameObject
 {
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
+    private const int ExhaustionTime = 180, SpeedBase = 3, SpeedSprint = 5;
+    private const int StaminaLoss = -1, StaminaGain = 2;
+
     private Orientation _orientation;
     private readonly Texture2D[] _textures;
-    private readonly Attributes _attributes;
+    public readonly Attributes Attributes;
     public int Life, Stamina, Souls;
+    public bool IsHuman, HasRiteOfKindling, HasTeleportationSkill;
     private int _exhaustingTime;
 
     
     
     public Character(Texture2D[] textures) : base(textures[0])
     {
-        Position = new Vector2(Main.CellSize*7, Main.CellSize*4);
-        _orientation = Orientation.Up;
         _textures = textures;
-        _attributes = new Attributes();
+        Attributes = new Attributes();
         Life = MaxLife();
         Stamina = MaxStamina();
+        IsHuman = false;
+        HasRiteOfKindling = true;
+        HasTeleportationSkill = false;
         _exhaustingTime = 0;
     }
 
     public void Move(List<Wall> walls)
     {
         var oldPosition = new Vector2(Position.X, Position.Y);
-        var speed = 3;
+        var speed = SpeedBase;
         
         // Running and Stamina control
         if (Controls.Run.IsPressed
-            && (Controls.Up.IsPressed || Controls.Down.IsPressed || Controls.Right.IsPressed || Controls.Left.IsPressed))
+            && GetNumberOfPressedMovements() >= 1)
         {
             if (Stamina < 0)
-                _exhaustingTime = 300;
+                _exhaustingTime = ExhaustionTime;
             if (_exhaustingTime == 0)
             {
-                speed = 5;
-                AddStamina(-3);
+                speed = SpeedSprint;
+                AddStamina(StaminaLoss);
             }
             else
             {
@@ -53,8 +58,12 @@ public class Character : GameObject
         }
         else
         {
-            AddStamina(5);
+            AddStamina(StaminaGain);
         }
+
+        // double speed fix (when pressing two directions at once)
+        if (GetNumberOfPressedMovements() >= 2)
+            speed--;
         
         // Real Movement Vertical
         if (Controls.Up.IsPressed)
@@ -84,6 +93,20 @@ public class Character : GameObject
         foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
             Position.X = oldPosition.X;
         
+    }
+
+    private int GetNumberOfPressedMovements()
+    {
+        var result = 0;
+        if (Controls.Up.IsPressed)
+            result++;
+        if (Controls.Down.IsPressed)
+            result++;
+        if (Controls.Right.IsPressed)
+            result++;
+        if (Controls.Left.IsPressed)
+            result++;
+        return result;
     }
 
     private new Rectangle GetHitbox()
@@ -158,13 +181,25 @@ public class Character : GameObject
         }
     }
 
+    public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
+    {
+        Position.X = xGrid * Main.CellSize + (float)(MarginS)/2;
+        Position.Y = yGrid * Main.CellSize - MarginU;
+        _orientation = orientation;
+    }
+    
+    public void PlaceOnGrid(Destination destination)
+    {
+        PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
+    }
+
     public int MaxLife()
     {
-        return _attributes.Get(Attributes.Attribute.Vitality) * 50;
+        return Attributes.Get(Attributes.Attribute.Vitality) * 50;
     }
     public int MaxStamina()
     {
-        return _attributes.Get(Attributes.Attribute.Endurance) * 30;
+        return Attributes.Get(Attributes.Attribute.Endurance) * 30;
     }
 
     public void AddLife(int hp)

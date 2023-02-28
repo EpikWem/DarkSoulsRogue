@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace DarkSoulsRogue.Core;
 
@@ -15,6 +16,8 @@ public class Attributes
         {
             _values[i] = 10;
         }
+        Set(Attribute.Attunement, 0);
+        Set(Attribute.Humanity, 0);
     }
 
     public int Get(Attribute attribute)
@@ -22,9 +25,24 @@ public class Attributes
         return _values[(int)attribute];
     }
 
-    public void Set(Attribute attribute, int value)
+    private void Set(Attribute attribute, int value)
     {
         _values[(int)attribute] = value;
     }
+    
+    public void Increase(Attribute attribute, int value)
+    {
+        _values[(int)attribute] += value;
+    }
+
+    public void Increase(int[] values)
+    {
+        for (int i = 0; i < _values.Length; i++)
+        {
+            _values[i] += values[i];
+        }
+    }
+
+    public int GetTotalLevel() => _values.Sum();
 
 }

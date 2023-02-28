@@ -1,5 +1,6 @@
 ﻿using System;
 using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -11,6 +12,7 @@ public class Ath
     private readonly Bar _life, _stamina;
     private readonly SoulCounter _soulCounter;
     private readonly Character _character;
+    private readonly Circle _humanityCounter;
 
     public Ath(Character character, GraphicsDevice graphicsDevice)
     {
@@ -18,6 +20,7 @@ public class Ath
         _life = new Bar(graphicsDevice, new Vector2(20, 20), 20, Color.Red);
         _stamina = new Bar(graphicsDevice, new Vector2(20, 40), 20, Color.DarkGreen);
         _soulCounter = new SoulCounter(graphicsDevice);
+        _humanityCounter = new Circle(new Vector2(100, 100));
     }
 
     public void Draw(SpriteBatch spriteBatch)
@@ -25,6 +28,7 @@ public class Ath
         _life.Draw(spriteBatch, _character.Life, _character.MaxLife());
         _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
         _soulCounter.Draw(spriteBatch, _character.Souls);
+        spriteBatch.
     }
 
     private class Bar

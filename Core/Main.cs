@@ -49,6 +49,7 @@ public class Main : Game
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
+        _character.PlaceOnGrid(7, 4, Orientation.Up);
         _ath = new Ath(_character, GraphicsDevice);
         LoadMap(Maps.GetMap(101));
 
@@ -94,7 +95,7 @@ public class Main : Game
         // KEY TESTS
         Controls.UpdateKeyListener();
         
-        MoveCharacter();
+        _character.Move(_walls.Concat(_objects).ToList());
         
         if (Controls.KillApp.IsPressed)
             Exit();
@@ -105,18 +106,21 @@ public class Main : Game
             foreach (var o in _objects
             .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
             {
-                o.Interact(_character);
-                if (o.GetType() == typeof(Door))
-                    _objects.Remove(o);
+                
+                if (o.GetType() == typeof(Door) && o.GetState() == 1)
+                { // need to pass through the door
+                    var d = ((Door)o).Destination;
+                    _character.PlaceOnGrid(d);
+                    LoadMap(Maps.GetMap(d.MapId));
+                }
+                else
+                    o.Interact(_character);
             }
         }
         if (Controls.Pause.IsPressed)
         {
-            _character.AddSouls(3000);
+            _character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
         }
-        
-        // MODEL UPDATES
-        //to do
 
         base.Update(gameTime);
     }
@@ -124,28 +128,20 @@ public class Main : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        
-        //Add your drawing code here
         _spriteBatch.Begin();
         
         _world.Draw(_spriteBatch);
-        foreach (Wall w in _walls) {
+        foreach (var w in _walls) {
             w.Draw(_spriteBatch);
         }
-        foreach (InteractiveObject o in _objects) {
+        foreach (var o in _objects) {
             o.Draw(_spriteBatch);
         }
         _character.Draw(_spriteBatch);
         _ath.Draw(_spriteBatch);
         
         _spriteBatch.End();
-        
         base.Draw(gameTime);
-    }
-    
-    private void MoveCharacter()
-    {
-        _character.Move(_walls.Concat(_objects).ToList());
     }
 
 }

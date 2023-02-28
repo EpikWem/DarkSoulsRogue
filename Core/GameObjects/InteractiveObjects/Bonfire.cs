@@ -1,13 +1,11 @@
-﻿using Microsoft.Xna.Framework.Graphics;
-
-namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+﻿namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public class Bonfire : InteractiveObject
 {
-    internal new const string Name = "bonfire";
-    internal new const int StateNumber = 5; 
+    public const string Name = "bonfire";
+    public const int StateNumber = 5; 
     
-    public Bonfire(Texture2D[] textures, int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
+    public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
     {
         
     }
@@ -16,14 +14,37 @@ public class Bonfire : InteractiveObject
     {
         character.AddLife(character.MaxLife());
         character.AddStamina(character.MaxStamina());
-        Lit();
+        Lit(character);
     }
 
-    private void Lit()
+    private void Lit(Character character)
     {
-        if (State != 4)
-            State++;
-        UpdateTexture();
+        if (character.IsHuman)
+        {
+            if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
+            {
+                if (State == 2 && !character.HasRiteOfKindling)
+                    return;
+                if (State != 4)
+                {
+                    character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
+                    IncreaseState();
+                }
+            }
+        }
+        
+    }
+
+    private void RetrieveHumanity(Character character)
+    {
+        if (!character.IsHuman)
+        {
+            if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
+            {
+                character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
+                character.IsHuman = true;
+            }   
+        }
     }
     
 }
