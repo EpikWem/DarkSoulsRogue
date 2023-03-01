@@ -52,6 +52,8 @@ public class Main : Game
         _character = new Character(_textures.CharacterDebugT);
         _character.PlaceOnGrid(7, 4, Orientation.Up);
         _ath = new Ath(_character, GraphicsDevice);
+        
+        SaveSystem.Load(_character);
         LoadMap(Maps.GetMap(101));
 
         base.Initialize();

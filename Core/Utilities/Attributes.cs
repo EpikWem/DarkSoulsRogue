@@ -30,17 +30,17 @@ public class Attributes
         _values[(int)attribute] = value;
     }
     
+    public void Set(int[] values)
+    {
+        for (var i = 0; i < _values.Length; i++)
+        {
+            _values[i] = values[i];
+        }
+    }
+    
     public void Increase(Attribute attribute, int value)
     {
         _values[(int)attribute] += value;
-    }
-
-    public void Increase(int[] values)
-    {
-        for (int i = 0; i < _values.Length; i++)
-        {
-            _values[i] += values[i];
-        }
     }
 
     public int GetTotalLevel() => _values.Sum();

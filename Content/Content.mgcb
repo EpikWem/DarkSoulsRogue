@@ -269,3 +269,8 @@
 /processorParam:TextureFormat=Color
 /build:images/walls/1.png
 
+#begin saves/save1.xml
+/importer:XmlImporter
+/processor:PassThroughProcessor
+/build:saves/save1.xml
+

@@ -30,7 +30,8 @@ public class Bonfire : InteractiveObject
                         character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
                         IncreaseState();
                     }
-                    else{
+                    else
+                    {
                         return; // impossible d'embraser plus
                     }
                     
