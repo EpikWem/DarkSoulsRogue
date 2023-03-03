@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core;
@@ -47,12 +49,14 @@ public class Main : Game
         FontBold = Content.Load<SpriteFont>("fonts/font_bold");
         FontHumanityCounter = Content.Load<SpriteFont>("fonts/humanity_counter");
         FontSoulCounter = Content.Load<SpriteFont>("fonts/soul_counter");
+        
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
         _character.PlaceOnGrid(7, 4, Orientation.Up);
         _ath = new Ath(_character, GraphicsDevice);
         
+        SaveSystem.Init();
         SaveSystem.Load(_character);
         LoadMap(Maps.GetMap(101));
 

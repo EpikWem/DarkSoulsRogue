@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 
 namespace DarkSoulsRogue.Core;
 
@@ -8,11 +7,13 @@ public class Attributes
     
     public enum Attribute { Vitality, Endurance, Attunement, Strength, Dexterity, Resistance, Intelligence, Faith, Humanity }
 
-    private int[] _values = new int[9]; 
+    public const int NumAttributes = 9;
+    
+    private int[] _values = new int[NumAttributes]; 
 
     public Attributes()
     {
-        for (int i = 0; i < _values.Length; i++)
+        for (int i = 0; i < NumAttributes; i++)
         {
             _values[i] = 10;
         }
@@ -32,7 +33,7 @@ public class Attributes
     
     public void Set(int[] values)
     {
-        for (var i = 0; i < _values.Length; i++)
+        for (var i = 0; i < NumAttributes; i++)
         {
             _values[i] = values[i];
         }
