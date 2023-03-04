@@ -1,4 +1,6 @@
-﻿namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+﻿using DarkSoulsRogue.Core.Utilities;
+
+namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public class Bonfire : InteractiveObject
 {
@@ -25,7 +27,7 @@ public class Bonfire : InteractiveObject
             {
                 if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
                 {
-                    if (State == 1 || ((State == 2 || State == 3) && character.HasRiteOfKindling))
+                    if (State == 1 || ((State == 2 || State == 3) && character.Triggers.Get(Triggers.Trigger.HasRiteOfKindling)))
                     {
                         character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
                         IncreaseState();

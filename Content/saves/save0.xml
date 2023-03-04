@@ -1,18 +1,32 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
-  <Asset Type="DarkSoulsRogue.Core.GameObjects.Character">
-    <Life>100</Life>
-    <Souls>10</Souls>
-    <Attributes>
-      <vitality>4</vitality>
-      <endurance>5</endurance>
-      <attunement>1</attunement>
-      <strength>12</strength>
-      <dexterity>14</dexterity>
-      <resistance>2</resistance>
-      <intelligence>9</intelligence>
-      <faith>54</faith>
-      <humanity>1</humanity>
-    </Attributes>
+  <Asset>
+    <character>
+      <life>200</life>
+      <souls>10</souls>
+      <isHuman>True</isHuman>
+      <attributes>
+        <vitality>4</vitality>
+        <endurance>5</endurance>
+        <attunement>1</attunement>
+        <strength>12</strength>
+        <dexterity>14</dexterity>
+        <resistance>2</resistance>
+        <intelligence>9</intelligence>
+        <faith>54</faith>
+        <humanity>8</humanity>
+      </attributes>
+      <triggers>
+        <finishedFirstAsylum>False</finishedFirstAsylum>
+        <hasRiteOfKindling>True</hasRiteOfKindling>
+        <hasTeleportationSkill>False</hasTeleportationSkill>
+        <unlockedGoldenBarriers>False</unlockedGoldenBarriers>
+        <hasArtoriasRing>False</hasArtoriasRing>
+        <beatNito>False</beatNito>
+        <beatSeath>False</beatSeath>
+        <beatFourKings>False</beatFourKings>
+        <beatBedOfChaos>False</beatBedOfChaos>
+      </triggers>
+    </character>
   </Asset>
 </XnaContent>

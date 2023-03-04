@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core;
@@ -103,9 +101,9 @@ public class Main : Game
         Controls.UpdateKeyListener();
         
         _character.Move(_walls.Concat(_objects).ToList());
-        
+
         if (Controls.KillApp.IsPressed)
-            Exit();
+            QuitApp();
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
         if (Controls.Interact.IsOnePressed)
@@ -149,6 +147,12 @@ public class Main : Game
         
         _spriteBatch.End();
         base.Draw(gameTime);
+    }
+
+    private void QuitApp()
+    {
+        SaveSystem.Save(_character);
+        Exit();
     }
 
 }

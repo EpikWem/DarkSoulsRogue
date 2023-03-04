@@ -16,9 +16,10 @@ public class Character : GameObject
 
     private Orientation _orientation;
     private readonly Texture2D[] _textures;
-    public readonly Attributes Attributes;
     public int Life, Stamina, Souls;
-    public bool IsHuman, HasRiteOfKindling, HasTeleportationSkill;
+    public bool IsHuman;
+    public readonly Attributes Attributes;
+    public readonly Triggers Triggers;
     private int _exhaustingTime;
 
     
@@ -27,11 +28,8 @@ public class Character : GameObject
     {
         _textures = textures;
         Attributes = new Attributes();
-        Life = MaxLife();
+        Triggers = new Triggers();
         Stamina = MaxStamina();
-        IsHuman = false;
-        HasRiteOfKindling = true;
-        HasTeleportationSkill = false;
         _exhaustingTime = 0;
     }
 
