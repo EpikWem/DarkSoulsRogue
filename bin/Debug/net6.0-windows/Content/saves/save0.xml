@@ -2,9 +2,14 @@
 <XnaContent>
   <Asset>
     <character>
-      <life>100</life>
+      <life>200</life>
       <souls>10</souls>
-      <isHuman>false</isHuman>
+      <isHuman>True</isHuman>
+      <position>
+        <x>71</x>
+        <y>70</y>
+        <orientation>1</orientation>
+      </position>
       <attributes>
         <vitality>4</vitality>
         <endurance>5</endurance>
@@ -14,18 +19,18 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>1</humanity>
+        <humanity>10</humanity>
       </attributes>
       <triggers>
-        <finishedFirstAsylum>false</finishedFirstAsylum>
-        <hasRiteOfKindling>true</hasRiteOfKindling>
-        <hasTeleportationSkill>false</hasTeleportationSkill>
-        <unlockedGoldenBarriers>false</unlockedGoldenBarriers>
-        <hasArtoriasRing>false</hasArtoriasRing>
-        <beatNito>false</beatNito>
-        <beatSeath>false</beatSeath>
-        <beatFourKings>false</beatFourKings>
-        <beatBedOfChaos>false</beatBedOfChaos>
+        <finishedFirstAsylum>False</finishedFirstAsylum>
+        <hasRiteOfKindling>True</hasRiteOfKindling>
+        <hasTeleportationSkill>False</hasTeleportationSkill>
+        <unlockedGoldenBarriers>False</unlockedGoldenBarriers>
+        <hasArtoriasRing>False</hasArtoriasRing>
+        <beatNito>False</beatNito>
+        <beatSeath>False</beatSeath>
+        <beatFourKings>False</beatFourKings>
+        <beatBedOfChaos>False</beatBedOfChaos>
       </triggers>
     </character>
   </Asset>

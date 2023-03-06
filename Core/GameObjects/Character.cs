@@ -14,7 +14,7 @@ public class Character : GameObject
     private const int ExhaustionTime = 180, SpeedBase = 3, SpeedSprint = 5;
     private const int StaminaLoss = -1, StaminaGain = 2;
 
-    private Orientation _orientation;
+    public Orientation Orientation;
     private readonly Texture2D[] _textures;
     public int Life, Stamina, Souls;
     public bool IsHuman;
@@ -66,12 +66,12 @@ public class Character : GameObject
         // Real Movement Vertical
         if (Controls.Up.IsPressed)
         {
-            _orientation = Orientation.Up;
+            Orientation = Orientation.Up;
             Position.Y -= speed;
         }
         if (Controls.Down.IsPressed)
         {
-            _orientation = Orientation.Down;
+            Orientation = Orientation.Down;
             Position.Y += speed;
         }
         foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
@@ -80,12 +80,12 @@ public class Character : GameObject
         // Real Movement Horizontal
         if (Controls.Right.IsPressed)
         {
-            _orientation = Orientation.Right;
+            Orientation = Orientation.Right;
             Position.X += speed;
         }
         if (Controls.Left.IsPressed)
         {
-            _orientation = Orientation.Left;
+            Orientation = Orientation.Left;
             Position.X -= speed;
         }
         foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
@@ -93,7 +93,7 @@ public class Character : GameObject
         
     }
 
-    private int GetNumberOfPressedMovements()
+    private static int GetNumberOfPressedMovements()
     {
         var result = 0;
         if (Controls.Up.IsPressed)
@@ -105,6 +105,14 @@ public class Character : GameObject
         if (Controls.Left.IsPressed)
             result++;
         return result;
+    }
+
+    public Vector2 GetPosition() => Position;
+
+    public void SetPosition(int x, int y)
+    {
+        Position.X = x;
+        Position.Y = y;
     }
 
     private new Rectangle GetHitbox()
@@ -119,7 +127,7 @@ public class Character : GameObject
 
     private Texture2D GetTextureToDraw()
     {
-        return _orientation switch
+        return Orientation switch
         {
             Orientation.Up => _textures[0],
             Orientation.Down => _textures[1],
@@ -131,7 +139,7 @@ public class Character : GameObject
 
     private Vector2 GetLookingPoint()
     {
-        return _orientation switch
+        return Orientation switch
         {
             Orientation.Up => new Vector2(Position.X + (float)Width/2, Position.Y),
             Orientation.Down => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
@@ -183,13 +191,15 @@ public class Character : GameObject
     {
         Position.X = xGrid * Main.CellSize + (float)(MarginS)/2;
         Position.Y = yGrid * Main.CellSize - MarginU;
-        _orientation = orientation;
+        Orientation = orientation;
     }
     
     public void PlaceOnGrid(Destination destination)
     {
         PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
     }
+
+    // TOFDOpublic Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Main.CellSize), (float)Math.Truncate(Position.Y / Main.CellSize));
 
     public int MaxLife()
     {

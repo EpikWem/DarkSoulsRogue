@@ -5,6 +5,11 @@
       <life>200</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
+      <position>
+        <x>485</x>
+        <y>405</y>
+        <orientation>1</orientation>
+      </position>
       <attributes>
         <vitality>4</vitality>
         <endurance>5</endurance>
@@ -14,7 +19,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>8</humanity>
+        <humanity>11</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>

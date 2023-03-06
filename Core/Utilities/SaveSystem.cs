@@ -16,17 +16,27 @@ public static class SaveSystem
         _saveFile = new XmlDocument();
         _saveFile.Load(SaveFilePath);
         _asset = _saveFile["XnaContent"]["Asset"];
-        
     }
     
     public static void Load(Character character)
     {
         XmlNode node;
-
+        
         node = _asset["character"];
         character.Life = GetInt(node["life"]);
         character.Souls = GetInt(node["souls"]);
         character.IsHuman = GetBool(node["isHuman"]);
+        
+        node = _asset["character"]["position"];
+        character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
+        character.Orientation = GetInt(node["orientation"]) switch
+        {
+            0 => Orientation.Up,
+            1 => Orientation.Down,
+            2 => Orientation.Right,
+            3 => Orientation.Left,
+            _ => Orientation.Null
+        };
 
         node = _asset["character"]["attributes"];
         var attributes = new int[Attributes.NumAttributes];
@@ -39,6 +49,7 @@ public static class SaveSystem
         for (var i = 0; i < Triggers.NumTriggers; i++)
             triggers[i] = GetBool(node.ChildNodes[i]);
         character.Triggers.Set(triggers);
+        
         
     }
     
@@ -53,6 +64,19 @@ public static class SaveSystem
         node["life"].InnerText = character.Life.ToString();
         node["souls"].InnerText = character.Souls.ToString();
         node["isHuman"].InnerText = character.IsHuman.ToString();
+        
+        node = asset["character"]["position"];
+        node["x"].InnerText = character.GetPosition().X.ToString();
+        node["y"].InnerText = character.GetPosition().Y.ToString();
+        node["orientation"].InnerText = (character.Orientation switch
+        {
+            Orientation.Up => 0,
+            Orientation.Down => 1,
+            Orientation.Right => 2,
+            Orientation.Left => 3,
+            Orientation.Null => 0,
+            _ => 0
+        }).ToString();
 
         node = asset["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)

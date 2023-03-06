@@ -51,7 +51,6 @@ public class Main : Game
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
         _character = new Character(_textures.CharacterDebugT);
-        _character.PlaceOnGrid(7, 4, Orientation.Up);
         _ath = new Ath(_character, GraphicsDevice);
         
         SaveSystem.Init();
