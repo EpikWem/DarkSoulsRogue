@@ -1,6 +1,8 @@
-﻿namespace DarkSoulsRogue.Core.Items;
+﻿using DarkSoulsRogue.Core.Utilities;
 
-public class Weapon : Item
+namespace DarkSoulsRogue.Core.Items;
+
+public class Weapon : Equipment
 {
 
     public enum WeaponTypes
@@ -24,6 +26,10 @@ public class Weapon : Item
         Poise, ResBlood, ResPoison, ResCurse, Weight;
 
     public Weapon(string name, WeaponTypes weaponType) : base(name, Categories.Weapon)
+    {
+        WeaponType = weaponType;
+    }
+    public Weapon(string name, WeaponTypes weaponType, Upgrades.Upgrade upgrade) : base(name, Categories.Weapon, upgrade)
     {
         WeaponType = weaponType;
     }

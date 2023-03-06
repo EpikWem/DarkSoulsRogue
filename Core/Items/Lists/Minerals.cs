@@ -5,7 +5,7 @@ public class Minerals
 
     public static Mineral
         TitaniteShard = new Mineral("Titanite Shard"),
-        GreatTitaniteShard = new Mineral("Great Titanite Shard"),
+        TitaniteShardLarge = new Mineral("Large Titanite Shard"),
         TitaniteChunk = new Mineral("Titanite Chunk"),
         TitaniteSlab = new Mineral("Titanite Slab"),
         

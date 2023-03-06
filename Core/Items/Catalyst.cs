@@ -1,14 +1,13 @@
 ﻿namespace DarkSoulsRogue.Core.Items;
 
-public class Catalyst
-{
-
-    public const int MaxUpgrade = 10; 
+public class Catalyst : Equipment
+{ 
     
     public enum SpellCategories { Sorcery, Pyromancy, Miracle }
     public readonly SpellCategories SpellCategory;
-    public readonly Mineral UpgradeMineral;
-        
-    private int _upgradeLevel;
 
+    public Catalyst(string name, SpellCategories spellCategory) : base(name, Categories.Tool)
+    {
+        SpellCategory = spellCategory;
+    }
 }

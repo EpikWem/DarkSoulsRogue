@@ -2,7 +2,7 @@
 
 namespace DarkSoulsRogue.Core.Items;
 
-public class Armor : Item
+public class Armor : Equipment
 {
 
     public readonly float
