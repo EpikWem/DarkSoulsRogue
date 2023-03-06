@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -14,12 +15,13 @@ public class Character : GameObject
     private const int ExhaustionTime = 180, SpeedBase = 3, SpeedSprint = 5;
     private const int StaminaLoss = -1, StaminaGain = 2;
 
-    public Orientation Orientation;
     private readonly Texture2D[] _textures;
+    public Orientation Orientation;
     public int Life, Stamina, Souls;
     public bool IsHuman;
     public readonly Attributes Attributes;
     public readonly Triggers Triggers;
+    public readonly Inventory Inventory;
     private int _exhaustingTime;
 
     
@@ -29,6 +31,7 @@ public class Character : GameObject
         _textures = textures;
         Attributes = new Attributes();
         Triggers = new Triggers();
+        Inventory = new Inventory();
         Stamina = MaxStamina();
         _exhaustingTime = 0;
     }
