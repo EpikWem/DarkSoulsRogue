@@ -8,6 +8,7 @@ public class Inventory
     private Armor _equippedArmor;
     private Weapon _equippedWeapon;
     private Catalyst _equippedCatalyst;
+    private Ring _equippedRing;
     
     // equipped arrows and carrets 
 
