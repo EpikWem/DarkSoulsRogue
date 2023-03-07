@@ -1,7 +1,4 @@
-﻿using DarkSoulsRogue.Core.Items;
-using DarkSoulsRogue.Core.Items.Lists;
-
-namespace DarkSoulsRogue.Core.Utilities;
+﻿namespace DarkSoulsRogue.Core.Items.Lists;
 
 public static class Upgrades
 {

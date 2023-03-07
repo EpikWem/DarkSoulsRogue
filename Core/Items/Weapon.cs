@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.Utilities;
+﻿using DarkSoulsRogue.Core.Items.Lists;
+using DarkSoulsRogue.Core.Utilities;
 
 namespace DarkSoulsRogue.Core.Items;
 

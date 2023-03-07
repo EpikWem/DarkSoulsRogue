@@ -2,6 +2,7 @@
 using System.Linq;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;

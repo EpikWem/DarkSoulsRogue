@@ -4,7 +4,7 @@ using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.Interfaces;
 
 public class Ath
 {
