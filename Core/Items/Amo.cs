@@ -1,15 +1,17 @@
 ﻿namespace DarkSoulsRogue.Core.Items;
 
-public class Amo : Item
+public abstract class Amo : Item
 {
-    
-    public enum AmoTypes { Arrow, GreatArrow, Caret }
 
-    public readonly AmoTypes AmoType;
+    public readonly int Damages;
     
-    public Amo(string name, AmoTypes amoType) : base(name, Categories.Tool)
+    public enum DamageTypes { Physical, Magic, Fire, Lightning }
+    public readonly DamageTypes DamageType;
+    
+    protected Amo(string name, int damages, DamageTypes damageType) : base(name, Categories.Amo)
     {
-        AmoType = amoType;
+        Damages = damages;
+        DamageType = damageType;
     }
     
 }
