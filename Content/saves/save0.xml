@@ -7,13 +7,13 @@
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>427</x>
-        <y>357</y>
-        <orientation>0</orientation>
+        <x>323</x>
+        <y>273</y>
+        <orientation>2</orientation>
       </position>
       <attributes>
-        <vitality>4</vitality>
-        <endurance>5</endurance>
+        <vitality>8</vitality>
+        <endurance>10</endurance>
         <attunement>1</attunement>
         <strength>12</strength>
         <dexterity>14</dexterity>
@@ -51,7 +51,7 @@
         <equippedArmor>2</equippedArmor>
         <equippedWeapon>0</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
-        <equippedRing>0</equippedRing>
+        <equippedRing>1</equippedRing>
         <equippedCovenant>0</equippedCovenant>
       </inventory>
     </character>

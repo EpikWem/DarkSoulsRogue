@@ -11,7 +11,7 @@ public class Textures
     private const int WallNumber = 1;
 
     public static Texture2D BgT;
-    public static Texture2D[] BonfireT, DoorT;
+    public static Texture2D[] BonfireT, ChestT, DoorT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures;
         
@@ -29,6 +29,7 @@ public class Textures
         };
         
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
+        ChestT = LoadObjectTextures(Chest.Name, Chest.StateNumber, content);
         DoorT = LoadObjectTextures(Door.Name, Door.StateNumber, content);
         WallsT = LoadWallsTexture(content);
     }
@@ -44,7 +45,7 @@ public class Textures
         return content.Load<Texture2D>("images/" + fileName);
     }
 
-    private Texture2D[] LoadCharacterTextures(string characterName, ContentManager content)
+    private static Texture2D[] LoadCharacterTextures(string characterName, ContentManager content)
     {
         return new[]
         {
@@ -55,17 +56,17 @@ public class Textures
         };
     }
 
-    private Texture2D[] LoadObjectTextures(string name, int stateNumber, ContentManager content)
+    private static Texture2D[] LoadObjectTextures(string name, int stateNumber, ContentManager content)
     {
-        Texture2D[] result = new Texture2D[stateNumber];
+        var result = new Texture2D[stateNumber];
         for (int i = 0; i < stateNumber; i++)
             result[i] = LoadTexture("objects/" + name + "/" + i, content);
         return result;
     }
 
-    private Texture2D[] LoadWallsTexture(ContentManager content)
+    private static Texture2D[] LoadWallsTexture(ContentManager content)
     {
-        Texture2D[] result = new Texture2D[WallNumber+1];
+        var result = new Texture2D[WallNumber+1];
         for (int i = 1; i < WallNumber+1; i++)
             result[i] = LoadTexture("walls/" + i, content);
         return result;

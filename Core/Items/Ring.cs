@@ -1,18 +1,15 @@
-using System;
 using DarkSoulsRogue.Core.GameObjects;
 
 namespace DarkSoulsRogue.Core.Items;
 
-public abstract class Ring : Item
+public abstract class Ring : Equipment
 {
-
-    private readonly Func<Character, int> _effect;
     
-    public Ring(string name, Func<Character, int> effect) : base(name, Categories.Ring)
+    public Ring(string name) : base(name, Categories.Ring)
     {
         
     }
 
-    public void Effect(Character character) => _effect(character);
+    public abstract void Effect(Character character);
 
 }

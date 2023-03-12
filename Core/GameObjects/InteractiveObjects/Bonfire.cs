@@ -7,7 +7,7 @@ public class Bonfire : InteractiveObject
     public const string Name = "bonfire";
     public const int StateNumber = 5; 
     
-    public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid)
+    public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid, Textures.BonfireT)
     {
         
     }

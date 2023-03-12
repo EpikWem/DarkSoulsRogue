@@ -54,7 +54,6 @@ public class Main : Game
         
         SaveSystem.Init();
         LoadMap(Maps.GetMap(SaveSystem.Load(_character)));
-        _character.ChangeArmor(_character.Inventory.EquippedArmor);
 
         base.Initialize();
     }
@@ -73,18 +72,9 @@ public class Main : Game
         for (var y = 0; y < _currentMap.Height; y++)
             for (var x = 0; x < _currentMap.Width; x++)
                 if (_currentMap.WallsIds[y][x] != 0)
-                    _walls.Add(new Wall(Textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
+                    _walls.Add(new Wall(x, y, Textures.WallsT[_currentMap.WallsIds[y][x]]));
 
         _objects = _currentMap.Objects;
-        foreach (var o in _objects)
-        {
-            if (o.GetType() == typeof(Bonfire))
-                o.SetTextures(Textures.BonfireT);
-            /*if (o.GetType() == typeof(Chest))
-                o.SetTextures(_textures.ChestT);*/
-            if (o.GetType() == typeof(Door))
-                o.SetTextures(Textures.DoorT);
-        }
     }
     
     
@@ -126,15 +116,15 @@ public class Main : Game
         }
         if (Controls.Debug1.IsOnePressed)
         {
-            _character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
+            _character.ChangeRing(Rings.NoRingR);
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            _character.ChangeArmor(Armors.Solaire);
+            _character.ChangeRing(Rings.TinyBeingR);
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            _character.ChangeArmor(Armors.Artorias);
+            _character.ChangeRing(Rings.CloranthyR);
         }
 
         base.Update(gameTime);

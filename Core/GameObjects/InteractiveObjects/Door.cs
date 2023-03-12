@@ -10,7 +10,7 @@ public class Door : InteractiveObject
 
     public readonly Destination Destination;
     
-    public Door(int xInGrid, int yInGrid, Destination destination) : base(xInGrid, yInGrid)
+    public Door(int xInGrid, int yInGrid, Destination destination) : base(xInGrid, yInGrid, Textures.DoorT)
     {
         Destination = destination;
     }

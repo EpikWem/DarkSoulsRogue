@@ -7,29 +7,19 @@ public abstract class InteractiveObject : Wall
     protected int State;
     private Texture2D[] _textures;
 
-    protected InteractiveObject(int xInGrid, int yInGrid)
+    protected InteractiveObject(int xInGrid, int yInGrid, Texture2D[] textures) : base(xInGrid, yInGrid, textures[0])
     {
         State = 0;
         Position.X = xInGrid*Main.CellSize;
         Position.Y = yInGrid*Main.CellSize;
+        _textures = textures;
     }
 
     public abstract void Interact(Character character);
 
-    public void SetTextures(Texture2D[] textures)
-    {
-        _textures = textures;
-        UpdateTexture();
-    }
-
-    public void IncreaseState()
+    protected void IncreaseState()
     {
         State++;
-        UpdateTexture();
-    }
-    
-    private void UpdateTexture()
-    {
         SetTexture(_textures[State]);
     }
 

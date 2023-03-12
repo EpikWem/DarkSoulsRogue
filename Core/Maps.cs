@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Lists;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 
@@ -65,9 +67,9 @@ public abstract class Maps
             new[] {
                 new[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
-                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1},
-                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
+                new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1},
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
                 new[] {1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1},
@@ -75,6 +77,7 @@ public abstract class Maps
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
             }, new List<InteractiveObject> (new InteractiveObject[] {
                 new Bonfire(12, 7),
+                new Chest(12, 3, new Stack(Consumables.SoulOfALostUndead, 2)),
                 new Door(7, 9, new Destination(102, new Vector2(7, 1), Orientation.Down))
             })
         );

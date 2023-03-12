@@ -11,7 +11,7 @@ public abstract class Item
     public readonly int Price;
     public readonly string Description;
     
-    public enum Categories { Usable, Weapon, Tool, Armor, Ring, Mineral, Key, Amo }
+    public enum Categories { Consumable, Weapon, Tool, Armor, Ring, Mineral, Key, Amo }
 
     protected Item(string name, Categories category)
     {

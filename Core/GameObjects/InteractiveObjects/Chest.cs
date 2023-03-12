@@ -1,5 +1,4 @@
 ﻿using DarkSoulsRogue.Core.Items;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
@@ -7,20 +6,20 @@ public class Chest : InteractiveObject
 {
     
     public const string Name = "chest";
-    public const int StateNumber = 2; 
-
-    private readonly Item _item;
+    public const int StateNumber = 2;
     
-    public Chest(int xInGrid, int yInGrid, Item item) : base(xInGrid, yInGrid)
+    private readonly Stack _item;
+    
+    public Chest(int xInGrid, int yInGrid, Stack stack) : base(xInGrid, yInGrid, Textures.ChestT)
     {
-        _item = item;
+        _item = stack;
     }
 
     public override void Interact(Character character)
     {
         if (State == 0)
         {
-            //TODO: give _content to player
+            character.Inventory.AddItem(_item.Item, _item.Quantity);
             State = 1;
         }
     }

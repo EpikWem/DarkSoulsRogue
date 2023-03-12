@@ -52,7 +52,8 @@ public static class SaveSystem
         character.Triggers.Set(triggers);
 
         node = _asset["character"]["inventory"];
-        character.Inventory.EquippedArmor = Armors.GetFromIndex(GetInt(node["equippedArmor"]));
+        character.ChangeArmor(Armors.GetFromIndex(GetInt(node["equippedArmor"])));
+        character.ChangeRing(Rings.GetFromIndex(GetInt(node["equippedRing"])));
 
         return GetInt(_asset["map"]);
     }
@@ -93,6 +94,7 @@ public static class SaveSystem
         
         node = asset["character"]["inventory"];
         node["equippedArmor"].InnerText = Armors.GetIndexOf(character.Inventory.EquippedArmor).ToString();
+        node["equippedRing"].InnerText = Rings.GetIndexOf(character.Inventory.EquippedRing).ToString();
         
         doc.Save(SaveFilePath);
     }

@@ -12,8 +12,10 @@ public class Character : GameObject
 {
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
-    private const int ExhaustionTime = 120, SpeedBase = 3, SpeedSprint = 5;
-    private const int StaminaLoss = -5, StaminaGain = 8;
+    private const int ExhaustionTime = 120, BaseSpeed = 3, BaseSpeedSprint = 5;
+    private const int BaseStaminaLoss = -25, BaseStaminaGain = 10;
+
+    public float CoefLifeMax, CoefStaminaMax, CoefStaminaGain;
 
     private readonly Texture2D[] _textures;
     public Orientation Orientation;
@@ -28,6 +30,7 @@ public class Character : GameObject
     
     public Character(Texture2D[] textures) : base(textures[0])
     {
+        ResetCoef();
         _textures = textures;
         Attributes = new Attributes();
         Triggers = new Triggers();
@@ -39,7 +42,7 @@ public class Character : GameObject
     public void Move(List<Wall> walls)
     {
         var oldPosition = new Vector2(Position.X, Position.Y);
-        var speed = SpeedBase;
+        var speed = BaseSpeed;
         
         // Running and Stamina control
         if (Controls.Run.IsPressed
@@ -49,8 +52,8 @@ public class Character : GameObject
                 _exhaustingTime = ExhaustionTime;
             if (_exhaustingTime == 0)
             {
-                speed = SpeedSprint;
-                AddStamina(StaminaLoss);
+                speed = BaseSpeedSprint;
+                AddStamina(BaseStaminaLoss);
             }
             else
             {
@@ -59,7 +62,7 @@ public class Character : GameObject
         }
         else
         {
-            AddStamina(StaminaGain);
+            AddStamina((int)(BaseStaminaGain * CoefStaminaGain));
         }
 
         // double speed fix (when pressing two directions at once)
@@ -206,11 +209,11 @@ public class Character : GameObject
 
     public int MaxLife()
     {
-        return Attributes.Get(Attributes.Attribute.Vitality) * 500;
+        return Attributes.Get(Attributes.Attribute.Vitality) * (int)(CoefLifeMax * 500.0f);
     }
     public int MaxStamina()
     {
-        return Attributes.Get(Attributes.Attribute.Endurance) * 300;
+        return Attributes.Get(Attributes.Attribute.Endurance) * (int)(CoefStaminaMax * 300.0f);
     }
 
     public void AddLife(int hp)
@@ -232,11 +235,25 @@ public class Character : GameObject
         Souls += souls;
     }
 
+    private void ResetCoef()
+    {
+        CoefLifeMax = 1.0f;
+        CoefStaminaMax = 1.0f;
+        CoefStaminaGain = 1.0f;
+    }
+
     public void ChangeArmor(Armor armor)
     {
         Inventory.EquippedArmor = armor;
         for (var i = 0; i < _textures.Length; i++)
             _textures[i] = armor.GetWearingTextures()[i];
+    }
+    
+    public void ChangeRing(Ring ring)
+    {
+        ResetCoef();
+        Inventory.EquippedRing = ring;
+        ring.Effect(this);
     }
 
 }
