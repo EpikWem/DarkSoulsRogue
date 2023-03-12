@@ -5,18 +5,18 @@ namespace DarkSoulsRogue.Core.Items;
 public class Inventory
 {
     
-    private readonly Stack[] MenuItems = new Stack[5];
-    private readonly Stack[] QuickItems = new Stack[5];
-    private readonly Amo[] _equipedAmos = new Amo[2];
-    
-    private Armor _equippedArmor;
-    private Weapon _equippedWeapon;
-    private Catalyst _equippedCatalyst;
-    private Ring _equippedRing;
-    private Covenant _equippedCovenant;
+    public readonly Item[] MenuItems = new Item[5];
+    public readonly Item[] QuickItems = new Item[5];
+    public readonly Amo[] EquippedAmos = new Amo[2];
+
+    public Armor EquippedArmor;
+    public Weapon EquippedWeapon;
+    public Catalyst EquippedCatalyst;
+    public Ring EquippedRing;
+    public Covenant EquippedCovenant;
 
     private readonly List<Stack> _items = new();
-
+    
     public void AddItem(Item item, int quantity = 1)
     {
         bool Predicate(Stack s) => s.Item.Equals(item);

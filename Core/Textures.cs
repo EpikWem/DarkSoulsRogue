@@ -1,6 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Lists;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -14,15 +15,25 @@ public class Textures
     private ContentManager _content;
 
     public Texture2D BgT;
-    public Texture2D[] CharacterDebugT, CharacterLinkT, BonfireT, DoorT, WallsT;
+    public Texture2D[]
+        BonfireT, DoorT, WallsT;
+    private readonly List<Texture2D[]> _armorTextures;
         
 
     public Textures(ContentManager content)
     {
         _content = content;
+        
         BgT = LoadTexture("bg");
-        CharacterDebugT = LoadCharacterTextures("debug");
-        CharacterLinkT = LoadCharacterTextures("link");
+        
+        _armorTextures = new List<Texture2D[]>
+        {
+            LoadCharacterTextures("link"),
+            LoadCharacterTextures("artorias"),
+            //LoadCharacterTextures("black_iron"),
+            LoadCharacterTextures("solaire")
+        };
+        
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber);
         DoorT = LoadObjectTextures(Door.Name, Door.StateNumber);
         WallsT = LoadWallTextures();
@@ -65,5 +76,7 @@ public class Textures
             result[i] = LoadTexture("walls/" + i);
         return result;
     }
-    
+
+    public Texture2D[] GetArmorTextures(Armor armor) => _armorTextures[Armors.GetIndexOf(armor)];
+
 }

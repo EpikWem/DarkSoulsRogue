@@ -6,8 +6,8 @@
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>485</x>
-        <y>405</y>
+        <x>525</x>
+        <y>129</y>
         <orientation>1</orientation>
       </position>
       <attributes>
@@ -19,7 +19,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>11</humanity>
+        <humanity>12</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>
@@ -32,6 +32,27 @@
         <beatFourKings>False</beatFourKings>
         <beatBedOfChaos>False</beatBedOfChaos>
       </triggers>
+      <inventory>
+        <menuItems>
+          <i0>0</i0>
+          <i1>0</i1>
+          <i2>0</i2>
+          <i3>0</i3>
+          <i4>0</i4>
+        </menuItems>
+        <quickItems>
+          <i0>0</i0>
+          <i1>0</i1>
+          <i2>0</i2>
+          <i3>0</i3>
+          <i4>0</i4>
+        </quickItems>
+        <equippedArmor>2</equippedArmor>
+        <equippedWeapon>0</equippedWeapon>
+        <equippedCatalyst>0</equippedCatalyst>
+        <equippedRing>0</equippedRing>
+        <equippedCovenant>0</equippedCovenant>
+      </inventory>
     </character>
   </Asset>
 </XnaContent>

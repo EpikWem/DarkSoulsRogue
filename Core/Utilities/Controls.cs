@@ -1,6 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Input;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.Utilities;
 
 public abstract class Controls
 {
@@ -20,16 +20,19 @@ public abstract class Controls
     }
     
     public static readonly Control
-        KillApp = new Control(Keys.F10),
-        ToggleFullscreen = new Control(Keys.F11),
-        Pause = new Control(Keys.Escape),
-        Up = new Control(Keys.Up),
-        Down = new Control(Keys.Down),
-        Right = new Control(Keys.Right),
-        Left = new Control(Keys.Left),
-        Interact = new Control(Keys.E),
-        Run = new Control(Keys.Space);
-    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run };
+        KillApp = new (Keys.F10),
+        ToggleFullscreen = new (Keys.F11),
+        Pause = new (Keys.Escape),
+        Up = new (Keys.Up),
+        Down = new (Keys.Down),
+        Right = new (Keys.Right),
+        Left = new (Keys.Left),
+        Interact = new (Keys.E),
+        Run = new (Keys.Space),
+        Debug1 = new (Keys.NumPad1),
+        Debug2 = new (Keys.NumPad2),
+        Debug3 = new (Keys.NumPad3);
+    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, Debug1, Debug2, Debug3 };
 
     public static void UpdateKeyListener()
     {

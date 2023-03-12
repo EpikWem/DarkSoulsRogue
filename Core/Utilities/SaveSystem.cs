@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Lists;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
@@ -20,12 +22,10 @@ public static class SaveSystem
     
     public static void Load(Character character)
     {
-        XmlNode node;
-        
-        node = _asset["character"];
+        XmlNode node = _asset["character"];
         character.Life = GetInt(node["life"]);
         character.Souls = GetInt(node["souls"]);
-        character.IsHuman = GetBool(node["isHuman"]);
+        character.IsHuman = GetBool(node["isHuman"]); 
         
         node = _asset["character"]["position"];
         character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
@@ -49,8 +49,9 @@ public static class SaveSystem
         for (var i = 0; i < Triggers.NumTriggers; i++)
             triggers[i] = GetBool(node.ChildNodes[i]);
         character.Triggers.Set(triggers);
-        
-        
+
+        node = _asset["character"]["inventory"];
+        character.Inventory.EquippedArmor = Armors.GetFromIndex(GetInt(node["equippedArmor"]));
     }
     
     public static void Save(Character character)
@@ -85,6 +86,9 @@ public static class SaveSystem
         node = asset["character"]["triggers"];
         for (var i = 0; i < Triggers.NumTriggers; i++)
             node.ChildNodes[i].InnerText = character.Triggers.GetAll()[i].ToString();
+        
+        node = asset["character"]["inventory"];
+        node["equippedArmor"].InnerText = Armors.GetIndexOf(character.Inventory.EquippedArmor).ToString();
         
         doc.Save(SaveFilePath);
     }

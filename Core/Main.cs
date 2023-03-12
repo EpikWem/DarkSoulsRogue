@@ -3,6 +3,7 @@ using System.Linq;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Interfaces;
+using DarkSoulsRogue.Core.Items.Lists;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -51,11 +52,12 @@ public class Main : Game
         
         _textures = new Textures(Content);
         _world = new World(_textures.BgT);
-        _character = new Character(_textures.CharacterDebugT);
+        _character = new Character(_textures.GetArmorTextures(Armors.Naked));
         _ath = new Ath(_character, GraphicsDevice);
         
         SaveSystem.Init();
         SaveSystem.Load(_character);
+        _character.ChangeArmor(_character.Inventory.EquippedArmor, _textures);
         LoadMap(Maps.GetMap(101));
 
         base.Initialize();
@@ -124,7 +126,19 @@ public class Main : Game
         }
         if (Controls.Pause.IsOnePressed)
         {
+            QuitApp();
+        }
+        if (Controls.Debug1.IsOnePressed)
+        {
             _character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
+        }
+        if (Controls.Debug2.IsOnePressed)
+        {
+            _character.ChangeArmor(Armors.Solaire, _textures);
+        }
+        if (Controls.Debug3.IsOnePressed)
+        {
+            _character.ChangeArmor(Armors.Artorias, _textures);
         }
 
         base.Update(gameTime);

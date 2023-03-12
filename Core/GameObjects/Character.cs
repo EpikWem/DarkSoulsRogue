@@ -12,7 +12,7 @@ public class Character : GameObject
 {
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
-    private const int ExhaustionTime = 180, SpeedBase = 3, SpeedSprint = 5;
+    private const int ExhaustionTime = 120, SpeedBase = 3, SpeedSprint = 5;
     private const int StaminaLoss = -1, StaminaGain = 2;
 
     private readonly Texture2D[] _textures;
@@ -230,6 +230,13 @@ public class Character : GameObject
     public void AddSouls(int souls)
     {
         Souls += souls;
+    }
+
+    public void ChangeArmor(Armor armor, Textures textures)
+    {
+        Inventory.EquippedArmor = armor;
+        for (var i = 0; i < _textures.Length; i++)
+            _textures[i] = armor.GetWearingTextures(textures)[i];
     }
 
 }
