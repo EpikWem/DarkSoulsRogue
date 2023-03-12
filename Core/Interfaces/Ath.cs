@@ -9,6 +9,8 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public class Ath
 {
 
+    private const int BarScaleReduction = 10; 
+
     private readonly Texture2D _pixel; 
     
     private readonly Bar _life, _stamina;
@@ -48,6 +50,8 @@ public class Ath
 
         public void Draw(SpriteBatch spriteBatch, Texture2D pixel, int value, int maxValue)
         {
+            value /= BarScaleReduction;
+            maxValue /= BarScaleReduction;
             spriteBatch.Draw(pixel, new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
             spriteBatch.Draw(pixel, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin,
                 value - 2*Margin, Thickness - 2*Margin), _color);

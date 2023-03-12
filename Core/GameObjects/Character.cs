@@ -13,7 +13,7 @@ public class Character : GameObject
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
     private const int ExhaustionTime = 120, SpeedBase = 3, SpeedSprint = 5;
-    private const int StaminaLoss = -1, StaminaGain = 2;
+    private const int StaminaLoss = -5, StaminaGain = 8;
 
     private readonly Texture2D[] _textures;
     public Orientation Orientation;
@@ -202,15 +202,15 @@ public class Character : GameObject
         PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
     }
 
-    // TOFDOpublic Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Main.CellSize), (float)Math.Truncate(Position.Y / Main.CellSize));
+    //TODO: public Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Main.CellSize), (float)Math.Truncate(Position.Y / Main.CellSize));
 
     public int MaxLife()
     {
-        return Attributes.Get(Attributes.Attribute.Vitality) * 50;
+        return Attributes.Get(Attributes.Attribute.Vitality) * 500;
     }
     public int MaxStamina()
     {
-        return Attributes.Get(Attributes.Attribute.Endurance) * 30;
+        return Attributes.Get(Attributes.Attribute.Endurance) * 300;
     }
 
     public void AddLife(int hp)

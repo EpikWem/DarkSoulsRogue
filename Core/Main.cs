@@ -56,9 +56,8 @@ public class Main : Game
         _ath = new Ath(_character, GraphicsDevice);
         
         SaveSystem.Init();
-        SaveSystem.Load(_character);
+        LoadMap(Maps.GetMap(SaveSystem.Load(_character)));
         _character.ChangeArmor(_character.Inventory.EquippedArmor, _textures);
-        LoadMap(Maps.GetMap(101));
 
         base.Initialize();
     }
@@ -165,7 +164,7 @@ public class Main : Game
 
     private void QuitApp()
     {
-        SaveSystem.Save(_character);
+        SaveSystem.Save(_currentMap.Id, _character);
         Exit();
     }
 

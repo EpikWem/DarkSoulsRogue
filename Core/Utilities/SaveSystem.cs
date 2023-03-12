@@ -20,7 +20,8 @@ public static class SaveSystem
         _asset = _saveFile["XnaContent"]["Asset"];
     }
     
-    public static void Load(Character character)
+    // RETURNS current map id
+    public static int Load(Character character)
     {
         XmlNode node = _asset["character"];
         character.Life = GetInt(node["life"]);
@@ -52,16 +53,19 @@ public static class SaveSystem
 
         node = _asset["character"]["inventory"];
         character.Inventory.EquippedArmor = Armors.GetFromIndex(GetInt(node["equippedArmor"]));
+
+        return GetInt(_asset["map"]);
     }
     
-    public static void Save(Character character)
+    public static void Save(int mapId, Character character)
     {
         var doc = new XmlDocument();
         doc.Load(SaveFilePath);
         XmlNode asset = doc["XnaContent"]["Asset"];
-        XmlNode node;
 
-        node = asset["character"];
+        asset["map"].InnerText = mapId.ToString();
+
+        XmlNode node = asset["character"];
         node["life"].InnerText = character.Life.ToString();
         node["souls"].InnerText = character.Souls.ToString();
         node["isHuman"].InnerText = character.IsHuman.ToString();

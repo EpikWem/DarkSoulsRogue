@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
+    <map>101</map>
     <character>
-      <life>200</life>
+      <life>2000</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>270</x>
-        <y>209</y>
+        <x>450</x>
+        <y>271</y>
         <orientation>0</orientation>
       </position>
       <attributes>
@@ -47,7 +48,7 @@
           <i3>0</i3>
           <i4>0</i4>
         </quickItems>
-        <equippedArmor>2</equippedArmor>
+        <equippedArmor>1</equippedArmor>
         <equippedWeapon>0</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
         <equippedRing>0</equippedRing>
