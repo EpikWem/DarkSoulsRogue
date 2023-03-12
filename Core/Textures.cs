@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
-using DarkSoulsRogue.Core.Items;
-using DarkSoulsRogue.Core.Items.Lists;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -12,31 +10,27 @@ public class Textures
 
     private const int WallNumber = 1;
 
-    private ContentManager _content;
-
-    public Texture2D BgT;
-    public Texture2D[]
-        BonfireT, DoorT, WallsT;
-    private readonly List<Texture2D[]> _armorTextures;
+    public static Texture2D BgT;
+    public static Texture2D[] BonfireT, DoorT;
+    public static Texture2D[] WallsT;
+    public static List<Texture2D[]> ArmorTextures;
         
 
     public Textures(ContentManager content)
     {
-        _content = content;
+        BgT = LoadTexture("bg", content);
         
-        BgT = LoadTexture("bg");
-        
-        _armorTextures = new List<Texture2D[]>
+        ArmorTextures = new List<Texture2D[]>
         {
-            LoadCharacterTextures("link"),
-            LoadCharacterTextures("artorias"),
+            LoadCharacterTextures("link", content),
+            LoadCharacterTextures("artorias", content),
             //LoadCharacterTextures("black_iron"),
-            LoadCharacterTextures("solaire")
+            LoadCharacterTextures("solaire", content)
         };
         
-        BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber);
-        DoorT = LoadObjectTextures(Door.Name, Door.StateNumber);
-        WallsT = LoadWallTextures();
+        BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
+        DoorT = LoadObjectTextures(Door.Name, Door.StateNumber, content);
+        WallsT = LoadWallsTexture(content);
     }
     
     
@@ -45,38 +39,36 @@ public class Textures
      *= TEXTURES MANAGEMENT ========================================
      *============================================================*/
     
-    private Texture2D LoadTexture(string fileName)
+    private static Texture2D LoadTexture(string fileName, ContentManager content)
     {
-        return _content.Load<Texture2D>("images/" + fileName);
+        return content.Load<Texture2D>("images/" + fileName);
     }
 
-    private Texture2D[] LoadCharacterTextures(string character)
+    private Texture2D[] LoadCharacterTextures(string characterName, ContentManager content)
     {
         return new[]
         {
-            LoadTexture("characters/" + character + "/up"),
-            LoadTexture("characters/" + character + "/down"),
-            LoadTexture("characters/" + character + "/right"),
-            LoadTexture("characters/" + character + "/left")
+            LoadTexture("characters/" + characterName + "/up", content),
+            LoadTexture("characters/" + characterName + "/down", content),
+            LoadTexture("characters/" + characterName + "/right", content),
+            LoadTexture("characters/" + characterName + "/left", content)
         };
     }
 
-    private Texture2D[] LoadObjectTextures(string name, int stateNumber)
+    private Texture2D[] LoadObjectTextures(string name, int stateNumber, ContentManager content)
     {
         Texture2D[] result = new Texture2D[stateNumber];
         for (int i = 0; i < stateNumber; i++)
-            result[i] = LoadTexture("objects/" + name + "/" + i);
+            result[i] = LoadTexture("objects/" + name + "/" + i, content);
         return result;
     }
 
-    private Texture2D[] LoadWallTextures()
+    private Texture2D[] LoadWallsTexture(ContentManager content)
     {
         Texture2D[] result = new Texture2D[WallNumber+1];
         for (int i = 1; i < WallNumber+1; i++)
-            result[i] = LoadTexture("walls/" + i);
+            result[i] = LoadTexture("walls/" + i, content);
         return result;
     }
-
-    public Texture2D[] GetArmorTextures(Armor armor) => _armorTextures[Armors.GetIndexOf(armor)];
 
 }

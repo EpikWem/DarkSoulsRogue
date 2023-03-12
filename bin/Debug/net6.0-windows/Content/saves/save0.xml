@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <map>101</map>
+    <map>103</map>
     <character>
       <life>2000</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>450</x>
-        <y>271</y>
-        <orientation>0</orientation>
+        <x>388</x>
+        <y>358</y>
+        <orientation>2</orientation>
       </position>
       <attributes>
         <vitality>4</vitality>
@@ -20,7 +20,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>12</humanity>
+        <humanity>9</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>

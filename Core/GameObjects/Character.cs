@@ -232,11 +232,11 @@ public class Character : GameObject
         Souls += souls;
     }
 
-    public void ChangeArmor(Armor armor, Textures textures)
+    public void ChangeArmor(Armor armor)
     {
         Inventory.EquippedArmor = armor;
         for (var i = 0; i < _textures.Length; i++)
-            _textures[i] = armor.GetWearingTextures(textures)[i];
+            _textures[i] = armor.GetWearingTextures()[i];
     }
 
 }

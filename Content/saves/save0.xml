@@ -7,9 +7,9 @@
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>540</x>
-        <y>501</y>
-        <orientation>2</orientation>
+        <x>427</x>
+        <y>357</y>
+        <orientation>0</orientation>
       </position>
       <attributes>
         <vitality>4</vitality>
@@ -48,7 +48,7 @@
           <i3>0</i3>
           <i4>0</i4>
         </quickItems>
-        <equippedArmor>1</equippedArmor>
+        <equippedArmor>2</equippedArmor>
         <equippedWeapon>0</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
         <equippedRing>0</equippedRing>

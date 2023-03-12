@@ -15,6 +15,6 @@ public class Armor : Equipment
         
     }
     
-    public Texture2D[] GetWearingTextures(Textures textures) => textures.GetArmorTextures(this);
+    public Texture2D[] GetWearingTextures() => Textures.ArmorTextures[Armors.GetIndexOf(this)];
     
 }

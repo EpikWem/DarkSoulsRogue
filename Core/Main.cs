@@ -18,8 +18,9 @@ public class Main : Game
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
 
-    public static SpriteFont Font, FontBold, FontHumanityCounter, FontSoulCounter;
+    
     private static Textures _textures;
+    private static Fonts _fonts;
     private static Ath _ath;
 
     private World _world;
@@ -45,19 +46,15 @@ public class Main : Game
 
     protected override void Initialize()
     {
-        Font = Content.Load<SpriteFont>("fonts/font");
-        FontBold = Content.Load<SpriteFont>("fonts/font_bold");
-        FontHumanityCounter = Content.Load<SpriteFont>("fonts/humanity_counter");
-        FontSoulCounter = Content.Load<SpriteFont>("fonts/soul_counter");
-        
         _textures = new Textures(Content);
-        _world = new World(_textures.BgT);
-        _character = new Character(_textures.GetArmorTextures(Armors.Naked));
+        _fonts = new Fonts(Content);
+        _world = new World(Textures.BgT);
+        _character = new Character(Armors.Naked.GetWearingTextures());
         _ath = new Ath(_character, GraphicsDevice);
         
         SaveSystem.Init();
         LoadMap(Maps.GetMap(SaveSystem.Load(_character)));
-        _character.ChangeArmor(_character.Inventory.EquippedArmor, _textures);
+        _character.ChangeArmor(_character.Inventory.EquippedArmor);
 
         base.Initialize();
     }
@@ -76,17 +73,17 @@ public class Main : Game
         for (var y = 0; y < _currentMap.Height; y++)
             for (var x = 0; x < _currentMap.Width; x++)
                 if (_currentMap.WallsIds[y][x] != 0)
-                    _walls.Add(new Wall(_textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
+                    _walls.Add(new Wall(Textures.WallsT[_currentMap.WallsIds[y][x]], x, y));
 
         _objects = _currentMap.Objects;
         foreach (var o in _objects)
         {
             if (o.GetType() == typeof(Bonfire))
-                o.SetTextures(_textures.BonfireT);
+                o.SetTextures(Textures.BonfireT);
             /*if (o.GetType() == typeof(Chest))
                 o.SetTextures(_textures.ChestT);*/
             if (o.GetType() == typeof(Door))
-                o.SetTextures(_textures.DoorT);
+                o.SetTextures(Textures.DoorT);
         }
     }
     
@@ -133,11 +130,11 @@ public class Main : Game
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            _character.ChangeArmor(Armors.Solaire, _textures);
+            _character.ChangeArmor(Armors.Solaire);
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            _character.ChangeArmor(Armors.Artorias, _textures);
+            _character.ChangeArmor(Armors.Artorias);
         }
 
         base.Update(gameTime);

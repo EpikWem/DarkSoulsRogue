@@ -69,7 +69,7 @@ public class Ath
         public static void Draw(SpriteBatch spriteBatch, Texture2D pixel, int souls)
         {
             spriteBatch.Draw(pixel, Rectangle, Color.Black);
-            spriteBatch.DrawString(Main.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
+            spriteBatch.DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
         }
 
         private static int XForDisplay(int souls)
@@ -95,7 +95,7 @@ public class Ath
             CircleOut.Draw(spriteBatch, pixel, GetHumanityColor(character));
             CircleIn.Draw(spriteBatch, pixel, new Color(50, 50, 50));
             spriteBatch.DrawString(
-                Main.FontHumanityCounter, 
+                Fonts.FontHumanityCounter, 
                 character.Attributes.Get(Attributes.Attribute.Humanity).ToString(), 
                 new Vector2(Border*2, 6), 
                 GetHumanityColor(character));
