@@ -3,12 +3,14 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects;
 
-public class World : GameObject
+public class Background : GameObject
 {
 
-    public World(Texture2D texture) : base(texture)
+    public Background() : base(Textures.BgT)
     {
         Position = new Vector2(0, 0);
     }
-    
+
+    public new void SetTexture(Texture2D texture) => base.SetTexture(texture);
+
 }

@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core;
 
-public class Textures
+public static class Textures
 {
 
     private const int WallNumber = 1;
@@ -16,7 +16,7 @@ public class Textures
     public static List<Texture2D[]> ArmorTextures;
         
 
-    public Textures(ContentManager content)
+    public static void Init(ContentManager content)
     {
         BgT = LoadTexture("bg", content);
         

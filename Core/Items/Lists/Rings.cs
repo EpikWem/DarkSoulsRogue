@@ -24,7 +24,7 @@ public static class Rings
     
     private class NoRing : Ring
     {
-        public NoRing() : base("Cloranthy Ring") {}
+        public NoRing() : base("No Ring") {}
         public override void Effect(Character character) {}
     }
     

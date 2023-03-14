@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Lists;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -13,12 +14,14 @@ public class Character : GameObject
 
     private const int MarginS = 4, MarginU = 12, MarginD = 6;
     private const int ExhaustionTime = 120, BaseSpeed = 3, BaseSpeedSprint = 5;
-    private const int BaseStaminaLoss = -25, BaseStaminaGain = 10;
+    private const int BaseStaminaLoss = -5, BaseStaminaGain = 10;
 
     public float CoefLifeMax, CoefStaminaMax, CoefStaminaGain;
 
     private readonly Texture2D[] _textures;
     public Orientation Orientation;
+    
+    public string Name;
     public int Life, Stamina, Souls;
     public bool IsHuman;
     public readonly Attributes Attributes;
@@ -28,15 +31,16 @@ public class Character : GameObject
 
     
     
-    public Character(Texture2D[] textures) : base(textures[0])
+    public Character() : base(Armors.Naked.GetWearingTextures()[0])
     {
-        ResetCoef();
-        _textures = textures;
+        
+        _textures = Armors.Naked.GetWearingTextures();
         Attributes = new Attributes();
         Triggers = new Triggers();
         Inventory = new Inventory();
         Stamina = MaxStamina();
         _exhaustingTime = 0;
+        ResetCoef();
     }
 
     public void Move(List<Wall> walls)
@@ -240,6 +244,10 @@ public class Character : GameObject
         CoefLifeMax = 1.0f;
         CoefStaminaMax = 1.0f;
         CoefStaminaGain = 1.0f;
+        if (Life > MaxLife())
+            Life = MaxLife();
+        if (Stamina > MaxStamina())
+            Stamina = MaxStamina();
     }
 
     public void ChangeArmor(Armor armor)

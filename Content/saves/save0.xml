@@ -3,13 +3,14 @@
   <Asset>
     <map>103</map>
     <character>
-      <life>2000</life>
+      <name>Anastesya</name>
+      <life>4200</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>323</x>
-        <y>273</y>
-        <orientation>2</orientation>
+        <x>477</x>
+        <y>319</y>
+        <orientation>0</orientation>
       </position>
       <attributes>
         <vitality>8</vitality>
@@ -20,7 +21,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>9</humanity>
+        <humanity>6</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>

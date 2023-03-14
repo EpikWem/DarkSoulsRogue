@@ -3,13 +3,14 @@
   <Asset>
     <map>103</map>
     <character>
-      <life>2000</life>
+      <name>Anastesya</name>
+      <life>4000</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>454</x>
-        <y>247</y>
-        <orientation>3</orientation>
+        <x>700</x>
+        <y>53</y>
+        <orientation>0</orientation>
       </position>
       <attributes>
         <vitality>8</vitality>
@@ -51,7 +52,7 @@
         <equippedArmor>2</equippedArmor>
         <equippedWeapon>0</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
-        <equippedRing>2</equippedRing>
+        <equippedRing>1</equippedRing>
         <equippedCovenant>0</equippedCovenant>
       </inventory>
     </character>

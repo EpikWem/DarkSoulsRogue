@@ -12,22 +12,19 @@ namespace DarkSoulsRogue.Core;
 
 public class Main : Game
 {
-
-    private readonly GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
+    
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
     public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
-
     
-    private static Textures _textures;
-    private static Fonts _fonts;
-    private static Ath _ath;
-
-    private World _world;
-    private Character _character;
-    private readonly List<Wall> _walls = new ();
-    private List<InteractiveObject> _objects = new ();
-    private Maps.Map _currentMap;
+    private readonly GraphicsDeviceManager _graphics;
+    private SpriteBatch _spriteBatch;
+    public static Texture2D PixelTexture;
+    
+    private static Background _background;
+    public static Character Character;
+    private static readonly List<Wall> Walls = new ();
+    private static List<InteractiveObject> _objects = new ();
+    private static Maps.Map _currentMap;
     
     
     
@@ -46,14 +43,17 @@ public class Main : Game
 
     protected override void Initialize()
     {
-        _textures = new Textures(Content);
-        _fonts = new Fonts(Content);
-        _world = new World(Textures.BgT);
-        _character = new Character(Armors.Naked.GetWearingTextures());
-        _ath = new Ath(_character, GraphicsDevice);
+        PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
+        PixelTexture.SetData(new [] { Color.White });
+        Textures.Init(Content);
+        Fonts.Init(Content);
+        
+        _background = new Background();
+        Character = new Character();
+        Ath.Init(Character);
         
         SaveSystem.Init();
-        LoadMap(Maps.GetMap(SaveSystem.Load(_character)));
+        LoadMap(Maps.GetMap(SaveSystem.Load(Character)));
 
         base.Initialize();
     }
@@ -68,11 +68,11 @@ public class Main : Game
     {
         _currentMap = map;
         
-        _walls.Clear();
+        Walls.Clear();
         for (var y = 0; y < _currentMap.Height; y++)
             for (var x = 0; x < _currentMap.Width; x++)
                 if (_currentMap.WallsIds[y][x] != 0)
-                    _walls.Add(new Wall(x, y, Textures.WallsT[_currentMap.WallsIds[y][x]]));
+                    Walls.Add(new Wall(x, y, Textures.WallsT[_currentMap.WallsIds[y][x]]));
 
         _objects = _currentMap.Objects;
     }
@@ -88,7 +88,7 @@ public class Main : Game
         // KEY TESTS
         Controls.UpdateKeyListener();
         
-        _character.Move(_walls.Concat(_objects).ToList());
+        Character.Move(Walls.Concat(_objects).ToList());
 
         if (Controls.KillApp.IsPressed)
             QuitApp();
@@ -97,17 +97,17 @@ public class Main : Game
         if (Controls.Interact.IsOnePressed)
         {
             foreach (var o in _objects
-            .Where(o => o.GetPositionOnGrid() == _character.GetLookingCell()))
+            .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
             {
                 
                 if (o.GetType() == typeof(Door) && o.GetState() == 1)
                 { // need to pass through the door
                     var d = ((Door)o).Destination;
-                    _character.PlaceOnGrid(d);
+                    Character.PlaceOnGrid(d);
                     LoadMap(Maps.GetMap(d.MapId));
                 }
                 else
-                    o.Interact(_character);
+                    o.Interact(Character);
             }
         }
         if (Controls.Pause.IsOnePressed)
@@ -116,15 +116,15 @@ public class Main : Game
         }
         if (Controls.Debug1.IsOnePressed)
         {
-            _character.ChangeRing(Rings.NoRingR);
+            Character.ChangeRing(Rings.NoRingR);
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            _character.ChangeRing(Rings.TinyBeingR);
+            Character.ChangeRing(Rings.TinyBeingR);
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            _character.ChangeRing(Rings.CloranthyR);
+            Character.ChangeRing(Rings.CloranthyR);
         }
 
         base.Update(gameTime);
@@ -135,15 +135,15 @@ public class Main : Game
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
         
-        _world.Draw(_spriteBatch);
-        foreach (var w in _walls) {
+        _background.Draw(_spriteBatch);
+        foreach (var w in Walls) {
             w.Draw(_spriteBatch);
         }
         foreach (var o in _objects) {
             o.Draw(_spriteBatch);
         }
-        _character.Draw(_spriteBatch);
-        _ath.Draw(_spriteBatch);
+        Character.Draw(_spriteBatch);
+        Ath.Draw(_spriteBatch);
         
         _spriteBatch.End();
         base.Draw(gameTime);
@@ -151,7 +151,7 @@ public class Main : Game
 
     private void QuitApp()
     {
-        SaveSystem.Save(_currentMap.Id, _character);
+        SaveSystem.Save(_currentMap.Id, Character);
         Exit();
     }
 

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Xml;
+﻿using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
-using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Lists;
 
 namespace DarkSoulsRogue.Core.Utilities;
@@ -24,6 +22,8 @@ public static class SaveSystem
     public static int Load(Character character)
     {
         XmlNode node = _asset["character"];
+
+        character.Name = GetString(node["name"]);
         character.Life = GetInt(node["life"]);
         character.Souls = GetInt(node["souls"]);
         character.IsHuman = GetBool(node["isHuman"]); 
@@ -67,6 +67,7 @@ public static class SaveSystem
         asset["map"].InnerText = mapId.ToString();
 
         XmlNode node = asset["character"];
+        node["name"].InnerText = character.Name;
         node["life"].InnerText = character.Life.ToString();
         node["souls"].InnerText = character.Souls.ToString();
         node["isHuman"].InnerText = character.IsHuman.ToString();

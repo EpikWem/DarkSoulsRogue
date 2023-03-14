@@ -3,12 +3,12 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
-public class Fonts
+public static class Fonts
 {
     
     public static SpriteFont Font, FontBold, FontHumanityCounter, FontSoulCounter;
 
-    public Fonts(ContentManager content)
+    public static void Init(ContentManager content)
     {
         Font = content.Load<SpriteFont>("fonts/font");
         FontBold = content.Load<SpriteFont>("fonts/font_bold");
