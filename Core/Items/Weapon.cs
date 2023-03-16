@@ -5,14 +5,15 @@ namespace DarkSoulsRogue.Core.Items;
 
 public class Weapon : Equipment
 {
+
     public static readonly Weapon
-        Claymore = new ("Claymore", WeaponTypes.GreatSword, DamageTypes.Slash, true, new []{103, 0, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.F), new float[]{60, 10, 40, 40}, 38, 6.0f),
-        AstoraSword = new ("Astora's Straight Sword", WeaponTypes.StraightSword, DamageTypes.Slash, false, new []{80, 80, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.C), new float[]{50, 10, 35, 35}, 32, 3.0f);
+        Claymore = new ("Claymore", WeaponTypes.GreatSword, DamageTypes.Slash, true, new []{103, 0, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.F), new float[]{0.6f, 0.1f, 0.4f, 0.4f}, 38, 6.0f),
+        AstoraSword = new ("Astoras Straight Sword", WeaponTypes.StraightSword, DamageTypes.Slash, false, new []{80, 80, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.C), new float[]{0.5f, 0.1f, 0.35f, 0.35f}, 32, 3.0f);
     
-    public static Weapon GetFromIndex(int i) => Values[i];
-    public static int GetIndexOf(Weapon weapon) => Values.IndexOf(weapon);
-    private static readonly List<Weapon> Values =
-        new () {
+    public static Weapon GetFromIndex(int i) => Weapons[i];
+    public static int GetIndexOf(Weapon weapon) => Weapons.IndexOf(weapon);
+    private static readonly List<Weapon>
+        Weapons = new () {
             Claymore,
             AstoraSword
         };
@@ -39,28 +40,35 @@ public class Weapon : Equipment
 
     public readonly ParamBonus ParamBonus;
     
-    public readonly float
-        DefPhysical, DefStrike, DefSlash, DefThrust,
-        DefMagic, DefFire, DefLightning,
-        ResBlood, ResPoison, ResCurse,
-        Poise, Weight;
+    public readonly float DefPhysical, DefMagic, DefFire, DefLightning, Weight;
+    public readonly int Stability;
 
-    public Weapon(
+    public Weapon(string name) : base(name, Categories.Weapon)
+    {
+        
+    }
+    
+    private Weapon(
         string name, WeaponTypes weaponType, DamageTypes damageType, bool enchantable,
-        int[] atks, ParamBonus paramBonus, float[] defs, float poise, float weight)
+        int[] atks, ParamBonus paramBonus, float[] defs, int stability, float weight)
         : base(name, Categories.Weapon)
     {
         WeaponType = weaponType;
         DamageType = damageType;
         Enchantable = enchantable;
         _upgradeLevel = 0;
+        _upgrade = WeaponUpgrade.Regular;
         AtkPhysical = atks[0]; AtkMagic = atks[1]; AtkFire = atks[2]; AtkLightning = atks[3];
         ParamBonus = paramBonus;
-        DefPhysical = defs[0]; DefStrike = defs[1]; DefSlash = defs[2]; DefThrust = defs[3];
-        DefMagic = defs[4]; DefFire = defs[5]; DefLightning = defs[6];
-        //ResBlood = ress[0]; ResPoison = ress[1]; ResCurse = ress[2];
-        Poise = poise;
+        DefPhysical = defs[0]; DefMagic = defs[1]; DefFire = defs[2]; DefLightning = defs[3];
         Weight = weight;
+        Stability = stability;
+    }
+
+    public void SetUpgrade(WeaponUpgrade enchant, int level)
+    {
+        _upgrade = enchant;
+        _upgradeLevel = level;
     }
 
     public int GetAttackDamage(Attributes attributes)

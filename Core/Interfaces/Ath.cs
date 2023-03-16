@@ -70,7 +70,7 @@ public static class Ath
         public static void Draw(SpriteBatch spriteBatch, string text)
         {
             spriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
-            spriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0), Color.White);
+            spriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0, Position.Y), Color.White);
         }
 
         private static int XForDisplay(int souls)
