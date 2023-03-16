@@ -27,7 +27,7 @@ public static class Ath
         _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
         SoulCounter.Draw(spriteBatch, _character.Souls);
         HumanityCounter.Draw(spriteBatch);
-        //SoulCounter.Draw(spriteBatch, _pixel, _character.Name);
+        SoulCounter.Draw(spriteBatch, _character.Inventory.EquippedWeapon.GetFullName());
     }
 
     private class Bar
@@ -66,6 +66,11 @@ public static class Ath
         {
             spriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
             spriteBatch.DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
+        }
+        public static void Draw(SpriteBatch spriteBatch, string text)
+        {
+            spriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
+            spriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0), Color.White);
         }
 
         private static int XForDisplay(int souls)

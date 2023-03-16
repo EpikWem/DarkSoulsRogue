@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.Items;
-using DarkSoulsRogue.Core.Items.Lists;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -31,10 +30,10 @@ public class Character : GameObject
 
     
     
-    public Character() : base(Armors.Naked.GetWearingTextures()[0])
+    public Character() : base(Armor.Naked.GetWearingTextures()[0])
     {
         
-        _textures = Armors.Naked.GetWearingTextures();
+        _textures = Armor.Naked.GetWearingTextures();
         Attributes = new Attributes();
         Triggers = new Triggers();
         Inventory = new Inventory();
@@ -262,6 +261,11 @@ public class Character : GameObject
         ResetCoef();
         Inventory.EquippedRing = ring;
         ring.Effect(this);
+    }
+
+    public void ChangeWeapon(Weapon weapon)
+    {
+        Inventory.EquippedWeapon = weapon;
     }
 
 }

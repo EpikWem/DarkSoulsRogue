@@ -3,7 +3,7 @@ using System.Linq;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Interfaces;
-using DarkSoulsRogue.Core.Items.Lists;
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -116,15 +116,15 @@ public class Main : Game
         }
         if (Controls.Debug1.IsOnePressed)
         {
-            Character.ChangeRing(Rings.NoRingR);
+            Character.Inventory.EquippedWeapon = Weapon.Claymore;
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            Character.ChangeRing(Rings.TinyBeingR);
+            Character.Inventory.EquippedWeapon = Weapon.AstoraSword;
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            Character.ChangeRing(Rings.CloranthyR);
+            
         }
 
         base.Update(gameTime);

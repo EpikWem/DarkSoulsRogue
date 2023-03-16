@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <map>103</map>
+    <map>101</map>
     <character>
       <name>Anastesya</name>
       <life>4200</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>477</x>
-        <y>319</y>
+        <x>450</x>
+        <y>291</y>
         <orientation>0</orientation>
       </position>
       <attributes>
@@ -50,7 +50,7 @@
           <i4>0</i4>
         </quickItems>
         <equippedArmor>2</equippedArmor>
-        <equippedWeapon>0</equippedWeapon>
+        <equippedWeapon>1</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
         <equippedRing>1</equippedRing>
         <equippedCovenant>0</equippedCovenant>

@@ -1,13 +1,14 @@
 ﻿using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
-using DarkSoulsRogue.Core.Items.Lists;
+using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
 public static class SaveSystem
 {
 
-    private const string SaveFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\save0.xml";
+    //private const string SaveFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\save0.xml";
+    private const string SaveFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\save0.xml";
     private static XmlDocument _saveFile;
     private static XmlNode _asset;
 
@@ -52,8 +53,9 @@ public static class SaveSystem
         character.Triggers.Set(triggers);
 
         node = _asset["character"]["inventory"];
-        character.ChangeArmor(Armors.GetFromIndex(GetInt(node["equippedArmor"])));
-        character.ChangeRing(Rings.GetFromIndex(GetInt(node["equippedRing"])));
+        character.ChangeArmor(Armor.GetFromIndex(GetInt(node["equippedArmor"])));
+        character.ChangeRing(Ring.GetFromIndex(GetInt(node["equippedRing"])));
+        character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node["equippedWeapon"])));
 
         return GetInt(_asset["map"]);
     }
@@ -94,8 +96,9 @@ public static class SaveSystem
             node.ChildNodes[i].InnerText = character.Triggers.GetAll()[i].ToString();
         
         node = asset["character"]["inventory"];
-        node["equippedArmor"].InnerText = Armors.GetIndexOf(character.Inventory.EquippedArmor).ToString();
-        node["equippedRing"].InnerText = Rings.GetIndexOf(character.Inventory.EquippedRing).ToString();
+        node["equippedArmor"].InnerText = Armor.GetIndexOf(character.Inventory.EquippedArmor).ToString();
+        node["equippedRing"].InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
+        node["equippedWeapon"].InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
         
         doc.Save(SaveFilePath);
     }
