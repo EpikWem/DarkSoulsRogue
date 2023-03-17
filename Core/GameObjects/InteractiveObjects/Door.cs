@@ -17,7 +17,11 @@ public class Door : InteractiveObject
 
     public override void Interact(Character character)
     {
-        IncreaseState();
+        switch (State)
+        {
+            case 0: IncreaseState(); break;
+            case 1: character.TransitMap(Destination.Orientation); break;
+        }
     }
     
 }

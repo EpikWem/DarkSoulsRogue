@@ -167,7 +167,7 @@ public class Character : GameObject
 
     public Orientation TestOutOfMap()
     {
-        Vector2 cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
+        var cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
         if (cp.Y < 0)
             return Orientation.Up;
         if (cp.Y > Main.Height-1)
@@ -181,20 +181,31 @@ public class Character : GameObject
 
     public void TransitMap(Orientation orientation)
     {
+        if (orientation == Orientation.Null)
+            return;
+        var dest = Main.CurrentMap.Connections[OrientationId(orientation)];
+        PlaceOnGrid(dest);
+        Main.LoadMap(dest.MapId);
+    }
+    
+    /*public void TransitMap(Orientation orientation)
+    {
         switch (orientation)
         {
             case Orientation.Up:
-                Position.Y = Main.Height - Height; break;
+                Position.Y = Main.Height - Height - Main.CellSize; break;
             case Orientation.Down:
-                Position.Y = 0; break;
+                Position.Y = 0 + Main.CellSize; break;
             case Orientation.Right:
-                Position.X = 0; break;
+                Position.X = 0 + Main.CellSize; break;
             case Orientation.Left:
-                Position.X = Main.Width - Width; break;
+                Position.X = Main.Width - Width - Main.CellSize; break;
+            case Orientation.Null:
+                return;
             default:
-                throw new ArgumentOutOfRangeException(nameof(orientation), orientation, null);
+                return;
         }
-    }
+    }*/
 
     public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
     {
@@ -260,12 +271,29 @@ public class Character : GameObject
     {
         ResetCoef();
         Inventory.EquippedRing = ring;
-        ring.Effect(this);
+        ring.Effect();
     }
 
     public void ChangeWeapon(Weapon weapon)
     {
         Inventory.EquippedWeapon = weapon;
     }
+
+    public static int OrientationId(Orientation orientation)
+        => orientation switch {
+            Orientation.Up => 0,
+            Orientation.Down => 1,
+            Orientation.Right => 2,
+            Orientation.Left => 3,
+            _ => -1
+        };
+    public static Orientation OrientationFromId(int id)
+        => id switch {
+                0 => Orientation.Up,
+                1 => Orientation.Down,
+                2 => Orientation.Right,
+                3 => Orientation.Left,
+                _ => Orientation.Null
+            };
 
 }

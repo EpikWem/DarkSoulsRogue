@@ -1,27 +1,42 @@
+using System;
 using System.Collections.Generic;
 using DarkSoulsRogue.Core.GameObjects;
 
 namespace DarkSoulsRogue.Core.Items;
 
-public abstract class Ring : Equipment
+public class Ring : Equipment
 {
     
     public static Ring GetFromIndex(int i) => Rings[i];
     public static int GetIndexOf(Ring ring) => Rings.IndexOf(ring);
 
     public static readonly Ring
-        NoRingR = new NoRing(),
-        TinyBeingR = new TinyBeing(),
-        CloranthyR = new Cloranthy();
+        NoRing = new ("", ENoRing),
+        TinyBeing = new ("Tiny Being's Ring", ETinyBeing),
+        Cloranthy = new ("Cloranthy Ring", ECloranthy),
+        Favor = new ("Ring of Favor and Protection", EFavor);
     
     private static readonly List<Ring> Rings =
         new () {
-            NoRingR,
-            TinyBeingR,
-            CloranthyR
+            NoRing,
+            TinyBeing,
+            Cloranthy,
+            Favor
         };
     
-    private class NoRing : Ring
+    private static void ENoRing() {}
+    private static void ETinyBeing() { Main.Character.CoefLifeMax += 0.05f; }
+    private static void ECloranthy() { Main.Character.CoefStaminaGain += 0.2f; }
+    private static void EFavor() { Main.Character.CoefLifeMax += 0.2f; Main.Character.CoefStaminaMax += 0.2f; }
+
+    public readonly Action Effect;
+
+    private Ring(string name, Action effect) : base(name, Categories.Ring)
+    {
+        Effect = effect;
+    }
+
+    /*private class NoRing : Ring
     {
         public NoRing() : base("No Ring") {}
         public override void Effect(Character character) {}
@@ -50,6 +65,6 @@ public abstract class Ring : Equipment
         
     }
 
-    public abstract void Effect(Character character);
+    public abstract void Effect(Character character);*/
 
 }

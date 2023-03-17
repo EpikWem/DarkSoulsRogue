@@ -55,7 +55,7 @@ public class Main : Game
         Ath.Init(Character);
         
         SaveSystem.Init();
-        LoadMap(Maps.GetMap(SaveSystem.Load()));
+        LoadMap(SaveSystem.Load());
 
         base.Initialize();
     }
@@ -66,9 +66,9 @@ public class Main : Game
         //Use this.Content to load your game content here
     }
 
-    private void LoadMap(Maps.Map map)
+    public static void LoadMap(int mapId)
     {
-        CurrentMap = map;
+        CurrentMap = Maps.GetMap(mapId);
         
         Walls.Clear();
         for (var y = 0; y < CurrentMap.Height; y++)
@@ -91,6 +91,7 @@ public class Main : Game
         Controls.UpdateKeyListener();
         
         Character.Move(Walls.Concat(_objects).ToList());
+        Character.TransitMap(Character.TestOutOfMap());
 
         if (Controls.KillApp.IsPressed)
             QuitApp();
@@ -101,15 +102,7 @@ public class Main : Game
             foreach (var o in _objects
             .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
             {
-                
-                if (o.GetType() == typeof(Door) && o.GetState() == 1)
-                { // need to pass through the door
-                    var d = ((Door)o).Destination;
-                    Character.PlaceOnGrid(d);
-                    LoadMap(Maps.GetMap(d.MapId));
-                }
-                else
-                    o.Interact(Character);
+                o.Interact(Character);
             }
         }
         if (Controls.Pause.IsOnePressed)
@@ -118,15 +111,15 @@ public class Main : Game
         }
         if (Controls.Debug1.IsOnePressed)
         {
-            Character.Inventory.EquippedWeapon = Weapon.Claymore;
+            Character.ChangeRing(Ring.NoRing);
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            Character.Inventory.EquippedWeapon = Weapon.AstoraSword;
+            Character.ChangeRing(Ring.TinyBeing);
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            
+            Character.ChangeRing(Ring.Favor);
         }
 
         base.Update(gameTime);

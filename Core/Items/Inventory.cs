@@ -11,6 +11,7 @@ public class Inventory
 
     public Armor EquippedArmor;
     public Weapon EquippedWeapon;
+    public Shield EquippedShield;
     public Catalyst EquippedCatalyst;
     public Ring EquippedRing;
     public Covenant EquippedCovenant;
@@ -41,9 +42,7 @@ public class Inventory
     public int GetQuantity(Item item)
     {
         bool Predicate(Stack s) => s.Item.Equals(item);
-        if (_items.Exists(Predicate))
-            return _items.Find(Predicate).Quantity;
-        return 0;
+        return _items.Exists(Predicate) ? _items.Find(Predicate).Quantity : 0;
     }
     
 }

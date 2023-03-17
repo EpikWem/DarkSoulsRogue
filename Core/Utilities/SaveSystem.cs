@@ -1,4 +1,5 @@
 ﻿using System.Xml;
+using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.Utilities;
@@ -13,13 +14,13 @@ public static class SaveSystem
     {
         
     }
-    
-    
-    
+
+
+
     /**=============================================================
      *= LOAD METHOD ================================================
      *============================================================*/
-    
+
     // RETURNS current map id
     public static int Load()
     {
@@ -27,25 +28,18 @@ public static class SaveSystem
         saveFile.Load(GetFullFilePath());
         var asset = saveFile["XnaContent"]?["Asset"];
         var character = Main.Character;
-        
+
         XmlNode node = asset["character"];
         character.Name = GetString(node["name"]);
         character.Life = GetInt(node["life"]);
         character.Souls = GetInt(node["souls"]);
-        character.IsHuman = GetBool(node["isHuman"]); 
-        
+        character.IsHuman = GetBool(node["isHuman"]);
+
         node = asset["character"]["position"];
         character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
-        character.Orientation = GetInt(node["orientation"]) switch
-        {
-            0 => Orientation.Up,
-            1 => Orientation.Down,
-            2 => Orientation.Right,
-            3 => Orientation.Left,
-            _ => Orientation.Null
-        };
+        character.Orientation = Character.OrientationFromId(GetInt(node["orientation"]));
 
-        node = asset["character"]["attributes"];
+    node = asset["character"]["attributes"];
         var attributes = new int[Attributes.NumAttributes];
         for (var i = 0; i < Attributes.NumAttributes; i++)
             attributes[i] = GetInt(node.ChildNodes[i]);
@@ -93,15 +87,7 @@ public static class SaveSystem
         node = asset["character"]["position"];
         node["x"].InnerText = character.GetPosition().X.ToString();
         node["y"].InnerText = character.GetPosition().Y.ToString();
-        node["orientation"].InnerText = (character.Orientation switch
-        {
-            Orientation.Up => 0,
-            Orientation.Down => 1,
-            Orientation.Right => 2,
-            Orientation.Left => 3,
-            Orientation.Null => 0,
-            _ => 0
-        }).ToString();
+        node["orientation"].InnerText = Character.OrientationId(character.Orientation).ToString();
 
         node = asset["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)

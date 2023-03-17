@@ -16,14 +16,16 @@ public abstract class Maps
         public readonly int[][] WallsIds;
         public readonly List<InteractiveObject> Objects;
         public readonly int Width, Height;
+        public readonly Destination[] Connections;
 
-        public Map(int id, int[][] walls, List<InteractiveObject> objects)
+        public Map(int id, int[][] walls, List<InteractiveObject> objects, Destination[] connections)
         {
             Id = id;
             WallsIds = walls;
             Objects = objects;
             Width = WallsIds[0].Length;
             Height = WallsIds.Length;
+            Connections = connections;
         }
         
     }
@@ -41,9 +43,14 @@ public abstract class Maps
                 new[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
-            }, new List<InteractiveObject> (new InteractiveObject[] {
+            }, new List<InteractiveObject>(new InteractiveObject[] {
                 new Door(7, 2, new Destination(102, new Vector2(7, 8), Orientation.Up))
-            })
+            }), new Destination[] {
+                new (102, new Vector2(7, 8), Orientation.Up), 
+                null,
+                null,
+                null
+            }
         ),
         UndeadAsylum2 = new (102,
             new[] {
@@ -58,9 +65,13 @@ public abstract class Maps
                 new[] { 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 }
             }, new List<InteractiveObject> (new InteractiveObject[] {
-                new Door(7, 0, new Destination(103, new Vector2(7, 8), Orientation.Up)),
-                new Door(7, 9, new Destination(101, new Vector2(7, 3), Orientation.Down))
-            })
+                
+            }), new Destination[] {
+                new (103, new Vector2(7, 8), Orientation.Up),
+                new (101, new Vector2(7, 1), Orientation.Down), 
+                null,
+                null
+            }
         ),
         UndeadAsylum3 = new ( 103,
             new[] {
@@ -76,9 +87,13 @@ public abstract class Maps
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
             }, new List<InteractiveObject> (new InteractiveObject[] {
                 new Bonfire(12, 7),
-                new Chest(12, 3, new Stack(Consumable.SoulOfALostUndead, 2)),
-                new Door(7, 9, new Destination(102, new Vector2(7, 1), Orientation.Down))
-            })
+                new Chest(12, 3, new Stack(Consumable.SoulOfALostUndead, 2))
+            }), new Destination[] {
+                null,
+                new (102, new Vector2(7, 1), Orientation.Down),
+                null,
+                null
+            }
         );
 
     private static readonly Map[] MapArray = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3 };
