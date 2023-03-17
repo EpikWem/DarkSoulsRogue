@@ -5,7 +5,7 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 public abstract class InteractiveObject : Wall
 {
     protected int State;
-    private Texture2D[] _textures;
+    private readonly Texture2D[] _textures;
 
     protected InteractiveObject(int xInGrid, int yInGrid, Texture2D[] textures) : base(xInGrid, yInGrid, textures[0])
     {
@@ -20,9 +20,20 @@ public abstract class InteractiveObject : Wall
     protected void IncreaseState()
     {
         State++;
-        SetTexture(_textures[State]);
+        UpdateTexture();
     }
 
     public int GetState() => State;
+
+    public void SetState(int i)
+    {
+        State = i;
+        UpdateTexture();
+    }
+
+    private void UpdateTexture()
+    {
+        SetTexture(_textures[State]);
+    }
     
 }

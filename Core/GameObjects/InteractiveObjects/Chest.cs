@@ -20,7 +20,7 @@ public class Chest : InteractiveObject
         if (State == 0)
         {
             character.Inventory.AddItem(_item.Item, _item.Quantity);
-            State = 1;
+            IncreaseState();
         }
     }
     

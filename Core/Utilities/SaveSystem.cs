@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.Utilities;
@@ -7,29 +6,35 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    private const string SaveFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\save0.xml";
-    //private const string SaveFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\save0.xml";
-    private static XmlDocument _saveFile;
-    private static XmlNode _asset;
+    private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
 
     public static void Init()
     {
-        _saveFile = new XmlDocument();
-        _saveFile.Load(SaveFilePath);
-        _asset = _saveFile["XnaContent"]["Asset"];
+        
     }
     
+    
+    
+    /**=============================================================
+     *= LOAD METHOD ================================================
+     *============================================================*/
+    
     // RETURNS current map id
-    public static int Load(Character character)
+    public static int Load()
     {
-        XmlNode node = _asset["character"];
-
+        var saveFile = new XmlDocument();
+        saveFile.Load(GetFullFilePath());
+        var asset = saveFile["XnaContent"]?["Asset"];
+        var character = Main.Character;
+        
+        XmlNode node = asset["character"];
         character.Name = GetString(node["name"]);
         character.Life = GetInt(node["life"]);
         character.Souls = GetInt(node["souls"]);
         character.IsHuman = GetBool(node["isHuman"]); 
         
-        node = _asset["character"]["position"];
+        node = asset["character"]["position"];
         character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
         character.Orientation = GetInt(node["orientation"]) switch
         {
@@ -40,33 +45,44 @@ public static class SaveSystem
             _ => Orientation.Null
         };
 
-        node = _asset["character"]["attributes"];
+        node = asset["character"]["attributes"];
         var attributes = new int[Attributes.NumAttributes];
         for (var i = 0; i < Attributes.NumAttributes; i++)
             attributes[i] = GetInt(node.ChildNodes[i]);
         character.Attributes.Set(attributes);
         
-        node = _asset["character"]["triggers"];
+        node = asset["character"]["triggers"];
         var triggers = new bool[Triggers.NumTriggers];
         for (var i = 0; i < Triggers.NumTriggers; i++)
             triggers[i] = GetBool(node.ChildNodes[i]);
         character.Triggers.Set(triggers);
 
-        node = _asset["character"]["inventory"];
+        node = asset["character"]["inventory"];
         character.ChangeArmor(Armor.GetFromIndex(GetInt(node["equippedArmor"])));
         character.ChangeRing(Ring.GetFromIndex(GetInt(node["equippedRing"])));
         character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node["equippedWeapon"])));
 
-        return GetInt(_asset["map"]);
+        node = asset["objects"];
+        for (var i = 0; i < node.ChildNodes.Count; i++)
+            Maps.GetObjectFromId(i).SetState(GetInt(node.ChildNodes[i]));
+        
+        return GetInt(asset["map"]);
     }
     
-    public static void Save(int mapId, Character character)
+    
+    
+    /**=============================================================
+     *= SAVE METHOD ================================================
+     *============================================================*/
+    
+    public static void Save()
     {
+        var character = Main.Character;
         var doc = new XmlDocument();
-        doc.Load(SaveFilePath);
+        doc.Load(GetFullFilePath());
         XmlNode asset = doc["XnaContent"]["Asset"];
 
-        asset["map"].InnerText = mapId.ToString();
+        asset["map"].InnerText = Main.CurrentMap.Id.ToString();
 
         XmlNode node = asset["character"];
         node["name"].InnerText = character.Name;
@@ -100,8 +116,14 @@ public static class SaveSystem
         node["equippedRing"].InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
         node["equippedWeapon"].InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
         
-        doc.Save(SaveFilePath);
+        node = asset["objects"];
+        for (var i = 0; i < node.ChildNodes.Count; i++)
+            node.ChildNodes[i].InnerText = Maps.GetObjectFromId(i).GetState().ToString();
+        
+        doc.Save(GetFullFilePath());
     }
+
+    private static string GetFullFilePath() => SavesFilePath + "save" + Main.SaveId + ".xml";
 
     private static int GetInt(XmlNode node) => int.Parse(node.InnerText);
     private static bool GetBool(XmlNode node) => bool.Parse(node.InnerText);

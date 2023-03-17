@@ -27,7 +27,7 @@ public static class Ath
         _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
         SoulCounter.Draw(spriteBatch, _character.Souls);
         HumanityCounter.Draw(spriteBatch);
-        SoulCounter.Draw(spriteBatch, _character.Inventory.EquippedWeapon.GetFullName());
+        //SoulCounter.Draw(spriteBatch, _character.Inventory.EquippedWeapon.GetFullName());
     }
 
     private class Bar

@@ -81,11 +81,30 @@ public abstract class Maps
             })
         );
 
-    private static readonly Map[] Array = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3 };
+    private static readonly Map[] MapArray = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3 };
+
+    public static int GetObjectIdOf(InteractiveObject obj)
+    {
+        List<InteractiveObject> objArray = new ();
+        foreach (var map in MapArray)
+            objArray.AddRange(map.Objects);
+        for (var i = 0; i < objArray.Count; i++)
+            if (objArray[i] == obj)
+                return i;
+        return -1;
+    }
+
+    public static InteractiveObject GetObjectFromId(int id)
+    {
+        List<InteractiveObject> objArray = new ();
+        foreach (var map in MapArray)
+            objArray.AddRange(map.Objects);
+        return objArray[id];
+    }
 
     public static Map GetMap(int id)
     {
-        return Array.First(m => m.Id == id);
+        return MapArray.First(m => m.Id == id);
     }
 
 }

@@ -20,11 +20,12 @@ public class Main : Game
     private SpriteBatch _spriteBatch;
     public static Texture2D PixelTexture;
     
+    public static int SaveId;
     private static Background _background;
     public static Character Character;
     private static readonly List<Wall> Walls = new ();
     private static List<InteractiveObject> _objects = new ();
-    private static Maps.Map _currentMap;
+    public static Maps.Map CurrentMap;
     
     
     
@@ -47,13 +48,14 @@ public class Main : Game
         PixelTexture.SetData(new [] { Color.White });
         Textures.Init(Content);
         Fonts.Init(Content);
-        
+
+        SaveId = 0;
         _background = new Background();
         Character = new Character();
         Ath.Init(Character);
         
         SaveSystem.Init();
-        LoadMap(Maps.GetMap(SaveSystem.Load(Character)));
+        LoadMap(Maps.GetMap(SaveSystem.Load()));
 
         base.Initialize();
     }
@@ -66,15 +68,15 @@ public class Main : Game
 
     private void LoadMap(Maps.Map map)
     {
-        _currentMap = map;
+        CurrentMap = map;
         
         Walls.Clear();
-        for (var y = 0; y < _currentMap.Height; y++)
-            for (var x = 0; x < _currentMap.Width; x++)
-                if (_currentMap.WallsIds[y][x] != 0)
-                    Walls.Add(new Wall(x, y, Textures.WallsT[_currentMap.WallsIds[y][x]]));
+        for (var y = 0; y < CurrentMap.Height; y++)
+            for (var x = 0; x < CurrentMap.Width; x++)
+                if (CurrentMap.WallsIds[y][x] != 0)
+                    Walls.Add(new Wall(x, y, Textures.WallsT[CurrentMap.WallsIds[y][x]]));
 
-        _objects = _currentMap.Objects;
+        _objects = CurrentMap.Objects;
     }
     
     
@@ -151,7 +153,7 @@ public class Main : Game
 
     private void QuitApp()
     {
-        SaveSystem.Save(_currentMap.Id, Character);
+        SaveSystem.Save();
         Exit();
     }
 

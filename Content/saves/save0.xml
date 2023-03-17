@@ -4,13 +4,13 @@
     <map>103</map>
     <character>
       <name>Anastesya</name>
-      <life>4000</life>
+      <life>4200</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>399</x>
-        <y>390</y>
-        <orientation>0</orientation>
+        <x>671</x>
+        <y>501</y>
+        <orientation>3</orientation>
       </position>
       <attributes>
         <vitality>8</vitality>
@@ -21,7 +21,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>6</humanity>
+        <humanity>3</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>
@@ -56,5 +56,13 @@
         <equippedCovenant>0</equippedCovenant>
       </inventory>
     </character>
+    <objects>
+      <o1>1</o1>
+      <o2>1</o2>
+      <o3>0</o3>
+      <o4>4</o4>
+      <o5>1</o5>
+      <o6>1</o6>
+    </objects>
   </Asset>
 </XnaContent>
