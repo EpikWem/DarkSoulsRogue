@@ -90,7 +90,7 @@ public class Main : Game
         // KEY TESTS
         Controls.UpdateKeyListener();
         
-        Character.Move(Walls.Concat(_objects).ToList());
+        Character.Move(GetCollisionsList());
         Character.TransitMap(Character.TestOutOfMap());
 
         if (Controls.KillApp.IsPressed)
@@ -103,6 +103,7 @@ public class Main : Game
             .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
             {
                 o.Interact(Character);
+                //TODO: Remove doors from walls when they are opened
             }
         }
         if (Controls.Pause.IsOnePressed)
@@ -123,6 +124,13 @@ public class Main : Game
         }
 
         base.Update(gameTime);
+    }
+
+    private static List<Wall> GetCollisionsList()
+    {
+        var objs = _objects
+            .Where(o => !(o.GetType() == typeof(Door) && o.GetState() == 1)).ToList();
+        return Walls.Concat(objs).ToList();
     }
 
     protected override void Draw(GameTime gameTime)

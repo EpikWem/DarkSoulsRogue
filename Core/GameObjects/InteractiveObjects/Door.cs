@@ -1,27 +1,20 @@
-﻿using DarkSoulsRogue.Core.Utilities;
-
-namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+﻿namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public class Door : InteractiveObject
 {
     
     public const string Name = "door";
     public const int StateNumber = 2;
-
-    public readonly Destination Destination;
     
-    public Door(int xInGrid, int yInGrid, Destination destination) : base(xInGrid, yInGrid, Textures.DoorT)
+    public Door(int xInGrid, int yInGrid) : base(xInGrid, yInGrid, Textures.DoorT)
     {
-        Destination = destination;
+        
     }
 
     public override void Interact(Character character)
     {
-        switch (State)
-        {
-            case 0: IncreaseState(); break;
-            case 1: character.TransitMap(Destination.Orientation); break;
-        }
+        if (State == 0)
+            IncreaseState();
     }
     
 }

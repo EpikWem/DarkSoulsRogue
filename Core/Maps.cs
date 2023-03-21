@@ -33,20 +33,20 @@ public abstract class Maps
     private static readonly Map
         UndeadAsylum1 = new (101,
             new[] {
-                new[] { 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0 },
-                new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 },
+                new[] { 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
             }, new List<InteractiveObject>(new InteractiveObject[] {
-                new Door(7, 2, new Destination(102, new Vector2(7, 8), Orientation.Up))
+                new Door(7, 2)
             }), new Destination[] {
-                new (102, new Vector2(7, 8), Orientation.Up), 
+                new (102, new Vector2(7, 8), Orientation.Up),
                 null,
                 null,
                 null
@@ -68,7 +68,7 @@ public abstract class Maps
                 
             }), new Destination[] {
                 new (103, new Vector2(7, 8), Orientation.Up),
-                new (101, new Vector2(7, 1), Orientation.Down), 
+                new (101, new Vector2(7, 3), Orientation.Down), 
                 null,
                 null
             }

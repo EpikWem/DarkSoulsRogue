@@ -8,9 +8,9 @@
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>450</x>
-        <y>13</y>
-        <orientation>0</orientation>
+        <x>366</x>
+        <y>320</y>
+        <orientation>2</orientation>
       </position>
       <attributes>
         <vitality>8</vitality>
@@ -52,7 +52,7 @@
         <equippedArmor>2</equippedArmor>
         <equippedWeapon>1</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
-        <equippedRing>3</equippedRing>
+        <equippedRing>0</equippedRing>
         <equippedCovenant>0</equippedCovenant>
       </inventory>
     </character>
