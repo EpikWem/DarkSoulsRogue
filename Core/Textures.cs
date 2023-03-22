@@ -11,7 +11,7 @@ public static class Textures
     private const int WallNumber = 1;
 
     public static Texture2D BgT;
-    public static Texture2D[] BonfireT, ChestT, DoorT;
+    public static Texture2D[] BonfireT, ChestT, DoorT, LadderT, LootT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures;
         
@@ -31,6 +31,8 @@ public static class Textures
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
         ChestT = LoadObjectTextures(Chest.Name, Chest.StateNumber, content);
         DoorT = LoadObjectTextures(Door.Name, Door.StateNumber, content);
+        LadderT = LoadObjectTextures(Ladder.Name, Ladder.StateNumber, content);
+        LootT = LoadObjectTextures(Loot.Name, Loot.StateNumber, content);
         WallsT = LoadWallsTexture(content);
     }
     

@@ -129,7 +129,7 @@ public class Main : Game
     private static List<Wall> GetCollisionsList()
     {
         var objs = _objects
-            .Where(o => !(o.GetType() == typeof(Door) && o.GetState() == 1)).ToList();
+            .Where(o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor)) && o.GetState() == 1)).ToList();
         return Walls.Concat(objs).ToList();
     }
 

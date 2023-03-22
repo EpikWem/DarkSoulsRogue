@@ -186,25 +186,6 @@ public class Character : GameObject
         PlaceOnGrid(dest);
         Main.LoadMap(dest.MapId);
     }
-    
-    /*public void TransitMap(Orientation orientation)
-    {
-        switch (orientation)
-        {
-            case Orientation.Up:
-                Position.Y = Main.Height - Height - Main.CellSize; break;
-            case Orientation.Down:
-                Position.Y = 0 + Main.CellSize; break;
-            case Orientation.Right:
-                Position.X = 0 + Main.CellSize; break;
-            case Orientation.Left:
-                Position.X = Main.Width - Width - Main.CellSize; break;
-            case Orientation.Null:
-                return;
-            default:
-                return;
-        }
-    }*/
 
     public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
     {

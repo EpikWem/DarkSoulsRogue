@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <map>101</map>
+    <map>102</map>
     <character>
       <name>Anastesya</name>
       <life>4000</life>
       <souls>10</souls>
       <isHuman>True</isHuman>
       <position>
-        <x>366</x>
-        <y>320</y>
-        <orientation>2</orientation>
+        <x>450</x>
+        <y>146</y>
+        <orientation>0</orientation>
       </position>
       <attributes>
         <vitality>8</vitality>
@@ -21,7 +21,7 @@
         <resistance>2</resistance>
         <intelligence>9</intelligence>
         <faith>54</faith>
-        <humanity>3</humanity>
+        <humanity>1</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>
@@ -58,8 +58,10 @@
     </character>
     <objects>
       <o1>1</o1>
-      <o2>0</o2>
+      <o2>1</o2>
       <o3>0</o3>
+      <o4>3</o4>
+      <o5>1</o5>
     </objects>
   </Asset>
 </XnaContent>
