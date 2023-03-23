@@ -7,13 +7,8 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    //private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
-
-    public static void Init()
-    {
-        
-    }
+    //private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
 
 
 
@@ -39,7 +34,7 @@ public static class SaveSystem
         character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
         character.Orientation = Character.OrientationFromId(GetInt(node["orientation"]));
 
-    node = asset["character"]["attributes"];
+        node = asset["character"]["attributes"];
         var attributes = new int[Attributes.NumAttributes];
         for (var i = 0; i < Attributes.NumAttributes; i++)
             attributes[i] = GetInt(node.ChildNodes[i]);

@@ -377,7 +377,7 @@
 /processorParam:TextureFormat=Color
 /build:images/objects/door/1.png
 
-#begin images/objects/ladder/0.png
+#begin images/objects/ladder/bottom.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -387,9 +387,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/objects/ladder/0.png
+/build:images/objects/ladder/bottom.png
 
-#begin images/objects/ladder/1.png
+#begin images/objects/ladder/top.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -399,7 +399,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:images/objects/ladder/1.png
+/build:images/objects/ladder/top.png
 
 #begin images/walls/1.png
 /importer:TextureImporter

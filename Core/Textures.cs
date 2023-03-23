@@ -11,15 +11,16 @@ public static class Textures
     private const int WallNumber = 1;
 
     public static Texture2D BgT;
-    public static Texture2D[] BonfireT, ChestT, DoorT, LadderT, LootT;
+    public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
+    public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures;
-        
+
 
     public static void Init(ContentManager content)
     {
         BgT = LoadTexture("bg", content);
-        
+
         ArmorTextures = new List<Texture2D[]>
         {
             LoadCharacterTextures("link", content),
@@ -27,11 +28,12 @@ public static class Textures
             //LoadCharacterTextures("black_iron"),
             LoadCharacterTextures("solaire", content)
         };
-        
+
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
         ChestT = LoadObjectTextures(Chest.Name, Chest.StateNumber, content);
         DoorT = LoadObjectTextures(Door.Name, Door.StateNumber, content);
-        LadderT = LoadObjectTextures(Ladder.Name, Ladder.StateNumber, content);
+        LadderBottomT = new[] { LoadTexture(Ladder.Name + "/bottom", content) };
+        LadderTopT = new[] { LoadTexture(Ladder.Name + "/top", content) };
         LootT = LoadObjectTextures(Loot.Name, Loot.StateNumber, content);
         WallsT = LoadWallsTexture(content);
     }

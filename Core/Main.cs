@@ -54,7 +54,6 @@ public class Main : Game
         Character = new Character();
         Ath.Init(Character);
         
-        SaveSystem.Init();
         LoadMap(SaveSystem.Load());
 
         base.Initialize();

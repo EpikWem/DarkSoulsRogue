@@ -6,14 +6,13 @@ public class Ladder : InteractiveObject
 {
 
     public const string Name = "ladder";
-    public const int StateNumber = 2;
+    public const int StateNumber = 1;
 
     private readonly Destination _destination;
     
-    public Ladder(int xInGrid, int yInGrid, bool isTop, Destination destination) : base(xInGrid, yInGrid, Textures.LadderT)
+    public Ladder(int xInGrid, int yInGrid, bool isTop, Destination destination)
+        : base(xInGrid, yInGrid, (isTop ? Textures.LadderTopT : Textures.LadderBottomT))
     {
-        if (isTop)
-            IncreaseState();
         _destination = destination;
     }
 

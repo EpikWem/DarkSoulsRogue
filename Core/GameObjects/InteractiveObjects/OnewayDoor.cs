@@ -17,20 +17,10 @@ public class OnewayDoor : Door
     {
         if (State != 0)
             return;
-        if (character.Orientation == GetRevertedOrientation(_rightOrientation))
+        if (character.Orientation == _rightOrientation)
             IncreaseState();
         else
             Console.WriteLine("It can't opened on this side.");
     }
-
-    private static Orientation GetRevertedOrientation(Orientation orientation) => orientation switch
-    {
-        Orientation.Up => Orientation.Down,
-        Orientation.Down => Orientation.Up,
-        Orientation.Right => Orientation.Left,
-        Orientation.Left => Orientation.Right,
-        Orientation.Null => Orientation.Null,
-        _ => Orientation.Null
-    };
 
 }
