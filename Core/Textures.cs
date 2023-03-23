@@ -32,8 +32,8 @@ public static class Textures
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
         ChestT = LoadObjectTextures(Chest.Name, Chest.StateNumber, content);
         DoorT = LoadObjectTextures(Door.Name, Door.StateNumber, content);
-        LadderBottomT = new[] { LoadTexture(Ladder.Name + "/bottom", content) };
-        LadderTopT = new[] { LoadTexture(Ladder.Name + "/top", content) };
+        LadderBottomT = new[] { LoadTexture("objects/" + Ladder.Name + "/bottom", content) };
+        LadderTopT = new[] { LoadTexture("objects/" + Ladder.Name + "/top", content) };
         LootT = LoadObjectTextures(Loot.Name, Loot.StateNumber, content);
         WallsT = LoadWallsTexture(content);
     }

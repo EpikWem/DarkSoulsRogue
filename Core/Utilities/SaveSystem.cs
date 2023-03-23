@@ -7,8 +7,8 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    //private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
 
 
 

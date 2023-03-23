@@ -218,7 +218,7 @@ C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-window
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\runtimes\win-x64\native\freetype6.dll
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\runtimes\win-x64\native\libmojoshader_64.dll
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\runtimes\win-x64\native\nvtt.dll
-C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\0.xnb
-C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\1.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\bottom.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\top.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\bottom.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\ladder\top.xnb
