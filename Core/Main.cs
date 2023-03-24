@@ -49,12 +49,13 @@ public class Main : Game
         Textures.Init(Content);
         Fonts.Init(Content);
 
+        SaveSystem.Init();
+        
         CurrentSaveId = 0;
         _background = new Background();
         Character = new Character();
         Ath.Init(Character);
-        
-        LoadMap(SaveSystem.Load());
+        TitleMenu.Init();
 
         base.Initialize();
     }
@@ -86,40 +87,50 @@ public class Main : Game
     
     protected override void Update(GameTime gameTime)
     {
-        // KEY TESTS
-        Controls.UpdateKeyListener();
+        Controls.UpdateKeyListener(); // key states update
         
-        Character.Move(GetCollisionsList());
-        Character.TransitMap(Character.TestOutOfMap());
-
         if (Controls.KillApp.IsPressed)
-            QuitApp();
-        if (Controls.ToggleFullscreen.IsPressed)
-            _graphics.ToggleFullScreen();
-        if (Controls.Interact.IsOnePressed)
-        {
-            foreach (var o in _objects
-            .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
+            Exit(); // kill app with F10
+        
+        if (TitleMenu.IsActive)
+            if (TitleMenu.Update()) // update title menu
+                Exit();
+        if (!TitleMenu.IsActive)
+        {   // update game
+            Character.Move(GetCollisionsList());
+            Character.TransitMap(Character.TestOutOfMap());
+            
+            if (Controls.ToggleFullscreen.IsPressed)
+                _graphics.ToggleFullScreen();
+            if (Controls.Interact.IsOnePressed)
             {
-                o.Interact(Character);
-                //TODO: Remove doors from walls when they are opened
+                foreach (var o in _objects
+                             .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
+                {
+                    o.Interact(Character);
+                    //TODO: Remove doors from walls when they are opened
+                }
             }
-        }
-        if (Controls.Pause.IsOnePressed)
-        {
-            QuitApp();
-        }
-        if (Controls.Debug1.IsOnePressed)
-        {
-            CurrentSaveId = SaveSystem.CreateNewSave();
-        }
-        if (Controls.Debug2.IsOnePressed)
-        {
-            
-        }
-        if (Controls.Debug3.IsOnePressed)
-        {
-            
+
+            if (Controls.Pause.IsOnePressed)
+            {
+                GotoTitle();
+            }
+
+            if (Controls.Debug1.IsOnePressed)
+            {
+                
+            }
+
+            if (Controls.Debug2.IsOnePressed)
+            {
+
+            }
+
+            if (Controls.Debug3.IsOnePressed)
+            {
+
+            }
         }
 
         base.Update(gameTime);
@@ -136,25 +147,32 @@ public class Main : Game
     {
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
-        
-        _background.Draw(_spriteBatch);
-        foreach (var w in Walls) {
-            w.Draw(_spriteBatch);
+
+        if (TitleMenu.IsActive)
+            TitleMenu.Draw(_spriteBatch); // draw title menu
+        else
+        {   // draw game
+            _background.Draw(_spriteBatch);
+            foreach (var w in Walls)
+            {
+                w.Draw(_spriteBatch);
+            }
+            foreach (var o in _objects)
+            {
+                o.Draw(_spriteBatch);
+            }
+            Character.Draw(_spriteBatch);
+            Ath.Draw(_spriteBatch);
         }
-        foreach (var o in _objects) {
-            o.Draw(_spriteBatch);
-        }
-        Character.Draw(_spriteBatch);
-        Ath.Draw(_spriteBatch);
         
         _spriteBatch.End();
         base.Draw(gameTime);
     }
 
-    private void QuitApp()
+    public void GotoTitle()
     {
         SaveSystem.Save();
-        Exit();
+        TitleMenu.Init();
     }
 
 }

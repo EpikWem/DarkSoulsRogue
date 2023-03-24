@@ -8,8 +8,16 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    //private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    public const int SavesCount = 4;
+
+    private static readonly XmlDocument SaveFile = new ();
+    
+    public static void Init()
+    {
+        SaveFile.Load(GetSaveFilePath());
+    }
 
 
 
@@ -17,48 +25,48 @@ public static class SaveSystem
      *= LOAD METHOD ================================================
      *============================================================*/
 
-    // RETURNS current map id
-    public static int Load()
+    public static void Load() => Load(GetInt(SaveFile["XnaContent"]?["Asset"]?["lastSaveId"]));
+    public static void Load(int saveId)
     {
-        var saveFile = new XmlDocument();
-        saveFile.Load(GetFullFilePath());
-        var asset = saveFile["XnaContent"]?["Asset"];
         var character = Main.Character;
+        
+        Main.CurrentSaveId = saveId;
+        
+        var root = SaveFile["XnaContent"]?["Asset"]?["s" + Main.CurrentSaveId];
+        
+        XmlNode node = root?["character"];
+        character.Name = GetString(node?["name"]);
+        character.Life = GetInt(node?["life"]);
+        character.Souls = GetInt(node?["souls"]);
+        character.IsHuman = GetBool(node?["isHuman"]);
 
-        Main.CurrentSaveId = GetInt(asset["lastSaveId"]);
+        node = root?["character"]?["position"];
+        character.SetPosition(GetInt(node?["x"]), GetInt(node?["y"]));
+        character.Orientation = Character.OrientationFromId(GetInt(node?["orientation"]));
 
-        XmlNode node = asset["character"];
-        character.Name = GetString(node["name"]);
-        character.Life = GetInt(node["life"]);
-        character.Souls = GetInt(node["souls"]);
-        character.IsHuman = GetBool(node["isHuman"]);
-
-        node = asset["character"]["position"];
-        character.SetPosition(GetInt(node["x"]), GetInt(node["y"]));
-        character.Orientation = Character.OrientationFromId(GetInt(node["orientation"]));
-
-        node = asset["character"]["attributes"];
+        node = root?["character"]?["attributes"];
         var attributes = new int[Attributes.NumAttributes];
         for (var i = 0; i < Attributes.NumAttributes; i++)
-            attributes[i] = GetInt(node.ChildNodes[i]);
+            attributes[i] = GetInt(node?.ChildNodes[i]);
         character.Attributes.Set(attributes);
         
-        node = asset["character"]["triggers"];
+        node = root?["character"]?["triggers"];
         var triggers = new bool[Triggers.NumTriggers];
         for (var i = 0; i < Triggers.NumTriggers; i++)
-            triggers[i] = GetBool(node.ChildNodes[i]);
+            triggers[i] = GetBool(node?.ChildNodes[i]);
         character.Triggers.Set(triggers);
 
-        node = asset["character"]["inventory"];
-        character.ChangeArmor(Armor.GetFromIndex(GetInt(node["equippedArmor"])));
-        character.ChangeRing(Ring.GetFromIndex(GetInt(node["equippedRing"])));
-        character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node["equippedWeapon"])));
+        node = root?["character"]?["inventory"];
+        character.ChangeArmor(Armor.GetFromIndex(GetInt(node?["equippedArmor"])));
+        character.ChangeRing(Ring.GetFromIndex(GetInt(node?["equippedRing"])));
+        character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node?["equippedWeapon"])));
 
-        node = asset["objects"];
+        node = root?["objects"];
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
-            Maps.GetObjectFromId(i).SetState(GetInt(node.ChildNodes[i]));
+            Maps.GetObjectFromId(i).SetState(GetInt(node?.ChildNodes[i]));
         
-        return GetInt(asset["map"]);
+        Main.LoadMap(GetInt(root?["map"]));
+        TitleMenu.IsActive = false;
     }
     
     
@@ -70,58 +78,58 @@ public static class SaveSystem
     public static void Save()
     {
         var character = Main.Character;
-        var doc = new XmlDocument();
-        doc.Load(GetFullFilePath());
-        XmlNode asset = doc["XnaContent"]["Asset"];
-
-        asset["lastSaveId"].InnerText = Main.CurrentSaveId.ToString();
-        asset["map"].InnerText = Main.CurrentMap.Id.ToString();
-
-        XmlNode node = asset["character"];
-        node["name"].InnerText = character.Name;
-        node["life"].InnerText = character.Life.ToString();
-        node["souls"].InnerText = character.Souls.ToString();
-        node["isHuman"].InnerText = character.IsHuman.ToString();
         
-        node = asset["character"]["position"];
-        node["x"].InnerText = character.GetPosition().X.ToString();
-        node["y"].InnerText = character.GetPosition().Y.ToString();
-        node["orientation"].InnerText = Character.OrientationId(character.Orientation).ToString();
+        SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = Main.CurrentSaveId.ToString();
+        
+        XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + Main.CurrentSaveId];
+        
+        root!["map"]!.InnerText = Main.CurrentMap.Id.ToString();
 
-        node = asset["character"]["attributes"];
+        XmlNode node = root["character"];
+        node!["name"]!.InnerText = character.Name;
+        node["life"]!.InnerText = character.Life.ToString();
+        node["souls"]!.InnerText = character.Souls.ToString();
+        node["isHuman"]!.InnerText = character.IsHuman.ToString();
+        
+        node = root["character"]?["position"];
+        node!["x"]!.InnerText = character.GetPosition().X.ToString();
+        node["y"]!.InnerText = character.GetPosition().Y.ToString();
+        node["orientation"]!.InnerText = Character.OrientationId(character.Orientation).ToString();
+
+        node = root["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)
-            node.ChildNodes[i].InnerText = character.Attributes.GetAll()[i].ToString();
+            node!.ChildNodes[i]!.InnerText = character.Attributes.GetAll()[i].ToString();
         
-        node = asset["character"]["triggers"];
+        node = root["character"]["triggers"];
         for (var i = 0; i < Triggers.NumTriggers; i++)
-            node.ChildNodes[i].InnerText = character.Triggers.GetAll()[i].ToString();
+            node!.ChildNodes[i]!.InnerText = character.Triggers.GetAll()[i].ToString();
         
-        node = asset["character"]["inventory"];
-        node["equippedArmor"].InnerText = Armor.GetIndexOf(character.Inventory.EquippedArmor).ToString();
-        node["equippedRing"].InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
-        node["equippedWeapon"].InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
+        node = root["character"]["inventory"];
+        node!["equippedArmor"]!.InnerText = Armor.GetIndexOf(character.Inventory.EquippedArmor).ToString();
+        node["equippedRing"]!.InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
+        node["equippedWeapon"]!.InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
         
-        node = asset["objects"];
+        node = root["objects"];
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
-            node.ChildNodes[i].InnerText = Maps.GetObjectFromId(i).GetState().ToString();
+            node!.ChildNodes[i]!.InnerText = Maps.GetObjectFromId(i).GetState().ToString();
         
-        doc.Save(GetFullFilePath());
+        SaveFile.Save(GetSaveFilePath());
     }
 
-    public static int CreateNewSave()
+    public static void CreateNewSave(int newSaveId)
     {
-        int id;
-        id = 0;
         Main.LoadMap(101);
         Main.Character = new Character();
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
             Maps.GetObjectFromId(i).SetState(0);
         Ath.Init(Main.Character);
-        return id;
+        Main.CurrentSaveId = newSaveId;
+        TitleMenu.IsActive = false;
     }
 
-    private static string GetFullFilePath() => SavesFilePath + "save" + Main.CurrentSaveId + ".xml";
+    private static string GetSaveFilePath() => SavesPath + "save.xml";
+    private static string GetSettingsPath() => SavesPath + "settings.xml";
 
     private static int GetInt(XmlNode node) => int.Parse(node.InnerText);
     private static bool GetBool(XmlNode node) => bool.Parse(node.InnerText);

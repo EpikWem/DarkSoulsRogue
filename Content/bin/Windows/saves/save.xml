@@ -3,7 +3,7 @@
   <Asset>
     <lastSaveId>0</lastSaveId>
     <saveCount>1</saveCount>
-    <map>104</map>
+    <map>102</map>
     <character>
       <name>
       </name>
@@ -11,9 +11,9 @@
       <souls>0</souls>
       <isHuman>False</isHuman>
       <position>
-        <x>486</x>
-        <y>181</y>
-        <orientation>3</orientation>
+        <x>461</x>
+        <y>389</y>
+        <orientation>0</orientation>
       </position>
       <attributes>
         <vitality>10</vitality>

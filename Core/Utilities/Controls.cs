@@ -18,21 +18,26 @@ public abstract class Controls
             IsOnePressed = false;
         }
     }
-    
+
     public static readonly Control
-        KillApp = new (Keys.F10),
-        ToggleFullscreen = new (Keys.F11),
-        Pause = new (Keys.Escape),
-        Up = new (Keys.Up),
-        Down = new (Keys.Down),
-        Right = new (Keys.Right),
-        Left = new (Keys.Left),
-        Interact = new (Keys.E),
-        Run = new (Keys.Space),
+        KillApp = new(Keys.F10),
+        ToggleFullscreen = new(Keys.F11),
+        Pause = new(Keys.Escape),
+        Up = new(Keys.Z),
+        Down = new(Keys.S),
+        Right = new(Keys.D),
+        Left = new(Keys.Q),
+        Interact = new(Keys.E),
+        Run = new(Keys.Space),
+        MenuUp = new(Keys.Up),
+        MenuDown = new(Keys.Down),
+        MenuRight = new(Keys.Right),
+        MenuLeft = new(Keys.Left),
+        MenuBack = new Control(Keys.A),
         Debug1 = new (Keys.NumPad1),
         Debug2 = new (Keys.NumPad2),
         Debug3 = new (Keys.NumPad3);
-    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, Debug1, Debug2, Debug3 };
+    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack, Debug1, Debug2, Debug3 };
 
     public static void UpdateKeyListener()
     {
