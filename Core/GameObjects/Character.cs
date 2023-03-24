@@ -31,11 +31,14 @@ public class Character : GameObject
     
     public Character() : base(Armor.Naked.GetWearingTextures()[0])
     {
-        
-        _textures = Armor.Naked.GetWearingTextures();
+        _textures = new Texture2D[4];
         Attributes = new Attributes();
         Triggers = new Triggers();
         Inventory = new Inventory();
+        ChangeArmor(Armor.Naked);
+        ChangeWeapon(Weapon.BareFist);
+        ChangeRing(Ring.NoRing);
+        Life = MaxLife();
         Stamina = MaxStamina();
         _exhaustingTime = 0;
         ResetCoef();

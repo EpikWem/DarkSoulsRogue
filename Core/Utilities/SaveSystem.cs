@@ -1,5 +1,6 @@
 ﻿using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.Utilities;
@@ -7,8 +8,8 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    //private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesFilePath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesFilePath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
 
 
 
@@ -23,6 +24,8 @@ public static class SaveSystem
         saveFile.Load(GetFullFilePath());
         var asset = saveFile["XnaContent"]?["Asset"];
         var character = Main.Character;
+
+        Main.CurrentSaveId = GetInt(asset["lastSaveId"]);
 
         XmlNode node = asset["character"];
         character.Name = GetString(node["name"]);
@@ -52,7 +55,7 @@ public static class SaveSystem
         character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node["equippedWeapon"])));
 
         node = asset["objects"];
-        for (var i = 0; i < node.ChildNodes.Count; i++)
+        for (var i = 0; i < Maps.GetObjectsCount(); i++)
             Maps.GetObjectFromId(i).SetState(GetInt(node.ChildNodes[i]));
         
         return GetInt(asset["map"]);
@@ -71,6 +74,7 @@ public static class SaveSystem
         doc.Load(GetFullFilePath());
         XmlNode asset = doc["XnaContent"]["Asset"];
 
+        asset["lastSaveId"].InnerText = Main.CurrentSaveId.ToString();
         asset["map"].InnerText = Main.CurrentMap.Id.ToString();
 
         XmlNode node = asset["character"];
@@ -98,13 +102,26 @@ public static class SaveSystem
         node["equippedWeapon"].InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
         
         node = asset["objects"];
-        for (var i = 0; i < node.ChildNodes.Count; i++)
+        for (var i = 0; i < Maps.GetObjectsCount(); i++)
             node.ChildNodes[i].InnerText = Maps.GetObjectFromId(i).GetState().ToString();
         
         doc.Save(GetFullFilePath());
     }
 
-    private static string GetFullFilePath() => SavesFilePath + "save" + Main.SaveId + ".xml";
+    public static int CreateNewSave()
+    {
+        int id;
+        id = 0;
+        Main.LoadMap(101);
+        Main.Character = new Character();
+        Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
+        for (var i = 0; i < Maps.GetObjectsCount(); i++)
+            Maps.GetObjectFromId(i).SetState(0);
+        Ath.Init(Main.Character);
+        return id;
+    }
+
+    private static string GetFullFilePath() => SavesFilePath + "save" + Main.CurrentSaveId + ".xml";
 
     private static int GetInt(XmlNode node) => int.Parse(node.InnerText);
     private static bool GetBool(XmlNode node) => bool.Parse(node.InnerText);

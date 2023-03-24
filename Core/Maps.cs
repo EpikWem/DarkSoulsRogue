@@ -123,7 +123,7 @@ public abstract class Maps
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
-                new[] {0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -142,6 +142,8 @@ public abstract class Maps
 
     private static readonly Map[] MapArray = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3, UndeadAsylum4, UndeadAsylum5 };
 
+    public static int GetObjectsCount() => MapArray.Sum(map => map.Objects.Count);
+    
     public static int GetObjectIdOf(InteractiveObject obj)
     {
         List<InteractiveObject> objArray = new ();

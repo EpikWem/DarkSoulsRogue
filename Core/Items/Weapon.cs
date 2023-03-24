@@ -7,6 +7,7 @@ public class Weapon : Equipment
 {
 
     public static readonly Weapon
+        BareFist = new Weapon("Bare Fist", WeaponTypes.Fist, DamageTypes.Strike, false, new []{10, 0, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.F), new []{0f, 0f, 0f, 0f}, 0, 0),
         Claymore = new ("Claymore", WeaponTypes.GreatSword, DamageTypes.Slash, true, new []{103, 0, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.F), new float[]{0.6f, 0.1f, 0.4f, 0.4f}, 38, 6.0f),
         AstoraSword = new ("Astoras Straight Sword", WeaponTypes.StraightSword, DamageTypes.Slash, false, new []{80, 80, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.C), new float[]{0.5f, 0.1f, 0.35f, 0.35f}, 32, 3.0f);
     
@@ -14,6 +15,7 @@ public class Weapon : Equipment
     public static int GetIndexOf(Weapon weapon) => Weapons.IndexOf(weapon);
     private static readonly List<Weapon>
         Weapons = new () {
+            BareFist,
             Claymore,
             AstoraSword
         };

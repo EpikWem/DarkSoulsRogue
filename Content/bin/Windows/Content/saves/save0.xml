@@ -1,31 +1,34 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <map>104</map>
+    <lastSaveId>0</lastSaveId>
+    <saveCount>1</saveCount>
+    <map>102</map>
     <character>
-      <name>Anastesya</name>
-      <life>4000</life>
-      <souls>10</souls>
-      <isHuman>True</isHuman>
+      <name>
+      </name>
+      <life>5000</life>
+      <souls>0</souls>
+      <isHuman>False</isHuman>
       <position>
-        <x>468</x>
-        <y>308</y>
-        <orientation>0</orientation>
+        <x>450</x>
+        <y>143</y>
+        <orientation>1</orientation>
       </position>
       <attributes>
-        <vitality>8</vitality>
+        <vitality>10</vitality>
         <endurance>10</endurance>
-        <attunement>1</attunement>
-        <strength>12</strength>
-        <dexterity>14</dexterity>
-        <resistance>2</resistance>
-        <intelligence>9</intelligence>
-        <faith>54</faith>
-        <humanity>1</humanity>
+        <attunement>0</attunement>
+        <strength>10</strength>
+        <dexterity>10</dexterity>
+        <resistance>10</resistance>
+        <intelligence>10</intelligence>
+        <faith>10</faith>
+        <humanity>0</humanity>
       </attributes>
       <triggers>
         <finishedFirstAsylum>False</finishedFirstAsylum>
-        <hasRiteOfKindling>True</hasRiteOfKindling>
+        <hasRiteOfKindling>False</hasRiteOfKindling>
         <hasTeleportationSkill>False</hasTeleportationSkill>
         <unlockedGoldenBarriers>False</unlockedGoldenBarriers>
         <hasArtoriasRing>False</hasArtoriasRing>
@@ -49,15 +52,16 @@
           <i3>0</i3>
           <i4>0</i4>
         </quickItems>
-        <equippedArmor>2</equippedArmor>
-        <equippedWeapon>1</equippedWeapon>
+        <equippedArmor>0</equippedArmor>
+        <equippedWeapon>0</equippedWeapon>
         <equippedCatalyst>0</equippedCatalyst>
         <equippedRing>0</equippedRing>
         <equippedCovenant>0</equippedCovenant>
       </inventory>
     </character>
     <objects>
-      <o1>0</o1>
+      <o0>1</o0>
+      <o1>1</o1>
       <o2>0</o2>
       <o3>0</o3>
       <o4>0</o4>

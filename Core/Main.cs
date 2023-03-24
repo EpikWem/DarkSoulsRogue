@@ -20,7 +20,7 @@ public class Main : Game
     private SpriteBatch _spriteBatch;
     public static Texture2D PixelTexture;
     
-    public static int SaveId;
+    public static int CurrentSaveId;
     private static Background _background;
     public static Character Character;
     private static readonly List<Wall> Walls = new ();
@@ -49,7 +49,7 @@ public class Main : Game
         Textures.Init(Content);
         Fonts.Init(Content);
 
-        SaveId = 0;
+        CurrentSaveId = 0;
         _background = new Background();
         Character = new Character();
         Ath.Init(Character);
@@ -111,15 +111,15 @@ public class Main : Game
         }
         if (Controls.Debug1.IsOnePressed)
         {
-            Character.ChangeRing(Ring.NoRing);
+            CurrentSaveId = SaveSystem.CreateNewSave();
         }
         if (Controls.Debug2.IsOnePressed)
         {
-            Character.ChangeRing(Ring.TinyBeing);
+            
         }
         if (Controls.Debug3.IsOnePressed)
         {
-            Character.ChangeRing(Ring.Favor);
+            
         }
 
         base.Update(gameTime);
