@@ -2,6 +2,7 @@
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
@@ -127,6 +128,13 @@ public static class SaveSystem
         Main.CurrentSaveId = newSaveId;
         TitleMenu.IsActive = false;
     }
+
+    public static Texture2D GetGameIcon(int gameId) =>
+        Armor.GetFromIndex(
+            GetInt(SaveFile!["XnaContent"]!["Asset"]!["s" + gameId]!["character"]!["inventory"]!["equippedArmor"]))
+            .GetWearingTextures()[1];
+    public static string GetGameName(int gameId) =>
+        GetString(SaveFile!["XnaContent"]!["Asset"]!["s" + gameId]!["character"]!["name"]);
 
     private static string GetSaveFilePath() => SavesPath + "save.xml";
     private static string GetSettingsPath() => SavesPath + "settings.xml";

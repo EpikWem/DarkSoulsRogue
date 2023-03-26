@@ -5,8 +5,7 @@
     <s0>
       <map>104</map>
       <character>
-        <name>
-        </name>
+        <name>Jacqueline0</name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
@@ -73,8 +72,7 @@
     <s1>
       <map>105</map>
       <character>
-        <name>
-        </name>
+        <name>Emilia1</name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
@@ -141,8 +139,7 @@
     <s2>
       <map>102</map>
       <character>
-        <name>
-        </name>
+        <name>Harold2</name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
@@ -209,8 +206,7 @@
     <s3>
       <map>104</map>
       <character>
-        <name>
-        </name>
+        <name>Amalya3</name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
