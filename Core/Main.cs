@@ -13,9 +13,6 @@ namespace DarkSoulsRogue.Core;
 public class Main : Game
 {
     
-    public const int GridWidth = 15, GridHeight = 10, CellSize = 64;
-    public const int Width = GridWidth*CellSize, Height = GridHeight*CellSize;
-    
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     public static Texture2D PixelTexture;
@@ -38,8 +35,8 @@ public class Main : Game
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = false;
-        _graphics.PreferredBackBufferWidth = Width;
-        _graphics.PreferredBackBufferHeight = Height;
+        _graphics.PreferredBackBufferWidth = Camera.Width;
+        _graphics.PreferredBackBufferHeight = Camera.Height;
     }
 
     protected override void Initialize()

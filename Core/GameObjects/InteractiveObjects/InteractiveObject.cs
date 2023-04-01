@@ -10,8 +10,8 @@ public abstract class InteractiveObject : Wall
     protected InteractiveObject(int xInGrid, int yInGrid, Texture2D[] textures) : base(xInGrid, yInGrid, textures[0])
     {
         State = 0;
-        Position.X = xInGrid*Main.CellSize;
-        Position.Y = yInGrid*Main.CellSize;
+        Position.X = xInGrid*Camera.CellSize;
+        Position.Y = yInGrid*Camera.CellSize;
         _textures = textures;
     }
 

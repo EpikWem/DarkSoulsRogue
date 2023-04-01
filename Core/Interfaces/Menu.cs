@@ -1,13 +1,11 @@
-﻿namespace DarkSoulsRogue.Core.Interfaces;
+﻿using Microsoft.Xna.Framework.Graphics;
 
-public class Menu
+namespace DarkSoulsRogue.Core.Interfaces;
+
+public abstract class Menu
 {
-
-    private static MenuBar _menuBar = new ();
-
-    private class MenuBar
-    {
-        
-    }
+    public abstract void Init();
+    public abstract void Update();
+    public abstract void Draw(SpriteBatch spriteBatch);
 
 }

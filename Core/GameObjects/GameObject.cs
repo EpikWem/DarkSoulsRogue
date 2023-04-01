@@ -12,8 +12,8 @@ public abstract class GameObject
 
     protected GameObject()
     {
-        Width = Main.CellSize;
-        Height = Main.CellSize;
+        Width = Camera.CellSize;
+        Height = Camera.CellSize;
     }
     
     protected GameObject(Texture2D texture)
@@ -35,7 +35,7 @@ public abstract class GameObject
 
     public Vector2 GetPositionOnGrid()
     {
-        return new Vector2((int)(Position.X / Main.CellSize), (int)(Position.Y / Main.CellSize));
+        return new Vector2((int)(Position.X / Camera.CellSize), (int)(Position.Y / Camera.CellSize));
     }
 
     protected void SetTexture(Texture2D texture)

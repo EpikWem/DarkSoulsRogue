@@ -163,8 +163,8 @@ public class Character : GameObject
     public Vector2 GetLookingCell()
     {
         return new Vector2(
-            (int)(GetLookingPoint().X / Main.CellSize),
-            (int)(GetLookingPoint().Y / Main.CellSize));
+            (int)(GetLookingPoint().X / Camera.CellSize),
+            (int)(GetLookingPoint().Y / Camera.CellSize));
     }
 
     public Orientation TestOutOfMap()
@@ -172,9 +172,9 @@ public class Character : GameObject
         var cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
         if (cp.Y < 0)
             return Orientation.Up;
-        if (cp.Y > Main.Height-1)
+        if (cp.Y > Camera.Height-1)
             return Orientation.Down;
-        if (cp.X > Main.Width-1)
+        if (cp.X > Camera.Width-1)
             return Orientation.Right;
         if (cp.X < 0)
             return Orientation.Left;
@@ -192,8 +192,8 @@ public class Character : GameObject
 
     public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
     {
-        Position.X = xGrid * Main.CellSize + (float)(MarginS)/2;
-        Position.Y = yGrid * Main.CellSize - MarginU;
+        Position.X = xGrid * Camera.CellSize + (float)(MarginS)/2;
+        Position.Y = yGrid * Camera.CellSize - MarginU;
         Orientation = orientation;
     }
     
@@ -202,7 +202,7 @@ public class Character : GameObject
         PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
     }
 
-    //TODO: public Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Main.CellSize), (float)Math.Truncate(Position.Y / Main.CellSize));
+    //TODO: public Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Camera.CellSize), (float)Math.Truncate(Position.Y / Camera.CellSize));
 
     public int MaxLife()
     {

@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Items;
@@ -120,6 +120,29 @@ public abstract class Maps
         ),
         UndeadAsylum5 = new ( 105,
             new[] {
+                new[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
+                new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
+                new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1}
+            }, new List<InteractiveObject> (new InteractiveObject[] {
+            }), new Destination[] {
+                null,
+                new (104, new Vector2(7, 1), Orientation.Down),
+                null,
+                new (106, new Vector2(14, 3), Orientation.Left)
+            }
+        /*),
+        UndeadAsylum5 = new ( 105,
+            new[] {
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -137,7 +160,7 @@ public abstract class Maps
                 new (104, new Vector2(7, 1), Orientation.Down),
                 null,
                 new (106, new Vector2(14, 3), Orientation.Left)
-            }
+            }*/
         );
 
     private static readonly Map[] MapArray = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3, UndeadAsylum4, UndeadAsylum5 };

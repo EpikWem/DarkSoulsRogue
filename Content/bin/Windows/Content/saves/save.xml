@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>3</lastSaveId>
+    <lastSaveId>2</lastSaveId>
     <s0>
       <map>104</map>
       <character>
@@ -137,16 +137,16 @@
       </objects>
     </s1>
     <s2>
-      <map>102</map>
+      <map>105</map>
       <character>
         <name>Harold2</name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>380</x>
-          <y>251</y>
-          <orientation>3</orientation>
+          <x>450</x>
+          <y>372</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
           <vitality>10</vitality>
@@ -196,7 +196,7 @@
         <o0>1</o0>
         <o1>1</o1>
         <o2>0</o2>
-        <o3>0</o3>
+        <o3>1</o3>
         <o4>0</o4>
         <o5>0</o5>
         <o6>0</o6>
