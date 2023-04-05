@@ -15,7 +15,6 @@ public static class TitleScreen
 
     public static bool IsActive;
     private static Menu _activeMenu;
-    private static bool _selectForANewGame;
 
     private static readonly TitleMenu TitleM = new ();
     private static readonly GameSelectionMenu GameSelectionM = new ();
@@ -25,7 +24,6 @@ public static class TitleScreen
     {
         IsActive = true;
         _activeMenu = TitleM;
-        _selectForANewGame = false;
     }
     
     //RETURNS: true to QuitApp()
@@ -35,14 +33,25 @@ public static class TitleScreen
         return _activeMenu == TitleM && TitleM.WantsToQuit;
     }
 
+    public static void Draw(SpriteBatch spriteBatch)
+    {
+        _activeMenu.Draw(spriteBatch);
+    }
+    
+    
+    
+    /**================================================================================================================
+     *  GAME SELECTOR SCREEN
+     *===============================================================================================================*/
+
     private class TitleMenu : Menu
     {
         
-        private readonly string[] _choices = { "Continue", "Load Game", "New Game", "Settings", "Quit Game" };
+        private static readonly string[] Choices = { "Continue", "Load Game", "New Game", "Settings", "Quit Game" };
         private int _selectionId;
         public bool WantsToQuit;
         
-        public override void Init()
+        public TitleMenu()
         {
             _selectionId = 0;
             WantsToQuit = false;
@@ -57,7 +66,7 @@ public static class TitleScreen
                 {
                     case 0: SaveSystem.Load(); return;
                     case 1: _activeMenu = GameSelectionM; return;
-                    case 2: _selectForANewGame = true; _activeMenu = GameSelectionM; return;
+                    case 2: _activeMenu = GameCreationM; return;
                     case 3: return;
                     case 4: WantsToQuit = true; return;
                     default: return;
@@ -88,20 +97,14 @@ public static class TitleScreen
             var csx = (int)PositionOfTitleList.X - 4;
             var csy = (int)PositionOfTitleList.Y + _selectionId * HeightOfTitleItem;
 
-            if (_isInGameChoosing || _isInGameChoosingForNew)
-            {
-                GameSelectionScreen.Draw(spriteBatch);
-                return;
-            }
-            
             //spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, 100, HeightOfTitleItem), Color.Orange);
-            new RectangleHollow(csx, csy, 100, HeightOfTitleItem, Color.Orange, 2).Draw(spriteBatch);
-            for (var i = 0; i < _choices.Length; i++)
-                spriteBatch.DrawString(Fonts.Font, _choices[i],  PositionOfTitleList + new Vector2(0, i*HeightOfTitleItem + 4), Color.White);
+            new RectangleHollow(csx, csy, 100, HeightOfTitleItem, Color.Orange, Color.Black, 2).Draw(spriteBatch);
+            for (var i = 0; i < Choices.Length; i++)
+                spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*HeightOfTitleItem + 4), Color.White);
         }
         
         private static int FirstChoice() => 0;
-        private static int LastChoice() => _choices.Length - 1;
+        private static int LastChoice() => Choices.Length - 1;
         
     }
     
@@ -109,34 +112,44 @@ public static class TitleScreen
     
     /**================================================================================================================
      *  GAME SELECTOR SCREEN
-     ================================================================================================================*/
+     *===============================================================================================================*/
+    
     private class GameSelectionMenu : Menu
     {
-        public override void Init()
+
+        private int _selectedGameId;
+        private readonly Integer _forNewSave;
+        
+        public GameSelectionMenu(Integer forNewSave = null)
         {
-            throw new NotImplementedException();
+            _selectedGameId = 0;
+            _forNewSave = forNewSave;
         }
 
         public override void Update()
         {
             if (Controls.Interact.IsOnePressed)
             {
-                if (_isInGameChoosing)
-                    SaveSystem.Load(_gameSelectedId);
-                if (_isInGameChoosingForNew)
-                    SaveSystem.CreateNewSave(_gameSelectedId);
+                if (_forNewSave != null)
+                    _forNewSave.Value = _selectedGameId;
+                else
+                {
+                    IsActive = false;
+                    SaveSystem.Load(_selectedGameId);
+                }
+                    
             }
             if (Controls.MenuUp.IsOnePressed)
             {
-                _gameSelectedId--;
-                if (_gameSelectedId < FirstGameChoice())
-                    _gameSelectedId = LastGameChoice();
+                _selectedGameId--;
+                if (_selectedGameId < FirstGameChoice())
+                    _selectedGameId = LastGameChoice();
             }
             if (Controls.MenuDown.IsOnePressed)
             {
-                _gameSelectedId++;
-                if (_gameSelectedId > LastGameChoice())
-                    _gameSelectedId = FirstGameChoice();
+                _selectedGameId++;
+                if (_selectedGameId > LastGameChoice())
+                    _selectedGameId = FirstGameChoice();
             }
 
             if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
@@ -146,10 +159,10 @@ public static class TitleScreen
         public override void Draw(SpriteBatch spriteBatch)
         {
             var cgx = (int)PositionOfGameList.X - 8;
-            var cgy = (int)PositionOfGameList.Y + _gameSelectedId * HeightOfGameItem - 12;
+            var cgy = (int)PositionOfGameList.Y + _selectedGameId * HeightOfGameItem - 12;
             
             //spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, 240, HeightOfGameItem), Color.Orange);
-            new RectangleHollow(cgx, cgy, 240, HeightOfGameItem, Color.Orange, 4).Draw(spriteBatch);
+            new RectangleHollow(cgx, cgy, 240, HeightOfGameItem, Color.Orange, Color.Black, 4).Draw(spriteBatch);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * HeightOfGameItem - 8), Color.White);
@@ -161,23 +174,78 @@ public static class TitleScreen
         private static int LastGameChoice() => SaveSystem.SavesCount - 1;
         
     }
+    
+    
+    
+    /**================================================================================================================
+     *  GAME CREATION SCREEN
+     *===============================================================================================================*/
 
     private class GameCreationMenu : Menu
     {
-        public override void Init()
+
+        private enum Phase { PlaceSelection, Personalisation, Name, End }
+        private Phase _phase;
+        private readonly Integer _saveId;
+        private readonly GameSelectionMenu _selectionMenu;
+        private readonly TextArea _textArea;
+        
+        public GameCreationMenu()
         {
-            throw new NotImplementedException();
+            _phase = Phase.PlaceSelection;
+            _saveId = new Integer(-1);
+            _selectionMenu = new GameSelectionMenu(_saveId);
+            _textArea = new TextArea(new Rectangle(100, 100, 100, 28));
         }
 
         public override void Update()
         {
-            throw new NotImplementedException();
+            switch (_phase)
+            {
+                case Phase.PlaceSelection:
+                    _selectionMenu.Update();
+                    if (_saveId.Value != -1)
+                        NextPhase();
+                    return;
+                case Phase.Personalisation:
+                    //TODO: character personalisation
+                    NextPhase();
+                    return;
+                case Phase.Name:
+                    if (_textArea.Update() == TextArea.States.Processing)
+                        return;
+                    IsActive = false;
+                    SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read());
+                    return;
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            throw new NotImplementedException();
+            switch (_phase)
+            {
+                case Phase.PlaceSelection:
+                    _selectionMenu.Draw(spriteBatch);
+                    return;
+                case Phase.Personalisation:
+                    //TODO: Draw personalisation screen
+                    return;
+                case Phase.Name:
+                    _textArea.Draw(spriteBatch);
+                    return;
+            }
         }
+
+        private void NextPhase()
+        {
+            _phase = _phase switch
+            {
+                Phase.PlaceSelection => Phase.Personalisation,
+                Phase.Personalisation => Phase.Name,
+                _ => Phase.End
+            };
+        }
+        
     }
     
 }

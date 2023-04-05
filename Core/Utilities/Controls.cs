@@ -43,7 +43,7 @@ public abstract class Controls
     {
         foreach (Control c in Array)
         {
-            if (Keyboard.GetState().IsKeyDown(c.KeyCode))
+            if (IsPressed(c.KeyCode))
             {
                 c.IsOnePressed = !c.IsPressed;
                 c.IsPressed = true;
@@ -59,6 +59,8 @@ public abstract class Controls
     public static bool TestForMovementKey()
     {
         return Up.IsPressed || Down.IsPressed || Right.IsPressed || Left.IsPressed;
-    } 
+    }
+
+    public static bool IsPressed(Keys key) => Keyboard.GetState().IsKeyDown(key);
 
 }

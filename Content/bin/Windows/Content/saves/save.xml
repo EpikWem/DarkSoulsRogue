@@ -77,8 +77,8 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>289</x>
-          <y>141</y>
+          <x>450</x>
+          <y>413</y>
           <orientation>1</orientation>
         </position>
         <attributes>
@@ -137,15 +137,16 @@
       </objects>
     </s1>
     <s2>
-      <map>105</map>
+      <map>101</map>
       <character>
-        <name>Harold2</name>
+        <name>
+        </name>
         <life>5000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
           <x>450</x>
-          <y>372</y>
+          <y>308</y>
           <orientation>0</orientation>
         </position>
         <attributes>
@@ -193,10 +194,10 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
-        <o1>1</o1>
+        <o0>0</o0>
+        <o1>0</o1>
         <o2>0</o2>
-        <o3>1</o3>
+        <o3>0</o3>
         <o4>0</o4>
         <o5>0</o5>
         <o6>0</o6>

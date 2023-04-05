@@ -6,40 +6,43 @@ namespace DarkSoulsRogue.Core.Utilities;
 public class RectangleHollow
 {
     
-    private readonly Rectangle _rectangle;
-    private readonly Color _color;
-    private readonly int _thickness;
+    public readonly Rectangle Rectangle;
+    public readonly Color ColorBorder, ColorBackground;
+    public readonly int Thickness;
 
-    public RectangleHollow(Vector2 position, int width, int height, Color color, int thickness = 1)
+    public RectangleHollow(Vector2 position, int width, int height, Color colorBorder, Color colorBackground, int thickness = 1)
     {
-        _rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
-        _color = color;
-        _thickness = thickness;
+        Rectangle = new Rectangle((int)position.X, (int)position.Y, width, height);
+        ColorBorder = colorBorder;
+        ColorBackground = colorBackground;
+        Thickness = thickness;
     }
-    public RectangleHollow(int x, int y, int width, int height, Color color, int thickness = 1)
+    public RectangleHollow(int x, int y, int width, int height, Color colorBorder, Color colorBackground, int thickness = 1)
     {
-        _rectangle = new Rectangle(x, y, width, height);
-        _color = color;
-        _thickness = thickness;
+        Rectangle = new Rectangle(x, y, width, height);
+        ColorBorder = colorBorder;
+        ColorBackground = colorBackground;
+        Thickness = thickness;
     }
-    public RectangleHollow(Rectangle rectangle, Color color, int thickness = 1)
+    public RectangleHollow(Rectangle rectangle, Color colorBorder, Color colorBackground, int thickness = 1)
     {
-        _rectangle = rectangle;
-        _color = color;
-        _thickness = thickness;
+        Rectangle = rectangle;
+        ColorBorder = colorBorder;
+        ColorBackground = colorBackground;
+        Thickness = thickness;
     }
     
     public void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(Main.PixelTexture, _rectangle, _color);
+        spriteBatch.Draw(Main.PixelTexture, Rectangle, ColorBorder);
         spriteBatch.Draw(
             Main.PixelTexture,
             new Rectangle(
-                _rectangle.X + _thickness,
-                _rectangle.Y + _thickness,
-                _rectangle.Width - 2*_thickness, 
-                _rectangle.Height - 2*_thickness),
-            Color.Black);
+                Rectangle.X + Thickness,
+                Rectangle.Y + Thickness,
+                Rectangle.Width - 2*Thickness, 
+                Rectangle.Height - 2*Thickness),
+            ColorBackground);
     }
-    
+
 }

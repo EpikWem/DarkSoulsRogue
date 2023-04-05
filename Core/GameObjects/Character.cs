@@ -29,9 +29,10 @@ public class Character : GameObject
 
     
     
-    public Character() : base(Armor.Naked.GetWearingTextures()[0])
+    public Character(string name) : base(Armor.Naked.GetWearingTextures()[0])
     {
         _textures = new Texture2D[4];
+        Name = name;
         Attributes = new Attributes();
         Triggers = new Triggers();
         Inventory = new Inventory();

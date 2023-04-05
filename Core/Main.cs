@@ -50,9 +50,9 @@ public class Main : Game
         
         CurrentSaveId = 0;
         _background = new Background();
-        Character = new Character();
+        Character = new Character("");
         Ath.Init(Character);
-        TitleMenu.Init();
+        TitleScreen.Init();
 
         base.Initialize();
     }
@@ -89,10 +89,10 @@ public class Main : Game
         if (Controls.KillApp.IsPressed)
             Exit(); // kill app with F10
         
-        if (TitleMenu.IsActive)
-            if (TitleMenu.Update()) // update title menu
+        if (TitleScreen.IsActive)
+            if (TitleScreen.Update()) // update title menu
                 Exit();
-        if (!TitleMenu.IsActive)
+        if (!TitleScreen.IsActive)
         {   // update game
             Character.Move(GetCollisionsList());
             Character.TransitMap(Character.TestOutOfMap());
@@ -145,8 +145,8 @@ public class Main : Game
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
 
-        if (TitleMenu.IsActive)
-            TitleMenu.Draw(_spriteBatch); // draw title menu
+        if (TitleScreen.IsActive)
+            TitleScreen.Draw(_spriteBatch); // draw title menu
         else
         {   // draw game
             _background.Draw(_spriteBatch);
@@ -166,10 +166,10 @@ public class Main : Game
         base.Draw(gameTime);
     }
 
-    public void GotoTitle()
+    private static void GotoTitle()
     {
         SaveSystem.Save();
-        TitleMenu.Init();
+        TitleScreen.Init();
     }
 
 }

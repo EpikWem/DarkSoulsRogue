@@ -9,8 +9,8 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    //private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
     public const int SavesCount = 4;
 
     private static readonly XmlDocument SaveFile = new ();
@@ -67,7 +67,6 @@ public static class SaveSystem
             Maps.GetObjectFromId(i).SetState(GetInt(node?.ChildNodes[i]));
         
         Main.LoadMap(GetInt(root?["map"]));
-        TitleMenu.IsActive = false;
     }
     
     
@@ -117,16 +116,15 @@ public static class SaveSystem
         SaveFile.Save(GetSaveFilePath());
     }
 
-    public static void CreateNewSave(int newSaveId)
+    public static void CreateNewSave(int newSaveId, string name)
     {
         Main.LoadMap(101);
-        Main.Character = new Character();
+        Main.Character = new Character("");
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
             Maps.GetObjectFromId(i).SetState(0);
         Ath.Init(Main.Character);
         Main.CurrentSaveId = newSaveId;
-        TitleMenu.IsActive = false;
     }
 
     public static Texture2D GetGameIcon(int gameId) =>
