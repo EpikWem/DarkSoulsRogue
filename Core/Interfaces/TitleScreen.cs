@@ -1,5 +1,4 @@
-﻿using System;
-using DarkSoulsRogue.Core.Utilities;
+﻿using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -64,7 +63,7 @@ public static class TitleScreen
             {
                 switch (TitleM._selectionId)
                 {
-                    case 0: SaveSystem.Load(); return;
+                    case 0: IsActive = false; SaveSystem.Load(); return;
                     case 1: _activeMenu = GameSelectionM; return;
                     case 2: _activeMenu = GameCreationM; return;
                     case 3: return;
@@ -212,8 +211,10 @@ public static class TitleScreen
                     NextPhase();
                     return;
                 case Phase.Name:
-                    if (_textArea.Update() == TextArea.States.Processing)
-                        return;
+                    if (_textArea.Update() == TextArea.States.Confirmed)
+                        NextPhase();
+                    return;
+                case Phase.End:
                     IsActive = false;
                     SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read());
                     return;

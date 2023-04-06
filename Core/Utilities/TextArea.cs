@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Keys = Microsoft.Xna.Framework.Input.Keys;
+using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
@@ -19,9 +18,11 @@ public class TextArea
 
     public States Update()
     {
-        if (Controls.Interact.IsPressed)
+        if (Controls.Enter.IsOnePressed)
             return States.Confirmed;
-        _value += GetPressedCharacters();
+        var v = GetPressedCharacters();
+        if (v != "")
+            _value += v;
         return States.Processing;
     }
 
@@ -29,70 +30,70 @@ public class TextArea
     {
         _area.Draw(spriteBatch);
         var pos = new Vector2(_area.Rectangle.X + _area.Thickness, _area.Rectangle.Y + _area.Thickness);
-        spriteBatch.DrawString(Fonts.Font, _value, pos, Color.Black);
+        spriteBatch.DrawString(Fonts.Font, _value, pos, Color.White);
     }
 
     public string Read() => _value;
 
-    private string GetPressedCharacters()
+    private static string GetPressedCharacters()
     {
         var result = "";
         var maj = Controls.IsPressed(Keys.LeftShift) || Controls.IsPressed(Keys.RightShift); 
-        if (Controls.IsPressed(Keys.A))
+        if (Controls.A.IsOnePressed)
             result += maj ? "A" : "a";
-        if (Controls.IsPressed(Keys.B))
+        if (Controls.B.IsOnePressed)
             result += maj ? "B" : "b";
-        if (Controls.IsPressed(Keys.C))
+        if (Controls.C.IsOnePressed)
             result += maj ? "C" : "c";
-        if (Controls.IsPressed(Keys.D))
+        if (Controls.D.IsOnePressed)
             result += maj ? "D" : "d";
-        if (Controls.IsPressed(Keys.E))
+        if (Controls.E.IsOnePressed)
             result += maj ? "E" : "e";
-        if (Controls.IsPressed(Keys.F))
+        if (Controls.F.IsOnePressed)
             result += maj ? "F" : "f";
-        if (Controls.IsPressed(Keys.G))
+        if (Controls.G.IsOnePressed)
             result += maj ? "G" : "g";
-        if (Controls.IsPressed(Keys.H))
+        if (Controls.H.IsOnePressed)
             result += maj ? "H" : "h";
-        if (Controls.IsPressed(Keys.I))
+        if (Controls.I.IsOnePressed)
             result += maj ? "I" : "i";
-        if (Controls.IsPressed(Keys.J))
+        if (Controls.J.IsOnePressed)
             result += maj ? "J" : "j";
-        if (Controls.IsPressed(Keys.K))
+        if (Controls.K.IsOnePressed)
             result += maj ? "K" : "k";
-        if (Controls.IsPressed(Keys.L))
+        if (Controls.L.IsOnePressed)
             result += maj ? "L" : "l";
-        if (Controls.IsPressed(Keys.M))
+        if (Controls.M.IsOnePressed)
             result += maj ? "M" : "m";
-        if (Controls.IsPressed(Keys.N))
+        if (Controls.N.IsOnePressed)
             result += maj ? "N" : "n";
-        if (Controls.IsPressed(Keys.O))
+        if (Controls.O.IsOnePressed)
             result += maj ? "O" : "o";
-        if (Controls.IsPressed(Keys.P))
+        if (Controls.P.IsOnePressed)
             result += maj ? "P" : "p";
-        if (Controls.IsPressed(Keys.Q))
+        if (Controls.Q.IsOnePressed)
             result += maj ? "Q" : "q";
-        if (Controls.IsPressed(Keys.R))
+        if (Controls.R.IsOnePressed)
             result += maj ? "R" : "r";
-        if (Controls.IsPressed(Keys.S))
+        if (Controls.S.IsOnePressed)
             result += maj ? "S" : "s";
-        if (Controls.IsPressed(Keys.T))
+        if (Controls.T.IsOnePressed)
             result += maj ? "T" : "t";
-        if (Controls.IsPressed(Keys.U))
+        if (Controls.U.IsOnePressed)
             result += maj ? "U" : "u";
-        if (Controls.IsPressed(Keys.V))
+        if (Controls.V.IsOnePressed)
             result += maj ? "V" : "v";
-        if (Controls.IsPressed(Keys.W))
+        if (Controls.W.IsOnePressed)
             result += maj ? "W" : "w";
-        if (Controls.IsPressed(Keys.X))
+        if (Controls.X.IsOnePressed)
             result += maj ? "X" : "x";
-        if (Controls.IsPressed(Keys.Y))
+        if (Controls.Y.IsOnePressed)
             result += maj ? "Y" : "y";
-        if (Controls.IsPressed(Keys.Z))
+        if (Controls.Z.IsOnePressed)
             result += maj ? "Z" : "z";
-        if (Controls.IsPressed(Keys.D6))
+        if (Controls.D6.IsOnePressed)
             result += "-";
-        if (Controls.IsPressed(Keys.D8))
+        if (Controls.D8.IsOnePressed)
             result += "_";
         return result;
     }

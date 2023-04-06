@@ -33,11 +33,40 @@ public abstract class Controls
         MenuDown = new(Keys.Down),
         MenuRight = new(Keys.Right),
         MenuLeft = new(Keys.Left),
-        MenuBack = new Control(Keys.A),
+        MenuBack = new (Keys.A),
+        Enter = new (Keys.Enter),
         Debug1 = new (Keys.NumPad1),
         Debug2 = new (Keys.NumPad2),
-        Debug3 = new (Keys.NumPad3);
-    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack, Debug1, Debug2, Debug3 };
+        Debug3 = new (Keys.NumPad3),
+        A = new (Keys.A),
+        B = new (Keys.B),
+        C = new (Keys.C),
+        D = new (Keys.D),
+        E = new (Keys.E),
+        F = new (Keys.F),
+        G = new (Keys.G),
+        H = new (Keys.H),
+        I = new (Keys.I),
+        J = new (Keys.J),
+        K = new (Keys.K),
+        L = new (Keys.L),
+        M = new (Keys.M),
+        N = new (Keys.N),
+        O = new (Keys.O),
+        P = new (Keys.P),
+        Q = new (Keys.Q),
+        R = new (Keys.R),
+        S = new (Keys.S),
+        T = new (Keys.T),
+        U = new (Keys.U),
+        V = new (Keys.V),
+        W = new (Keys.W),
+        X = new (Keys.X),
+        Y = new (Keys.Y),
+        Z = new (Keys.Z),
+        D6 = new (Keys.D6),
+        D8 = new (Keys.D8);
+    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack, Enter, Debug1, Debug2, Debug3, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, D6, D8 };
 
     public static void UpdateKeyListener()
     {

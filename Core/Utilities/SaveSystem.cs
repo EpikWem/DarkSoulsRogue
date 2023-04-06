@@ -9,8 +9,8 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    //private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
+    //private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
     public const int SavesCount = 4;
 
     private static readonly XmlDocument SaveFile = new ();
@@ -119,7 +119,7 @@ public static class SaveSystem
     public static void CreateNewSave(int newSaveId, string name)
     {
         Main.LoadMap(101);
-        Main.Character = new Character("");
+        Main.Character = new Character(name);
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
             Maps.GetObjectFromId(i).SetState(0);
