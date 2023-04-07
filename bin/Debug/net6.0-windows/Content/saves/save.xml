@@ -1,28 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>3</lastSaveId>
+    <lastSaveId>2</lastSaveId>
     <s0>
-      <map>104</map>
+      <map>102</map>
       <character>
-        <name>Jacqueline0</name>
-        <life>5000</life>
+        <name>KBatman</name>
+        <life>500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>778</x>
-          <y>374</y>
+          <x>466</x>
+          <y>216</y>
           <orientation>1</orientation>
         </position>
         <attributes>
-          <vitality>10</vitality>
+          <vitality>14</vitality>
+          <attunement>10</attunement>
           <endurance>10</endurance>
-          <attunement>0</attunement>
-          <strength>10</strength>
-          <dexterity>10</dexterity>
+          <strength>11</strength>
+          <dexterity>11</dexterity>
           <resistance>10</resistance>
-          <intelligence>10</intelligence>
-          <faith>10</faith>
+          <intelligence>9</intelligence>
+          <faith>11</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -64,32 +64,32 @@
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>0</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>
     </s0>
     <s1>
-      <map>104</map>
+      <map>102</map>
       <character>
-        <name>Emilia1</name>
-        <life>5000</life>
+        <name>TrueHunter</name>
+        <life>500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>508</x>
-          <y>337</y>
+          <x>418</x>
+          <y>132</y>
           <orientation>1</orientation>
         </position>
         <attributes>
-          <vitality>10</vitality>
-          <endurance>10</endurance>
-          <attunement>0</attunement>
-          <strength>10</strength>
-          <dexterity>10</dexterity>
-          <resistance>10</resistance>
-          <intelligence>10</intelligence>
-          <faith>10</faith>
+          <vitality>11</vitality>
+          <attunement>9</attunement>
+          <endurance>11</endurance>
+          <strength>12</strength>
+          <dexterity>14</dexterity>
+          <resistance>11</resistance>
+          <intelligence>9</intelligence>
+          <faith>9</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -129,7 +129,7 @@
         <o0>1</o0>
         <o1>1</o1>
         <o2>0</o2>
-        <o3>1</o3>
+        <o3>0</o3>
         <o4>0</o4>
         <o5>0</o5>
         <o6>0</o6>
@@ -137,27 +137,26 @@
       </objects>
     </s1>
     <s2>
-      <map>102</map>
+      <map>101</map>
       <character>
-        <name>
-        </name>
-        <life>5000</life>
+        <name>Cler</name>
+        <life>500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>450</x>
-          <y>113</y>
-          <orientation>0</orientation>
+          <x>348</x>
+          <y>323</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
-          <vitality>10</vitality>
-          <endurance>10</endurance>
-          <attunement>0</attunement>
-          <strength>10</strength>
-          <dexterity>10</dexterity>
-          <resistance>10</resistance>
-          <intelligence>10</intelligence>
-          <faith>10</faith>
+          <vitality>11</vitality>
+          <attunement>11</attunement>
+          <endurance>9</endurance>
+          <strength>12</strength>
+          <dexterity>8</dexterity>
+          <resistance>11</resistance>
+          <intelligence>8</intelligence>
+          <faith>14</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -194,8 +193,8 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
-        <o1>1</o1>
+        <o0>0</o0>
+        <o1>0</o1>
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>
@@ -212,14 +211,14 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>412</x>
-          <y>181</y>
-          <orientation>3</orientation>
+          <x>369</x>
+          <y>221</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
           <vitality>10</vitality>
-          <endurance>10</endurance>
           <attunement>0</attunement>
+          <endurance>10</endurance>
           <strength>10</strength>
           <dexterity>10</dexterity>
           <resistance>10</resistance>

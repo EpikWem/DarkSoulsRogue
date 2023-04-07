@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
@@ -116,10 +117,11 @@ public static class SaveSystem
         SaveFile.Save(GetSaveFilePath());
     }
 
-    public static void CreateNewSave(int newSaveId, string name)
+    public static void CreateNewSave(int newSaveId, string name, List<int> attributes)
     {
         Main.LoadMap(101);
         Main.Character = new Character(name);
+        Main.Character.Attributes.Set(attributes);
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
             Maps.GetObjectFromId(i).SetState(0);
