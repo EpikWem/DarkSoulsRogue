@@ -245,6 +245,54 @@
 /processorParam:TextureFormat=Color
 /build:images/characters/solaire/up.png
 
+#begin images/equipments/shields/basic/down.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/equipments/shields/basic/down.png
+
+#begin images/equipments/shields/basic/left.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/equipments/shields/basic/left.png
+
+#begin images/equipments/shields/basic/right.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/equipments/shields/basic/right.png
+
+#begin images/equipments/shields/basic/up.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/equipments/shields/basic/up.png
+
 #begin images/floors/floor1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -401,6 +449,18 @@
 /processorParam:TextureFormat=Color
 /build:images/objects/ladder/top.png
 
+#begin images/void.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:images/void.png
+
 #begin images/walls/1.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -412,6 +472,12 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:images/walls/1.png
+
+#begin langs/en.xml
+/copy:langs/en.xml
+
+#begin langs/fr.xml
+/copy:langs/fr.xml
 
 #begin saves/save.xml
 /copy:saves/save.xml

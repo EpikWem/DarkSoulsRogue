@@ -10,8 +10,7 @@ namespace DarkSoulsRogue.Core.Utilities;
 public static class SaveSystem
 {
 
-    private const string SavesPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\saves\";
-    //private const string SavesPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\saves\";
+    private const string SavesPath = Main.ContentPath + @"saves\";
     public const int SavesCount = 4;
 
     private static readonly XmlDocument SaveFile = new ();
@@ -60,8 +59,9 @@ public static class SaveSystem
 
         node = root?["character"]?["inventory"];
         character.ChangeArmor(Armor.GetFromIndex(GetInt(node?["equippedArmor"])));
-        character.ChangeRing(Ring.GetFromIndex(GetInt(node?["equippedRing"])));
         character.ChangeWeapon(Weapon.GetFromIndex(GetInt(node?["equippedWeapon"])));
+        character.ChangeShield(Shield.GetFromIndex(GetInt(node?["equippedShield"])));
+        character.ChangeRing(Ring.GetFromIndex(GetInt(node?["equippedRing"])));
 
         node = root?["objects"];
         for (var i = 0; i < Maps.GetObjectsCount(); i++)
@@ -95,7 +95,7 @@ public static class SaveSystem
         node = root["character"]?["position"];
         node!["x"]!.InnerText = character.GetPosition().X.ToString();
         node["y"]!.InnerText = character.GetPosition().Y.ToString();
-        node["orientation"]!.InnerText = Character.OrientationId(character.Orientation).ToString();
+        node["orientation"]!.InnerText = ((int)character.Orientation).ToString();
 
         node = root["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)
@@ -107,8 +107,9 @@ public static class SaveSystem
         
         node = root["character"]["inventory"];
         node!["equippedArmor"]!.InnerText = Armor.GetIndexOf(character.Inventory.EquippedArmor).ToString();
-        node["equippedRing"]!.InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
         node["equippedWeapon"]!.InnerText = Weapon.GetIndexOf(character.Inventory.EquippedWeapon).ToString();
+        node["equippedShield"]!.InnerText = Shield.GetIndexOf(character.Inventory.EquippedShield).ToString();
+        node["equippedRing"]!.InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
         
         node = root["objects"];
         for (var i = 0; i < Maps.GetObjectsCount(); i++)

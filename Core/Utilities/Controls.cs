@@ -29,6 +29,8 @@ public abstract class Controls
         Left = new(Keys.Q),
         Interact = new(Keys.E),
         Run = new(Keys.Space),
+        Weapon = new (Keys.O),
+        Shield = new (Keys.P),
         MenuUp = new(Keys.Up),
         MenuDown = new(Keys.Down),
         MenuRight = new(Keys.Right),
@@ -66,7 +68,7 @@ public abstract class Controls
         Z = new (Keys.Z),
         D6 = new (Keys.D6),
         D8 = new (Keys.D8);
-    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack, Enter, Debug1, Debug2, Debug3, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, D6, D8 };
+    private static readonly Control[] Array = { KillApp, ToggleFullscreen, Pause, Up, Down, Right, Left, Interact, Run, Weapon, Shield, MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack, Enter, Debug1, Debug2, Debug3, A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, D6, D8 };
 
     public static void UpdateKeyListener()
     {

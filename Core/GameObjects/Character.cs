@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
@@ -7,18 +8,13 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects;
 
-public class Character : GameObject
+public class Character : Entity
 {
 
-    private const int MarginS = 4, MarginU = 12, MarginD = 6;
+    //private const int MarginS = 4, MarginU = 12, MarginD = 6;
     private const int ExhaustionTime = 120, BaseSpeed = 3, BaseSpeedSprint = 5;
-    private const int BaseStaminaLoss = -5, BaseStaminaGain = 10;
+    private const int BaseStaminaLoss = -20, BaseStaminaGain = 45;
 
-    public float CoefLifeMax, CoefStaminaMax, CoefStaminaGain;
-
-    private readonly Texture2D[] _textures;
-    public Orientation Orientation;
-    
     public string Name;
     public int Life, Stamina, Souls;
     public bool IsHuman;
@@ -26,12 +22,10 @@ public class Character : GameObject
     public readonly Triggers Triggers;
     public readonly Inventory Inventory;
     private int _exhaustingTime;
+    public bool ShieldUp;
 
-    
-    
-    public Character(string name) : base(Armor.Naked.GetWearingTextures()[0])
+    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(4, 9))
     {
-        _textures = new Texture2D[4];
         Name = name;
         Attributes = new Attributes();
         Triggers = new Triggers();
@@ -42,7 +36,20 @@ public class Character : GameObject
         Life = MaxLife();
         Stamina = MaxStamina();
         _exhaustingTime = 0;
-        ResetCoef();
+        ShieldUp = false;
+    }
+
+    public new void Draw(SpriteBatch spriteBatch)
+    {
+        if (ShieldUp && Orientation == Orientation.Up)
+        {
+            spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
+            base.Draw(spriteBatch);
+            return;
+        }
+        base.Draw(spriteBatch);
+        if (ShieldUp)
+            spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
     }
 
     public void Move(List<Wall> walls)
@@ -68,7 +75,7 @@ public class Character : GameObject
         }
         else
         {
-            AddStamina((int)(BaseStaminaGain * CoefStaminaGain));
+            AddStamina(BaseStaminaGain + (Inventory.EquippedRing == Ring.Cloranthy ? 20 : 0));
         }
 
         // double speed fix (when pressing two directions at once)
@@ -119,55 +126,6 @@ public class Character : GameObject
         return result;
     }
 
-    public Vector2 GetPosition() => Position;
-
-    public void SetPosition(int x, int y)
-    {
-        Position.X = x;
-        Position.Y = y;
-    }
-
-    private new Rectangle GetHitbox()
-    {
-        return new Rectangle((int)Position.X + MarginS, (int)Position.Y + MarginU, Width - MarginS*2, Height - MarginU - MarginD);
-    }
-
-    public new void Draw(SpriteBatch batch)
-    {
-        batch.Draw(GetTextureToDraw(), Position, Color.White);
-    }
-
-    private Texture2D GetTextureToDraw()
-    {
-        return Orientation switch
-        {
-            Orientation.Up => _textures[0],
-            Orientation.Down => _textures[1],
-            Orientation.Right => _textures[2],
-            Orientation.Left => _textures[3],
-            _ => _textures[0]
-        };
-    }
-
-    private Vector2 GetLookingPoint()
-    {
-        return Orientation switch
-        {
-            Orientation.Up => new Vector2(Position.X + (float)Width/2, Position.Y),
-            Orientation.Down => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
-            Orientation.Right => new Vector2(Position.X + Width, Position.Y + (float)Height/2),
-            Orientation.Left => new Vector2(Position.X, Position.Y + (float)Height/2),
-            _ => new Vector2(0, 0)
-        };
-    }
-    
-    public Vector2 GetLookingCell()
-    {
-        return new Vector2(
-            (int)(GetLookingPoint().X / Camera.CellSize),
-            (int)(GetLookingPoint().Y / Camera.CellSize));
-    }
-
     public Orientation TestOutOfMap()
     {
         var cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
@@ -186,32 +144,20 @@ public class Character : GameObject
     {
         if (orientation == Orientation.Null)
             return;
-        var dest = Main.CurrentMap.Connections[OrientationId(orientation)];
+        var dest = Main.CurrentMap.Connections[(int)orientation];
         PlaceOnGrid(dest);
         Main.LoadMap(dest.MapId);
     }
 
-    public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
-    {
-        Position.X = xGrid * Camera.CellSize + (float)(MarginS)/2;
-        Position.Y = yGrid * Camera.CellSize - MarginU;
-        Orientation = orientation;
-    }
-    
-    public void PlaceOnGrid(Destination destination)
-    {
-        PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
-    }
-
-    //TODO: public Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Camera.CellSize), (float)Math.Truncate(Position.Y / Camera.CellSize));
-
     public int MaxLife()
     {
-        return Attributes.Get(Attributes.Attribute.Vitality) * (int)(CoefLifeMax * 500.0f);
+        return (int)((500 + Attributes.Get(Attributes.Attribute.Vitality) * 15) * 100
+            * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1.0f)
+            * (Inventory.EquippedRing == Ring.TinyBeing ? 1.05f : 1.0f));
     }
     public int MaxStamina()
     {
-        return Attributes.Get(Attributes.Attribute.Endurance) * (int)(CoefStaminaMax * 300.0f);
+        return (int)((80 + Attributes.Get(Attributes.Attribute.Endurance) * 2) * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1.0f)) * 100;
     }
 
     public void AddLife(int hp)
@@ -233,44 +179,25 @@ public class Character : GameObject
         Souls += souls;
     }
 
-    private void ResetCoef()
-    {
-        CoefLifeMax = 1.0f;
-        CoefStaminaMax = 1.0f;
-        CoefStaminaGain = 1.0f;
-        if (Life > MaxLife())
-            Life = MaxLife();
-        if (Stamina > MaxStamina())
-            Stamina = MaxStamina();
-    }
-
     public void ChangeArmor(Armor armor)
     {
         Inventory.EquippedArmor = armor;
-        for (var i = 0; i < _textures.Length; i++)
-            _textures[i] = armor.GetWearingTextures()[i];
+        for (var i = 0; i < Textures.Length; i++)
+            Textures[i] = armor.GetWearingTextures()[i];
     }
-    
-    public void ChangeRing(Ring ring)
-    {
-        ResetCoef();
-        Inventory.EquippedRing = ring;
-        ring.Effect();
-    }
-
     public void ChangeWeapon(Weapon weapon)
     {
         Inventory.EquippedWeapon = weapon;
     }
-
-    public static int OrientationId(Orientation orientation)
-        => orientation switch {
-            Orientation.Up => 0,
-            Orientation.Down => 1,
-            Orientation.Right => 2,
-            Orientation.Left => 3,
-            _ => -1
-        };
+    public void ChangeShield(Shield shield)
+    {
+        Inventory.EquippedShield = shield;
+    }
+    public void ChangeRing(Ring ring)
+    {
+        Inventory.EquippedRing = ring;
+    }
+    
     public static Orientation OrientationFromId(int id)
         => id switch {
                 0 => Orientation.Up,

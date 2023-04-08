@@ -49,6 +49,10 @@
             "MonoGame.Framework.WindowsDX": {
               "target": "Package",
               "version": "[3.8.1.303, )"
+            },
+            "Narkhedegs.Chronometer": {
+              "target": "Package",
+              "version": "[0.0.3, )"
             }
           },
           "imports": [

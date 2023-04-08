@@ -3,30 +3,35 @@ using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core;
+namespace DarkSoulsRogue.Core.Utilities;
 
 public static class Textures
 {
 
     private const int WallNumber = 1;
 
-    public static Texture2D BgT;
+    public static Texture2D Void, BgT;
     public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
-    public static List<Texture2D[]> ArmorTextures;
+    public static List<Texture2D[]> ArmorTextures, ShieldTextures;
 
 
     public static void Init(ContentManager content)
     {
+        Void = LoadTexture("void", content);
         BgT = LoadTexture("bg", content);
 
         ArmorTextures = new List<Texture2D[]>
         {
             LoadCharacterTextures("link", content),
             LoadCharacterTextures("artorias", content),
-            //LoadCharacterTextures("black_iron"),
             LoadCharacterTextures("solaire", content)
+        };
+        ShieldTextures = new List<Texture2D[]>
+        {
+            new [] {Void, Void, Void, Void},
+            LoadEquipmentTextures(ETShields, "basic", content)
         };
 
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);
@@ -57,6 +62,19 @@ public static class Textures
             LoadTexture("characters/" + characterName + "/down", content),
             LoadTexture("characters/" + characterName + "/right", content),
             LoadTexture("characters/" + characterName + "/left", content)
+        };
+    }
+
+    private const string
+        ETShields = "shields/";
+    private static Texture2D[] LoadEquipmentTextures(string equipmentType, string equipmentName, ContentManager content)
+    {
+        return new[]
+        {
+            LoadTexture("equipments/" + equipmentType + equipmentName + "/up", content),
+            LoadTexture("equipments/" + equipmentType + equipmentName + "/down", content),
+            LoadTexture("equipments/" + equipmentType + equipmentName + "/right", content),
+            LoadTexture("equipments/" + equipmentType + equipmentName + "/left", content)
         };
     }
 

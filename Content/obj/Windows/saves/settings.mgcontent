@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/saves/settings.xml</SourceFile>
   <SourceTime>2022-07-26T13:44:10+02:00</SourceTime>
   <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/saves/settings.xnb</DestFile>
-  <DestTime>2023-03-24T21:50:17.836344+01:00</DestTime>
+  <DestTime>2023-04-08T18:46:00.3672795+02:00</DestTime>
   <Importer>XmlImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>PassThroughProcessor</Processor>

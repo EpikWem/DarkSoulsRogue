@@ -9,15 +9,15 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public static class Ath
 {
 
-    private const int BarScaleReduction = 10;
+    private const float BarScaleReduction = 1f;
     
     private static Bar _life, _stamina;
     private static Character _character;
 
     public static void Init(Character character)
     {
-        _life = new Bar(new Vector2(20, 20), Color. DarkRed);
-        _stamina = new Bar(new Vector2(20, 40), Color.DarkGreen);
+        _life = new Bar(new Vector2(20, 20), Color. DarkRed, 0.005f);
+        _stamina = new Bar(new Vector2(20, 40), Color.DarkGreen, 0.02f);
         _character = character;
     }
 
@@ -27,7 +27,7 @@ public static class Ath
         _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
         SoulCounter.Draw(spriteBatch, _character.Souls);
         HumanityCounter.Draw(spriteBatch);
-        //SoulCounter.Draw(spriteBatch, _character.Inventory.EquippedWeapon.GetFullName());
+        //SoulCounter.Draw(spriteBatch, );
     }
 
     private class Bar
@@ -37,20 +37,21 @@ public static class Ath
         
         private readonly Vector2 _position;
         private readonly Color _color;
+        private readonly float _scale;
 
-        public Bar(Vector2 position, Color color)
+        public Bar(Vector2 position, Color color, float scale)
         {
             _position = position;
             _color = color;
+            _scale = scale;
         }
 
         public void Draw(SpriteBatch spriteBatch, int value, int maxValue)
         {
-            value /= BarScaleReduction;
-            maxValue /= BarScaleReduction;
+            value = (int)(value * _scale);
+            maxValue = (int)(maxValue * _scale);
             spriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
-            spriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin,
-                value - 2*Margin, Thickness - 2*Margin), _color);
+            spriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin, value - 2*Margin, Thickness - 2*Margin), _color);
         }
         
     }

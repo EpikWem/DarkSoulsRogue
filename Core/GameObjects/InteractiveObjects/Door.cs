@@ -1,4 +1,6 @@
-﻿namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+﻿using DarkSoulsRogue.Core.Utilities;
+
+namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
 public class Door : InteractiveObject
 {

@@ -10,10 +10,12 @@ public static class Fonts
 
     public static void Init(ContentManager content)
     {
-        Font = content.Load<SpriteFont>("fonts/font");
-        FontBold = content.Load<SpriteFont>("fonts/font_bold");
-        FontHumanityCounter = content.Load<SpriteFont>("fonts/humanity_counter");
-        FontSoulCounter = content.Load<SpriteFont>("fonts/soul_counter");
+        Font = LoadFont(content, "font");
+        FontBold = LoadFont(content, "font_bold");
+        FontHumanityCounter = LoadFont(content, "humanity_counter");
+        FontSoulCounter = LoadFont(content, "soul_counter");
     }
+    
+    private static SpriteFont LoadFont(ContentManager content, string fontName) => content.Load<SpriteFont>("fonts/" + fontName);
 
 }

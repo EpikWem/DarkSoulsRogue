@@ -1,7 +1,4 @@
-using System;
-using DarkSoulsRogue.Core.Items;
-
-namespace DarkSoulsRogue.Core.Utilities;
+namespace DarkSoulsRogue.Core.Items;
 
 public class WeaponUpgrade
 {

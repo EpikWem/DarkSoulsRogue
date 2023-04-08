@@ -592,6 +592,15 @@
           "build/MonoGame.Framework.WindowsDX.targets": {}
         }
       },
+      "Narkhedegs.Chronometer/0.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net45/Chronometer.dll": {}
+        },
+        "runtime": {
+          "lib/net45/Chronometer.dll": {}
+        }
+      },
       "NETStandard.Library/1.6.1": {
         "type": "package",
         "dependencies": {
@@ -3364,6 +3373,18 @@
         "lib/net6.0-windows7.0/MonoGame.Framework.dll",
         "monogame.framework.windowsdx.3.8.1.303.nupkg.sha512",
         "monogame.framework.windowsdx.nuspec"
+      ]
+    },
+    "Narkhedegs.Chronometer/0.0.3": {
+      "sha512": "PM9QpH63l5AGlWvdOwu9MoBbGnP3edonUQxYffaKvBvS3XyXUVlaOmyQS/ejoxTEKeZbyIOgHJHnn30ssWOtGg==",
+      "type": "package",
+      "path": "narkhedegs.chronometer/0.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net45/Chronometer.dll",
+        "narkhedegs.chronometer.0.0.3.nupkg.sha512",
+        "narkhedegs.chronometer.nuspec"
       ]
     },
     "NETStandard.Library/1.6.1": {
@@ -8203,7 +8224,8 @@
     "net6.0-windows7.0": [
       "MonoGame.Content.Builder.Task >= 3.8.1.303",
       "MonoGame.Framework.Content.Pipeline >= 3.8.1.303",
-      "MonoGame.Framework.WindowsDX >= 3.8.1.303"
+      "MonoGame.Framework.WindowsDX >= 3.8.1.303",
+      "Narkhedegs.Chronometer >= 0.0.3"
     ]
   },
   "packageFolders": {
@@ -8254,6 +8276,10 @@
           "MonoGame.Framework.WindowsDX": {
             "target": "Package",
             "version": "[3.8.1.303, )"
+          },
+          "Narkhedegs.Chronometer": {
+            "target": "Package",
+            "version": "[0.0.3, )"
           }
         },
         "imports": [
@@ -8296,5 +8322,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Narkhedegs.Chronometer 0.0.3' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0-windows7.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Narkhedegs.Chronometer",
+      "targetGraphs": [
+        "net6.0-windows7.0"
+      ]
+    }
+  ]
 }
