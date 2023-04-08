@@ -116,7 +116,6 @@ public class Main : Game
                              .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
                 {
                     o.Interact(Character);
-                    //TODO: Remove doors from walls when they are opened
                 }
             }
 
@@ -139,7 +138,7 @@ public class Main : Game
 
             if (Controls.Debug3.IsOnePressed)
             {
-
+                Character.ChangeShield(Shield.GrassShield);
             }
         }
 

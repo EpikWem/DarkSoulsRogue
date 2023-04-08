@@ -234,3 +234,7 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Co
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\basic\right.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\basic\up.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\void.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\grass\down.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\grass\left.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\grass\right.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\shields\grass\up.xnb

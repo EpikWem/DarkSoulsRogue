@@ -31,7 +31,8 @@ public static class Textures
         ShieldTextures = new List<Texture2D[]>
         {
             new [] {Void, Void, Void, Void},
-            LoadEquipmentTextures(ETShields, "basic", content)
+            LoadEquipmentTextures(ETShields, "basic", content),
+            LoadEquipmentTextures(ETShields, "grass", content)
         };
 
         BonfireT = LoadObjectTextures(Bonfire.Name, Bonfire.StateNumber, content);

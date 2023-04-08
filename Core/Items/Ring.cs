@@ -12,18 +12,20 @@ public class Ring : Equipment
         NoRing = new (""),
         TinyBeing = new ("Tiny Being's Ring"),
         Cloranthy = new ("Cloranthy Ring"),
-        Favor = new ("Ring of Favor and Protection");
+        Favor = new ("Ring of Favor and Protection"),
+        Havel = new ("Havel's Ring");
     
     private static readonly List<Ring> Rings = new () {
         NoRing,
         TinyBeing,
         Cloranthy,
-        Favor
+        Favor,
+        Havel
     };
 
     private Ring(string name) : base(name, Categories.Ring)
     {
         
     }
-
+    
 }

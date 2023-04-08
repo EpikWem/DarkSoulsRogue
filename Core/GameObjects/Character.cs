@@ -75,7 +75,7 @@ public class Character : Entity
         }
         else
         {
-            AddStamina(BaseStaminaGain + (Inventory.EquippedRing == Ring.Cloranthy ? 20 : 0));
+            AddStamina(StaminaGain());
         }
 
         // double speed fix (when pressing two directions at once)
@@ -128,7 +128,7 @@ public class Character : Entity
 
     public Orientation TestOutOfMap()
     {
-        var cp = new Vector2(Position.X + Width/2, Position.Y + Height/2);
+        var cp = new Vector2(Position.X + (float)Width/2, Position.Y + (float)Height/2);
         if (cp.Y < 0)
             return Orientation.Up;
         if (cp.Y > Camera.Height-1)
@@ -149,16 +149,24 @@ public class Character : Entity
         Main.LoadMap(dest.MapId);
     }
 
-    public int MaxLife()
-    {
-        return (int)((500 + Attributes.Get(Attributes.Attribute.Vitality) * 15) * 100
-            * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1.0f)
-            * (Inventory.EquippedRing == Ring.TinyBeing ? 1.05f : 1.0f));
-    }
-    public int MaxStamina()
-    {
-        return (int)((80 + Attributes.Get(Attributes.Attribute.Endurance) * 2) * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1.0f)) * 100;
-    }
+    public int MaxLife() => (int)((500 + Attributes.Get(Attributes.Attribute.Vitality) * 15) * 100
+         * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f)
+         * (Inventory.EquippedRing == Ring.TinyBeing ? 1.05f : 1f));
+
+    public int MaxStamina() => (int)((80 + Attributes.Get(Attributes.Attribute.Endurance) * 2) * 100
+        * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f));
+    private int StaminaGain() => (int)((BaseStaminaGain
+        * (EquipLoadRatio() > 0.5f ? 0.7f : 1f )
+        + (Inventory.EquippedRing == Ring.Cloranthy ? 20f : 0f)
+        + (Inventory.EquippedShield == Shield.GrassShield ? 10f : 0f))
+        * (ShieldUp ? 0.2f : 1f));
+    private float MaxEquipLoad() => 40f + Attributes.Get(Attributes.Attribute.Endurance)
+        * (Inventory.EquippedRing == Ring.Havel ? 1.5f : 1f)
+        * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f);
+
+    public float EquipLoadRatio() =>
+        Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight //TODO: etc...
+        / MaxEquipLoad();
 
     public void AddLife(int hp)
     {

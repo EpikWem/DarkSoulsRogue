@@ -146,8 +146,8 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>350</x>
-          <y>260</y>
+          <x>366</x>
+          <y>451</y>
           <orientation>2</orientation>
         </position>
         <attributes>
@@ -189,7 +189,7 @@
           </quickItems>
           <equippedArmor>0</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
-          <equippedShield>0</equippedShield>
+          <equippedShield>1</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
           <equippedRing>2</equippedRing>
           <equippedCovenant>0</equippedCovenant>
