@@ -3,7 +3,7 @@ using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core.Utilities;
+namespace DarkSoulsRogue.Core.Statics;
 
 public static class Textures
 {

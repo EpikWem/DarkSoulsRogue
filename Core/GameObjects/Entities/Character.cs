@@ -1,12 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
+using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core.GameObjects;
+namespace DarkSoulsRogue.Core.GameObjects.Entities;
 
 public class Character : Entity
 {
@@ -144,7 +146,7 @@ public class Character : Entity
     {
         if (orientation == Orientation.Null)
             return;
-        var dest = Main.CurrentMap.Connections[(int)orientation];
+        var dest = Main.CurrentMap.Connections[orientation.Index];
         PlaceOnGrid(dest);
         Main.LoadMap(dest.MapId);
     }
@@ -205,14 +207,5 @@ public class Character : Entity
     {
         Inventory.EquippedRing = ring;
     }
-    
-    public static Orientation OrientationFromId(int id)
-        => id switch {
-                0 => Orientation.Up,
-                1 => Orientation.Down,
-                2 => Orientation.Right,
-                3 => Orientation.Left,
-                _ => Orientation.Null
-            };
 
 }

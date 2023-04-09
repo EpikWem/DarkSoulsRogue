@@ -1,4 +1,6 @@
-﻿using DarkSoulsRogue.Core.Utilities;
+﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.Utilities;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 

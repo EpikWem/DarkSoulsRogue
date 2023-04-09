@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DarkSoulsRogue.Core.Items.Equipments;
 
 namespace DarkSoulsRogue.Core.Items;
 

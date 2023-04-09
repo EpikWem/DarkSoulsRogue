@@ -1,4 +1,4 @@
-﻿namespace DarkSoulsRogue.Core.Items;
+﻿namespace DarkSoulsRogue.Core.Items.Equipments;
 
 public class Catalyst : Equipment
 {

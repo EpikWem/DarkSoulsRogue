@@ -139,16 +139,16 @@
       </objects>
     </s1>
     <s2>
-      <map>103</map>
+      <map>105</map>
       <character>
         <name>Cler</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>366</x>
-          <y>451</y>
-          <orientation>2</orientation>
+          <x>450</x>
+          <y>489</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
           <vitality>11</vitality>

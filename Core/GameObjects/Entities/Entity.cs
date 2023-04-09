@@ -1,8 +1,10 @@
-﻿using DarkSoulsRogue.Core.Utilities;
+﻿using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.System;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core.GameObjects;
+namespace DarkSoulsRogue.Core.GameObjects.Entities;
 
 public abstract class Entity : GameObject
 {
@@ -19,7 +21,7 @@ public abstract class Entity : GameObject
     }
     
     public Vector2 GetPosition() => Position;
-    public new Rectangle GetHitbox() => _hitbox.ToRectangle(this);
+    protected new Rectangle GetHitbox() => _hitbox.ToRectangle(this);
 
     public void SetPosition(int x, int y)
     {
@@ -30,21 +32,21 @@ public abstract class Entity : GameObject
     public int GetWidth() => Textures[0].Width;
     public int GetHeight() => Textures[0].Height;
 
-    public new void Draw(SpriteBatch batch)
+    protected new void Draw(SpriteBatch batch)
     {
         batch.Draw(GetTextureToDraw(), Position, Color.White);
     }
 
-    private Texture2D GetTextureToDraw() => Textures[(int)Orientation];
+    private Texture2D GetTextureToDraw() => Textures[Orientation.Index];
 
     private Vector2 GetLookingPoint()
     {
-        return Orientation switch
+        return Orientation.Index switch
         {
-            Orientation.Up => new Vector2(Position.X + (float)Width/2, Position.Y),
-            Orientation.Down => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
-            Orientation.Right => new Vector2(Position.X + Width, Position.Y + (float)Height/2),
-            Orientation.Left => new Vector2(Position.X, Position.Y + (float)Height/2),
+            0 => new Vector2(Position.X + (float)Width/2, Position.Y),
+            1 => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
+            2 => new Vector2(Position.X + Width, Position.Y + (float)Height/2),
+            3 => new Vector2(Position.X, Position.Y + (float)Height/2),
             _ => new Vector2(0, 0)
         };
     }

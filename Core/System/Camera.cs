@@ -1,4 +1,4 @@
-﻿namespace DarkSoulsRogue.Core;
+﻿namespace DarkSoulsRogue.Core.System;
 
 public class Camera
 {

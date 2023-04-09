@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.System;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 

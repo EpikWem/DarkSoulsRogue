@@ -2,9 +2,13 @@
 using System.Linq;
 using System.Timers;
 using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
+using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -29,7 +33,6 @@ public class Main : Game
     private static Background _background;
     public static Character Character;
     private static readonly List<Wall> Walls = new ();
-    private static List<InteractiveObject> _objects = new ();
     public static Maps.Map CurrentMap;
     
     
@@ -75,14 +78,11 @@ public class Main : Game
     public static void LoadMap(int mapId)
     {
         CurrentMap = Maps.GetMap(mapId);
-        
         Walls.Clear();
         for (var y = 0; y < CurrentMap.Height; y++)
             for (var x = 0; x < CurrentMap.Width; x++)
                 if (CurrentMap.WallsIds[y][x] != 0)
                     Walls.Add(new Wall(x, y, Textures.WallsT[CurrentMap.WallsIds[y][x]]));
-
-        _objects = CurrentMap.Objects;
     }
     
     
@@ -95,62 +95,67 @@ public class Main : Game
     {
         Controls.UpdateKeyListener(); // key states update
         
+        // universal key tests
         if (Controls.KillApp.IsPressed)
             Exit(); // kill app with F10
+        if (Controls.ToggleFullscreen.IsPressed)
+            _graphics.ToggleFullScreen();
+        if (Controls.Pause.IsOnePressed)
+            GotoTitle();
+        if (Controls.Debug1.IsOnePressed)
+            Character.ChangeShield(Shield.NoShield);
+        if (Controls.Debug2.IsOnePressed)
+            Character.ChangeShield(Shield.BasicShield);
+        if (Controls.Debug3.IsOnePressed)
+            Character.ChangeShield(Shield.GrassShield);
 
+        // update title menu
         if (TitleScreen.IsActive)
         {
-            if (TitleScreen.Update()) // update title menu
-                            Exit();
+            if (TitleScreen.Update())
+                Exit();
         }
-        else    // update game
-        {   
+        
+        // update game
+        else
+        {
+            // while player is speaking to a Npc, skip character update
+            foreach (var entity in CurrentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
+            {
+                var npc = (Npc)entity;
+                if (!npc.IsSpeaking)
+                    continue;
+                npc.Interact(Character);
+                return;
+            }
+            
+            // character position updates
             Character.Move(GetCollisionsList());
             Character.TransitMap(Character.TestOutOfMap());
             
-            if (Controls.ToggleFullscreen.IsPressed)
-                _graphics.ToggleFullScreen();
+            // interactions with InteractiveObjects and Npc 
             if (Controls.Interact.IsOnePressed)
             {
-                foreach (var o in _objects
-                             .Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
+                foreach (var o in CurrentMap.Objects.Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
                 {
                     o.Interact(Character);
                 }
+                foreach (var entity in CurrentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
+                {
+                    ((Npc)entity).Interact(Character);
+                }
             }
 
-            Character.ShieldUp = Controls.Shield.IsPressed;
+            Character.ShieldUp = Controls.Shield.IsPressed; // shield key test
 
-            if (Controls.Pause.IsOnePressed)
-            {
-                GotoTitle();
-            }
-
-            if (Controls.Debug1.IsOnePressed)
-            {
-                Character.ChangeShield(Shield.NoShield);
-            }
-
-            if (Controls.Debug2.IsOnePressed)
-            {
-                Character.ChangeShield(Shield.BasicShield);
-            }
-
-            if (Controls.Debug3.IsOnePressed)
-            {
-                Character.ChangeShield(Shield.GrassShield);
-            }
         }
 
         base.Update(gameTime);
     }
 
-    private static List<Wall> GetCollisionsList()
-    {
-        var objs = _objects
-            .Where(o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor)) && o.GetState() == 1)).ToList();
-        return Walls.Concat(objs).ToList();
-    }
+    private static List<Wall> GetCollisionsList() => Walls.Concat(CurrentMap.Objects
+            .Where(o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor)) && o.GetState() == 1))
+            .ToList()).ToList();
 
     protected override void Draw(GameTime gameTime)
     {
@@ -166,12 +171,13 @@ public class Main : Game
             {
                 w.Draw(_spriteBatch);
             }
-            foreach (var o in _objects)
+            foreach (var o in CurrentMap.Objects)
             {
                 o.Draw(_spriteBatch);
             }
             Character.Draw(_spriteBatch);
             Ath.Draw(_spriteBatch);
+            ChatBox.Draw(_spriteBatch);
         }
         
         _spriteBatch.End();

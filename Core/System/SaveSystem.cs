@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Xml;
-using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
+using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace DarkSoulsRogue.Core.Utilities;
+namespace DarkSoulsRogue.Core.System;
 
 public static class SaveSystem
 {
@@ -43,7 +46,7 @@ public static class SaveSystem
 
         node = root?["character"]?["position"];
         character.SetPosition(GetInt(node?["x"]), GetInt(node?["y"]));
-        character.Orientation = Character.OrientationFromId(GetInt(node?["orientation"]));
+        character.Orientation = Orientation.FromInt(GetInt(node?["orientation"]));
 
         node = root?["character"]?["attributes"];
         var attributes = new int[Attributes.NumAttributes];
@@ -95,7 +98,7 @@ public static class SaveSystem
         node = root["character"]?["position"];
         node!["x"]!.InnerText = character.GetPosition().X.ToString();
         node["y"]!.InnerText = character.GetPosition().Y.ToString();
-        node["orientation"]!.InnerText = ((int)character.Orientation).ToString();
+        node["orientation"]!.InnerText = character.Orientation.Index.ToString();
 
         node = root["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)

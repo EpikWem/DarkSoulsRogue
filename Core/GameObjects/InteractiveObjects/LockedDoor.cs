@@ -1,4 +1,5 @@
 ﻿using System;
+using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;

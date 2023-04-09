@@ -1,3 +1,4 @@
+using DarkSoulsRogue.Core.Statics;
 using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core.Utilities;

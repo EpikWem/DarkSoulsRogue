@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using DarkSoulsRogue.Core.Items.Equipments;
+using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 

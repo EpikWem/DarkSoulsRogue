@@ -1,4 +1,5 @@
 ﻿using DarkSoulsRogue.Core.GameObjects;
+using DarkSoulsRogue.Core.GameObjects.Entities;
 using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core.Utilities;

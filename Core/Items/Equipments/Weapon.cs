@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using DarkSoulsRogue.Core.Utilities;
 
-namespace DarkSoulsRogue.Core.Items;
+namespace DarkSoulsRogue.Core.Items.Equipments;
 
 public class Weapon : Equipment
 {
