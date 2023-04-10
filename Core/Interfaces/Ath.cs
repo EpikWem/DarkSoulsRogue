@@ -62,8 +62,8 @@ public static class Ath
     {
 
         private const int CellWidth = 18, Width = CellWidth*6, Height = 28, Margin = 8;
-        private static readonly Vector2 Position = new (Camera.Width - Width - Margin, Camera.Height - Height - Margin);
-        private static readonly Rectangle Rectangle = new ((int)Position.X, (int)Position.Y, Width, Height);
+        private static readonly Vector2 Position = new(Camera.Width - Width - Margin, Camera.Height - Height - Margin);
+        private static readonly Rectangle Rectangle = new((int)Position.X, (int)Position.Y, Width, Height);
 
         public static void Draw(SpriteBatch spriteBatch, int souls)
         {
@@ -91,8 +91,8 @@ public static class Ath
         private const int Radius = 36;
         private const int Border = 8;
         private static readonly Circle
-            CircleIn = new (new Vector2(Radius, Radius), Radius-Border),
-            CircleOut = new (new Vector2(Radius, Radius), Radius);
+            CircleIn = new(new Vector2(Radius, Radius), Radius-Border),
+            CircleOut = new(new Vector2(Radius, Radius), Radius);
 
         public static void Draw(SpriteBatch spriteBatch)
         {

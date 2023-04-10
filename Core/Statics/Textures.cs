@@ -10,7 +10,7 @@ public static class Textures
 
     private const int WallNumber = 1;
 
-    public static Texture2D Void, BgT;
+    public static Texture2D VoidT, BgT;
     public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
@@ -19,7 +19,7 @@ public static class Textures
 
     public static void Init(ContentManager content)
     {
-        Void = LoadTexture("void", content);
+        VoidT = LoadTexture("void", content);
         BgT = LoadTexture("bg", content);
 
         ArmorTextures = new List<Texture2D[]>
@@ -30,7 +30,7 @@ public static class Textures
         };
         ShieldTextures = new List<Texture2D[]>
         {
-            new [] {Void, Void, Void, Void},
+            new [] {VoidT, VoidT, VoidT, VoidT},
             LoadEquipmentTextures(ETShields, "basic", content),
             LoadEquipmentTextures(ETShields, "grass", content)
         };

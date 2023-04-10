@@ -4,9 +4,9 @@ public class Catalyst : Equipment
 {
     
     public static readonly Catalyst
-        WitcherCatalyst = new ("Witcher Catalyst", Catalyst.SpellCategories.Sorcery),
-        PyromancyFlame = new ("Pyromancy Flame", Catalyst.SpellCategories.Pyromancy),
-        Talisman = new ("Talisman", Catalyst.SpellCategories.Miracle);
+        WitcherCatalyst = new("Witcher Catalyst", Catalyst.SpellCategories.Sorcery),
+        PyromancyFlame = new("Pyromancy Flame", Catalyst.SpellCategories.Pyromancy),
+        Talisman = new("Talisman", Catalyst.SpellCategories.Miracle);
     
     public enum SpellCategories { Sorcery, Pyromancy, Miracle }
     public readonly SpellCategories SpellCategory;

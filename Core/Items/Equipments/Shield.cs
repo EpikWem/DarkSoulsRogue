@@ -8,9 +8,9 @@ public class Shield : Equipment
 {
 
     public static readonly Shield
-        NoShield = new (""),
-        BasicShield = new ("Basic Shield"),
-        GrassShield = new ("Grass Crest Shield");
+        NoShield = new(""),
+        BasicShield = new("Basic Shield"),
+        GrassShield = new("Grass Crest Shield");
     private static readonly List<Shield> Shields = new() {
         NoShield, BasicShield, GrassShield
     };

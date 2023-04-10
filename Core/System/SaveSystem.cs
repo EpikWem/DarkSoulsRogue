@@ -16,7 +16,7 @@ public static class SaveSystem
     private const string SavesPath = Main.ContentPath + @"saves\";
     public const int SavesCount = 4;
 
-    private static readonly XmlDocument SaveFile = new ();
+    private static readonly XmlDocument SaveFile = new();
     
     public static void Init()
     {

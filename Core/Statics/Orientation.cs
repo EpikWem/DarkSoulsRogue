@@ -6,11 +6,11 @@ public class Orientation
 {
     
     public static readonly Orientation
-        Up = new (0),
-        Down = new (1),
-        Right = new (2),
-        Left = new (3),
-        Null = new (-1);
+        Up = new(0),
+        Down = new(1),
+        Right = new(2),
+        Left = new(3),
+        Null = new(-1);
 
     public readonly int Index;
 

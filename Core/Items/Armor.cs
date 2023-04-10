@@ -10,15 +10,15 @@ public class Armor : Equipment
 {
 
     public static readonly Armor
-        Naked = new ("", null, new[]{0f, 0f, 0f, 0f, 0, 0, 0}, new[]{0f, 0f, 0f}, 0f),
-        Artorias = new ("Artorias", ArmorUpgrade.Unique, new[]{159.6f, 143.7f, 183.6f, 167.7f, 80.6f, 170.6f, 80.7f}, new[]{66f, 66f, 48f}, 24.8f, 37),
-        //BlackIron = new ("Black Iron Armor"),
-        Solaire = new ("Solaire", ArmorUpgrade.Unique, new[]{208f, 210.5f, 210.5f, 206.3f, 127f, 127f, 94f}, new[]{56f, 84f, 22.4f}, 23.1f, 40); 
+        Naked = new("", null, new[]{0f, 0f, 0f, 0f, 0, 0, 0}, new[]{0f, 0f, 0f}, 0f),
+        Artorias = new("Artorias", ArmorUpgrade.Unique, new[]{159.6f, 143.7f, 183.6f, 167.7f, 80.6f, 170.6f, 80.7f}, new[]{66f, 66f, 48f}, 24.8f, 37),
+        //BlackIron = new("Black Iron Armor"),
+        Solaire = new("Solaire", ArmorUpgrade.Unique, new[]{208f, 210.5f, 210.5f, 206.3f, 127f, 127f, 94f}, new[]{56f, 84f, 22.4f}, 23.1f, 40); 
     
     public static Armor GetFromIndex(int i) => Armors[i];
     public static int GetIndexOf(Armor armor) => Armors.IndexOf(armor);
     private static readonly List<Armor>
-        Armors = new () {
+        Armors = new() {
             Naked,
             Artorias,
             //BlackIron,

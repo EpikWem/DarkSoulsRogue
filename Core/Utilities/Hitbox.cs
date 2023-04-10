@@ -17,7 +17,7 @@ public class Hitbox
     public int GetMarginX() => _marginX;
     public int GetMarginY() => _marginY;
 
-    public Rectangle ToRectangle(Entity entity) => new (
+    public Rectangle ToRectangle(Entity entity) => new(
         (int)entity.GetPosition().X + _marginX,
         (int)entity.GetPosition().Y + _marginY,
         entity.GetTWidth() - 2*_marginX,

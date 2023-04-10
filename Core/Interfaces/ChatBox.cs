@@ -10,7 +10,7 @@ public static class ChatBox
 
     private const int Width = (int)(Camera.Width * 0.7f);
     private const int Height = 32;
-    private static readonly Vector2 Position = new (((float)Camera.Width - Width)/2, Camera.Height - Height - 4);
+    private static readonly Vector2 Position = new(((float)Camera.Width - Width)/2, Camera.Height - Height - 4);
 
     private static string _text = "";
 

@@ -12,6 +12,12 @@ public class Background : GameObject
         Position = new Vector2(0, 0);
     }
 
+    public void Move(int dx, int dy)
+    {
+        Position.X += dx;
+        Position.Y += dy;
+    }
+
     public new void SetTexture(Texture2D texture) => base.SetTexture(texture);
 
     public new void Draw(SpriteBatch spriteBatch) => base.Draw(spriteBatch);

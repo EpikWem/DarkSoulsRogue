@@ -16,6 +16,8 @@ namespace DarkSoulsRogue.Core;
 public class Main : Game
 {
 
+    public const bool DrawWalls = false;
+    public const bool CameraCentered = false;
     public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
     //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
     
@@ -27,7 +29,7 @@ public class Main : Game
     public static int CurrentSaveId;
     private static Background _background;
     public static Character Character;
-    private static readonly List<Wall> Walls = new ();
+    private static readonly List<Wall> Walls = new();
     private static Map _currentMap;
     
     
@@ -40,7 +42,7 @@ public class Main : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = false;
+        IsMouseVisible = true;
         _graphics.PreferredBackBufferWidth = Camera.Width;
         _graphics.PreferredBackBufferHeight = Camera.Height;
     }
@@ -132,13 +134,9 @@ public class Main : Game
             if (Controls.Interact.IsOnePressed)
             {
                 foreach (var o in _currentMap.Objects.Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
-                {
                     o.Interact(Character);
-                }
-                foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
-                {
+                foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc) && e.GetGraphicbox().Contains(Character.GetLookingPoint())))
                     ((Npc)entity).Interact(Character);
-                }
             }
 
             Character.ShieldUp = Controls.Shield.IsPressed; // shield key test
@@ -172,8 +170,9 @@ public class Main : Game
         else
         {   // draw game
             _background.Draw(_spriteBatch);
-            foreach (var w in Walls)
-                w.Draw(_spriteBatch);
+            if (DrawWalls)
+                foreach (var w in Walls)
+                    w.Draw(_spriteBatch);
             foreach (var o in _currentMap.Objects)
                 o.Draw(_spriteBatch);
             foreach (var e in _currentMap.Entities)

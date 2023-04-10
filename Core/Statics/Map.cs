@@ -12,7 +12,7 @@ public class Map
 {
 
     private static readonly Map
-        UndeadAsylum1 = new (101, new[] {
+        UndeadAsylum1 = new(101, new[] {
                 new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
                 new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
                 new[] { 0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 0, 0 },
@@ -28,12 +28,12 @@ public class Map
                 new Loot(9, 6, new Stack(Key.AsylumCell)) },
             new List<Entity>(),
             new Destination[] {
-                new (102, new Vector2(7, 8), Orientation.Up),
+                new(102, new Vector2(7, 8), Orientation.Up),
                 null,
                 null,
                 null }
         ),
-        UndeadAsylum2 = new (102, new[] {
+        UndeadAsylum2 = new(102, new[] {
                 new[] { 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
                 new[] { 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0 },
@@ -47,12 +47,12 @@ public class Map
             new List<InteractiveObject> (),
             new List<Entity>(),
             new Destination[] {
-                new (103, new Vector2(4, 9), Orientation.Up),
-                new (101, new Vector2(7, 3), Orientation.Down), 
+                new(103, new Vector2(4, 9), Orientation.Up),
+                new(101, new Vector2(7, 3), Orientation.Down), 
                 null,
                 null }
         ),
-        UndeadAsylum3 = new ( 103, new[] {
+        UndeadAsylum3 = new( 103, new[] {
                 new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0},
                 new[] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0},
                 new[] {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 0},
@@ -68,11 +68,11 @@ public class Map
             new List<Entity>(),
             new Destination[] {
                 null,
-                new (102, new Vector2(7, 1), Orientation.Down),
+                new(102, new Vector2(7, 1), Orientation.Down),
                 null,
                 null }
         ),
-        UndeadAsylum4 = new ( 104, new[] {
+        UndeadAsylum4 = new( 104, new[] {
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -90,12 +90,12 @@ public class Map
                 new Ladder(7, 8, true, new Destination(103, new Vector2(11, 2), Orientation.Down)) },
             new List<Entity>(),
             new Destination[] {
-                new (105, new Vector2(7, 9), Orientation.Up),
+                new(105, new Vector2(7, 9), Orientation.Up),
                 null,
-                new (107, new Vector2(7, 1), Orientation.Down),
+                new(107, new Vector2(7, 1), Orientation.Down),
                 null }
         ),
-        UndeadAsylum5 = new ( 105, new[] {
+        UndeadAsylum5 = new( 105, new[] {
                 new[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
@@ -114,9 +114,9 @@ public class Map
                 new Npc(new Vector2(7, 2), Textures.ArmorTextures[0], Orientation.Down, Speaks.Solarius) },
             new Destination[] {
                 null,
-                new (104, new Vector2(7, 1), Orientation.Down),
+                new(104, new Vector2(7, 1), Orientation.Down),
                 null,
-                new (106, new Vector2(14, 3), Orientation.Left) }
+                new(106, new Vector2(14, 3), Orientation.Left) }
         );
 
     private static readonly Map[] MapArray = { UndeadAsylum1, UndeadAsylum2, UndeadAsylum3, UndeadAsylum4, UndeadAsylum5 };
@@ -125,7 +125,7 @@ public class Map
     
     public static int GetObjectIdOf(InteractiveObject obj)
     {
-        List<InteractiveObject> objArray = new ();
+        List<InteractiveObject> objArray = new();
         foreach (var map in MapArray)
             objArray.AddRange(map.Objects);
         for (var i = 0; i < objArray.Count; i++)
@@ -136,7 +136,7 @@ public class Map
 
     public static InteractiveObject GetObject(int id)
     {
-        List<InteractiveObject> objArray = new ();
+        List<InteractiveObject> objArray = new();
         foreach (var map in MapArray)
             objArray.AddRange(map.Objects);
         return objArray[id];

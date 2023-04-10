@@ -22,6 +22,7 @@ public abstract class Entity : GameObject
     
     public Vector2 GetPosition() => Position;
     public Rectangle GetHitbox() => _hitbox.ToRectangle(this);
+    public Rectangle GetGraphicbox() => new((int)Position.X, (int)Position.Y, Width, Height);
 
     public void SetPosition(int x, int y)
     {
@@ -36,14 +37,14 @@ public abstract class Entity : GameObject
 
     private Texture2D GetTextureToDraw() => Textures[Orientation.Index];
 
-    private Vector2 GetLookingPoint() => Orientation.Index switch {
+    public Vector2 GetLookingPoint() => Orientation.Index switch {
             0 => new Vector2(Position.X + (float)Width/2, Position.Y),
             1 => new Vector2(Position.X + (float)Width/2, Position.Y + Height),
             2 => new Vector2(Position.X + Width, Position.Y + (float)Height/2),
             3 => new Vector2(Position.X, Position.Y + (float)Height/2),
             _ => new Vector2(0, 0) };
 
-    public Vector2 GetLookingCell() => new (
+    public Vector2 GetLookingCell() => new(
             (int)(GetLookingPoint().X / Camera.CellSize),
             (int)(GetLookingPoint().Y / Camera.CellSize));
 

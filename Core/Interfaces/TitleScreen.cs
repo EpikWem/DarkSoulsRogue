@@ -11,13 +11,13 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public static class TitleScreen
 {
 
-    private static readonly Vector2 PositionOfTitleList = new (Camera.Width/2 - 100, 240);
+    private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 100, 240);
     private const int TitleItemHeight = 28;
     private const int TitleItemWidth = 100;
-    private static readonly Vector2 PositionOfGameList = new (100, 40);
+    private static readonly Vector2 PositionOfGameList = new(100, 40);
     private const int GameItemHeight = 90;
     private const int GameItemWidth = 240;
-    private static readonly Vector2 PositionOfClassList1 = new (100, 40);
+    private static readonly Vector2 PositionOfClassList1 = new(100, 40);
     private static readonly Vector2 PositionOfClassList2 = PositionOfClassList1 + new Vector2(ClassItemWidth, -ClassItemHeight*5);
     private const int ClassItemHeight = 90;
     private const int ClassItemWidth = 240;
@@ -25,9 +25,9 @@ public static class TitleScreen
     public static bool IsActive;
     private static Menu _activeMenu;
 
-    private static readonly TitleMenu TitleM = new ();
-    private static readonly GameSelectionMenu GameSelectionM = new ();
-    private static readonly GameCreationMenu GameCreationM = new ();
+    private static readonly TitleMenu TitleM = new();
+    private static readonly GameSelectionMenu GameSelectionM = new();
+    private static readonly GameCreationMenu GameCreationM = new();
 
     public static void Init()
     {
@@ -327,7 +327,7 @@ public static class TitleScreen
                 }
             }
 
-            public List<int> GetChosenAttributes() => new (BaseAttributesTable[_selectedClass]) { 0 };
+            public List<int> GetChosenAttributes() => new(BaseAttributesTable[_selectedClass]) { 0 };
         
             private static int FirstClassChoice() => 0;
             private static int LastClassChoice() => ClassNames.Length - 1;
