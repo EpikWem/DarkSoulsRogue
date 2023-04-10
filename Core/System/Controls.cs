@@ -31,6 +31,8 @@ public abstract class Controls
         Run = new(Keys.Space),
         Weapon = new(Keys.O),
         Shield = new(Keys.P),
+        Consumable = new(Keys.R),
+        Catalyst = new(Keys.F),
         MenuUp = new(Keys.Up),
         MenuDown = new(Keys.Down),
         MenuRight = new(Keys.Right),

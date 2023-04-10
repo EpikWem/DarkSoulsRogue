@@ -4,7 +4,9 @@ namespace DarkSoulsRogue.Core.Interfaces;
 
 public abstract class Menu
 {
-    public abstract void Update();
-    public abstract void Draw(SpriteBatch spriteBatch);
+
+    internal abstract void Reinit();
+    internal abstract void Update();
+    internal abstract void Draw(SpriteBatch spriteBatch);
 
 }

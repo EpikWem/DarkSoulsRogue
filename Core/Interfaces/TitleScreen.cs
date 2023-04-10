@@ -5,6 +5,7 @@ using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using NotImplementedException = System.NotImplementedException;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
@@ -22,29 +23,36 @@ public static class TitleScreen
     private const int ClassItemHeight = 90;
     private const int ClassItemWidth = 240;
 
-    public static bool IsActive;
-    private static Menu _activeMenu;
+    private static bool _isActive;
+    private static Menu _currentMenu;
 
     private static readonly TitleMenu TitleM = new();
     private static readonly GameSelectionMenu GameSelectionM = new();
     private static readonly GameCreationMenu GameCreationM = new();
 
-    public static void Init()
+    public static bool IsActive() => _isActive;
+    public static void Activate()
     {
-        IsActive = true;
-        _activeMenu = TitleM;
+        _isActive = true;
+        ChangeMenu(TitleM);
+    }
+
+    private static void ChangeMenu(Menu menu)
+    {
+        _currentMenu = menu;
+        _currentMenu.Reinit();
     }
     
     //RETURNS: true to QuitApp()
     public static bool Update()
     {
-        _activeMenu.Update();
-        return _activeMenu == TitleM && TitleM.WantsToQuit;
+        _currentMenu.Update();
+        return _currentMenu == TitleM && TitleM.WantsToQuit;
     }
 
     public static void Draw(SpriteBatch spriteBatch)
     {
-        _activeMenu.Draw(spriteBatch);
+        _currentMenu.Draw(spriteBatch);
     }
     
     
@@ -60,22 +68,27 @@ public static class TitleScreen
         private int _selectionId;
         public bool WantsToQuit;
         
-        public TitleMenu()
+        internal TitleMenu()
+        {
+            Reinit();
+        }
+
+        //RETURNS: true to QuitApp()
+        internal sealed override void Reinit()
         {
             _selectionId = 0;
             WantsToQuit = false;
         }
-
-        //RETURNS: true to QuitApp()
-        public override void Update()
+        
+        internal override void Update()
         {
             if (Controls.Interact.IsOnePressed)
             {
                 switch (TitleM._selectionId)
                 {
-                    case 0: IsActive = false; SaveSystem.Load(); return;
-                    case 1: _activeMenu = GameSelectionM; return;
-                    case 2: _activeMenu = GameCreationM; return;
+                    case 0: _isActive = false; SaveSystem.Load(); return;
+                    case 1: ChangeMenu(GameSelectionM); return;
+                    case 2: ChangeMenu(GameCreationM); return;
                     case 3: return;
                     case 4: WantsToQuit = true; return;
                     default: return;
@@ -98,7 +111,7 @@ public static class TitleScreen
                 _selectionId = LastChoice();
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        internal override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Main.PixelTexture, new Rectangle(0, 0, Camera.Width, Camera.Height), Color.Black);
             var csx = (int)PositionOfTitleList.X - 4;
@@ -127,13 +140,18 @@ public static class TitleScreen
         private int _selectedGameId;
         private readonly Integer _forNewSave;
         
-        public GameSelectionMenu(Integer forNewSave = null)
+        internal GameSelectionMenu(Integer forNewSave = null)
         {
-            _selectedGameId = 0;
             _forNewSave = forNewSave;
+            Reinit();
         }
 
-        public override void Update()
+        internal sealed override void Reinit()
+        {
+            _selectedGameId = 0;
+        }
+
+        internal override void Update()
         {
             if (Controls.Interact.IsOnePressed)
             {
@@ -141,7 +159,7 @@ public static class TitleScreen
                     _forNewSave.Value = _selectedGameId;
                 else
                 {
-                    IsActive = false;
+                    _isActive = false;
                     SaveSystem.Load(_selectedGameId);
                 }
                     
@@ -158,10 +176,10 @@ public static class TitleScreen
             }
 
             if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
-                Init();
+                Activate();
         }
         
-        public override void Draw(SpriteBatch spriteBatch)
+        internal override void Draw(SpriteBatch spriteBatch)
         {
             var cgx = (int)PositionOfGameList.X - 8;
             var cgy = (int)PositionOfGameList.Y + _selectedGameId * GameItemHeight - 12;
@@ -195,16 +213,21 @@ public static class TitleScreen
         private readonly PersonalisationMenu _personalisationMenu;
         private readonly TextArea _textArea;
         
-        public GameCreationMenu()
+        internal GameCreationMenu()
         {
-            _phase = Phase.PlaceSelection;
             _saveId = new Integer(-1);
             _selectionMenu = new GameSelectionMenu(_saveId);
             _personalisationMenu = new PersonalisationMenu();
             _textArea = new TextArea(new Rectangle(100, 100, 100, 28));
+            Reinit();
         }
 
-        public override void Update()
+        internal sealed override void Reinit()
+        {
+            _phase = Phase.PlaceSelection;
+        }
+
+        internal override void Update()
         {
             switch (_phase)
             {
@@ -223,13 +246,13 @@ public static class TitleScreen
                         NextPhase();
                     return;
                 case Phase.End:
-                    IsActive = false;
+                    _isActive = false;
                     SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read(), _personalisationMenu.GetChosenAttributes());
                     return;
             }
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        internal override void Draw(SpriteBatch spriteBatch)
         {
             switch (_phase)
             {
@@ -257,7 +280,7 @@ public static class TitleScreen
         private void PastPhase()
         {
             if (_phase == Phase.PlaceSelection)
-                Init();
+                Activate();
             _phase = _phase switch
             {
                 Phase.Personalisation => Phase.PlaceSelection,
@@ -284,15 +307,17 @@ public static class TitleScreen
             private static readonly Texture2D[] ClassIcons = { Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0] };
 
             private int _selectedClass;
-            public bool IsConfirmed;
+            internal bool IsConfirmed;
 
-            public PersonalisationMenu()
+            internal PersonalisationMenu() => Reinit();
+
+            internal sealed override void Reinit()
             {
                 _selectedClass = 0;
                 IsConfirmed = false;
             }
 
-            public override void Update()
+            internal override void Update()
             {
                 if (Controls.Interact.IsOnePressed)
                 {
@@ -309,10 +334,10 @@ public static class TitleScreen
                         _selectedClass++;
                 }
                 if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
-                    Init();
+                    Activate();
             }
         
-            public override void Draw(SpriteBatch spriteBatch)
+            internal override void Draw(SpriteBatch spriteBatch)
             {
                 var posList = _selectedClass < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                 var cgx = (int)posList.X - 8;

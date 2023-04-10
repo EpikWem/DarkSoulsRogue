@@ -16,7 +16,7 @@ namespace DarkSoulsRogue.Core;
 public class Main : Game
 {
 
-    public const bool DrawWalls = false;
+    public const bool DrawWalls = true;
     public const bool CameraCentered = false;
     public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
     //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
@@ -60,7 +60,7 @@ public class Main : Game
         CurrentSaveId = 0;
         _background = new Background();
         Character = new Character("");
-        TitleScreen.Init();
+        TitleScreen.Activate();
         Ath.Init(Character);
 
         base.Initialize();
@@ -97,8 +97,6 @@ public class Main : Game
             Exit(); // kill app with F10
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
-        if (Controls.Pause.IsOnePressed)
-            GotoTitle();
         if (Controls.Debug1.IsOnePressed)
             Character.ChangeShield(Shield.NoShield);
         if (Controls.Debug2.IsOnePressed)
@@ -107,7 +105,7 @@ public class Main : Game
             Character.ChangeShield(Shield.GrassShield);
 
         // update title menu
-        if (TitleScreen.IsActive)
+        if (TitleScreen.IsActive())
         {
             if (TitleScreen.Update())
                 Exit();
@@ -130,6 +128,16 @@ public class Main : Game
             Character.Move(GetCollisionsList());
             Character.TransitMap(Character.TestOutOfMap());
             
+            // update IngameMenu if displayed
+            if (IngameMenu.IsActive())
+            {
+                IngameMenu.Update();
+                return;
+            }
+            // activate menu if pause is pressed
+            if (Controls.Pause.IsOnePressed)
+                IngameMenu.Activate();
+
             // interactions with InteractiveObjects and Npc 
             if (Controls.Interact.IsOnePressed)
             {
@@ -138,9 +146,9 @@ public class Main : Game
                 foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc) && e.GetGraphicbox().Contains(Character.GetLookingPoint())))
                     ((Npc)entity).Interact(Character);
             }
-
-            Character.ShieldUp = Controls.Shield.IsPressed; // shield key test
-
+            
+            // shield key test
+            Character.ShieldUp = Controls.Shield.IsPressed;
         }
 
         base.Update(gameTime);
@@ -164,11 +172,14 @@ public class Main : Game
     {
         GraphicsDevice.Clear(Color.Black);
         _spriteBatch.Begin();
-
-        if (TitleScreen.IsActive)
-            TitleScreen.Draw(_spriteBatch); // draw title menu
+        
+        // draw title menu
+        if (TitleScreen.IsActive())
+            TitleScreen.Draw(_spriteBatch);
+        
+        // or draw game
         else
-        {   // draw game
+        {   
             _background.Draw(_spriteBatch);
             if (DrawWalls)
                 foreach (var w in Walls)
@@ -179,6 +190,8 @@ public class Main : Game
                 e.Draw(_spriteBatch);
             Character.Draw(_spriteBatch);
             Ath.Draw(_spriteBatch);
+            if (IngameMenu.IsActive())
+                IngameMenu.Draw(_spriteBatch);
             ChatBox.Draw(_spriteBatch);
         }
         
@@ -186,10 +199,10 @@ public class Main : Game
         base.Draw(gameTime);
     }
 
-    private static void GotoTitle()
+    public static void GotoTitle()
     {
         SaveSystem.Save();
-        TitleScreen.Init();
+        TitleScreen.Activate();
     }
 
 }
