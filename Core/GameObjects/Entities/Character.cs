@@ -26,7 +26,7 @@ public class Character : Entity
     private int _exhaustingTime;
     public bool ShieldUp;
 
-    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(4, 9))
+    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(6, 10))
     {
         Name = name;
         Attributes = new Attributes();
@@ -54,7 +54,7 @@ public class Character : Entity
             spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
     }
 
-    public void Move(List<Wall> walls)
+    public void Move(List<Rectangle> collisions)
     {
         var oldPosition = new Vector2(Position.X, Position.Y);
         var speed = BaseSpeed;
@@ -95,8 +95,12 @@ public class Character : Entity
             Orientation = Orientation.Down;
             Position.Y += speed;
         }
-        foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
-            Position.Y = oldPosition.Y;
+        foreach (var c in collisions)
+            if (c.Intersects(GetHitbox()))
+            {
+                Position.Y = oldPosition.Y;
+                break;
+            }
         
         // Real Movement Horizontal
         if (Controls.Right.IsPressed)
@@ -109,8 +113,12 @@ public class Character : Entity
             Orientation = Orientation.Left;
             Position.X -= speed;
         }
-        foreach (var w in walls.Where(w => w.GetHitbox().Intersects(GetHitbox())))
-            Position.X = oldPosition.X;
+        foreach (var c in collisions)
+            if (c.Intersects(GetHitbox()))
+            {
+                Position.X = oldPosition.X;
+                break;
+            }
         
     }
 

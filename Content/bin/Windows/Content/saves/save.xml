@@ -139,15 +139,15 @@
       </objects>
     </s1>
     <s2>
-      <map>104</map>
+      <map>105</map>
       <character>
         <name>Cler</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>571</x>
-          <y>81</y>
+          <x>411</x>
+          <y>268</y>
           <orientation>0</orientation>
         </position>
         <attributes>

@@ -1,5 +1,4 @@
 using DarkSoulsRogue.Core.Statics;
-using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -15,4 +14,6 @@ public class Background : GameObject
 
     public new void SetTexture(Texture2D texture) => base.SetTexture(texture);
 
+    public new void Draw(SpriteBatch spriteBatch) => base.Draw(spriteBatch);
+    
 }

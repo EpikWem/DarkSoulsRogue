@@ -17,7 +17,7 @@ public class Npc : Mob
     private int _speakingStage;
     public bool IsSpeaking;
 
-    public Npc(Vector2 positionOnGrid, Texture2D[] textures, Hitbox hitbox, Orientation baseOrientation, List<string> speaks) : base(textures, hitbox)
+    public Npc(Vector2 positionOnGrid, Texture2D[] textures, Orientation baseOrientation, List<string> speaks) : base(textures, new Hitbox(12, 24))
     {
         PlaceOnGrid(positionOnGrid.X, positionOnGrid.Y, baseOrientation);
         _baseOrientation = baseOrientation;

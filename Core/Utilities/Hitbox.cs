@@ -1,5 +1,4 @@
-﻿using DarkSoulsRogue.Core.GameObjects;
-using DarkSoulsRogue.Core.GameObjects.Entities;
+﻿using DarkSoulsRogue.Core.GameObjects.Entities;
 using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core.Utilities;
@@ -19,7 +18,9 @@ public class Hitbox
     public int GetMarginY() => _marginY;
 
     public Rectangle ToRectangle(Entity entity) => new (
-        (int)entity.GetPosition().X + _marginX, (int)entity.GetPosition().Y + _marginY,
-         entity.GetWidth() - 2*_marginX, entity.GetHeight() - 2*_marginY);
+        (int)entity.GetPosition().X + _marginX,
+        (int)entity.GetPosition().Y + _marginY,
+        entity.GetTWidth() - 2*_marginX,
+        entity.GetTHeight() - 2*_marginY);
 
 }

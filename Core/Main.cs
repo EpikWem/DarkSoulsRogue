@@ -150,9 +150,17 @@ public class Main : Game
 
     public static Map CurrentMap() => _currentMap;
 
-    private static List<Wall> GetCollisionsList() => Walls.Concat(_currentMap.Objects
-            .Where(o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor)) && o.GetState() == 1))
-            .ToList()).ToList();
+    private static List<Rectangle> GetCollisionsList()
+    {
+        var result = Walls.Select(w => w.GetHitbox()).ToList();
+        result.AddRange(_currentMap.Objects
+            .Where(
+                o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor))
+                && o.GetState() == 1))
+            .Select(w => w.GetHitbox()).ToList());
+        result.AddRange(_currentMap.Entities.Select(e => e.GetHitbox()).ToList());
+        return result;
+    }
 
     protected override void Draw(GameTime gameTime)
     {

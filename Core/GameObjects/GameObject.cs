@@ -24,14 +24,9 @@ public abstract class GameObject
         Height = texture.Height;
     }
     
-    public void Draw(SpriteBatch batch)
+    protected void Draw(SpriteBatch batch)
     {
         batch.Draw(_texture, Position, Color.White);
-    }
-
-    public Rectangle GetHitbox()
-    {
-        return new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
     }
 
     public Vector2 GetPositionOnGrid()
