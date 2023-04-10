@@ -3,36 +3,13 @@ using System.Linq;
 using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Items;
-using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 
-namespace DarkSoulsRogue.Core.System;
+namespace DarkSoulsRogue.Core.Statics;
 
-public abstract class Maps
+public class Map
 {
-    
-    public class Map
-    {
-        public readonly int Id;
-        public readonly int[][] WallsIds;
-        public readonly int Width, Height;
-        public readonly List<InteractiveObject> Objects;
-        public readonly List<Entity> Entities;
-        public readonly Destination[] Connections;
-
-        public Map(int id, int[][] walls, List<InteractiveObject> objects, List<Entity> entities, Destination[] connections)
-        {
-            Id = id;
-            WallsIds = walls;
-            Width = WallsIds[0].Length;
-            Height = WallsIds.Length;
-            Objects = objects;
-            Entities = entities;
-            Connections = connections;
-        }
-        
-    }
 
     private static readonly Map
         UndeadAsylum1 = new (101, new[] {
@@ -157,7 +134,7 @@ public abstract class Maps
         return -1;
     }
 
-    public static InteractiveObject GetObjectFromId(int id)
+    public static InteractiveObject GetObject(int id)
     {
         List<InteractiveObject> objArray = new ();
         foreach (var map in MapArray)
@@ -168,6 +145,24 @@ public abstract class Maps
     public static Map GetMap(int id)
     {
         return MapArray.First(m => m.Id == id);
+    }
+    
+    public readonly int Id;
+    public readonly int[][] WallsIds;
+    public readonly int Width, Height;
+    public readonly List<InteractiveObject> Objects;
+    public readonly List<Entity> Entities;
+    public readonly Destination[] Connections;
+
+    public Map(int id, int[][] walls, List<InteractiveObject> objects, List<Entity> entities, Destination[] connections)
+    {
+        Id = id;
+        WallsIds = walls;
+        Width = WallsIds[0].Length;
+        Height = WallsIds.Length;
+        Objects = objects;
+        Entities = entities;
+        Connections = connections;
     }
 
 }

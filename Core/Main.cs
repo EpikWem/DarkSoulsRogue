@@ -1,19 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Timers;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Interfaces;
-using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using Narkhedegs.PerformanceMeasurement;
 
 namespace DarkSoulsRogue.Core;
 
@@ -27,13 +23,12 @@ public class Main : Game
     private SpriteBatch _spriteBatch;
     
     public static Texture2D PixelTexture;
-    public static readonly Chronometer Chronometer = new ();
     
     public static int CurrentSaveId;
     private static Background _background;
     public static Character Character;
     private static readonly List<Wall> Walls = new ();
-    public static Maps.Map CurrentMap;
+    private static Map _currentMap;
     
     
     
@@ -77,12 +72,12 @@ public class Main : Game
 
     public static void LoadMap(int mapId)
     {
-        CurrentMap = Maps.GetMap(mapId);
+        _currentMap = Map.GetMap(mapId);
         Walls.Clear();
-        for (var y = 0; y < CurrentMap.Height; y++)
-            for (var x = 0; x < CurrentMap.Width; x++)
-                if (CurrentMap.WallsIds[y][x] != 0)
-                    Walls.Add(new Wall(x, y, Textures.WallsT[CurrentMap.WallsIds[y][x]]));
+        for (var y = 0; y < _currentMap.Height; y++)
+            for (var x = 0; x < _currentMap.Width; x++)
+                if (_currentMap.WallsIds[y][x] != 0)
+                    Walls.Add(new Wall(x, y, Textures.WallsT[_currentMap.WallsIds[y][x]]));
     }
     
     
@@ -120,7 +115,7 @@ public class Main : Game
         else
         {
             // while player is speaking to a Npc, skip character update
-            foreach (var entity in CurrentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
+            foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
             {
                 var npc = (Npc)entity;
                 if (!npc.IsSpeaking)
@@ -136,11 +131,11 @@ public class Main : Game
             // interactions with InteractiveObjects and Npc 
             if (Controls.Interact.IsOnePressed)
             {
-                foreach (var o in CurrentMap.Objects.Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
+                foreach (var o in _currentMap.Objects.Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
                 {
                     o.Interact(Character);
                 }
-                foreach (var entity in CurrentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
+                foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
                 {
                     ((Npc)entity).Interact(Character);
                 }
@@ -153,7 +148,9 @@ public class Main : Game
         base.Update(gameTime);
     }
 
-    private static List<Wall> GetCollisionsList() => Walls.Concat(CurrentMap.Objects
+    public static Map CurrentMap() => _currentMap;
+
+    private static List<Wall> GetCollisionsList() => Walls.Concat(_currentMap.Objects
             .Where(o => !((o.GetType() == typeof(Door) || o.GetType() == typeof(LockedDoor) || o.GetType() == typeof(OnewayDoor)) && o.GetState() == 1))
             .ToList()).ToList();
 
@@ -168,13 +165,11 @@ public class Main : Game
         {   // draw game
             _background.Draw(_spriteBatch);
             foreach (var w in Walls)
-            {
                 w.Draw(_spriteBatch);
-            }
-            foreach (var o in CurrentMap.Objects)
-            {
+            foreach (var o in _currentMap.Objects)
                 o.Draw(_spriteBatch);
-            }
+            foreach (var e in _currentMap.Entities)
+                e.Draw(_spriteBatch);
             Character.Draw(_spriteBatch);
             Ath.Draw(_spriteBatch);
             ChatBox.Draw(_spriteBatch);

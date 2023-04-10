@@ -146,7 +146,7 @@ public class Character : Entity
     {
         if (orientation == Orientation.Null)
             return;
-        var dest = Main.CurrentMap.Connections[orientation.Index];
+        var dest = Main.CurrentMap().Connections[orientation.Index];
         PlaceOnGrid(dest);
         Main.LoadMap(dest.MapId);
     }

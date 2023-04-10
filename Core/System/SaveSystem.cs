@@ -67,8 +67,8 @@ public static class SaveSystem
         character.ChangeRing(Ring.GetFromIndex(GetInt(node?["equippedRing"])));
 
         node = root?["objects"];
-        for (var i = 0; i < Maps.GetObjectsCount(); i++)
-            Maps.GetObjectFromId(i).SetState(GetInt(node?.ChildNodes[i]));
+        for (var i = 0; i < Map.GetObjectsCount(); i++)
+            Map.GetObject(i).SetState(GetInt(node?.ChildNodes[i]));
         
         Main.LoadMap(GetInt(root?["map"]));
     }
@@ -87,7 +87,7 @@ public static class SaveSystem
         
         XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + Main.CurrentSaveId];
         
-        root!["map"]!.InnerText = Main.CurrentMap.Id.ToString();
+        root!["map"]!.InnerText = Main.CurrentMap().Id.ToString();
 
         XmlNode node = root["character"];
         node!["name"]!.InnerText = character.Name;
@@ -115,8 +115,8 @@ public static class SaveSystem
         node["equippedRing"]!.InnerText = Ring.GetIndexOf(character.Inventory.EquippedRing).ToString();
         
         node = root["objects"];
-        for (var i = 0; i < Maps.GetObjectsCount(); i++)
-            node!.ChildNodes[i]!.InnerText = Maps.GetObjectFromId(i).GetState().ToString();
+        for (var i = 0; i < Map.GetObjectsCount(); i++)
+            node!.ChildNodes[i]!.InnerText = Map.GetObject(i).GetState().ToString();
         
         SaveFile.Save(GetSaveFilePath());
     }
@@ -127,8 +127,8 @@ public static class SaveSystem
         Main.Character = new Character(name);
         Main.Character.Attributes.Set(attributes);
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
-        for (var i = 0; i < Maps.GetObjectsCount(); i++)
-            Maps.GetObjectFromId(i).SetState(0);
+        for (var i = 0; i < Map.GetObjectsCount(); i++)
+            Map.GetObject(i).SetState(0);
         Ath.Init(Main.Character);
         Main.CurrentSaveId = newSaveId;
     }
