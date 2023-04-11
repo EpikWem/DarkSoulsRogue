@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.Statics;
+﻿using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
@@ -8,16 +9,15 @@ namespace DarkSoulsRogue.Core.GameObjects.Entities;
 
 public abstract class Entity : GameObject
 {
-    
-    protected readonly Texture2D[] Textures;
+    private readonly Armor _baseArmor;
     public Orientation Orientation;
     private readonly Hitbox _hitbox;
 
-    protected Entity(Texture2D[] textures, Hitbox hitbox = null) : base(textures[0])
+    protected Entity(Armor baseArmor, Hitbox hitbox = null) : base(baseArmor.GetWearingTextures()[0])
     {
-        Textures = textures;
+        _baseArmor = baseArmor;
         Orientation = Orientation.Down;
-        _hitbox = hitbox ?? new Hitbox(Textures[0].Width, Textures[0].Height);
+        _hitbox = hitbox ?? new Hitbox(Camera.CellSize, Camera.CellSize);
     }
     
     public Vector2 GetPosition() => Position;
@@ -30,18 +30,16 @@ public abstract class Entity : GameObject
         Position.Y = y;
     }
 
-    public int GetTWidth() => Textures[0].Width;
-    public int GetTHeight() => Textures[0].Height;
+    public int GetGWidth() => Width;
+    public int GetGHeight() => Height;
 
-    public new void Draw(SpriteBatch batch)
+    public void Draw(SpriteBatch batch, Armor equippedArmor = null)
     {
-        batch.Draw(Main.PixelTexture, GetGraphicbox(), Color.Orange);
-        batch.Draw(Main.PixelTexture, GetHitbox(), Color.Purple);
-        batch.Draw(GetTextureToDraw(), Position, Color.White);
-        batch.Draw(Main.PixelTexture, new Rectangle((int)GetLookingPoint().X, (int)GetLookingPoint().Y, 4, 4), Color.Red);
+        //batch.Draw(Main.PixelTexture, GetGraphicbox(), Color.Orange);
+        //batch.Draw(Main.PixelTexture, GetHitbox(), Color.Purple);
+        batch.Draw((equippedArmor ?? _baseArmor).GetWearingTextures()[Orientation.Index], Position, Color.White);
+        //batch.Draw(Main.PixelTexture, new Rectangle((int)GetLookingPoint().X, (int)GetLookingPoint().Y, 4, 4), Color.Red);
     }
-
-    private Texture2D GetTextureToDraw() => Textures[Orientation.Index];
 
     public Vector2 GetLookingPoint() => Orientation.Index switch {
             0 => new Vector2(Position.X + (float)Width/2, Position.Y),

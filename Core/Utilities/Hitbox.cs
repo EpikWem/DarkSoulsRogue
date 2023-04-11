@@ -20,7 +20,7 @@ public class Hitbox
     public Rectangle ToRectangle(Entity entity) => new(
         (int)entity.GetPosition().X + _marginX,
         (int)entity.GetPosition().Y + _marginY,
-        entity.GetTWidth() - 2*_marginX,
-        entity.GetTHeight() - 2*_marginY);
+        entity.GetGWidth() - 2*_marginX,
+        entity.GetGHeight() - 2*_marginY);
 
 }

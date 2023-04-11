@@ -3,15 +3,15 @@
   <Asset>
     <lastSaveId>0</lastSaveId>
     <s0>
-      <map>104</map>
+      <map>105</map>
       <character>
         <name>BATMAN</name>
         <life>71000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>132</x>
-          <y>180</y>
+          <x>496</x>
+          <y>195</y>
           <orientation>1</orientation>
         </position>
         <attributes>

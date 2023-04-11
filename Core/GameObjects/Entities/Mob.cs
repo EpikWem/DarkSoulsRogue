@@ -1,3 +1,4 @@
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -6,7 +7,7 @@ namespace DarkSoulsRogue.Core.GameObjects.Entities;
 public class Mob : Entity
 {
     
-    protected Mob(Texture2D[] textures, Hitbox hitbox) : base(textures, hitbox)
+    protected Mob(Armor baseArmor, Hitbox hitbox) : base(baseArmor, hitbox)
     {
         
     }

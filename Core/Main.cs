@@ -125,13 +125,10 @@ public class Main : Game
             }
             
             // character position updates
-            if (Controls.TestForMovementKey())
-            {
-                Character.Move(GetCollisionsList());
-                Character.TransitMap(Character.TestOutOfMap());
-            }
-            
-            // update IngameMenu if displayed
+            Character.Move(GetCollisionsList());
+            Character.TransitMap(Character.TestOutOfMap());
+
+                // update IngameMenu if displayed
             if (IngameMenu.IsActive())
             {
                 IngameMenu.Update();

@@ -27,7 +27,7 @@ public class Character : Entity
     private bool _running;
     public bool ShieldUp;
 
-    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(4, 20))
+    public Character(string name) : base(Armor.Naked, new Hitbox(4, 20))
     {
         Name = name;
         Attributes = new Attributes();
@@ -48,10 +48,10 @@ public class Character : Entity
         if (ShieldUp && Orientation == Orientation.Up)
         {
             spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
-            base.Draw(spriteBatch);
+            base.Draw(spriteBatch, Inventory.EquippedArmor);
             return;
         }
-        base.Draw(spriteBatch);
+        base.Draw(spriteBatch, Inventory.EquippedArmor);
         if (ShieldUp)
             spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
     }
@@ -77,6 +77,10 @@ public class Character : Entity
         }
         else
             AddStamina(StaminaGain());
+
+        // Test if movement is needed
+        if (!Controls.TestForMovementKey())
+            return;
         
         var speed = MovementSpeed();
 
@@ -197,12 +201,7 @@ public class Character : Entity
     
     public void AddSouls(int souls) => Souls += souls;
 
-    public void ChangeArmor(Armor armor)
-    {
-        Inventory.EquippedArmor = armor;
-        for (var i = 0; i < Textures.Length; i++)
-            Textures[i] = armor.GetWearingTextures()[i];
-    }
+    public void ChangeArmor(Armor armor) => Inventory.EquippedArmor = armor;
     public void ChangeWeapon(Weapon weapon) => Inventory.EquippedWeapon = weapon;
     public void ChangeShield(Shield shield) => Inventory.EquippedShield = shield;
     public void ChangeRing(Ring ring) => Inventory.EquippedRing = ring;

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DarkSoulsRogue.Core.Interfaces;
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
@@ -17,7 +18,7 @@ public class Npc : Mob
     private int _speakingStage;
     public bool IsSpeaking;
 
-    public Npc(int xGrid, int yGrid, Texture2D[] textures, Orientation baseOrientation, List<string> speaks) : base(textures, new Hitbox(12, 24))
+    public Npc(int xGrid, int yGrid, Armor baseArmor, Orientation baseOrientation, List<string> speaks) : base(baseArmor, new Hitbox(12, 24))
     {
         PlaceOnGrid(xGrid, yGrid, baseOrientation);
         _baseOrientation = baseOrientation;
