@@ -10,12 +10,6 @@ public abstract class GameObject
     protected readonly int Width, Height;
     protected Vector2 Position;
     private Texture2D _texture;
-
-    protected GameObject()
-    {
-        Width = Camera.CellSize;
-        Height = Camera.CellSize;
-    }
     
     protected GameObject(Texture2D texture)
     {

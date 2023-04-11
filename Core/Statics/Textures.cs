@@ -26,6 +26,8 @@ public static class Textures
         {
             LoadCharacterTextures("link", content),
             LoadCharacterTextures("artorias", content),
+            LoadCharacterTextures("blackiron", content),
+            LoadCharacterTextures("crimson", content),
             LoadCharacterTextures("solaire", content)
         };
         ShieldTextures = new List<Texture2D[]>

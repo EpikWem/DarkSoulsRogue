@@ -13,7 +13,7 @@ public class Ladder : InteractiveObject
     private readonly Destination _destination;
     
     public Ladder(int xInGrid, int yInGrid, bool isTop, Destination destination)
-        : base(xInGrid, yInGrid, (isTop ? Textures.LadderTopT : Textures.LadderBottomT))
+        : base(xInGrid, yInGrid, isTop ? Textures.LadderTopT : Textures.LadderBottomT)
     {
         _destination = destination;
     }

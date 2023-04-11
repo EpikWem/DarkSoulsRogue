@@ -33,7 +33,13 @@ public abstract class Entity : GameObject
     public int GetTWidth() => Textures[0].Width;
     public int GetTHeight() => Textures[0].Height;
 
-    public new void Draw(SpriteBatch batch) => batch.Draw(GetTextureToDraw(), Position, Color.White);
+    public new void Draw(SpriteBatch batch)
+    {
+        batch.Draw(Main.PixelTexture, GetGraphicbox(), Color.Orange);
+        batch.Draw(Main.PixelTexture, GetHitbox(), Color.Purple);
+        batch.Draw(GetTextureToDraw(), Position, Color.White);
+        batch.Draw(Main.PixelTexture, new Rectangle((int)GetLookingPoint().X, (int)GetLookingPoint().Y, 4, 4), Color.Red);
+    }
 
     private Texture2D GetTextureToDraw() => Textures[Orientation.Index];
 
@@ -44,18 +50,15 @@ public abstract class Entity : GameObject
             3 => new Vector2(Position.X, Position.Y + (float)Height/2),
             _ => new Vector2(0, 0) };
 
-    public Vector2 GetLookingCell() => new(
-            (int)(GetLookingPoint().X / Camera.CellSize),
-            (int)(GetLookingPoint().Y / Camera.CellSize));
-
-    public void PlaceOnGrid(float xGrid, float yGrid, Orientation orientation)
+    public void PlaceOnGrid(int xGrid, int yGrid, Orientation orientation)
     {
-        Position.X = xGrid * Camera.CellSize + (float)_hitbox.GetMarginX()/2;
-        Position.Y = yGrid * Camera.CellSize - _hitbox.GetMarginY();
+        SetPosition(
+            xGrid * Camera.CellSize,
+            yGrid * Camera.CellSize - _hitbox.GetMarginY());
         Orientation = orientation;
     }
     
-    public void PlaceOnGrid(Destination destination) => PlaceOnGrid(destination.PositionOnGrid.X, destination.PositionOnGrid.Y, destination.Orientation);
+    public void PlaceOnGrid(Destination destination) => PlaceOnGrid((int)destination.PositionOnGrid.X, (int)destination.PositionOnGrid.Y, destination.Orientation);
 
     //TODO: public Vector2 PositionOnGrid() => new Vector2((float)Math.Truncate(Position.X / Camera.CellSize), (float)Math.Truncate(Position.Y / Camera.CellSize));
     

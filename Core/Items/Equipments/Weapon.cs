@@ -12,7 +12,7 @@ public class Weapon : Equipment
         AstoraSword = new("Astoras Straight Sword", WeaponTypes.StraightSword, DamageTypes.Slash, false, new []{80, 80, 0, 0}, new ParamBonus(ParamBonus.C, ParamBonus.C, ParamBonus.F, ParamBonus.C), new float[]{0.5f, 0.1f, 0.35f, 0.35f}, 32, 3.0f);
     
     public static Weapon GetFromIndex(int i) => Weapons[i];
-    public static int GetIndexOf(Weapon weapon) => Weapons.IndexOf(weapon);
+    public static int GetIndexOf(Weapon weapon) => weapon != null ? Weapons.IndexOf(weapon) : 0;
     private static readonly List<Weapon>
         Weapons = new() {
             BareFist,

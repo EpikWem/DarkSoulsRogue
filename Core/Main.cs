@@ -4,7 +4,7 @@ using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Interfaces;
-using DarkSoulsRogue.Core.Items.Equipments;
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
@@ -98,11 +98,11 @@ public class Main : Game
         if (Controls.ToggleFullscreen.IsPressed)
             _graphics.ToggleFullScreen();
         if (Controls.Debug1.IsOnePressed)
-            Character.ChangeShield(Shield.NoShield);
+            Character.ChangeArmor(Armor.Crimson);
         if (Controls.Debug2.IsOnePressed)
-            Character.ChangeShield(Shield.BasicShield);
+            Character.ChangeArmor(Armor.Artorias);
         if (Controls.Debug3.IsOnePressed)
-            Character.ChangeShield(Shield.GrassShield);
+            Character.ChangeArmor(Armor.BlackIron);
 
         // update title menu
         if (TitleScreen.IsActive())
@@ -112,7 +112,7 @@ public class Main : Game
         }
         
         // update game
-        else
+        if (!TitleScreen.IsActive())
         {
             // while player is speaking to a Npc, skip character update
             foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc)))
@@ -125,8 +125,11 @@ public class Main : Game
             }
             
             // character position updates
-            Character.Move(GetCollisionsList());
-            Character.TransitMap(Character.TestOutOfMap());
+            if (Controls.TestForMovementKey())
+            {
+                Character.Move(GetCollisionsList());
+                Character.TransitMap(Character.TestOutOfMap());
+            }
             
             // update IngameMenu if displayed
             if (IngameMenu.IsActive())
@@ -141,7 +144,7 @@ public class Main : Game
             // interactions with InteractiveObjects and Npc 
             if (Controls.Interact.IsOnePressed)
             {
-                foreach (var o in _currentMap.Objects.Where(o => o.GetPositionOnGrid() == Character.GetLookingCell()))
+                foreach (var o in _currentMap.Objects.Where(o => o.GetHitbox().Contains(Character.GetLookingPoint())))
                     o.Interact(Character);
                 foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc) && e.GetGraphicbox().Contains(Character.GetLookingPoint())))
                     ((Npc)entity).Interact(Character);

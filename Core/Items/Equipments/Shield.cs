@@ -15,7 +15,7 @@ public class Shield : Equipment
         NoShield, BasicShield, GrassShield
     };
     public static Shield GetFromIndex(int i) => Shields[i];
-    public static int GetIndexOf(Shield shield) => Shields.IndexOf(shield);
+    public static int GetIndexOf(Shield shield) => shield != null ? Shields.IndexOf(shield) : 0;
     
     public Texture2D GetTexture(Orientation orientation) => Textures.ShieldTextures[GetIndexOf(this)][orientation.Index];
 

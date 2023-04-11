@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using System.Linq;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Equipments;
@@ -14,7 +14,7 @@ public class Character : Entity
 {
 
     //private const int MarginS = 4, MarginU = 12, MarginD = 6;
-    private const int ExhaustionTime = 120, BaseSpeed = 3, BaseSpeedSprint = 5;
+    private const int ExhaustionTime = 120;
     private const int BaseStaminaLoss = -20, BaseStaminaGain = 45;
 
     public string Name;
@@ -24,9 +24,10 @@ public class Character : Entity
     public readonly Triggers Triggers;
     public readonly Inventory Inventory;
     private int _exhaustingTime;
+    private bool _running;
     public bool ShieldUp;
 
-    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(6, 10))
+    public Character(string name) : base(Armor.Naked.GetWearingTextures(), new Hitbox(4, 20))
     {
         Name = name;
         Attributes = new Attributes();
@@ -38,6 +39,7 @@ public class Character : Entity
         Life = MaxLife();
         Stamina = MaxStamina();
         _exhaustingTime = 0;
+        _running = false;
         ShieldUp = false;
     }
 
@@ -57,7 +59,7 @@ public class Character : Entity
     public void Move(List<Rectangle> collisions)
     {
         var oldPosition = new Vector2(Position.X, Position.Y);
-        var speed = BaseSpeed;
+        _running = false;
         
         // Running and Stamina control
         if (Controls.Run.IsPressed
@@ -67,23 +69,17 @@ public class Character : Entity
                 _exhaustingTime = ExhaustionTime;
             if (_exhaustingTime == 0)
             {
-                speed = BaseSpeedSprint;
+                _running = true;
                 AddStamina(BaseStaminaLoss);
             }
             else
-            {
                 _exhaustingTime--;
-            }
         }
         else
-        {
             AddStamina(StaminaGain());
-        }
-
-        // double speed fix (when pressing two directions at once)
-        if (GetNumberOfPressedMovements() >= 2)
-            speed--;
         
+        var speed = MovementSpeed();
+
         // Real Movement Vertical
         if (Controls.Up.IsPressed)
         {
@@ -119,7 +115,6 @@ public class Character : Entity
                 Position.X = oldPosition.X;
                 break;
             }
-        
     }
 
     private static int GetNumberOfPressedMovements()
@@ -165,18 +160,26 @@ public class Character : Entity
 
     public int MaxStamina() => (int)((80 + Attributes.Get(Attributes.Attribute.Endurance) * 2) * 100
         * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f));
+    
     private int StaminaGain() => (int)((BaseStaminaGain
-        * (EquipLoadRatio() > 0.5f ? 0.7f : 1f )
+        * (EquipLoadRatio() > 0.5f ? 0.7f : 1f)
         + (Inventory.EquippedRing == Ring.Cloranthy ? 20f : 0f)
         + (Inventory.EquippedShield == Shield.GrassShield ? 10f : 0f))
         * (ShieldUp ? 0.2f : 1f));
+    
     private float MaxEquipLoad() => 40f + Attributes.Get(Attributes.Attribute.Endurance)
         * (Inventory.EquippedRing == Ring.Havel ? 1.5f : 1f)
         * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f);
 
     public float EquipLoadRatio() =>
-        Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight //TODO: etc...
+        (Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight) //TODO: +etc...
         / MaxEquipLoad();
+
+    public int MovementSpeed() => (GetNumberOfPressedMovements() > 1 && EquipLoadRatio() <= 0.75f ? -1 : 0) + EquipLoadRatio() switch {
+        <= 0.25f    =>  _running ? 4 : 3,
+        <= 0.50f    =>  _running ? 3 : 2,
+        <= 0.75f    =>  _running ? 2 : 1,
+        _           =>  0 };
 
     public void AddLife(int hp)
     {
@@ -192,10 +195,7 @@ public class Character : Entity
             Stamina = MaxStamina();
     }
     
-    public void AddSouls(int souls)
-    {
-        Souls += souls;
-    }
+    public void AddSouls(int souls) => Souls += souls;
 
     public void ChangeArmor(Armor armor)
     {
@@ -203,17 +203,8 @@ public class Character : Entity
         for (var i = 0; i < Textures.Length; i++)
             Textures[i] = armor.GetWearingTextures()[i];
     }
-    public void ChangeWeapon(Weapon weapon)
-    {
-        Inventory.EquippedWeapon = weapon;
-    }
-    public void ChangeShield(Shield shield)
-    {
-        Inventory.EquippedShield = shield;
-    }
-    public void ChangeRing(Ring ring)
-    {
-        Inventory.EquippedRing = ring;
-    }
+    public void ChangeWeapon(Weapon weapon) => Inventory.EquippedWeapon = weapon;
+    public void ChangeShield(Shield shield) => Inventory.EquippedShield = shield;
+    public void ChangeRing(Ring ring) => Inventory.EquippedRing = ring;
 
 }

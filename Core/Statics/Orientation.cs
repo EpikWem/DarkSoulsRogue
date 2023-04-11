@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace DarkSoulsRogue.Core.Statics;
+﻿namespace DarkSoulsRogue.Core.Statics;
 
 public class Orientation
 {

@@ -111,7 +111,7 @@ public class Map
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1} },
             new List<InteractiveObject> (), 
             new List<Entity> {
-                new Npc(new Vector2(7, 2), Textures.ArmorTextures[0], Orientation.Down, Speaks.Solarius) },
+                new Npc(7, 2, Textures.ArmorTextures[0], Orientation.Down, Speaks.Solarius) },
             new Destination[] {
                 null,
                 new(104, new Vector2(7, 1), Orientation.Down),
