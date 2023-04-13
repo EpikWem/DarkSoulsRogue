@@ -45,13 +45,16 @@ public class Character : Entity
 
     public new void Draw(SpriteBatch spriteBatch)
     {
-        if (ShieldUp && Orientation == Orientation.Up)
+        if (Orientation == Orientation.Up)
         {
-            spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
+            if (ShieldUp)
+                spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
             base.Draw(spriteBatch, Inventory.EquippedArmor);
             return;
         }
         base.Draw(spriteBatch, Inventory.EquippedArmor);
+        if (Orientation == Orientation.Right || Orientation == Orientation.Left)
+            spriteBatch.Draw(Textures.WeaponTextures[0][Orientation.Index], Position, Color.White);
         if (ShieldUp)
             spriteBatch.Draw(Inventory.EquippedShield.GetTexture(Orientation), Position, Color.White);
     }

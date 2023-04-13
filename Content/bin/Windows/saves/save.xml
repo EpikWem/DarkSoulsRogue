@@ -10,8 +10,8 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>452</x>
-          <y>339</y>
+          <x>496</x>
+          <y>195</y>
           <orientation>1</orientation>
         </position>
         <attributes>
@@ -51,7 +51,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>1</equippedArmor>
+          <equippedArmor>3</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>

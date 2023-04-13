@@ -14,7 +14,7 @@ public static class Textures
     public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
-    public static List<Texture2D[]> ArmorTextures, ShieldTextures;
+    public static List<Texture2D[]> ArmorTextures, WeaponTextures, ShieldTextures;
 
 
     public static void Init(ContentManager content)
@@ -29,6 +29,10 @@ public static class Textures
             LoadCharacterTextures("blackiron", content),
             LoadCharacterTextures("crimson", content),
             LoadCharacterTextures("solaire", content)
+        };
+        WeaponTextures = new List<Texture2D[]>
+        {
+            LoadEquipmentTextures(ETStraightswords, "passive", content)
         };
         ShieldTextures = new List<Texture2D[]>
         {
@@ -69,7 +73,7 @@ public static class Textures
     }
 
     private const string
-        ETShields = "shields/";
+        ETShields = "shields/", ETStraightswords = "straightswords/";
     private static Texture2D[] LoadEquipmentTextures(string equipmentType, string equipmentName, ContentManager content)
     {
         return new[]
