@@ -82,7 +82,7 @@ public static class TitleScreen
         
         internal override void Update()
         {
-            if (Controls.Interact.IsOnePressed)
+            if (Control.Interact.IsOnePressed())
             {
                 switch (TitleM._selectionId)
                 {
@@ -95,19 +95,19 @@ public static class TitleScreen
                 }
             }
 
-            if (Controls.MenuUp.IsOnePressed)
+            if (Control.MenuUp.IsOnePressed())
             {
                 if (_selectionId > FirstChoice())
                     _selectionId--;
             }
 
-            if (Controls.MenuDown.IsOnePressed)
+            if (Control.MenuDown.IsOnePressed())
             {
                 if (_selectionId < LastChoice())
                     _selectionId++;
             }
 
-            if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
+            if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 _selectionId = LastChoice();
         }
 
@@ -153,7 +153,7 @@ public static class TitleScreen
 
         internal override void Update()
         {
-            if (Controls.Interact.IsOnePressed)
+            if (Control.Interact.IsOnePressed())
             {
                 if (_forNewSave != null)
                     _forNewSave.Value = _selectedGameId;
@@ -164,18 +164,18 @@ public static class TitleScreen
                 }
                     
             }
-            if (Controls.MenuUp.IsOnePressed)
+            if (Control.MenuUp.IsOnePressed())
             {
                 if (_selectedGameId > FirstGameChoice())
                     _selectedGameId--;
             }
-            if (Controls.MenuDown.IsOnePressed)
+            if (Control.MenuDown.IsOnePressed())
             {
                 if (_selectedGameId < LastGameChoice())
                     _selectedGameId++;
             }
 
-            if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
+            if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 Activate();
         }
         
@@ -319,21 +319,21 @@ public static class TitleScreen
 
             internal override void Update()
             {
-                if (Controls.Interact.IsOnePressed)
+                if (Control.Interact.IsOnePressed())
                 {
                     IsConfirmed = true;
                 }
-                if (Controls.MenuUp.IsOnePressed)
+                if (Control.MenuUp.IsOnePressed())
                 {
                     if (_selectedClass > FirstClassChoice())
                         _selectedClass--;
                 }
-                if (Controls.MenuDown.IsOnePressed)
+                if (Control.MenuDown.IsOnePressed())
                 {
                     if (_selectedClass < LastClassChoice())
                         _selectedClass++;
                 }
-                if (Controls.MenuBack.IsOnePressed || Controls.Pause.IsOnePressed)
+                if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                     Activate();
             }
         

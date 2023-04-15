@@ -13,14 +13,14 @@ namespace DarkSoulsRogue.Core.System;
 public static class SaveSystem
 {
 
-    private const string SavesPath = Main.ContentPath + @"saves\";
+    private const string SaveFilePath = Main.ContentPath + @"saves\save.xml";
     public const int SavesCount = 4;
 
     private static readonly XmlDocument SaveFile = new();
     
     public static void Init()
     {
-        SaveFile.Load(GetSaveFilePath());
+        SaveFile.Load(SaveFilePath);
     }
 
 
@@ -118,9 +118,15 @@ public static class SaveSystem
         for (var i = 0; i < Map.GetObjectsCount(); i++)
             node!.ChildNodes[i]!.InnerText = Map.GetObject(i).GetState().ToString();
         
-        SaveFile.Save(GetSaveFilePath());
+        SaveFile.Save(SaveFilePath);
     }
 
+    
+    
+    /**=============================================================
+     *= OTHER METHODS ==============================================
+     *============================================================*/
+    
     public static void CreateNewSave(int newSaveId, string name, List<int> attributes)
     {
         Main.LoadMap(101);
@@ -139,9 +145,6 @@ public static class SaveSystem
             .GetWearingTextures()[1];
     public static string GetGameName(int gameId) =>
         GetString(SaveFile!["XnaContent"]!["Asset"]!["s" + gameId]!["character"]!["name"]);
-
-    private static string GetSaveFilePath() => SavesPath + "save.xml";
-    private static string GetSettingsPath() => SavesPath + "settings.xml";
 
     private static int GetInt(XmlNode node) => int.Parse(node.InnerText);
     private static bool GetBool(XmlNode node) => bool.Parse(node.InnerText);

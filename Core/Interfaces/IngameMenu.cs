@@ -47,7 +47,7 @@ public static class IngameMenu
     
     public static void Update()
     {
-        if (Controls.Pause.IsOnePressed)
+        if (Control.Pause.IsOnePressed())
         {
             _isActive = false;
             return;
@@ -57,9 +57,9 @@ public static class IngameMenu
             QuitM.Update();
             return;
         }
-        if (Controls.MenuBack.IsOnePressed)
+        if (Control.MenuBack.IsOnePressed())
             ToggleQuit();
-        if (Controls.Consumable.IsOnePressed || Controls.Catalyst.IsOnePressed || Controls.Weapon.IsOnePressed || Controls.Shield.IsOnePressed)
+        if (Control.Consumable.IsOnePressed() || Control.Catalyst.IsOnePressed() || Control.Weapon.IsOnePressed() || Control.Shield.IsOnePressed())
             SwitchMenu();
         
     }
@@ -126,7 +126,7 @@ public static class IngameMenu
         }
         internal override void Update()
         {
-            if (Controls.Interact.IsOnePressed)
+            if (Control.Interact.IsOnePressed())
             {
                 if (_selection) // if OK
                 {
@@ -138,12 +138,12 @@ public static class IngameMenu
                 ToggleQuit();
                 return;
             }
-            if (Controls.MenuBack.IsOnePressed)
+            if (Control.MenuBack.IsOnePressed())
             { // GO BACK
                 ToggleQuit();
                 return;
             }
-            if (Controls.MenuRight.IsOnePressed || Controls.MenuLeft.IsOnePressed)
+            if (Control.MenuRight.IsOnePressed() || Control.MenuLeft.IsOnePressed())
                 _selection = !_selection;
         }
         internal override void Draw(SpriteBatch spriteBatch)

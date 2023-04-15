@@ -10,6 +10,7 @@ using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core;
 
@@ -56,6 +57,8 @@ public class Main : Game
         Fonts.Init(Content);
         Langs.Init(Content);
         SaveSystem.Init();
+        SettingsSystem.Init();
+        SettingsSystem.Load();
         
         CurrentSaveId = 0;
         _background = new Background();
@@ -90,19 +93,19 @@ public class Main : Game
     
     protected override void Update(GameTime gameTime)
     {
-        Controls.UpdateKeyListener(); // key states update
+        Control.UpdateKeyListener(); // key states update
         
         // universal key tests
-        if (Controls.KillApp.IsPressed)
+        if (Control.KillApp.IsPressed())
             Exit(); // kill app with F10
-        if (Controls.ToggleFullscreen.IsPressed)
+        if (Control.ToggleFullscreen.IsPressed())
             _graphics.ToggleFullScreen();
-        if (Controls.Debug1.IsOnePressed)
+        if (Control.Debug1.IsOnePressed())
             Character.ChangeArmor(Armor.Crimson);
-        if (Controls.Debug2.IsOnePressed)
+        if (Control.Debug2.IsOnePressed())
             Character.ChangeArmor(Armor.Artorias);
-        if (Controls.Debug3.IsOnePressed)
-            Character.ChangeArmor(Armor.BlackIron);
+        if (Control.Debug3.IsOnePressed())
+            SettingsSystem.ResetToDefault();
 
         // update title menu
         if (TitleScreen.IsActive())
@@ -135,11 +138,11 @@ public class Main : Game
                 return;
             }
             // activate menu if pause is pressed
-            if (Controls.Pause.IsOnePressed)
+            if (Control.Pause.IsOnePressed())
                 IngameMenu.Activate();
 
             // interactions with InteractiveObjects and Npc 
-            if (Controls.Interact.IsOnePressed)
+            if (Control.Interact.IsOnePressed())
             {
                 foreach (var o in _currentMap.Objects.Where(o => o.GetHitbox().Contains(Character.GetLookingPoint())))
                     o.Interact(Character);
@@ -148,7 +151,7 @@ public class Main : Game
             }
             
             // shield key test
-            Character.ShieldUp = Controls.Shield.IsPressed;
+            Character.ShieldUp = Control.Shield.IsPressed();
         }
 
         base.Update(gameTime);
@@ -202,6 +205,7 @@ public class Main : Game
     public static void GotoTitle()
     {
         SaveSystem.Save();
+        SettingsSystem.Save();
         TitleScreen.Activate();
     }
 

@@ -19,7 +19,7 @@ public class TextArea
 
     public States Update()
     {
-        if (Controls.Enter.IsOnePressed)
+        if (Control.Enter.IsOnePressed())
             return States.Confirmed;
         var v = GetPressedCharacters();
         if (v != "")
@@ -39,62 +39,62 @@ public class TextArea
     private static string GetPressedCharacters()
     {
         var result = "";
-        var maj = Controls.IsPressed(Keys.LeftShift) || Controls.IsPressed(Keys.RightShift); 
-        if (Controls.A.IsOnePressed)
+        var maj = Control.IsPressed(Keys.LeftShift) || Control.IsPressed(Keys.RightShift); 
+        if (Control.A.IsOnePressed())
             result += maj ? "A" : "a";
-        if (Controls.B.IsOnePressed)
+        if (Control.B.IsOnePressed())
             result += maj ? "B" : "b";
-        if (Controls.C.IsOnePressed)
+        if (Control.C.IsOnePressed())
             result += maj ? "C" : "c";
-        if (Controls.D.IsOnePressed)
+        if (Control.D.IsOnePressed())
             result += maj ? "D" : "d";
-        if (Controls.E.IsOnePressed)
+        if (Control.E.IsOnePressed())
             result += maj ? "E" : "e";
-        if (Controls.F.IsOnePressed)
+        if (Control.F.IsOnePressed())
             result += maj ? "F" : "f";
-        if (Controls.G.IsOnePressed)
+        if (Control.G.IsOnePressed())
             result += maj ? "G" : "g";
-        if (Controls.H.IsOnePressed)
+        if (Control.H.IsOnePressed())
             result += maj ? "H" : "h";
-        if (Controls.I.IsOnePressed)
+        if (Control.I.IsOnePressed())
             result += maj ? "I" : "i";
-        if (Controls.J.IsOnePressed)
+        if (Control.J.IsOnePressed())
             result += maj ? "J" : "j";
-        if (Controls.K.IsOnePressed)
+        if (Control.K.IsOnePressed())
             result += maj ? "K" : "k";
-        if (Controls.L.IsOnePressed)
+        if (Control.L.IsOnePressed())
             result += maj ? "L" : "l";
-        if (Controls.M.IsOnePressed)
+        if (Control.M.IsOnePressed())
             result += maj ? "M" : "m";
-        if (Controls.N.IsOnePressed)
+        if (Control.N.IsOnePressed())
             result += maj ? "N" : "n";
-        if (Controls.O.IsOnePressed)
+        if (Control.O.IsOnePressed())
             result += maj ? "O" : "o";
-        if (Controls.P.IsOnePressed)
+        if (Control.P.IsOnePressed())
             result += maj ? "P" : "p";
-        if (Controls.Q.IsOnePressed)
+        if (Control.Q.IsOnePressed())
             result += maj ? "Q" : "q";
-        if (Controls.R.IsOnePressed)
+        if (Control.R.IsOnePressed())
             result += maj ? "R" : "r";
-        if (Controls.S.IsOnePressed)
+        if (Control.S.IsOnePressed())
             result += maj ? "S" : "s";
-        if (Controls.T.IsOnePressed)
+        if (Control.T.IsOnePressed())
             result += maj ? "T" : "t";
-        if (Controls.U.IsOnePressed)
+        if (Control.U.IsOnePressed())
             result += maj ? "U" : "u";
-        if (Controls.V.IsOnePressed)
+        if (Control.V.IsOnePressed())
             result += maj ? "V" : "v";
-        if (Controls.W.IsOnePressed)
+        if (Control.W.IsOnePressed())
             result += maj ? "W" : "w";
-        if (Controls.X.IsOnePressed)
+        if (Control.X.IsOnePressed())
             result += maj ? "X" : "x";
-        if (Controls.Y.IsOnePressed)
+        if (Control.Y.IsOnePressed())
             result += maj ? "Y" : "y";
-        if (Controls.Z.IsOnePressed)
+        if (Control.Z.IsOnePressed())
             result += maj ? "Z" : "z";
-        if (Controls.D6.IsOnePressed)
+        if (Control.D6.IsOnePressed())
             result += "-";
-        if (Controls.D8.IsOnePressed)
+        if (Control.D8.IsOnePressed())
             result += "_";
         return result;
     }

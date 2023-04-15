@@ -146,9 +146,9 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>557</x>
-          <y>396</y>
-          <orientation>0</orientation>
+          <x>351</x>
+          <y>330</y>
+          <orientation>2</orientation>
         </position>
         <attributes>
           <vitality>9</vitality>

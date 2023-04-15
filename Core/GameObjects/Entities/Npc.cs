@@ -4,8 +4,6 @@ using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.GameObjects.Entities;
 
@@ -46,7 +44,7 @@ public class Npc : Mob
         }
         else
         {
-            if (!Controls.Interact.IsOnePressed)
+            if (!Control.Interact.IsOnePressed())
                 return;
             if (_speakingStage >= _speaks.Count-1)
             {

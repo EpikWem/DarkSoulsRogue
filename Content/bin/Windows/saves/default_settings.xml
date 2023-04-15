@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent>
+  <Asset>
+    <controls>
+      <up></up>
+      <down></down>
+      <right></right>
+      <left></left>
+      <interact></interact>
+      <run></run>
+      <weapon></weapon>
+      <shield></shield>
+      <consumable></consumable>
+      <catalyst></catalyst>
+      <menuUp></menuUp>
+      <menuDown></menuDown>
+      <menuRight></menuRight>
+      <menuLeft></menuLeft>
+      <menuBack></menuBack>
+      <enter></enter>
+    </controls>
+  </Asset>
+</XnaContent>

@@ -1,5 +1,4 @@
  using System.Collections.Generic;
-using System.Linq;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Statics;
@@ -65,7 +64,7 @@ public class Character : Entity
         _running = false;
         
         // Running and Stamina control
-        if (Controls.Run.IsPressed
+        if (Control.Run.IsPressed()
             && GetNumberOfPressedMovements() >= 1)
         {
             if (Stamina < 0)
@@ -82,18 +81,18 @@ public class Character : Entity
             AddStamina(StaminaGain());
 
         // Test if movement is needed
-        if (!Controls.TestForMovementKey())
+        if (!Control.TestForMovementKey())
             return;
         
         var speed = MovementSpeed();
 
         // Real Movement Vertical
-        if (Controls.Up.IsPressed)
+        if (Control.Up.IsPressed())
         {
             Orientation = Orientation.Up;
             Position.Y -= speed;
         }
-        if (Controls.Down.IsPressed)
+        if (Control.Down.IsPressed())
         {
             Orientation = Orientation.Down;
             Position.Y += speed;
@@ -106,12 +105,12 @@ public class Character : Entity
             }
         
         // Real Movement Horizontal
-        if (Controls.Right.IsPressed)
+        if (Control.Right.IsPressed())
         {
             Orientation = Orientation.Right;
             Position.X += speed;
         }
-        if (Controls.Left.IsPressed)
+        if (Control.Left.IsPressed())
         {
             Orientation = Orientation.Left;
             Position.X -= speed;
@@ -127,13 +126,13 @@ public class Character : Entity
     private static int GetNumberOfPressedMovements()
     {
         var result = 0;
-        if (Controls.Up.IsPressed)
+        if (Control.Up.IsPressed())
             result++;
-        if (Controls.Down.IsPressed)
+        if (Control.Down.IsPressed())
             result++;
-        if (Controls.Right.IsPressed)
+        if (Control.Right.IsPressed())
             result++;
-        if (Controls.Left.IsPressed)
+        if (Control.Left.IsPressed())
             result++;
         return result;
     }

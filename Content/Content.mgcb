@@ -623,11 +623,12 @@
 #begin langs/fr.xml
 /copy:langs/fr.xml
 
+#begin saves/default_settings.xml
+/copy:saves/default_settings.xml
+
 #begin saves/save.xml
 /copy:saves/save.xml
 
 #begin saves/settings.xml
-/importer:XmlImporter
-/processor:PassThroughProcessor
-/build:saves/settings.xml
+/copy:saves/settings.xml
 
