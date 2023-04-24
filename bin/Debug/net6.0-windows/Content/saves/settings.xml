@@ -2,16 +2,19 @@
 <XnaContent>
   <Asset>
     <controls>
-      <up>0</up>
-      <down>0</down>
-      <right>10</right>
-      <left>5</left>
+      <up>90</up>
+      <down>83</down>
+      <right>68</right>
+      <left>81</left>
       <interact>69</interact>
-      <run>34</run>
-      <weapon>1</weapon>
+      <run>32</run>
+      <weapon>79</weapon>
       <shield>80</shield>
-      <consumable>75</consumable>
+      <consumable>82</consumable>
       <catalyst>70</catalyst>
+      <switchConsumable>160</switchConsumable>
+      <switchSpell>162</switchSpell>
+      <write>88</write>
       <menuUp>38</menuUp>
       <menuDown>40</menuDown>
       <menuRight>39</menuRight>

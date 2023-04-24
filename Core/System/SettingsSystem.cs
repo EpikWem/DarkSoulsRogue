@@ -3,12 +3,11 @@ using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core.System;
 
-public class SettingsSystem
+public static class SettingsSystem
 {
     
     private const string SettingsFilePath = Main.ContentPath + @"saves\settings.xml";
     private const string DefaultFilePath = Main.ContentPath + @"saves\default_settings.xml";
-    public const int SavesCount = 4;
 
     private static readonly XmlDocument SettingsFile = new();
     
@@ -35,6 +34,9 @@ public class SettingsSystem
         SetupControl(Control.Shield, "shield");
         SetupControl(Control.Consumable, "consumable");
         SetupControl(Control.Catalyst, "catalyst");
+        SetupControl(Control.SwitchConsumable, "switchConsumable");
+        SetupControl(Control.SwitchSpell, "switchSpell");
+        SetupControl(Control.Write, "write");
         SetupControl(Control.MenuUp, "menuUp");
         SetupControl(Control.MenuDown, "menuDown");
         SetupControl(Control.MenuRight, "menuRight");
@@ -60,6 +62,9 @@ public class SettingsSystem
         SaveControl(Control.Shield, "shield");
         SaveControl(Control.Consumable, "consumable");
         SaveControl(Control.Catalyst, "catalyst");
+        SaveControl(Control.SwitchConsumable, "switchConsumable");
+        SaveControl(Control.SwitchSpell, "switchSpell");
+        SaveControl(Control.Write, "write");
         SaveControl(Control.MenuUp, "menuUp");
         SaveControl(Control.MenuDown, "menuDown");
         SaveControl(Control.MenuRight, "menuRight");

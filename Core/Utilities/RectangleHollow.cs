@@ -6,7 +6,7 @@ namespace DarkSoulsRogue.Core.Utilities;
 public class RectangleHollow
 {
     
-    public readonly Rectangle Rectangle;
+    public Rectangle Rectangle;
     public readonly Color ColorBorder, ColorBackground;
     public readonly int Thickness;
 
@@ -44,5 +44,8 @@ public class RectangleHollow
                 Rectangle.Height - 2*Thickness),
             ColorBackground);
     }
+
+    public void SetPosition(int x, int y) => Rectangle.Location = new Point(x, y);
+    public void SetPosition(Vector2 position) => SetPosition((int)position.X, (int)position.Y);
 
 }

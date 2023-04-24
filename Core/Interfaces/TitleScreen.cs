@@ -1,11 +1,9 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using NotImplementedException = System.NotImplementedException;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
@@ -25,35 +23,49 @@ public static class TitleScreen
 
     private static bool _isActive;
     private static Menu _currentMenu;
+    private static bool _wantsToQuit;
 
     private static readonly TitleMenu TitleM = new();
     private static readonly GameSelectionMenu GameSelectionM = new();
     private static readonly GameCreationMenu GameCreationM = new();
+    private static readonly SettingsMenu SettingsM = new();
 
     public static bool IsActive() => _isActive;
     public static void Activate()
     {
+        _wantsToQuit = false;
         _isActive = true;
-        ChangeMenu(TitleM);
+        TitleM.Reinit();
+        _currentMenu = TitleM;
     }
 
-    private static void ChangeMenu(Menu menu)
+    private static void ChangeMenu()
     {
-        _currentMenu = menu;
+        switch (TitleM.SelectionId())
+        {
+            case 0: _isActive = false; SaveSystem.Load(); return;
+            case 1: _currentMenu = GameSelectionM; break;
+            case 2: _currentMenu = GameCreationM; break;
+            case 3: _currentMenu = SettingsM; break;
+            case 4: _wantsToQuit = true; return;
+            default: return;
+        }
         _currentMenu.Reinit();
     }
     
     //RETURNS: true to QuitApp()
     public static bool Update()
     {
+        if (_currentMenu == SettingsM && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
+        {
+            Activate();
+            return false;
+        }
         _currentMenu.Update();
-        return _currentMenu == TitleM && TitleM.WantsToQuit;
+        return _currentMenu == TitleM && _wantsToQuit;
     }
 
-    public static void Draw(SpriteBatch spriteBatch)
-    {
-        _currentMenu.Draw(spriteBatch);
-    }
+    public static void Draw(SpriteBatch spriteBatch) => _currentMenu.Draw(spriteBatch);
     
     
     
@@ -66,49 +78,23 @@ public static class TitleScreen
         
         private static readonly string[] Choices = { "Continue", "Load Game", "New Game", "Settings", "Quit Game" };
         private int _selectionId;
-        public bool WantsToQuit;
         
-        internal TitleMenu()
-        {
-            Reinit();
-        }
+        internal TitleMenu() => Reinit();
 
         //RETURNS: true to QuitApp()
-        internal sealed override void Reinit()
-        {
-            _selectionId = 0;
-            WantsToQuit = false;
-        }
+        internal sealed override void Reinit() => _selectionId = 0;
         
         internal override void Update()
         {
             if (Control.Interact.IsOnePressed())
-            {
-                switch (TitleM._selectionId)
-                {
-                    case 0: _isActive = false; SaveSystem.Load(); return;
-                    case 1: ChangeMenu(GameSelectionM); return;
-                    case 2: ChangeMenu(GameCreationM); return;
-                    case 3: return;
-                    case 4: WantsToQuit = true; return;
-                    default: return;
-                }
-            }
-
-            if (Control.MenuUp.IsOnePressed())
-            {
-                if (_selectionId > FirstChoice())
-                    _selectionId--;
-            }
-
-            if (Control.MenuDown.IsOnePressed())
-            {
-                if (_selectionId < LastChoice())
-                    _selectionId++;
-            }
-
+                ChangeMenu();
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 _selectionId = LastChoice();
+
+            if (Control.MenuUp.IsOnePressed() && _selectionId > FirstChoice())
+                _selectionId--;
+            if (Control.MenuDown.IsOnePressed() && _selectionId < LastChoice())
+                _selectionId++;
         }
 
         internal override void Draw(SpriteBatch spriteBatch)
@@ -122,6 +108,8 @@ public static class TitleScreen
             for (var i = 0; i < Choices.Length; i++)
                 spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Color.White);
         }
+
+        internal int SelectionId() => _selectionId;
         
         private static int FirstChoice() => 0;
         private static int LastChoice() => Choices.Length - 1;
