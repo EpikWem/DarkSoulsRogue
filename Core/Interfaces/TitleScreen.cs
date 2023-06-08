@@ -56,7 +56,7 @@ public static class TitleScreen
     //RETURNS: true to QuitApp()
     public static bool Update()
     {
-        if (_currentMenu == SettingsM && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
+        if (_currentMenu == SettingsM && !SettingsM.IsWaitingForKey() && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
         {
             Activate();
             return false;
@@ -104,7 +104,7 @@ public static class TitleScreen
             var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight;
 
             //spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, 100, HeightOfTitleItem), Color.Orange);
-            new RectangleHollow(csx, csy, TitleItemWidth, TitleItemHeight, Color.Orange, Color.Black, 2).Draw(spriteBatch);
+            new RectangleBordered(csx, csy, TitleItemWidth, TitleItemHeight, Color.Orange, Color.Black, 2).Draw(spriteBatch);
             for (var i = 0; i < Choices.Length; i++)
                 spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Color.White);
         }
@@ -172,7 +172,7 @@ public static class TitleScreen
             var cgx = (int)PositionOfGameList.X - 8;
             var cgy = (int)PositionOfGameList.Y + _selectedGameId * GameItemHeight - 12;
             
-            new RectangleHollow(cgx, cgy, GameItemWidth, GameItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
+            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Color.White);
@@ -331,7 +331,7 @@ public static class TitleScreen
                 var cgx = (int)posList.X - 8;
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 12;
             
-                new RectangleHollow(cgx, cgy, ClassItemWidth, ClassItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
+                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;

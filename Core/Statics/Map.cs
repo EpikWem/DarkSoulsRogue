@@ -154,7 +154,7 @@ public class Map
     public readonly List<Entity> Entities;
     public readonly Destination[] Connections;
 
-    public Map(int id, int[][] walls, List<InteractiveObject> objects, List<Entity> entities, Destination[] connections)
+    private Map(int id, int[][] walls, List<InteractiveObject> objects, List<Entity> entities, Destination[] connections)
     {
         Id = id;
         WallsIds = walls;

@@ -117,7 +117,7 @@ internal class QuitMenu : Menu
 {
     
     private const int QWidth = 500, QHeight = 200;
-    private static readonly RectangleHollow QArea = new((Camera.Width - QWidth)/2, (Camera.Height - QHeight)/2, QWidth, QHeight, Color.WhiteSmoke, Color.Black, 4);
+    private static readonly RectangleBordered QArea = new((Camera.Width - QWidth)/2, (Camera.Height - QHeight)/2, QWidth, QHeight, Color.WhiteSmoke, Color.Black, 4);
     private bool _selection;
 
     internal QuitMenu() => Reinit();
@@ -153,7 +153,7 @@ internal class QuitMenu : Menu
     internal override void Draw(SpriteBatch spriteBatch)
     {
         QArea.Draw(spriteBatch);
-        new RectangleHollow(QArea.Rectangle.X+30 + (_selection ? 90 : 0), QArea.Rectangle.Y+62, 70, 30, Color.Orange, Color.Black, 2).Draw(spriteBatch);
+        new RectangleBordered(QArea.Rectangle.X+30 + (_selection ? 90 : 0), QArea.Rectangle.Y+62, 70, 30, Color.Orange, Color.Black, 2).Draw(spriteBatch);
         spriteBatch.DrawString(Fonts.FontSoulCounter, "Quit to Title ?", new Vector2(QArea.Rectangle.X+10, QArea.Rectangle.Y+10), Color.White);
         spriteBatch.DrawString(Fonts.FontSoulCounter, "Back     Yes", new Vector2(QArea.Rectangle.X+30, QArea.Rectangle.Y+64), Color.White);
     }

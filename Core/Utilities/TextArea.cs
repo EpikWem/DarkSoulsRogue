@@ -8,12 +8,12 @@ namespace DarkSoulsRogue.Core.Utilities;
 public class TextArea
 {
     
-    private readonly RectangleHollow _area;
+    private readonly RectangleBordered _area;
     private string _value;
 
     public TextArea(Rectangle area)
     {
-        _area = new RectangleHollow(area, Color.WhiteSmoke, Color.Black, 2);
+        _area = new RectangleBordered(area, Color.WhiteSmoke, Color.Black, 2);
         _value = "";
     }
 
