@@ -10,7 +10,6 @@ using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core;
 
@@ -43,7 +42,7 @@ public class Main : Game
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
-        IsMouseVisible = true;
+        IsMouseVisible = false;
         _graphics.PreferredBackBufferWidth = Camera.Width;
         _graphics.PreferredBackBufferHeight = Camera.Height;
     }

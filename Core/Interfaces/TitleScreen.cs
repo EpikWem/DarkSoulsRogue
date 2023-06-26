@@ -13,13 +13,13 @@ public static class TitleScreen
     private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 100, 240);
     private const int TitleItemHeight = 28;
     private const int TitleItemWidth = 100;
-    private static readonly Vector2 PositionOfGameList = new(100, 40);
+    private static readonly Vector2 PositionOfGameList = new(100, 220);
     private const int GameItemHeight = 90;
     private const int GameItemWidth = 240;
-    private static readonly Vector2 PositionOfClassList1 = new(100, 40);
+    private static readonly Vector2 PositionOfClassList1 = new(520, 60);
     private static readonly Vector2 PositionOfClassList2 = PositionOfClassList1 + new Vector2(ClassItemWidth, -ClassItemHeight*5);
-    private const int ClassItemHeight = 90;
-    private const int ClassItemWidth = 240;
+    private const int ClassItemWidth = 210;
+    private const int ClassItemHeight = 104;
 
     private static bool _isActive;
     private static Menu _currentMenu;
@@ -65,7 +65,8 @@ public static class TitleScreen
         return _currentMenu == TitleM && _wantsToQuit;
     }
 
-    public static void Draw(SpriteBatch spriteBatch) => _currentMenu.Draw(spriteBatch);
+    public static void Draw(SpriteBatch spriteBatch)
+        => _currentMenu.Draw(spriteBatch);
     
     
     
@@ -79,10 +80,12 @@ public static class TitleScreen
         private static readonly string[] Choices = { "Continue", "Load Game", "New Game", "Settings", "Quit Game" };
         private int _selectionId;
         
-        internal TitleMenu() => Reinit();
+        internal TitleMenu()
+            => Reinit();
 
         //RETURNS: true to QuitApp()
-        internal sealed override void Reinit() => _selectionId = 0;
+        internal sealed override void Reinit()
+            => _selectionId = 0;
         
         internal override void Update()
         {
@@ -99,7 +102,7 @@ public static class TitleScreen
 
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Main.PixelTexture, new Rectangle(0, 0, Camera.Width, Camera.Height), Color.Black);
+            spriteBatch.Draw(Textures.MTitle, Camera.AllScreen, Color.White);
             var csx = (int)PositionOfTitleList.X - 4;
             var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight;
 
@@ -150,7 +153,6 @@ public static class TitleScreen
                     _isActive = false;
                     SaveSystem.Load(_selectedGameId);
                 }
-                    
             }
             if (Control.MenuUp.IsOnePressed())
             {
@@ -162,7 +164,6 @@ public static class TitleScreen
                 if (_selectedGameId < LastGameChoice())
                     _selectedGameId++;
             }
-
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 Activate();
         }
@@ -321,6 +322,16 @@ public static class TitleScreen
                     if (_selectedClass < LastClassChoice())
                         _selectedClass++;
                 }
+                if (Control.MenuRight.IsOnePressed())
+                {
+                    if (_selectedClass < 5)
+                        _selectedClass += 5;
+                }
+                if (Control.MenuLeft.IsOnePressed())
+                {
+                    if (_selectedClass >= 5)
+                        _selectedClass -= 5;
+                }
                 if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                     Activate();
             }
@@ -329,9 +340,9 @@ public static class TitleScreen
             {
                 var posList = _selectedClass < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                 var cgx = (int)posList.X - 8;
-                var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 12;
+                var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
             
-                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
+                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Color.Orange, Color.Black, 4).Draw(spriteBatch);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;

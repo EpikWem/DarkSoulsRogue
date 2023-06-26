@@ -251,3 +251,4 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Co
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\equipments\straightswords\passive\up.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\saves\default_settings.xml
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\saves\settings.xml
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\menus\title.xnb

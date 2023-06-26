@@ -10,17 +10,17 @@ public static class Textures
 
     private const int WallNumber = 1;
 
-    public static Texture2D VoidT, BgT;
+    public static Texture2D VoidT, BgT, MTitle;
     public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures, WeaponTextures, ShieldTextures;
-
-
+    
     public static void Init(ContentManager content)
     {
         VoidT = LoadTexture("void", content);
         BgT = LoadTexture("bg", content);
+        MTitle = LoadMenuTexture("title", content);
 
         ArmorTextures = new List<Texture2D[]>
         {
@@ -57,33 +57,28 @@ public static class Textures
      *============================================================*/
     
     private static Texture2D LoadTexture(string fileName, ContentManager content)
-    {
-        return content.Load<Texture2D>("images/" + fileName);
-    }
+        => content.Load<Texture2D>("images/" + fileName);
+
+    private static Texture2D LoadMenuTexture(string name, ContentManager content)
+        => LoadTexture("menus/" + name, content);
 
     private static Texture2D[] LoadCharacterTextures(string characterName, ContentManager content)
-    {
-        return new[]
-        {
+        => new[] {
             LoadTexture("characters/" + characterName + "/up", content),
             LoadTexture("characters/" + characterName + "/down", content),
             LoadTexture("characters/" + characterName + "/right", content),
             LoadTexture("characters/" + characterName + "/left", content)
         };
-    }
 
     private const string
         ETShields = "shields/", ETStraightswords = "straightswords/";
     private static Texture2D[] LoadEquipmentTextures(string equipmentType, string equipmentName, ContentManager content)
-    {
-        return new[]
-        {
+        => new[] {
             LoadTexture("equipments/" + equipmentType + equipmentName + "/up", content),
             LoadTexture("equipments/" + equipmentType + equipmentName + "/down", content),
             LoadTexture("equipments/" + equipmentType + equipmentName + "/right", content),
             LoadTexture("equipments/" + equipmentType + equipmentName + "/left", content)
         };
-    }
 
     private static Texture2D[] LoadObjectTextures(string name, int stateNumber, ContentManager content)
     {

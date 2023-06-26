@@ -43,6 +43,7 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/equipments/straightswords/passive/up.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor1.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor2.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/title.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/objects/bonfire/0.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/objects/bonfire/1.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/objects/bonfire/2.png</File>
@@ -58,6 +59,7 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/walls/1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
