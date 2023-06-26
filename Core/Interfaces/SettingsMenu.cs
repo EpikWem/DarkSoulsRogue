@@ -148,9 +148,11 @@ internal class ControlsMenu : Menu
     {
         spriteBatch.DrawString(Fonts.FontHumanityCounter, "Controls Settings", new Vector2(Camera.Width/2 - 260, 20), Color.White);
         _selection.Draw(spriteBatch);
-        for (var i = 0; i < Names.Length; i++){
+        for (var i = 0; i < Names.Length; i++)
+        {
             spriteBatch.DrawString(Fonts.Font, Names[i], GetPosition(i), Color.White);
             //TODO: display current assigned keys
+            DrawKeyRectangle(spriteBatch, i);
         }
         if (!_waitingForKey)
             return;
@@ -165,5 +167,13 @@ internal class ControlsMenu : Menu
 
     private static int FirstChoice() => 0;
     private static int LastChoice() => Names.Length - 1;
+
+    private static void DrawKeyRectangle(SpriteBatch spriteBatch, int index)
+    {
+        const int size = 32;
+        var x = (int)GetPosition(index).X + 130;
+        var y = (int)GetPosition(index).Y - 10;
+        spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, size, size), new Color(30, 30, 30));
+    }
 
 }

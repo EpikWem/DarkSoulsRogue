@@ -10,8 +10,8 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public static class TitleScreen
 {
 
-    private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 100, 240);
-    private const int TitleItemHeight = 28;
+    private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 60, 300);
+    private const int TitleItemHeight = 32;
     private const int TitleItemWidth = 100;
     private static readonly Vector2 PositionOfGameList = new(100, 220);
     private const int GameItemHeight = 90;
@@ -77,7 +77,7 @@ public static class TitleScreen
     private class TitleMenu : Menu
     {
         
-        private static readonly string[] Choices = { "Continue", "Load Game", "New Game", "Settings", "Quit Game" };
+        private static readonly string[] Choices = { " Continue", "Load Game", " New Game", "  Settings", "Quit Game" };
         private int _selectionId;
         
         internal TitleMenu()
@@ -103,8 +103,8 @@ public static class TitleScreen
         internal override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Textures.MTitle, Camera.AllScreen, Color.White);
-            var csx = (int)PositionOfTitleList.X - 4;
-            var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight;
+            var csx = (int)PositionOfTitleList.X - 10;
+            var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 4;
 
             //spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, 100, HeightOfTitleItem), Color.Orange);
             new RectangleBordered(csx, csy, TitleItemWidth, TitleItemHeight, Color.Orange, Color.Black, 2).Draw(spriteBatch);
