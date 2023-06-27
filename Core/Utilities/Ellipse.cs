@@ -4,22 +4,31 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Utilities;
 
-public class Circle
+public class Ellipse
 {
 
     public Vector2 Center { get; set; }
-    public int Radius { get; set; }
+    public int RadiusX { get; set; }
+    public int RadiusY { get; set; }
 
-    public Circle(Vector2 center, int radius)
+    public Ellipse(Vector2 center, int radiusX, int radiusY)
     {
         Center = center;
-        Radius = radius;
+        RadiusX = radiusX;
+        RadiusY = radiusY;
     }
 
-    public bool Contains(Vector2 point) =>
-        Math.Pow(point.X - Center.X, 2) + Math.Pow(point.Y - Center.Y, 2) <= Math.Pow(Radius, 2);
+    public bool Contains(Vector2 point)
+    {
+        var normalized = new Vector2(point.X - Center.X, point.Y - Center.Y);
+        return
+            (double)(normalized.X * normalized.X)
+            / (RadiusX * RadiusX) + (double)(normalized.Y * normalized.Y) / (RadiusY * RadiusY)
+           <= 1.0;
+        //Math.Pow(point.X - Center.X, 2) + Math.Pow(point.Y - Center.Y, 2) <= Math.Pow(Radius, 2);
+    }
 
-    public bool Intersects(Rectangle rectangle)
+    /*public bool Intersects(Rectangle rectangle)
     {
         var d = new Vector2();
         d.X = Math.Abs(Center.X - rectangle.Center.X);
@@ -35,12 +44,12 @@ public class Circle
             (int)(d.Y - (float)rectangle.Height/2)^2;
 
         return (cornerDistanceSq <= (Radius^2));
-    }
+    }*/
 
     public void Draw(SpriteBatch spriteBatch, Color color)
     {
-        for(var y = (int)Center.Y-Radius; y < (int)Center.Y+Radius; y++)
-            for(var x = (int)Center.X-Radius; x < (int)Center.X+Radius; x++)
+        for(var y = (int)Center.Y - RadiusY; y < (int)Center.Y + RadiusY; y++)
+            for(var x = (int)Center.X - RadiusX; x < (int)Center.X + RadiusX; x++)
                 if (Contains(new Vector2(x, y)))
                     spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, 1, 1), color);
     }

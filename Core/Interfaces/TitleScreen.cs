@@ -10,7 +10,7 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public static class TitleScreen
 {
 
-    private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 60, 300);
+    private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 40, 370);
     private const int TitleItemHeight = 32;
     private const int TitleItemWidth = 100;
     private static readonly Vector2 PositionOfGameList = new(100, 220);
@@ -102,14 +102,14 @@ public static class TitleScreen
 
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Textures.MTitle, Camera.AllScreen, Color.White);
-            var csx = (int)PositionOfTitleList.X - 10;
-            var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 4;
-
-            //spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, 100, HeightOfTitleItem), Color.Orange);
-            new RectangleBordered(csx, csy, TitleItemWidth, TitleItemHeight, Color.Orange, Color.Black, 2).Draw(spriteBatch);
+            spriteBatch.Draw(Textures.MTitle, Camera.AllScreen, Colors.White);
+            var csx = (int)PositionOfTitleList.X - 30;
+            var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 2;
+            
+            //new RectangleBordered(csx, csy, TitleItemWidth + 20, TitleItemHeight-4, Colors.Orange, Colors.Black, 2).Draw(spriteBatch);
+            spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight-4), Colors.Orange);
             for (var i = 0; i < Choices.Length; i++)
-                spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Color.White);
+                spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Colors.White);
         }
 
         internal int SelectionId() => _selectionId;
@@ -173,11 +173,11 @@ public static class TitleScreen
             var cgx = (int)PositionOfGameList.X - 8;
             var cgy = (int)PositionOfGameList.Y + _selectedGameId * GameItemHeight - 12;
             
-            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight, Color.Orange, Color.Black, 4).Draw(spriteBatch);
+            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight, Colors.Orange, Colors.Black, 4).Draw(spriteBatch);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
-                spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Color.White);
-                spriteBatch.DrawString(Fonts.FontBold, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Color.White);
+                spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Colors.White);
+                spriteBatch.DrawString(Fonts.FontBold, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Colors.White);
             }
         }
         
@@ -341,13 +341,13 @@ public static class TitleScreen
                 var posList = _selectedClass < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                 var cgx = (int)posList.X - 8;
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
-            
-                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Color.Orange, Color.Black, 4).Draw(spriteBatch);
+                
+                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Colors.Orange, Colors.Black, 4).Draw(spriteBatch);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
-                    spriteBatch.Draw(ClassIcons[i], posItem + new Vector2(0, i * ClassItemHeight - 8), Color.White);
-                    spriteBatch.DrawString(Fonts.FontBold, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Color.White);
+                    spriteBatch.Draw(ClassIcons[i], posItem + new Vector2(0, i * ClassItemHeight - 8), Colors.White);
+                    spriteBatch.DrawString(Fonts.FontBold, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
                 }
             }
 

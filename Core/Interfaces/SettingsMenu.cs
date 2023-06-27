@@ -46,11 +46,11 @@ public class SettingsMenu : Menu
 
     internal override void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.Draw(Main.PixelTexture, IngameMenu.Area, Color.Black);
+        spriteBatch.Draw(Main.PixelTexture, IngameMenu.Area, Colors.Black);
         _currentMenu.Draw(spriteBatch);
     }
 
-    public bool IsWaitingForKey() => _controlsM._waitingForKey;
+    public bool IsWaitingForKey() => _controlsM.WaitingForKey;
 
 }
 
@@ -83,16 +83,16 @@ internal class ControlsMenu : Menu
         Control.Write, Control.MenuUp, Control.MenuDown, Control.MenuRight, Control.MenuLeft, Control.MenuBack };
     private static readonly string[] Names = {
         "Up", "Down", "Right", "Left", "Interact", "Run",
-        "Weapon", "Shield", "Consumable", "Catalyst", "Switch Consum.", "Switch Spell",
+        "Weapon", "Shield", "Consumable", "Catalyst", "Switch Cons.", "Switch Spell",
         "Write/Mark", "(Menu) Up", "(Menu) Down", "(Menu) Right", "(Menu) Left", "(Menu) Back" };
     private const int X1 = 60, X2 =  X1 + Camera.Width / 3, X3 =  X2 + Camera.Width / 3, Y = 240,
         ItemHeight = 48, SecondColumn = 6, ThirdColumn = 12;
 
     private const int CRWidth = 480, CRHeight = 60;
     private static readonly RectangleBordered CenteredRectangle
-        = new((Camera.Width - CRWidth)/2, (Camera.Height - CRHeight)/2, CRWidth, CRHeight, Color.Gray, Color.Black, 2);
+        = new((Camera.Width - CRWidth)/2, (Camera.Height - CRHeight)/2, CRWidth, CRHeight, Color.Gray, Colors.Black, 2);
 
-    internal bool _waitingForKey;
+    internal bool WaitingForKey;
     private RectangleBordered _selection;
     private int _selectionId;
 
@@ -100,18 +100,18 @@ internal class ControlsMenu : Menu
     
     internal sealed override void Reinit()
     {
-        _waitingForKey = false;
-        _selection = new RectangleBordered(0, 0, 130, 30, Color.Orange, Color.Black, 2);
+        WaitingForKey = false;
+        _selection = new RectangleBordered(0, 0, 144, 30, Colors.Orange, Colors.Orange, 2);
         _selectionId = 0;
     }
 
     internal override void Update()
     {
-        if (_waitingForKey) // get a key for replace
+        if (WaitingForKey) // get a key for replace
         {
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
-                _waitingForKey = false;
+                WaitingForKey = false;
                 return;
             }
 
@@ -122,13 +122,13 @@ internal class ControlsMenu : Menu
                 return; // refuse if this key is already assigned
             Controls[_selectionId].Set(key); // save to current memory
             SettingsSystem.Save(); // save to settings file
-            _waitingForKey = false; // unfreeze menu
+            WaitingForKey = false; // unfreeze menu
             return;
         }
         
         if (Control.Interact.IsOnePressed()) // enter in changing mode
         {
-            _waitingForKey = true;
+            WaitingForKey = true;
             return;
         }
         
@@ -154,7 +154,7 @@ internal class ControlsMenu : Menu
             //TODO: display current assigned keys
             DrawKeyRectangle(spriteBatch, i);
         }
-        if (!_waitingForKey)
+        if (!WaitingForKey)
             return;
         CenteredRectangle.Draw(spriteBatch);
         spriteBatch.DrawString(Fonts.FontSoulCounter, "Waiting for an unassigned Key...", CenteredRectangle.GetPosition()*1.06f, Color.White);
@@ -170,10 +170,10 @@ internal class ControlsMenu : Menu
 
     private static void DrawKeyRectangle(SpriteBatch spriteBatch, int index)
     {
-        const int size = 32;
-        var x = (int)GetPosition(index).X + 130;
-        var y = (int)GetPosition(index).Y - 10;
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, size, size), new Color(30, 30, 30));
+        const int size = 24;
+        var x = (int)GetPosition(index).X + 104;
+        var y = (int)GetPosition(index).Y - 5;
+        spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, size + 4, size), new Color(30, 30, 30));
     }
 
 }
