@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.System;
+﻿using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -17,5 +18,5 @@ public static class ChatBox
     public static void Say(string text) => _text = text;
     public static void Clear() => _text = "";
 
-    public static void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawString(Fonts.FontBold, _text, Position, Color.WhiteSmoke);
+    public static void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawString(Fonts.FontBold12, _text, Position, Color.WhiteSmoke);
 }

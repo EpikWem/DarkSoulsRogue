@@ -1,20 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>0</lastSaveId>
+    <lastSaveId>1</lastSaveId>
     <s0>
-      <map>105</map>
+      <map>101</map>
       <character>
-        <name>BATMAN</name>
-        <life>71000</life>
+        <name>BatmanSan</name>
+        <life>51500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>454</x>
-          <y>355</y>
-          <orientation>1</orientation>
+          <x>448</x>
+          <y>300</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
+          <level>5</level>
           <vitality>14</vitality>
           <attunement>10</attunement>
           <endurance>10</endurance>
@@ -51,7 +52,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>3</equippedArmor>
+          <equippedArmor>0</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -60,29 +61,30 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
-        <o1>1</o1>
+        <o0>0</o0>
+        <o1>0</o1>
         <o2>0</o2>
-        <o3>1</o3>
+        <o3>0</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>0</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>
     </s0>
     <s1>
-      <map>105</map>
+      <map>101</map>
       <character>
-        <name>TrueHunter</name>
+        <name>Gunter</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>70</x>
-          <y>519</y>
-          <orientation>0</orientation>
+          <x>448</x>
+          <y>280</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
+          <level>4</level>
           <vitality>11</vitality>
           <attunement>9</attunement>
           <endurance>11</endurance>
@@ -119,7 +121,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>3</equippedArmor>
+          <equippedArmor>0</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -139,26 +141,27 @@
       </objects>
     </s1>
     <s2>
-      <map>105</map>
+      <map>101</map>
       <character>
-        <name>CLERIAL</name>
-        <life>63500</life>
+        <name>Claire</name>
+        <life>51500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>324</x>
-          <y>448</y>
-          <orientation>2</orientation>
+          <x>568</x>
+          <y>194</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
-          <vitality>9</vitality>
+          <level>2</level>
+          <vitality>11</vitality>
           <attunement>11</attunement>
           <endurance>9</endurance>
-          <strength>9</strength>
-          <dexterity>15</dexterity>
-          <resistance>10</resistance>
-          <intelligence>12</intelligence>
-          <faith>11</faith>
+          <strength>12</strength>
+          <dexterity>8</dexterity>
+          <resistance>11</resistance>
+          <intelligence>8</intelligence>
+          <faith>14</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -196,37 +199,38 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
-        <o1>1</o1>
+        <o0>0</o0>
+        <o1>0</o1>
         <o2>0</o2>
-        <o3>1</o3>
+        <o3>0</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>0</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>
     </s2>
     <s3>
-      <map>104</map>
+      <map>101</map>
       <character>
-        <name>Karim</name>
-        <life>66500</life>
+        <name>KARIM</name>
+        <life>51500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>841</x>
-          <y>505</y>
+          <x>451</x>
+          <y>216</y>
           <orientation>1</orientation>
         </position>
         <attributes>
-          <vitality>11</vitality>
-          <attunement>11</attunement>
-          <endurance>11</endurance>
-          <strength>11</strength>
-          <dexterity>11</dexterity>
+          <level>4</level>
+          <vitality>12</vitality>
+          <attunement>8</attunement>
+          <endurance>14</endurance>
+          <strength>14</strength>
+          <dexterity>9</dexterity>
           <resistance>11</resistance>
-          <intelligence>11</intelligence>
-          <faith>11</faith>
+          <intelligence>8</intelligence>
+          <faith>10</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -264,12 +268,12 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
+        <o0>0</o0>
         <o1>1</o1>
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>0</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold.spritefont</SourceFile>
-  <SourceTime>2023-02-05T15:25:43.5331892+01:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/fonts/font_bold.xnb</DestFile>
-  <DestTime>2023-04-06T20:53:46.1644074+02:00</DestTime>
+  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font12.spritefont</SourceFile>
+  <SourceTime>2023-02-04T19:29:00.7819398+01:00</SourceTime>
+  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/fonts/font12.xnb</DestFile>
+  <DestTime>2023-06-29T20:32:42.4392402+02:00</DestTime>
   <Importer>FontDescriptionImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>FontDescriptionProcessor</Processor>

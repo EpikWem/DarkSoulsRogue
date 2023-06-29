@@ -92,8 +92,6 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Co
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\door\0.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\objects\door\1.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\walls\1.xnb
-C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font.xnb
-C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font_bold.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\soul_counter.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font.xnb
 C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font_bold.xnb
@@ -252,3 +250,7 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Co
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\saves\default_settings.xml
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\saves\settings.xml
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\images\menus\title.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font18.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font_bold18.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font12.xnb
+C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\fonts\font_bold12.xnb

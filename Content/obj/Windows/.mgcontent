@@ -4,8 +4,10 @@
   <Platform>Windows</Platform>
   <Config />
   <SourceFiles>
-    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font.spritefont</File>
-    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold12.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold18.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font12.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font18.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/humanity_counter.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/soul_counter.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/bg.png</File>
@@ -59,6 +61,8 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/walls/1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,3 +1,4 @@
+using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -34,7 +35,7 @@ public class TextArea
     {
         _area.Draw(spriteBatch);
         var pos = new Vector2(_area.Rectangle.X + _area.Thickness, _area.Rectangle.Y + _area.Thickness);
-        spriteBatch.DrawString(Fonts.Font, _value, pos, Colors.White);
+        spriteBatch.DrawString(Fonts.Font12, _value, pos, Colors.White);
     }
 
     public string Read() => _value;

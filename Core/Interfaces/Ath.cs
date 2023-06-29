@@ -1,6 +1,7 @@
 ﻿using System;
 using DarkSoulsRogue.Core.GameObjects;
 using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;

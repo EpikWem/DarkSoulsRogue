@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
@@ -150,7 +151,7 @@ internal class ControlsMenu : Menu
         _selection.Draw(spriteBatch);
         for (var i = 0; i < Names.Length; i++)
         {
-            spriteBatch.DrawString(Fonts.Font, Names[i], GetPosition(i), Color.White);
+            spriteBatch.DrawString(Fonts.Font12, Names[i], GetPosition(i), Color.White);
             //TODO: display current assigned keys
             DrawKeyRectangle(spriteBatch, i);
         }

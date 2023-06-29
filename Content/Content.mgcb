@@ -13,19 +13,33 @@
 
 #---------------------------------- Content ---------------------------------#
 
-#begin fonts/font.spritefont
+#begin fonts/font_bold12.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/font.spritefont
+/build:fonts/font_bold12.spritefont
 
-#begin fonts/font_bold.spritefont
+#begin fonts/font_bold18.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
-/build:fonts/font_bold.spritefont
+/build:fonts/font_bold18.spritefont
+
+#begin fonts/font12.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/font12.spritefont
+
+#begin fonts/font18.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:PremultiplyAlpha=True
+/processorParam:TextureFormat=Compressed
+/build:fonts/font18.spritefont
 
 #begin fonts/humanity_counter.spritefont
 /importer:FontDescriptionImporter

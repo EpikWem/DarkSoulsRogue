@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.System;
+﻿using DarkSoulsRogue.Core.Statics;
+using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
