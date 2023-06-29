@@ -13,17 +13,20 @@ public class TextArea
 
     public TextArea(Rectangle area)
     {
-        _area = new RectangleBordered(area, Color.WhiteSmoke, Color.Black, 2);
+        _area = new RectangleBordered(area, Colors.LightGray, Color.Black, 2);
         _value = "";
     }
+
+    public void Reinit()
+        => _value = "";
 
     public States Update()
     {
         if (Control.Enter.IsOnePressed())
             return States.Confirmed;
-        var v = GetPressedCharacters();
-        if (v != "")
-            _value += v;
+        if (Control.Backspace.IsOnePressed() && _value.Length > 0)
+            _value = _value?.Remove(_value.Length - 1);
+        _value += GetPressedCharacters();
         return States.Processing;
     }
 
@@ -31,7 +34,7 @@ public class TextArea
     {
         _area.Draw(spriteBatch);
         var pos = new Vector2(_area.Rectangle.X + _area.Thickness, _area.Rectangle.Y + _area.Thickness);
-        spriteBatch.DrawString(Fonts.Font, _value, pos, Color.White);
+        spriteBatch.DrawString(Fonts.Font, _value, pos, Colors.White);
     }
 
     public string Read() => _value;

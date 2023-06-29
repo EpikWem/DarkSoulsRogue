@@ -1,14 +1,14 @@
 ﻿using System.Xml;
 using Microsoft.Xna.Framework.Content;
 
-namespace DarkSoulsRogue.Core.Utilities;
+namespace DarkSoulsRogue.Core.Statics;
 
 public static class Langs
 {
     
     private const string LangsPath = Main.ContentPath + @"langs\";
 
-    public static XmlDocument En = new(), Fr = new();
+    public static readonly XmlDocument En = new(), Fr = new();
 
     public static void Init(ContentManager content)
     {

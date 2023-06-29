@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
@@ -13,13 +14,14 @@ public static class TitleScreen
     private static readonly Vector2 PositionOfTitleList = new(Camera.Width/2 - 40, 370);
     private const int TitleItemHeight = 32;
     private const int TitleItemWidth = 100;
-    private static readonly Vector2 PositionOfGameList = new(100, 220);
-    private const int GameItemHeight = 90;
+    private static readonly Vector2 PositionOfGameList = new(40, 100);
+    private const int GameItemHeight = 120;
     private const int GameItemWidth = 240;
-    private static readonly Vector2 PositionOfClassList1 = new(520, 60);
+    private static readonly Vector2 PositionOfClassList1 = new(40, 90);
     private static readonly Vector2 PositionOfClassList2 = PositionOfClassList1 + new Vector2(ClassItemWidth, -ClassItemHeight*5);
     private const int ClassItemWidth = 210;
     private const int ClassItemHeight = 104;
+    private static readonly Rectangle AttributesSheetArea = new(620, 20, 320, Camera.Height - 40);
 
     private static bool _isActive;
     private static Menu _currentMenu;
@@ -107,7 +109,7 @@ public static class TitleScreen
             var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 2;
             
             //new RectangleBordered(csx, csy, TitleItemWidth + 20, TitleItemHeight-4, Colors.Orange, Colors.Black, 2).Draw(spriteBatch);
-            spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight-4), Colors.Orange);
+            spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight - 4), Colors.Orange);
             for (var i = 0; i < Choices.Length; i++)
                 spriteBatch.DrawString(Fonts.Font, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Colors.White);
         }
@@ -130,10 +132,22 @@ public static class TitleScreen
 
         private int _selectedGameId;
         private readonly Integer _forNewSave;
+        private readonly Rectangle _titleRectangle;
+        private readonly string _titleString;
         
         internal GameSelectionMenu(Integer forNewSave = null)
         {
             _forNewSave = forNewSave;
+            if (_forNewSave == null)
+            {
+                _titleRectangle = new Rectangle(10, 10, 240, 40);
+                _titleString = "Select a Game to Load";
+            }
+            else
+            {
+                _titleRectangle = new Rectangle(10, 10, 320, 40);
+                _titleString = "Select a place for the new Save";
+            }
             Reinit();
         }
 
@@ -170,15 +184,21 @@ public static class TitleScreen
         
         internal override void Draw(SpriteBatch spriteBatch)
         {
-            var cgx = (int)PositionOfGameList.X - 8;
-            var cgy = (int)PositionOfGameList.Y + _selectedGameId * GameItemHeight - 12;
+            var cgx = (int)PositionOfGameList.X - 12;
+            var cgy = (int)PositionOfGameList.Y + _selectedGameId*GameItemHeight - 12;
             
-            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight, Colors.Orange, Colors.Black, 4).Draw(spriteBatch);
+            spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
+            spriteBatch.DrawString(Fonts.FontBold, _titleString, new Vector2(12), Colors.White);
+            
+            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight - 16, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Colors.White);
                 spriteBatch.DrawString(Fonts.FontBold, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Colors.White);
+                spriteBatch.DrawString(Fonts.Font, "Level " + SaveSystem.GetGameLevel(i), PositionOfGameList + new Vector2(70, i*GameItemHeight + 36), Colors.LightGray);
             }
+            
+            DrawAttributesSheet(spriteBatch, SaveSystem.GetGameName(_selectedGameId), SaveSystem.GetGameAttributes(_selectedGameId));
         }
         
         private static int FirstGameChoice() => 0;
@@ -207,12 +227,16 @@ public static class TitleScreen
             _saveId = new Integer(-1);
             _selectionMenu = new GameSelectionMenu(_saveId);
             _personalisationMenu = new PersonalisationMenu();
-            _textArea = new TextArea(new Rectangle(100, 100, 100, 28));
-            Reinit();
+            _textArea = new TextArea(new Rectangle(100, 100, 300, 28));
+            _phase = Phase.PlaceSelection;
         }
 
         internal sealed override void Reinit()
         {
+            _saveId.Value = -1;
+            _selectionMenu.Reinit();
+            _personalisationMenu.Reinit();
+            _textArea.Reinit();
             _phase = Phase.PlaceSelection;
         }
 
@@ -231,6 +255,12 @@ public static class TitleScreen
                         NextPhase();
                     return;
                 case Phase.Name:
+                    if (Control.Pause.IsOnePressed())
+                    {
+                        _personalisationMenu.Reinit();
+                        _textArea.Reinit();
+                        _phase = Phase.Personalisation;
+                    }
                     if (_textArea.Update() == TextArea.States.Confirmed)
                         NextPhase();
                     return;
@@ -282,23 +312,42 @@ public static class TitleScreen
             
             private static readonly string[] ClassNames = { "Warrior", "Knight", "Wanderer", "Thief", "Bandit", "Hunter", "Sorcerer", "Pyromancer", "Cleric", "Deprived" };
             private static readonly int[][] BaseAttributesTable = {
-                new [] { 11, 8,  12, 13, 13, 11, 9,  9  },
-                new [] { 14, 10, 10, 11, 11, 10, 9,  11 },
-                new [] { 10, 11, 10, 10, 14, 12, 11, 8  },
-                new [] { 9,  11, 9,  9,  15, 10, 12, 11 },
-                new [] { 12, 8,  14, 14, 9,  11, 8,  10 },
-                new [] { 11, 9,  11, 12, 14, 11, 9,  9  },
-                new [] { 8,  15, 8,  9,  11, 8,  15, 8  },
-                new [] { 10, 12, 11, 12, 9,  12, 10, 8  },
-                new [] { 11, 11, 9,  12, 8,  11, 8,  14 },
-                new [] { 11, 11, 11, 11, 11, 11, 11, 11 }
+                new [] { 4, 11, 8,  12, 13, 13, 11, 9,  9 , 0 },
+                new [] { 5, 14, 10, 10, 11, 11, 10, 9,  11, 0 },
+                new [] { 3, 10, 11, 10, 10, 14, 12, 11, 8 , 0 },
+                new [] { 5, 9,  11, 9,  9,  15, 10, 12, 11, 0 },
+                new [] { 4, 12, 8,  14, 14, 9,  11, 8,  10, 0 },
+                new [] { 4, 11, 9,  11, 12, 14, 11, 9,  9 , 0 },
+                new [] { 3, 8,  15, 8,  9,  11, 8,  15, 8 , 0 },
+                new [] { 1, 10, 12, 11, 12, 9,  12, 10, 8 , 0 },
+                new [] { 2, 11, 11, 9,  12, 8,  11, 8,  14, 0 },
+                new [] { 6, 11, 11, 11, 11, 11, 11, 11, 11, 0 }
             };
-            private static readonly Texture2D[] ClassIcons = { Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0], Textures.ArmorTextures[0][0] };
+            private static readonly Texture2D[] ClassIcons =
+            { //TODO: Link each class to its armor texture
+                Armor.Solaire.GetWearingTextures()[1],
+                Armor.BlackIron.GetWearingTextures()[1],
+                Armor.Artorias.GetWearingTextures()[1],
+                Armor.Naked.GetWearingTextures()[1],
+                Armor.Naked.GetWearingTextures()[1],
+                Armor.Naked.GetWearingTextures()[1],
+                Armor.Crimson.GetWearingTextures()[1],
+                Armor.Crimson.GetWearingTextures()[1],
+                Armor.Crimson.GetWearingTextures()[1],
+                Armor.Naked.GetWearingTextures()[1]
+            };
 
             private int _selectedClass;
             internal bool IsConfirmed;
+            private readonly Rectangle _titleRectangle;
+            private readonly string _titleString;
 
-            internal PersonalisationMenu() => Reinit();
+            internal PersonalisationMenu()
+            {
+                _titleRectangle = new Rectangle(10, 10, 320, 40);
+                _titleString = "Choose your starting Class";
+                Reinit();
+            }
 
             internal sealed override void Reinit()
             {
@@ -342,22 +391,43 @@ public static class TitleScreen
                 var cgx = (int)posList.X - 8;
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
                 
-                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Colors.Orange, Colors.Black, 4).Draw(spriteBatch);
+                spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
+                spriteBatch.DrawString(Fonts.FontBold, _titleString, new Vector2(12), Colors.White);
+                
+                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                     spriteBatch.Draw(ClassIcons[i], posItem + new Vector2(0, i * ClassItemHeight - 8), Colors.White);
                     spriteBatch.DrawString(Fonts.FontBold, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
                 }
+                
+                DrawAttributesSheet(spriteBatch, ClassNames[_selectedClass], BaseAttributesTable[_selectedClass]);
             }
 
-            public List<int> GetChosenAttributes() => new(BaseAttributesTable[_selectedClass]) { 0 };
+            public List<int> GetChosenAttributes()
+                => new(BaseAttributesTable[_selectedClass]) { 0 };
         
-            private static int FirstClassChoice() => 0;
-            private static int LastClassChoice() => ClassNames.Length - 1;
+            private static int FirstClassChoice()
+                => 0;
+            private static int LastClassChoice()
+                => ClassNames.Length - 1;
             
         }
         
+    }
+
+    private static void DrawAttributesSheet(SpriteBatch spriteBatch, string name, int[] values)
+    {
+        var pos = new Vector2(AttributesSheetArea.X, AttributesSheetArea.Y);
+        spriteBatch.Draw(Main.PixelTexture, AttributesSheetArea, Colors.DarkGray);
+        spriteBatch.DrawString(Fonts.FontBold, name, pos + new Vector2(10, 10), Colors.White);
+        for (var i = 0; i < Attributes.NumAttributes; i++)
+        {
+            var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 28;
+            spriteBatch.DrawString(Fonts.FontBold, Attributes.GetName(i), pos + new Vector2(10, dY), Colors.White);
+            spriteBatch.DrawString(Fonts.FontBold, values[i].ToString(), pos + new Vector2(280, dY), Colors.White);
+        }
     }
     
 }

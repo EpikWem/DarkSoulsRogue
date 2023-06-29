@@ -145,7 +145,18 @@ public static class SaveSystem
             .GetWearingTextures()[1];
     public static string GetGameName(int gameId) =>
         GetString(SaveFile!["XnaContent"]!["Asset"]!["s" + gameId]!["character"]!["name"]);
+    public static string GetGameLevel(int gameId) =>
+        GetString(SaveFile!["XnaContent"]!["Asset"]!["s" + gameId]!["character"]!["attributes"]?.ChildNodes[0]);
 
+    public static int[] GetGameAttributes(int gameId)
+    {
+        var result = new int[Attributes.NumAttributes];
+        for (var i = 0; i < Attributes.NumAttributes; i++)
+            result[i] = GetInt(SaveFile["XnaContent"]?["Asset"]?["s" + gameId]?["character"]?["attributes"]?.ChildNodes[i]);
+        return result;
+    }
+        
+    
     private static int GetInt(XmlNode node) => int.Parse(node.InnerText);
     private static bool GetBool(XmlNode node) => bool.Parse(node.InnerText);
     private static string GetString(XmlNode node) => node.InnerText;

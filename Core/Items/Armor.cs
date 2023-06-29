@@ -61,7 +61,8 @@ public class Armor : Equipment
     
     public bool IsUpgradable() => _upgradeLevel < _upgradeType.Quantities.Length;
     
-    public Texture2D[] GetWearingTextures() => Textures.ArmorTextures[GetIndexOf(this)];
+    public Texture2D[] GetWearingTextures()
+        => Textures.ArmorTextures[GetIndexOf(this)];
 
     public int GetUpgradeLevel() => _upgradeLevel;
 

@@ -28,6 +28,7 @@ public class Control
         ToggleFullscreen = new(Keys.F11),
         Pause = new(Keys.Escape),
         Enter = new(Keys.Enter),
+        Backspace = new(Keys.Back),
         Debug1 = new(Keys.NumPad1),
         Debug2 = new(Keys.NumPad2),
         Debug3 = new(Keys.NumPad3),
@@ -63,7 +64,7 @@ public class Control
     {
         Up, Down, Right, Left, Interact, Run, Weapon, Shield, Consumable, Catalyst,
         MenuUp, MenuDown, MenuRight, MenuLeft, MenuBack,
-        KillApp, ToggleFullscreen, Pause, Enter, Debug1, Debug2, Debug3,
+        KillApp, ToggleFullscreen, Pause, Enter, Backspace, Debug1, Debug2, Debug3,
         A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, D6, D8
     };
     
