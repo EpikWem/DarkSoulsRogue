@@ -127,11 +127,12 @@ public static class SaveSystem
      *= OTHER METHODS ==============================================
      *============================================================*/
     
-    public static void CreateNewSave(int newSaveId, string name, List<int> attributes)
+    public static void CreateNewSave(int newSaveId, string name, List<int> attributes, Armor armor)
     {
         Main.LoadMap(101);
         Main.Character = new Character(name);
         Main.Character.Attributes.Set(attributes);
+        Main.Character.ChangeArmor(armor);
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Map.GetObjectsCount(); i++)
             Map.GetObject(i).SetState(0);

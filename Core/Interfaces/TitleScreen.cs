@@ -266,7 +266,7 @@ public static class TitleScreen
                     return;
                 case Phase.End:
                     _isActive = false;
-                    SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read(), _personalisationMenu.GetChosenAttributes());
+                    SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read(), _personalisationMenu.GetChosenAttributes(), _personalisationMenu.GetChosenArmor());
                     return;
             }
         }
@@ -323,18 +323,8 @@ public static class TitleScreen
                 new [] { 2, 11, 11, 9,  12, 8,  11, 8,  14, 0 },
                 new [] { 6, 11, 11, 11, 11, 11, 11, 11, 11, 0 }
             };
-            private static readonly Texture2D[] ClassIcons =
-            { //TODO: Link each class to its armor texture
-                Armor.Warrior.GetWearingTextures()[1],
-                Armor.Knight.GetWearingTextures()[1],
-                Armor.Wanderer.GetWearingTextures()[1],
-                Armor.Thief.GetWearingTextures()[1],
-                Armor.Bandit.GetWearingTextures()[1],
-                Armor.Hunter.GetWearingTextures()[1],
-                Armor.Sorcerer.GetWearingTextures()[1],
-                Armor.Pyromancer.GetWearingTextures()[1],
-                Armor.Cleric.GetWearingTextures()[1],
-                Armor.Naked.GetWearingTextures()[1]
+            private static readonly Armor[] ClassArmors = {
+                Armor.Warrior, Armor.Knight, Armor.Wanderer, Armor.Thief, Armor.Bandit, Armor.Hunter, Armor.Sorcerer, Armor.Pyromancer, Armor.Cleric, Armor.Naked
             };
 
             private int _selectedClass;
@@ -398,7 +388,7 @@ public static class TitleScreen
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
-                    spriteBatch.Draw(ClassIcons[i], posItem + new Vector2(0, i * ClassItemHeight - 8), Colors.White);
+                    spriteBatch.Draw(GetClassIcon(i), posItem + new Vector2(0, i * ClassItemHeight - 8), Colors.White);
                     spriteBatch.DrawString(Fonts.FontBold16, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
                 }
                 
@@ -407,7 +397,13 @@ public static class TitleScreen
 
             public List<int> GetChosenAttributes()
                 => new(BaseAttributesTable[_selectedClass]) { 0 };
-        
+
+            public Armor GetChosenArmor()
+                => ClassArmors[_selectedClass];
+
+            private Texture2D GetClassIcon(int index)
+                => ClassArmors[index].GetWearingTextures()[1];
+
             private static int FirstClassChoice()
                 => 0;
             private static int LastClassChoice()
