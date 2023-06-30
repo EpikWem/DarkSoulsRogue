@@ -11,16 +11,30 @@ public static class Textures
     private const int WallNumber = 1;
 
     public static Texture2D VoidT, BgT, MTitle;
+    public static Texture2D[] IconsAttributes;
     public static Texture2D[] BonfireT, ChestT, DoorT, LootT;
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures, WeaponTextures, ShieldTextures;
-    
+
     public static void Init(ContentManager content)
     {
         VoidT = LoadTexture("void", content);
         BgT = LoadTexture("bg", content);
         MTitle = LoadMenuTexture("title", content);
+
+        IconsAttributes = new[] {
+            LoadIconTexture("level", content),
+            LoadIconTexture("vitality", content),
+            LoadIconTexture("attunement", content),
+            LoadIconTexture("endurance", content),
+            LoadIconTexture("strength", content),
+            LoadIconTexture("dexterity", content),
+            LoadIconTexture("resistance", content),
+            LoadIconTexture("intelligence", content),
+            LoadIconTexture("faith", content),
+            LoadIconTexture("humanity", content)
+        };
 
         ArmorTextures = new List<Texture2D[]>
         {
@@ -95,5 +109,8 @@ public static class Textures
             result[i] = LoadTexture("walls/" + i, content);
         return result;
     }
+
+    private static Texture2D LoadIconTexture(string name, ContentManager content) =>
+        LoadTexture("menus/icons/" + name, content);
 
 }

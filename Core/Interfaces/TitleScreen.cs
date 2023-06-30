@@ -140,12 +140,12 @@ public static class TitleScreen
             _forNewSave = forNewSave;
             if (_forNewSave == null)
             {
-                _titleRectangle = new Rectangle(10, 10, 240, 40);
+                _titleRectangle = new Rectangle(10, 10, 380, 40);
                 _titleString = "Select a Game to Load";
             }
             else
             {
-                _titleRectangle = new Rectangle(10, 10, 320, 40);
+                _titleRectangle = new Rectangle(10, 10, 480, 40);
                 _titleString = "Select a place for the new Save";
             }
             Reinit();
@@ -188,14 +188,14 @@ public static class TitleScreen
             var cgy = (int)PositionOfGameList.Y + _selectedGameId*GameItemHeight - 12;
             
             spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
-            spriteBatch.DrawString(Fonts.FontBold18, _titleString, new Vector2(12), Colors.White);
+            spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
             
             new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight - 16, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Colors.White);
-                spriteBatch.DrawString(Fonts.FontBold12, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Colors.White);
-                spriteBatch.DrawString(Fonts.Font12, "Level " + SaveSystem.GetGameLevel(i), PositionOfGameList + new Vector2(70, i*GameItemHeight + 36), Colors.LightGray);
+                spriteBatch.DrawString(Fonts.FontBold16, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Colors.White);
+                spriteBatch.DrawString(Fonts.Font14, "Level " + SaveSystem.GetGameLevel(i), PositionOfGameList + new Vector2(70, i*GameItemHeight + 36), Colors.LightGray);
             }
             
             DrawAttributesSheet(spriteBatch, SaveSystem.GetGameName(_selectedGameId), SaveSystem.GetGameAttributes(_selectedGameId));
@@ -344,7 +344,7 @@ public static class TitleScreen
 
             internal PersonalisationMenu()
             {
-                _titleRectangle = new Rectangle(10, 10, 320, 40);
+                _titleRectangle = new Rectangle(10, 10, 440, 40);
                 _titleString = "Choose your starting Class";
                 Reinit();
             }
@@ -392,14 +392,14 @@ public static class TitleScreen
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
                 
                 spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
-                spriteBatch.DrawString(Fonts.FontBold18, _titleString, new Vector2(12), Colors.White);
+                spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
                 
                 new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                     spriteBatch.Draw(ClassIcons[i], posItem + new Vector2(0, i * ClassItemHeight - 8), Colors.White);
-                    spriteBatch.DrawString(Fonts.FontBold12, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
+                    spriteBatch.DrawString(Fonts.FontBold16, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
                 }
                 
                 DrawAttributesSheet(spriteBatch, ClassNames[_selectedClass], BaseAttributesTable[_selectedClass]);
@@ -424,9 +424,10 @@ public static class TitleScreen
         spriteBatch.DrawString(Fonts.FontBold18, name, pos + new Vector2(10, 10), Colors.White);
         for (var i = 0; i < Attributes.NumAttributes; i++)
         {
-            var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 28;
-            spriteBatch.DrawString(Fonts.FontBold12, Attributes.GetName(i), pos + new Vector2(10, dY), Colors.White);
-            spriteBatch.DrawString(Fonts.FontBold12, values[i].ToString(), pos + new Vector2(280, dY), Colors.White);
+            var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
+            spriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
+            spriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.White);
+            spriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(280, dY+1), Colors.White);
         }
     }
     

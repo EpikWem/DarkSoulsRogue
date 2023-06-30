@@ -5,9 +5,15 @@
   <Config />
   <SourceFiles>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold12.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold14.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold16.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold18.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font_bold24.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font12.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font14.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font16.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font18.spritefont</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/font24.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/humanity_counter.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/fonts/soul_counter.spritefont</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/bg.png</File>
@@ -45,6 +51,16 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/equipments/straightswords/passive/up.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor1.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/floors/floor2.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/attunement.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/dexterity.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/endurance.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/faith.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/humanity.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/intelligence.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/level.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/resistance.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/strength.png</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/icons/vitality.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/menus/title.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/objects/bonfire/0.png</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/objects/bonfire/1.png</File>
@@ -61,6 +77,22 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/walls/1.png</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
