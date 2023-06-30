@@ -135,6 +135,7 @@ public static class SaveSystem
         Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Map.GetObjectsCount(); i++)
             Map.GetObject(i).SetState(0);
+        Main.Character.Life = Main.Character.MaxLife();
         Ath.Init(Main.Character);
         Main.CurrentSaveId = newSaveId;
     }

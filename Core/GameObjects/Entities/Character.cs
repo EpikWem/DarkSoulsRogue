@@ -178,7 +178,7 @@ public class Character : Entity
         * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f);
 
     public float EquipLoadRatio() =>
-        (Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight) //TODO: +etc...
+        (Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight) //TODO: add shields, etc load...
         / MaxEquipLoad();
 
     public int MovementSpeed() => (GetNumberOfPressedMovements() > 1 && EquipLoadRatio() <= 0.75f ? -1 : 0) + EquipLoadRatio() switch {

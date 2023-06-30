@@ -325,15 +325,15 @@ public static class TitleScreen
             };
             private static readonly Texture2D[] ClassIcons =
             { //TODO: Link each class to its armor texture
-                Armor.Solaire.GetWearingTextures()[1],
-                Armor.BlackIron.GetWearingTextures()[1],
-                Armor.Artorias.GetWearingTextures()[1],
-                Armor.Naked.GetWearingTextures()[1],
-                Armor.Naked.GetWearingTextures()[1],
-                Armor.Naked.GetWearingTextures()[1],
-                Armor.Crimson.GetWearingTextures()[1],
-                Armor.Crimson.GetWearingTextures()[1],
-                Armor.Crimson.GetWearingTextures()[1],
+                Armor.Warrior.GetWearingTextures()[1],
+                Armor.Knight.GetWearingTextures()[1],
+                Armor.Wanderer.GetWearingTextures()[1],
+                Armor.Thief.GetWearingTextures()[1],
+                Armor.Bandit.GetWearingTextures()[1],
+                Armor.Hunter.GetWearingTextures()[1],
+                Armor.Sorcerer.GetWearingTextures()[1],
+                Armor.Pyromancer.GetWearingTextures()[1],
+                Armor.Cleric.GetWearingTextures()[1],
                 Armor.Naked.GetWearingTextures()[1]
             };
 
@@ -426,7 +426,7 @@ public static class TitleScreen
         {
             var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
             spriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
-            spriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.White);
+            spriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
             spriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(280, dY+1), Colors.White);
         }
     }

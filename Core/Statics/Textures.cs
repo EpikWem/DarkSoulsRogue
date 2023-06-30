@@ -38,11 +38,20 @@ public static class Textures
 
         ArmorTextures = new List<Texture2D[]>
         {
-            LoadCharacterTextures("link", content),
+            LoadCharacterTextures("naked", content),
             LoadCharacterTextures("artorias", content),
+            LoadCharacterTextures("bandit", content),
             LoadCharacterTextures("blackiron", content),
+            LoadCharacterTextures("cleric", content),
             LoadCharacterTextures("crimson", content),
-            LoadCharacterTextures("solaire", content)
+            LoadCharacterTextures("hunter", content),
+            LoadCharacterTextures("knight", content),
+            LoadCharacterTextures("pyromancer", content),
+            LoadCharacterTextures("solaire", content),
+            LoadCharacterTextures("sorcerer", content),
+            LoadCharacterTextures("thief", content),
+            LoadCharacterTextures("wanderer", content),
+            LoadCharacterTextures("warrior", content)
         };
         WeaponTextures = new List<Texture2D[]>
         {
