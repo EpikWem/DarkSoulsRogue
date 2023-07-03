@@ -21,7 +21,7 @@ public class Main : Game
     public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
     //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
     
-    private readonly GraphicsDeviceManager _graphics;
+    public readonly GraphicsDeviceManager Graphics;
     private SpriteBatch _spriteBatch;
     
     public static Texture2D PixelTexture;
@@ -40,11 +40,11 @@ public class Main : Game
 
     public Main()
     {
-        _graphics = new GraphicsDeviceManager(this);
+        Graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = false;
-        _graphics.PreferredBackBufferWidth = Camera.Width;
-        _graphics.PreferredBackBufferHeight = Camera.Height;
+        Graphics.PreferredBackBufferWidth = Camera.Width;
+        Graphics.PreferredBackBufferHeight = Camera.Height;
     }
 
     protected override void Initialize()
@@ -52,7 +52,7 @@ public class Main : Game
         PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
         PixelTexture.SetData(new [] { Color.White });
         
-        Textures.Init(Content);
+        Textures.Init(Content, GraphicsDevice);
         Fonts.Init(Content);
         Langs.Init(Content);
         SaveSystem.Init();
@@ -98,7 +98,7 @@ public class Main : Game
         if (Control.KillApp.IsPressed())
             Exit(); // kill app with F10
         if (Control.ToggleFullscreen.IsPressed())
-            _graphics.ToggleFullScreen();
+            Graphics.ToggleFullScreen();
         if (Control.Debug1.IsOnePressed())
             Character.ChangeArmor(Armor.Crimson);
         if (Control.Debug2.IsOnePressed())

@@ -37,12 +37,12 @@ public class SettingsMenu : Menu
 
     internal override void Update()
     {
-        if (Control.Consumable.IsOnePressed() || Control.Catalyst.IsOnePressed() || Control.Weapon.IsOnePressed() || Control.Shield.IsOnePressed())
-        {
+        if ((Control.Consumable.IsOnePressed() || Control.Catalyst.IsOnePressed() || Control.Weapon.IsOnePressed() || Control.Shield.IsOnePressed())
+            && !_controlsM.WaitingForKey && !_controlsM.JustChangedAKey)
             SwitchMenu();
-            return;
-        }
         _currentMenu.Update();
+        if (!_controlsM.JustChangedAKey)
+            _controlsM.JustChangedAKey = false;
     }
 
     internal override void Draw(SpriteBatch spriteBatch)
@@ -94,6 +94,7 @@ internal class ControlsMenu : Menu
         = new((Camera.Width - CRWidth)/2, (Camera.Height - CRHeight)/2, CRWidth, CRHeight, Color.Gray, Colors.Black, 2);
 
     internal bool WaitingForKey;
+    internal bool JustChangedAKey;
     private RectangleBordered _selection;
     private int _selectionId;
 
@@ -119,11 +120,13 @@ internal class ControlsMenu : Menu
             var key = Keys.None;
             if (Keyboard.GetState().GetPressedKeys().Length > 0)
                 key = Keyboard.GetState().GetPressedKeys()[0]; // get it
-            if (key == Keys.None || Controls.Any(c => key == (Keys)c.KeyCode()))
+            if (key == Keys.None || Controls.Any(c => c.KeyCode() == (int)key) // already assigned
+                                 || key == Keys.Escape || key == Keys.Enter || key == Keys.Back) // forbidden keys
                 return; // refuse if this key is already assigned
             Controls[_selectionId].Set(key); // save to current memory
             SettingsSystem.Save(); // save to settings file
             WaitingForKey = false; // unfreeze menu
+            JustChangedAKey = true;
             return;
         }
         
@@ -152,8 +155,8 @@ internal class ControlsMenu : Menu
         for (var i = 0; i < Names.Length; i++)
         {
             spriteBatch.DrawString(Fonts.Font12, Names[i], GetPosition(i), Color.White);
-            //TODO: display current assigned keys
             DrawKeyRectangle(spriteBatch, i);
+            //TODO: display current assigned keys
         }
         if (!WaitingForKey)
             return;
@@ -174,7 +177,27 @@ internal class ControlsMenu : Menu
         const int size = 24;
         var x = (int)GetPosition(index).X + 104;
         var y = (int)GetPosition(index).Y - 5;
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, size + 4, size), new Color(30, 30, 30));
+        var k = Controls[index].KeyCode();
+        spriteBatch.Draw( k switch
+        {
+            >= 65 and <= 90 => Textures.KeysChars[k-65],
+            >= 48 and <= 57 => Textures.KeysNums[k-48],
+            162 or 163 => Textures.KeysSpecs[0],
+            160 or 161 => Textures.KeysSpecs[k-160 + 1],
+            164 or 165 => Textures.KeysSpecs[3],
+            27 => Textures.KeysSpecs[4],
+            13 => Textures.KeysSpecs[5],
+            8 => Textures.KeysSpecs[6],
+            37 => Textures.KeysSpecs[7],
+            39 => Textures.KeysSpecs[8],
+            38 => Textures.KeysSpecs[9],
+            40 => Textures.KeysSpecs[10],
+            9 => Textures.KeysSpecs[11],
+            32 => Textures.KeysSpecs[12],
+            _ => Textures.KeyVoid
+        }, new Vector2(x, y), Colors.White);
+        
+        
     }
 
 }

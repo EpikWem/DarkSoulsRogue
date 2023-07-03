@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Rectangle = System.Drawing.Rectangle;
 
 namespace DarkSoulsRogue.Core.Statics;
 
@@ -16,8 +18,10 @@ public static class Textures
     public static Texture2D[] LadderBottomT, LadderTopT;
     public static Texture2D[] WallsT;
     public static List<Texture2D[]> ArmorTextures, WeaponTextures, ShieldTextures;
+    public static Texture2D KeyVoid;
+    public static Texture2D[] KeysChars, KeysNums, KeysSpecs;
 
-    public static void Init(ContentManager content)
+    public static void Init(ContentManager content, GraphicsDevice graphics)
     {
         VoidT = LoadTexture("void", content);
         BgT = LoadTexture("bg", content);
@@ -71,9 +75,14 @@ public static class Textures
         LadderTopT = new[] { LoadTexture("objects/" + Ladder.Name + "/top", content) };
         LootT = LoadObjectTextures(Loot.Name, Loot.StateNumber, content);
         WallsT = LoadWallsTexture(content);
+
+        KeyVoid = LoadIconTexture("key", content);
+        KeysChars = LoadIconsFromBitmap(LoadIconTexture("chars", content), 26, graphics);
+        KeysNums = LoadIconsFromBitmap(LoadIconTexture("nums", content), 10, graphics);
+        KeysSpecs = LoadIconsFromBitmap(LoadIconTexture("specs", content), 13, graphics);
     }
-    
-    
+
+
     
     /**=============================================================
      *= TEXTURES MANAGEMENT ========================================
@@ -121,5 +130,26 @@ public static class Textures
 
     private static Texture2D LoadIconTexture(string name, ContentManager content) =>
         LoadTexture("menus/icons/" + name, content);
+
+    private static Texture2D[] LoadIconsFromBitmap(Texture2D image, int length, GraphicsDevice graphics)
+    {
+        var result = new Texture2D[length];
+        for (var i = 0; i < result.Length; i++)
+            result[i] = GetSubImage(image, new Rectangle(i * 24, 0, 24, 24), graphics);
+        return result;
+    }
+
+    private static Texture2D GetSubImage(Texture2D texture, Rectangle rectangle, GraphicsDevice graphics)
+    {
+        var result = new Texture2D(graphics, rectangle.Width, rectangle.Height);
+        var colorData  = new Color[texture.Width * texture.Height];
+        var subColorData  = new Color[rectangle.Width * rectangle.Height];
+        texture.GetData(colorData);
+        for (var y = 0; y < rectangle.Height; y++)
+            for (var x = 0; x < rectangle.Width; x++)
+                subColorData[x + y * rectangle.Width] = colorData[x + rectangle.X + (y + rectangle.Y) * texture.Width];
+        result.SetData(subColorData);
+        return result;
+    }
 
 }

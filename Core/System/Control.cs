@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Input;
+﻿using System.Linq;
+using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core.System;
 
@@ -107,5 +108,5 @@ public class Control
     public bool IsPressed() => _isPressed;
     public bool IsOnePressed() => _isOnePressed;
     public static bool IsPressed(Keys key) => Keyboard.GetState().IsKeyDown(key);
-
+    
 }
