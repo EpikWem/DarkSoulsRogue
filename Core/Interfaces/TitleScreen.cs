@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
@@ -108,7 +109,6 @@ public static class TitleScreen
             var csx = (int)PositionOfTitleList.X - 30;
             var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 2;
             
-            //new RectangleBordered(csx, csy, TitleItemWidth + 20, TitleItemHeight-4, Colors.Orange, Colors.Black, 2).Draw(spriteBatch);
             spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight - 4), Colors.Orange);
             for (var i = 0; i < Choices.Length; i++)
                 spriteBatch.DrawString(Fonts.Font12, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Colors.White);
@@ -190,11 +190,11 @@ public static class TitleScreen
             spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
             spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
             
-            new RectangleBordered(cgx, cgy, GameItemWidth, GameItemHeight - 16, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
+            spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, GameItemWidth, GameItemHeight - 16), Colors.Orange);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Colors.White);
-                spriteBatch.DrawString(Fonts.FontBold16, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i * GameItemHeight), Colors.White);
+                spriteBatch.DrawString(Fonts.FontBold16, SaveSystem.GetGameName(i), PositionOfGameList + new Vector2(70, i*GameItemHeight), Colors.White);
                 spriteBatch.DrawString(Fonts.Font14, "Level " + SaveSystem.GetGameLevel(i), PositionOfGameList + new Vector2(70, i*GameItemHeight + 36), Colors.LightGray);
             }
             
@@ -220,14 +220,12 @@ public static class TitleScreen
         private readonly Integer _saveId;
         private readonly GameSelectionMenu _selectionMenu;
         private readonly PersonalisationMenu _personalisationMenu;
-        private readonly TextArea _textArea;
         
         internal GameCreationMenu()
         {
             _saveId = new Integer(-1);
             _selectionMenu = new GameSelectionMenu(_saveId);
             _personalisationMenu = new PersonalisationMenu();
-            _textArea = new TextArea(new Rectangle(100, 100, 300, 28));
             _phase = Phase.PlaceSelection;
         }
 
@@ -236,7 +234,7 @@ public static class TitleScreen
             _saveId.Value = -1;
             _selectionMenu.Reinit();
             _personalisationMenu.Reinit();
-            _textArea.Reinit();
+            NameArea.Reinit();
             _phase = Phase.PlaceSelection;
         }
 
@@ -252,21 +250,21 @@ public static class TitleScreen
                 case Phase.Personalisation:
                     _personalisationMenu.Update();
                     if (_personalisationMenu.IsConfirmed)
+                    {
+                        NameArea.Reinit();
                         NextPhase();
+                        _personalisationMenu.IsConfirmed = false;
+                    }
                     return;
                 case Phase.Name:
                     if (Control.Pause.IsOnePressed())
-                    {
-                        _personalisationMenu.Reinit();
-                        _textArea.Reinit();
                         _phase = Phase.Personalisation;
-                    }
-                    if (_textArea.Update() == TextArea.States.Confirmed)
+                    if (NameArea.Update() == TextArea.States.Confirmed)
                         NextPhase();
                     return;
                 case Phase.End:
                     _isActive = false;
-                    SaveSystem.CreateNewSave(_saveId.Value, _textArea.Read(), _personalisationMenu.GetChosenAttributes(), _personalisationMenu.GetChosenArmor());
+                    SaveSystem.CreateNewSave(_saveId.Value, NameArea.TextArea.Read(), _personalisationMenu.GetChosenAttributes(), _personalisationMenu.GetChosenArmor());
                     return;
             }
         }
@@ -282,8 +280,13 @@ public static class TitleScreen
                     _personalisationMenu.Draw(spriteBatch);
                     return;
                 case Phase.Name:
-                    _textArea.Draw(spriteBatch);
+                    _personalisationMenu.Draw(spriteBatch);
+                    NameArea.Draw(spriteBatch);
                     return;
+                case Phase.End:
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -294,16 +297,6 @@ public static class TitleScreen
                 Phase.PlaceSelection => Phase.Personalisation,
                 Phase.Personalisation => Phase.Name,
                 _ => Phase.End
-            };
-        }
-        private void PastPhase()
-        {
-            if (_phase == Phase.PlaceSelection)
-                Activate();
-            _phase = _phase switch
-            {
-                Phase.Personalisation => Phase.PlaceSelection,
-                Phase.Name => Phase.Personalisation
             };
         }
 
@@ -384,7 +377,7 @@ public static class TitleScreen
                 spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
                 spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
                 
-                new RectangleBordered(cgx, cgy, ClassItemWidth, ClassItemHeight+4, Colors.Orange, Colors.Orange, 4).Draw(spriteBatch);
+                spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, ClassItemWidth, ClassItemHeight+4), Colors.Orange);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
@@ -401,7 +394,7 @@ public static class TitleScreen
             public Armor GetChosenArmor()
                 => ClassArmors[_selectedClass];
 
-            private Texture2D GetClassIcon(int index)
+            private static Texture2D GetClassIcon(int index)
                 => ClassArmors[index].GetWearingTextures()[1];
 
             private static int FirstClassChoice()
@@ -412,6 +405,26 @@ public static class TitleScreen
         }
         
     }
+
+    private static class NameArea
+    {
+
+        private static readonly Rectangle BlackRectangle = new(250, 300, 400, 200);
+        internal static readonly TextArea TextArea = new(new Rectangle(300, 400, 200, 28));
+        
+        internal static void Reinit()
+            => TextArea.Reinit();
+
+        internal static TextArea.States Update()
+            => TextArea.Update();
+
+        internal static void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Main.PixelTexture, BlackRectangle, Colors.DarkGrayA);
+            TextArea.Draw(spriteBatch);
+        }
+        
+    } 
 
     private static void DrawAttributesSheet(SpriteBatch spriteBatch, string name, int[] values)
     {

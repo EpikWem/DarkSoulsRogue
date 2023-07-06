@@ -154,9 +154,9 @@ internal class QuitMenu : Menu
     internal override void Draw(SpriteBatch spriteBatch)
     {
         QArea.Draw(spriteBatch);
-        new RectangleBordered(QArea.Rectangle.X+30 + (_selection ? 90 : 0), QArea.Rectangle.Y+62, 70, 30, Color.Orange, Color.Black, 2).Draw(spriteBatch);
-        spriteBatch.DrawString(Fonts.FontSoulCounter, "Quit to Title ?", new Vector2(QArea.Rectangle.X+10, QArea.Rectangle.Y+10), Color.White);
-        spriteBatch.DrawString(Fonts.FontSoulCounter, "Back     Yes", new Vector2(QArea.Rectangle.X+30, QArea.Rectangle.Y+64), Color.White);
+        spriteBatch.Draw(Main.PixelTexture, new Rectangle(QArea.Rectangle.X + 30 + (_selection ? 90 : 0), QArea.Rectangle.Y + 62, 70, 30), Colors.Orange);
+        spriteBatch.DrawString(Fonts.FontSoulCounter, "Quit to Title ?", new Vector2(QArea.Rectangle.X+10, QArea.Rectangle.Y+10), Colors.White);
+        spriteBatch.DrawString(Fonts.FontSoulCounter, "Back     Yes", new Vector2(QArea.Rectangle.X+30, QArea.Rectangle.Y+64), Colors.White);
     }
     
 }

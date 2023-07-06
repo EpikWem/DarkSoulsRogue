@@ -174,8 +174,7 @@ internal class ControlsMenu : Menu
 
     private static void DrawKeyRectangle(SpriteBatch spriteBatch, int index)
     {
-        const int size = 24;
-        var x = (int)GetPosition(index).X + 104;
+        var x = (int)GetPosition(index).X + 110;
         var y = (int)GetPosition(index).Y - 5;
         var k = Controls[index].KeyCode();
         spriteBatch.Draw( k switch
@@ -195,9 +194,7 @@ internal class ControlsMenu : Menu
             9 => Textures.KeysSpecs[11],
             32 => Textures.KeysSpecs[12],
             _ => Textures.KeyVoid
-        }, new Vector2(x, y), Colors.White);
-        
-        
+        }, new Vector2(x, y), Colors.White); 
     }
 
 }
