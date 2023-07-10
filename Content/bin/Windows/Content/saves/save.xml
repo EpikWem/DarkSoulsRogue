@@ -143,14 +143,14 @@
     <s2>
       <map>101</map>
       <character>
-        <name>Lanceleot</name>
+        <name>Lancelot</name>
         <life>71000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>348</x>
-          <y>187</y>
-          <orientation>1</orientation>
+          <x>388</x>
+          <y>267</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
           <level>5</level>

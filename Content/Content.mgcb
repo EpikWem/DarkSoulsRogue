@@ -1300,3 +1300,69 @@
 #begin saves/settings.xml
 /copy:saves/settings.xml
 
+#begin sounds/musics/title.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/musics/title.ogg
+
+#begin sounds/sfx/confirm.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/confirm.ogg
+
+#begin sounds/sfx/death.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/death.ogg
+
+#begin sounds/sfx/estus.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/estus.ogg
+
+#begin sounds/sfx/fog.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/fog.ogg
+
+#begin sounds/sfx/illusorywall.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/illusorywall.ogg
+
+#begin sounds/sfx/item.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/item.ogg
+
+#begin sounds/sfx/lit.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/lit.ogg
+
+#begin sounds/sfx/soulsuck1.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/soulsuck1.ogg
+
+#begin sounds/sfx/soulsuck2.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/soulsuck2.ogg
+
+#begin sounds/sfx/victory.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/victory.ogg
+

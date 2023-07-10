@@ -9,6 +9,7 @@ using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 
 namespace DarkSoulsRogue.Core;
 
@@ -17,8 +18,8 @@ public class Main : Game
 
     public const bool DrawWalls = true;
     public const bool CameraCentered = false;
-    //public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
-    public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
+    public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
+    //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
 
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
@@ -54,6 +55,8 @@ public class Main : Game
         Textures.Init(Content, GraphicsDevice);
         Fonts.Init(Content);
         Langs.Init(Content);
+        Sounds.Init(Content);
+        MediaPlayer.Play(Sounds.MTitle);
         SaveSystem.Init();
         SettingsSystem.Init();
         SettingsSystem.Load();
