@@ -39,6 +39,7 @@ public static class TitleScreen
         _wantsToQuit = false;
         _isActive = true;
         TitleM.Reinit();
+        Sounds.Play(Sounds.MTitle);
         _currentMenu = TitleM;
     }
 
@@ -93,7 +94,10 @@ public static class TitleScreen
         internal override void Update()
         {
             if (Control.Interact.IsOnePressed())
+            {
                 ChangeMenu();
+                Sounds.Play(Sounds.SConfirm);
+            }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 _selectionId = LastChoice();
 

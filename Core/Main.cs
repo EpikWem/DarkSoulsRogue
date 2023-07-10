@@ -9,7 +9,6 @@ using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 
 namespace DarkSoulsRogue.Core;
 
@@ -56,7 +55,6 @@ public class Main : Game
         Fonts.Init(Content);
         Langs.Init(Content);
         Sounds.Init(Content);
-        MediaPlayer.Play(Sounds.MTitle);
         SaveSystem.Init();
         SettingsSystem.Init();
         SettingsSystem.Load();

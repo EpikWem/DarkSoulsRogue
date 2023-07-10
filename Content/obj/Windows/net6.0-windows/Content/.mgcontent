@@ -119,6 +119,7 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/confirm.ogg</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/death.ogg</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/estus.ogg</File>
+    <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/fog.ogg</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/illusorywall.ogg</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/item.ogg</File>
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/lit.ogg</File>
@@ -127,6 +128,7 @@
     <File>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/victory.ogg</File>
   </SourceFiles>
   <DestFiles>
+    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
