@@ -7,7 +7,6 @@ using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
-using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -18,10 +17,10 @@ public class Main : Game
 
     public const bool DrawWalls = true;
     public const bool CameraCentered = false;
-    public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
-    //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
-    
-    public readonly GraphicsDeviceManager Graphics;
+    //public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
+    public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
+
+    private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
     
     public static Texture2D PixelTexture;
@@ -40,11 +39,11 @@ public class Main : Game
 
     public Main()
     {
-        Graphics = new GraphicsDeviceManager(this);
+        _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = false;
-        Graphics.PreferredBackBufferWidth = Camera.Width;
-        Graphics.PreferredBackBufferHeight = Camera.Height;
+        _graphics.PreferredBackBufferWidth = Camera.Width;
+        _graphics.PreferredBackBufferHeight = Camera.Height;
     }
 
     protected override void Initialize()
@@ -98,7 +97,7 @@ public class Main : Game
         if (Control.KillApp.IsPressed())
             Exit(); // kill app with F10
         if (Control.ToggleFullscreen.IsPressed())
-            Graphics.ToggleFullScreen();
+            _graphics.ToggleFullScreen();
         if (Control.Debug1.IsOnePressed())
             Character.ChangeArmor(Armor.Crimson);
         if (Control.Debug2.IsOnePressed())
