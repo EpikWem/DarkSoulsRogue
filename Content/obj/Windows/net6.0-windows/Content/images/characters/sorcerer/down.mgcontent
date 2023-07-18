@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/images/characters/sorcerer/down.png</SourceFile>
-  <SourceTime>2023-06-30T16:14:15.9718767+02:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/characters/sorcerer/down.xnb</DestFile>
-  <DestTime>2023-07-10T15:59:17.8658282+02:00</DestTime>
+  <SourceFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/images/characters/sorcerer/down.png</SourceFile>
+  <SourceTime>2023-07-03T17:55:32.6338213+02:00</SourceTime>
+  <DestFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/images/characters/sorcerer/down.xnb</DestFile>
+  <DestTime>2023-07-14T19:44:25.744593+02:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -17,8 +17,8 @@ public class Main : Game
 
     public const bool DrawWalls = true;
     public const bool CameraCentered = false;
-    public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
-    //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
+    //public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
+    public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
 
     private readonly GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
