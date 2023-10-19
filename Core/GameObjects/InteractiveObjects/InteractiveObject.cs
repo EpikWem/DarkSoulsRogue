@@ -17,7 +17,7 @@ public abstract class InteractiveObject : Wall
         _textures = textures;
     }
 
-    public abstract void Interact(Character character);
+    public abstract void Interact();
 
     protected void IncreaseState()
     {

@@ -1,4 +1,5 @@
 ﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
@@ -19,11 +20,11 @@ public class Loot : InteractiveObject
         _item = stack;
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
         if (State == 1)
             return;
-        character.Inventory.AddItem(_item.Item, _item.Quantity);
+        GameScreen.Character.Inventory.AddItem(_item.Item, _item.Quantity);
         IncreaseState();
     }
     

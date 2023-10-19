@@ -55,22 +55,51 @@ public class SettingsMenu : Menu
 
 }
 
-internal class GeneralMenu : Menu 
+internal class GeneralMenu : Menu
 {
-    
+
+    private int[] _levels;
+    private int _selection;
+
     internal override void Reinit()
     {
-        
+        _levels = Sounds.GetLevels();
+        _selection = 0;
     }
 
     internal override void Update()
     {
-        
+        if (Control.MenuUp.IsOnePressed())
+            _selection = 0;
+        if (Control.MenuDown.IsOnePressed())
+            _selection = 1;
+        if (Control.MenuRight.IsOnePressed())
+        {
+            _levels[_selection] += 10;
+            if (_levels[_selection] > 100)
+                _levels[_selection] = 100;
+            ApplyChanges();
+        }
+        if (Control.MenuLeft.IsOnePressed())
+        {
+            _levels[_selection] -= 10;
+            if (_levels[_selection] < 0)
+                _levels[_selection] = 0;
+            ApplyChanges();
+        }
     }
 
     internal override void Draw(SpriteBatch spriteBatch)
     {
-        spriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 300), Color.White);
+        spriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
+        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 300), Colors.White);
+        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 400), Colors.White);
+    }
+
+    private void ApplyChanges()
+    {
+        Sounds.SetLevels(_levels);
+        SettingsSystem.Save();
     }
     
 }

@@ -41,6 +41,7 @@ public class Npc : Mob
             Orientation = character.Orientation.Opposite();
             ChatBox.Say(_speaks[_speakingStage]);
             IsSpeaking = true;
+            GameScreen.Character.IsSpeaking = true;
         }
         else
         {
@@ -51,6 +52,7 @@ public class Npc : Mob
                 ChatBox.Clear();
                 Orientation = _baseOrientation;
                 IsSpeaking = false;
+                GameScreen.Character.IsSpeaking = false;
                 return;
             }
             _speakingStage++;

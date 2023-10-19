@@ -47,7 +47,7 @@ public static class TitleScreen
     {
         switch (TitleM.SelectionId())
         {
-            case 0: _isActive = false; SaveSystem.Load(); return;
+            case 0: _isActive = false; Sounds.StopMusic(); SaveSystem.Load(); return;
             case 1: _currentMenu = GameSelectionM; break;
             case 2: _currentMenu = GameCreationM; break;
             case 3: _currentMenu = SettingsM; break;
@@ -93,6 +93,21 @@ public static class TitleScreen
         
         internal override void Update()
         {
+            //=======================================
+            if (Control.Debug1.IsOnePressed())
+            {
+                
+            }
+            if (Control.Debug2.IsOnePressed())
+            {
+                
+            }
+            if (Control.Debug3.IsOnePressed())
+            {
+                
+            }
+            //=======================================
+            
             if (Control.Interact.IsOnePressed())
             {
                 ChangeMenu();

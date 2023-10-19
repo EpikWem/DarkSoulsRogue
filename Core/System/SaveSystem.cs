@@ -32,11 +32,11 @@ public static class SaveSystem
     public static void Load() => Load(GetInt(SaveFile["XnaContent"]?["Asset"]?["lastSaveId"]));
     public static void Load(int saveId)
     {
-        var character = Main.Character;
+        var character = GameScreen.Character;
         
-        Main.CurrentSaveId = saveId;
+        GameScreen.CurrentSaveId = saveId;
         
-        var root = SaveFile["XnaContent"]?["Asset"]?["s" + Main.CurrentSaveId];
+        var root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
         
         XmlNode node = root?["character"];
         character.Name = GetString(node?["name"]);
@@ -70,7 +70,7 @@ public static class SaveSystem
         for (var i = 0; i < Map.GetObjectsCount(); i++)
             Map.GetObject(i).SetState(GetInt(node?.ChildNodes[i]));
         
-        Main.LoadMap(GetInt(root?["map"]));
+        GameScreen.LoadMap(GetInt(root?["map"]));
     }
     
     
@@ -81,13 +81,13 @@ public static class SaveSystem
     
     public static void Save()
     {
-        var character = Main.Character;
+        var character = GameScreen.Character;
         
-        SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = Main.CurrentSaveId.ToString();
+        SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = GameScreen.CurrentSaveId.ToString();
         
-        XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + Main.CurrentSaveId];
+        XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
         
-        root!["map"]!.InnerText = Main.CurrentMap().Id.ToString();
+        root!["map"]!.InnerText = GameScreen.CurrentMap().Id.ToString();
 
         XmlNode node = root["character"];
         node!["name"]!.InnerText = character.Name;
@@ -129,16 +129,16 @@ public static class SaveSystem
     
     public static void CreateNewSave(int newSaveId, string name, List<int> attributes, Armor armor)
     {
-        Main.LoadMap(101);
-        Main.Character = new Character(name);
-        Main.Character.Attributes.Set(attributes);
-        Main.Character.ChangeArmor(armor);
-        Main.Character.PlaceOnGrid(7, 5, Orientation.Up);
+        GameScreen.LoadMap(101);
+        GameScreen.Character = new Character(name);
+        GameScreen.Character.Attributes.Set(attributes);
+        GameScreen.Character.ChangeArmor(armor);
+        GameScreen.Character.PlaceOnGrid(7, 5, Orientation.Up);
         for (var i = 0; i < Map.GetObjectsCount(); i++)
             Map.GetObject(i).SetState(0);
-        Main.Character.Life = Main.Character.MaxLife();
-        Ath.Init(Main.Character);
-        Main.CurrentSaveId = newSaveId;
+        GameScreen.Character.Life = GameScreen.Character.MaxLife();
+        Ath.Init(GameScreen.Character);
+        GameScreen.CurrentSaveId = newSaveId;
     }
 
     public static Texture2D GetGameIcon(int gameId) =>

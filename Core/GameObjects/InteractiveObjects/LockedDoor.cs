@@ -1,5 +1,6 @@
 ﻿using System;
 using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
@@ -14,11 +15,11 @@ public class LockedDoor : Door
         _key = key;
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
         if (State != 0)
             return;
-        if (character.Inventory.GetQuantity(_key) > 0)
+        if (GameScreen.Character.Inventory.GetQuantity(_key) > 0)
             IncreaseState();
         else
             Console.WriteLine("It is locked. You need a key");

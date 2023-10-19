@@ -1,5 +1,6 @@
  using System.Collections.Generic;
-using DarkSoulsRogue.Core.Items;
+ using DarkSoulsRogue.Core.Interfaces;
+ using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
@@ -25,6 +26,8 @@ public class Character : Entity
     private int _exhaustingTime;
     private bool _running;
     public bool ShieldUp;
+    public bool IsSpeaking;
+    public bool IsResting;
 
     public Character(string name) : base(Armor.Naked, new Hitbox(4, 20))
     {
@@ -40,6 +43,8 @@ public class Character : Entity
         _exhaustingTime = 0;
         _running = false;
         ShieldUp = false;
+        IsSpeaking = false;
+        IsResting = false;
     }
 
     public new void Draw(SpriteBatch spriteBatch)
@@ -155,9 +160,9 @@ public class Character : Entity
     {
         if (orientation == Orientation.Null)
             return;
-        var dest = Main.CurrentMap().Connections[orientation.Index];
+        var dest = GameScreen.CurrentMap().Connections[orientation.Index];
         PlaceOnGrid(dest);
-        Main.LoadMap(dest.MapId);
+        GameScreen.LoadMap(dest.MapId);
     }
 
     public int MaxLife() => (int)((500 + Attributes.Get(Attributes.Attribute.Vitality) * 15) * 100

@@ -7,33 +7,40 @@ namespace DarkSoulsRogue.Core.Statics;
 public static class Sounds
 {
 
-    public static Song
+    public static Music
         MTitle;
-    public static SoundEffect
+    public static Sfx
         SConfirm, SDeath, SEstus, SFog, SIllusoryWall, SItem, SLit, SSoul1, SSoul2, SVictory;
 
-    private static Song _currentSong;
-    public enum Chanel { Music, Effects, Ambience, Feet, Voice }
-    private static float[] _levels;
+    public class Music { internal Song Sound; internal Music(Song sound) => Sound = sound; }
+    public class Sfx { internal SoundEffect Sound; internal Sfx(SoundEffect sound) => Sound = sound; }
+    public class Ambient { internal Song Sound; internal Ambient(Song sound) => Sound = sound; }
+    public class Feet { internal SoundEffect Sound; internal Feet(SoundEffect sound) => Sound = sound; }
+
+    private static Music _currentSong;
+    private static Ambient _currentAmbience;
+    public enum Chanel { Music, Sfx, Ambient, Feet }
+    private static int[] _levels;
 
     public static void Init(ContentManager content)
     {
         MediaPlayer.IsRepeating = true;
         _currentSong = null;
-        _levels = new[] { 1.0f, 1.0f, 1.0f, 1.0f, 1.0f };
+        _currentAmbience = null;
+        _levels = new[] { 100, 100, 100, 100 };
         
-        MTitle = LoadM("title", content);
+        MTitle = new Music(LoadM("title", content));
 
-        SConfirm = LoadS("confirm", content);
-        SDeath = LoadS("death", content);
-        SEstus = LoadS("estus", content);
-        SFog = LoadS("fog", content);
-        SIllusoryWall = LoadS("illusorywall", content);
-        SItem = LoadS("item", content);
-        SLit = LoadS("lit", content);
-        SSoul1 = LoadS("soulsuck1", content);
-        SSoul2 = LoadS("soulsuck2", content);
-        SVictory = LoadS("victory", content);
+        SConfirm = new Sfx(LoadS("confirm", content));
+        SDeath = new Sfx(LoadS("death", content));
+        SEstus = new Sfx(LoadS("estus", content));
+        SFog = new Sfx(LoadS("fog", content));
+        SIllusoryWall = new Sfx(LoadS("illusorywall", content));
+        SItem = new Sfx(LoadS("item", content));
+        SLit = new Sfx(LoadS("lit", content));
+        SSoul1 = new Sfx(LoadS("soulsuck1", content));
+        SSoul2 = new Sfx(LoadS("soulsuck2", content));
+        SVictory = new Sfx(LoadS("victory", content));
     }
 
     private static Song LoadM(string name, ContentManager content)
@@ -41,22 +48,40 @@ public static class Sounds
     private static SoundEffect LoadS(string name, ContentManager content)
         => content.Load<SoundEffect>("sounds/sfx/" + name);
 
-    public static void Play(Song song)
+    public static void Play(Music music)
     {
-        if (song == _currentSong)
+        if (music == _currentSong)
             return;
-        MediaPlayer.Play(song);
-        _currentSong = song;
+        MediaPlayer.Play(music.Sound);
+        _currentSong = music;
     }
-    public static void Play(SoundEffect sfx)
-        => sfx.CreateInstance().Play();
-    
-    public static float[] GetLevels()
-        => _levels;   
-    public static void SetLevels(float[] levels)
+    public static void Play(Ambient ambient)
+    {
+        if (ambient == _currentAmbience)
+            return;
+        MediaPlayer.Play(ambient.Sound);
+        _currentAmbience = ambient;
+    }
+    public static void Play(Sfx sfx)
+        => sfx.Sound.CreateInstance().Play();
+    public static void Play(Feet feet)
+        => feet.Sound.CreateInstance().Play();
+
+    public static void StopMusic()
+    {
+        MediaPlayer.Stop();
+        _currentSong = null;
+    }
+
+    public static int[] GetLevels()
+        => _levels;
+    public static int GetLevel(Chanel chanel)
+        => _levels[(int)chanel];   
+    public static void SetLevels(int[] levels)
     {
         _levels = levels;
-        SoundEffect.MasterVolume = _levels[(int)Chanel.Effects];
+        MediaPlayer.Volume = (float)_levels[(int)Chanel.Music] / 100;
+        SoundEffect.MasterVolume = (float)_levels[(int)Chanel.Sfx] / 100;
     }
 
 }

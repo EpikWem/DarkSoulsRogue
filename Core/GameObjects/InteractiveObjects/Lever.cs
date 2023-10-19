@@ -17,7 +17,7 @@ public class Lever : InteractiveObject
         _isLocked = isLocked;
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
         
     }

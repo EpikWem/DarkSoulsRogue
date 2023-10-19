@@ -15,7 +15,7 @@ public class Door : InteractiveObject
         
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
         if (State == 0)
             IncreaseState();

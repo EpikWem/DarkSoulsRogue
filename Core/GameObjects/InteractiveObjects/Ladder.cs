@@ -1,4 +1,5 @@
 ﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
 
@@ -18,10 +19,10 @@ public class Ladder : InteractiveObject
         _destination = destination;
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
-        Main.LoadMap(_destination.MapId);
-        character.PlaceOnGrid(_destination);
+        GameScreen.LoadMap(_destination.MapId);
+        GameScreen.Character.PlaceOnGrid(_destination);
     }
     
 }

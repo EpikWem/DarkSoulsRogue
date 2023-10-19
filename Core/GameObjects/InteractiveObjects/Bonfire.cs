@@ -1,4 +1,5 @@
 ﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
 
@@ -7,18 +8,16 @@ namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 public class Bonfire : InteractiveObject
 {
     public const string Name = "bonfire";
-    public const int StateNumber = 5; 
+    public const int StateNumber = 5;
     
     public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid, Textures.BonfireT)
     {
         
     }
 
-    public override void Interact(Character character)
+    public override void Interact()
     {
-        character.AddLife(character.MaxLife());
-        character.AddStamina(character.MaxStamina());
-        Lit(character);
+        BonfireMenu.Activate();
     }
 
     private void Lit(Character character)
