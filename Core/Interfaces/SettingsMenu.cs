@@ -58,21 +58,34 @@ public class SettingsMenu : Menu
 internal class GeneralMenu : Menu
 {
 
-    private int[] _levels;
-    private int _selection;
+    private static int[] _levels;
+    private static int _selection;
+    private static Bar _musicBar, _sfxBar, _ambientBar, _feetBar;
 
     internal override void Reinit()
     {
         _levels = Sounds.GetLevels();
         _selection = 0;
+        _musicBar = new Bar(new Vector2(40, 306), Colors.Orange, 2.0f);
+        _sfxBar = new Bar(new Vector2(40, 356), Colors.Orange, 2.0f);
+        _ambientBar = new Bar(new Vector2(40, 406), Colors.Orange, 2.0f);
+        _feetBar = new Bar(new Vector2(40, 456), Colors.Orange, 2.0f);
     }
 
     internal override void Update()
     {
         if (Control.MenuUp.IsOnePressed())
-            _selection = 0;
+        {
+            _selection--;
+            if (_selection < 0)
+                _selection = 0;
+        }
         if (Control.MenuDown.IsOnePressed())
-            _selection = 1;
+        {
+            _selection++;
+            if (_selection > 3)
+                _selection = 3;
+        }
         if (Control.MenuRight.IsOnePressed())
         {
             _levels[_selection] += 10;
@@ -91,12 +104,19 @@ internal class GeneralMenu : Menu
 
     internal override void Draw(SpriteBatch spriteBatch)
     {
+        spriteBatch.Draw(Main.PixelTexture, new Rectangle(90, 298+50*_selection, 256, 40), Colors.Orange);
         spriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
+        _musicBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Music), 100);
         spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 300), Colors.White);
-        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 400), Colors.White);
+        _sfxBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Sfx), 100);
+        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 350), Colors.White);
+        _ambientBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Ambient), 100);
+        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Ambient).ToString(), new Vector2(300, 400), Colors.White);
+        _feetBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Feet), 100);
+        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Feet).ToString(), new Vector2(300, 450), Colors.White);
     }
 
-    private void ApplyChanges()
+    private static void ApplyChanges()
     {
         Sounds.SetLevels(_levels);
         SettingsSystem.Save();

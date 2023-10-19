@@ -79,11 +79,11 @@ public class Main : Game
         
         // debug controls
         if (Control.Debug1.IsOnePressed())
-            GameScreen.Character.ChangeArmor(Armor.Crimson);
+            ;
         if (Control.Debug2.IsOnePressed())
-            GameScreen.Character.ChangeArmor(Armor.Artorias);
+            ;
         if (Control.Debug3.IsOnePressed())
-            SettingsSystem.ResetToDefault();
+            ;
 
         // update title menu
         if (TitleScreen.IsActive())

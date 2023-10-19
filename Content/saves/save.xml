@@ -141,16 +141,16 @@
       </objects>
     </s1>
     <s2>
-      <map>101</map>
+      <map>102</map>
       <character>
         <name>Lancelot</name>
         <life>71000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>388</x>
-          <y>290</y>
-          <orientation>1</orientation>
+          <x>506</x>
+          <y>309</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
           <level>5</level>

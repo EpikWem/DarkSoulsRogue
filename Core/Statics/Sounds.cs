@@ -80,7 +80,7 @@ public static class Sounds
     public static void SetLevels(int[] levels)
     {
         _levels = levels;
-        MediaPlayer.Volume = (float)_levels[(int)Chanel.Music] / 100;
+        MediaPlayer.Volume = (float)_levels[(int)Chanel.Music] / 500;
         SoundEffect.MasterVolume = (float)_levels[(int)Chanel.Sfx] / 100;
     }
 
