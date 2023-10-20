@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/soulsuck2.ogg</SourceFile>
   <SourceTime>2023-07-10T16:21:42.3706958+02:00</SourceTime>
   <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/sounds/sfx/soulsuck2.xnb</DestFile>
-  <DestTime>2023-07-10T22:19:34.2066248+02:00</DestTime>
+  <DestTime>2023-10-20T18:49:02.5549434+02:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

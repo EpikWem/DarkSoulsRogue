@@ -141,15 +141,15 @@
       </objects>
     </s1>
     <s2>
-      <map>101</map>
+      <map>102</map>
       <character>
         <name>Lancelot</name>
         <life>71000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>388</x>
-          <y>267</y>
+          <x>506</x>
+          <y>309</y>
           <orientation>0</orientation>
         </position>
         <attributes>
@@ -190,7 +190,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>7</equippedArmor>
+          <equippedArmor>5</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -199,12 +199,12 @@
         </inventory>
       </character>
       <objects>
-        <o0>0</o0>
-        <o1>0</o1>
+        <o0>1</o0>
+        <o1>1</o1>
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>
-        <o5>0</o5>
+        <o5>1</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>
@@ -217,9 +217,9 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>448</x>
+          <x>379</x>
           <y>300</y>
-          <orientation>0</orientation>
+          <orientation>2</orientation>
         </position>
         <attributes>
           <level>2</level>

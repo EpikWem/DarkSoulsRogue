@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/death.ogg</SourceFile>
   <SourceTime>2023-07-10T16:32:32.1967155+02:00</SourceTime>
   <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/sounds/sfx/death.xnb</DestFile>
-  <DestTime>2023-07-10T22:19:33.3710998+02:00</DestTime>
+  <DestTime>2023-10-20T18:49:01.3860707+02:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

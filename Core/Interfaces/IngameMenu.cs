@@ -31,21 +31,30 @@ public static class IngameMenu
     
     private static void SwitchMenu()
     {
+        Sounds.Play(Sounds.SMenuMove);
         _currentMenu = _currentMenu == EquipmentM ? ItemsM : EquipmentM;
         _currentMenu.Reinit();
     }
 
     internal static void ToggleQuit()
     {
-        _quitting = !_quitting;
         if (_quitting)
+        {
+            Sounds.Play(Sounds.SMenuBack);
+        }
+        else
+        {
+            Sounds.Play(Sounds.SMenuConfirm);
             QuitM.Reinit();
+        }
+        _quitting = !_quitting;
     }
     
     public static void Update()
     {
         if (Control.Pause.IsOnePressed())
         {
+            Sounds.Play(Sounds.SMenuBack);
             _isActive = false;
             return;
         }
@@ -134,6 +143,7 @@ internal class QuitMenu : Menu
         {
             if (_selection) // if OK
             {
+                Sounds.Play(Sounds.SMenuConfirm);
                 IngameMenu.Deactivate();
                 Main.GotoTitle();
                 return;
@@ -148,7 +158,10 @@ internal class QuitMenu : Menu
             return;
         }
         if (Control.MenuRight.IsOnePressed() || Control.MenuLeft.IsOnePressed())
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selection = !_selection;
+        }
     }
     
     internal override void Draw(SpriteBatch spriteBatch)

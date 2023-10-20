@@ -24,9 +24,15 @@ public class TextArea
     public States Update()
     {
         if (Control.Enter.IsOnePressed())
+        {
+            Sounds.Play(Sounds.SMenuConfirm);
             return States.Confirmed;
+        }
         if (Control.Backspace.IsOnePressed() && _value.Length > 0)
+        {
+            Sounds.Play(Sounds.SMenuBack);
             _value = _value?.Remove(_value.Length - 1);
+        }
         _value += GetPressedCharacters();
         return States.Processing;
     }
@@ -100,6 +106,8 @@ public class TextArea
             result += "-";
         if (Control.D8.IsOnePressed())
             result += "_";
+        if (result != "")
+            Sounds.Play(Sounds.SMenuMove);
         return result;
     }
     

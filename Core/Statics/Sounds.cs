@@ -10,7 +10,7 @@ public static class Sounds
     public static Music
         MTitle;
     public static Sfx
-        SConfirm, SDeath, SEstus, SFog, SIllusoryWall, SItem, SLit, SSoul1, SSoul2, SVictory;
+        SMenuConfirm, SDeath, SEstus, SFog, SIllusoryWall, SItem, SLit, SMenuBack, SMenuMove, SSoul1, SSoul2, SVictory;
 
     public class Music { internal Song Sound; internal Music(Song sound) => Sound = sound; }
     public class Sfx { internal SoundEffect Sound; internal Sfx(SoundEffect sound) => Sound = sound; }
@@ -31,13 +31,15 @@ public static class Sounds
         
         MTitle = new Music(LoadM("title", content));
 
-        SConfirm = new Sfx(LoadS("confirm", content));
+        SMenuConfirm = new Sfx(LoadS("confirm", content));
         SDeath = new Sfx(LoadS("death", content));
         SEstus = new Sfx(LoadS("estus", content));
         SFog = new Sfx(LoadS("fog", content));
         SIllusoryWall = new Sfx(LoadS("illusorywall", content));
         SItem = new Sfx(LoadS("item", content));
         SLit = new Sfx(LoadS("lit", content));
+        SMenuBack = new Sfx(LoadS("menuback", content));
+        SMenuMove = new Sfx(LoadS("menumove", content));
         SSoul1 = new Sfx(LoadS("soulsuck1", content));
         SSoul2 = new Sfx(LoadS("soulsuck2", content));
         SVictory = new Sfx(LoadS("victory", content));

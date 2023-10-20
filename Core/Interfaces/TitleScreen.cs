@@ -62,6 +62,7 @@ public static class TitleScreen
     {
         if (_currentMenu == SettingsM && !SettingsM.IsWaitingForKey() && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
         {
+            Sounds.Play(Sounds.SMenuBack);
             Activate();
             return false;
         }
@@ -93,33 +94,27 @@ public static class TitleScreen
         
         internal override void Update()
         {
-            //=======================================
-            if (Control.Debug1.IsOnePressed())
-            {
-                
-            }
-            if (Control.Debug2.IsOnePressed())
-            {
-                
-            }
-            if (Control.Debug3.IsOnePressed())
-            {
-                
-            }
-            //=======================================
-            
             if (Control.Interact.IsOnePressed())
             {
+                Sounds.Play(Sounds.SMenuConfirm);
                 ChangeMenu();
-                Sounds.Play(Sounds.SConfirm);
             }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
+            {
+                Sounds.Play(Sounds.SMenuMove);
                 _selectionId = LastChoice();
+            }
 
             if (Control.MenuUp.IsOnePressed() && _selectionId > FirstChoice())
+            {
+                Sounds.Play(Sounds.SMenuMove);
                 _selectionId--;
+            }
             if (Control.MenuDown.IsOnePressed() && _selectionId < LastChoice())
+            {
+                Sounds.Play(Sounds.SMenuMove);
                 _selectionId++;
+            }
         }
 
         internal override void Draw(SpriteBatch spriteBatch)
@@ -179,26 +174,33 @@ public static class TitleScreen
         {
             if (Control.Interact.IsOnePressed())
             {
+                Sounds.Play(Sounds.SMenuConfirm);
                 if (_forNewSave != null)
                     _forNewSave.Value = _selectedGameId;
                 else
                 {
+                    Sounds.StopMusic();
                     _isActive = false;
                     SaveSystem.Load(_selectedGameId);
                 }
             }
             if (Control.MenuUp.IsOnePressed())
             {
+                Sounds.Play(Sounds.SMenuMove);
                 if (_selectedGameId > FirstGameChoice())
                     _selectedGameId--;
             }
             if (Control.MenuDown.IsOnePressed())
             {
+                Sounds.Play(Sounds.SMenuMove);
                 if (_selectedGameId < LastGameChoice())
                     _selectedGameId++;
             }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
+            {
+                Sounds.Play(Sounds.SMenuBack);
                 Activate();
+            }
         }
         
         internal override void Draw(SpriteBatch spriteBatch)
@@ -235,7 +237,7 @@ public static class TitleScreen
     {
 
         private enum Phase { PlaceSelection, Personalisation, Name, End }
-        private Phase _phase;
+        private static Phase _phase;
         private readonly Integer _saveId;
         private readonly GameSelectionMenu _selectionMenu;
         private readonly PersonalisationMenu _personalisationMenu;
@@ -268,12 +270,11 @@ public static class TitleScreen
                     return;
                 case Phase.Personalisation:
                     _personalisationMenu.Update();
-                    if (_personalisationMenu.IsConfirmed)
-                    {
-                        NameArea.Reinit();
-                        NextPhase();
-                        _personalisationMenu.IsConfirmed = false;
-                    }
+                    if (!_personalisationMenu.IsConfirmed)
+                        return;
+                    NameArea.Reinit();
+                    NextPhase();
+                    _personalisationMenu.IsConfirmed = false;
                     return;
                 case Phase.Name:
                     if (Control.Pause.IsOnePressed())
@@ -282,6 +283,7 @@ public static class TitleScreen
                         NextPhase();
                     return;
                 case Phase.End:
+                    Sounds.StopMusic();
                     _isActive = false;
                     SaveSystem.CreateNewSave(_saveId.Value, NameArea.TextArea.Read(), _personalisationMenu.GetChosenAttributes(), _personalisationMenu.GetChosenArmor());
                     return;
@@ -304,19 +306,32 @@ public static class TitleScreen
                     return;
                 case Phase.End:
                     break;
-                default:
-                    break;
             }
         }
 
-        private void NextPhase()
-        {
+        private void NextPhase() =>
             _phase = _phase switch
             {
                 Phase.PlaceSelection => Phase.Personalisation,
                 Phase.Personalisation => Phase.Name,
                 _ => Phase.End
             };
+
+        private static void LastPhase()
+        {
+            Sounds.Play(Sounds.SMenuBack);
+            switch (_phase)
+            {
+                case Phase.Personalisation:
+                    _phase = Phase.PlaceSelection;
+                    break;
+                case Phase.Name:
+                    _phase = Phase.Personalisation;
+                    break;
+            }
+            //=============
+            //TODO: fix Go back to last phase 
+            //=============
         }
 
         private class PersonalisationMenu : Menu
@@ -361,30 +376,53 @@ public static class TitleScreen
             {
                 if (Control.Interact.IsOnePressed())
                 {
+                    Sounds.Play(Sounds.SMenuConfirm);
                     IsConfirmed = true;
                 }
                 if (Control.MenuUp.IsOnePressed())
                 {
                     if (_selectedClass > FirstClassChoice())
+                    {
+                        Sounds.Play(Sounds.SMenuMove);
                         _selectedClass--;
+                    }
+                    else
+                        Sounds.Play(Sounds.SMenuBack);
                 }
                 if (Control.MenuDown.IsOnePressed())
                 {
                     if (_selectedClass < LastClassChoice())
+                    {
+                        Sounds.Play(Sounds.SMenuMove);
                         _selectedClass++;
+                    }
+                    else
+                        Sounds.Play(Sounds.SMenuBack);
                 }
                 if (Control.MenuRight.IsOnePressed())
                 {
                     if (_selectedClass < 5)
+                    {
+                        Sounds.Play(Sounds.SMenuMove);
                         _selectedClass += 5;
+                    }
+                    else
+                        Sounds.Play(Sounds.SMenuBack);
                 }
                 if (Control.MenuLeft.IsOnePressed())
                 {
                     if (_selectedClass >= 5)
+                    {
+                        Sounds.Play(Sounds.SMenuMove);
                         _selectedClass -= 5;
+                    }
+                    else
+                        Sounds.Play(Sounds.SMenuBack);
                 }
                 if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
-                    Activate();
+                {
+                    LastPhase();
+                }
             }
         
             internal override void Draw(SpriteBatch spriteBatch)
@@ -434,8 +472,8 @@ public static class TitleScreen
         internal static void Reinit()
             => TextArea.Reinit();
 
-        internal static TextArea.States Update()
-            => TextArea.Update();
+        internal static TextArea.States Update() =>
+            TextArea.Update();
 
         internal static void Draw(SpriteBatch spriteBatch)
         {

@@ -1,29 +1,29 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>2</lastSaveId>
+    <lastSaveId>0</lastSaveId>
     <s0>
       <map>101</map>
       <character>
-        <name>Lechasseur</name>
+        <name>LInk</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>450</x>
-          <y>263</y>
-          <orientation>1</orientation>
+          <x>448</x>
+          <y>300</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
-          <level>4</level>
+          <level>6</level>
           <vitality>11</vitality>
-          <attunement>9</attunement>
+          <attunement>11</attunement>
           <endurance>11</endurance>
-          <strength>12</strength>
-          <dexterity>14</dexterity>
+          <strength>11</strength>
+          <dexterity>11</dexterity>
           <resistance>11</resistance>
-          <intelligence>9</intelligence>
-          <faith>9</faith>
+          <intelligence>11</intelligence>
+          <faith>11</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -52,7 +52,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>6</equippedArmor>
+          <equippedArmor>0</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>

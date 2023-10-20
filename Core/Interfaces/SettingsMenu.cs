@@ -24,6 +24,7 @@ public class SettingsMenu : Menu
 
     private void SwitchMenu()
     {
+        Sounds.Play(Sounds.SMenuMove);
         _currentMenu = _currentMenu == _generalM ? _controlsM : _generalM;
         _currentMenu.Reinit();
     }
@@ -76,29 +77,41 @@ internal class GeneralMenu : Menu
     {
         if (Control.MenuUp.IsOnePressed())
         {
-            _selection--;
-            if (_selection < 0)
-                _selection = 0;
+            if (_selection > 0)
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _selection--;
+            }
         }
         if (Control.MenuDown.IsOnePressed())
         {
-            _selection++;
-            if (_selection > 3)
-                _selection = 3;
+            if (_selection < 3)
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _selection++;
+            }
         }
         if (Control.MenuRight.IsOnePressed())
         {
-            _levels[_selection] += 10;
-            if (_levels[_selection] > 100)
-                _levels[_selection] = 100;
-            ApplyChanges();
+            if (_levels[_selection] < 100)
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _levels[_selection] += 10;
+                ApplyChanges();
+            }
+            else
+                Sounds.Play(Sounds.SMenuBack);
         }
         if (Control.MenuLeft.IsOnePressed())
         {
-            _levels[_selection] -= 10;
-            if (_levels[_selection] < 0)
-                _levels[_selection] = 0;
-            ApplyChanges();
+            if (_levels[_selection] > 0)
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _levels[_selection] -= 10;
+                ApplyChanges();
+            }
+            else
+                Sounds.Play(Sounds.SMenuBack);
         }
     }
 
@@ -162,6 +175,7 @@ internal class ControlsMenu : Menu
         {
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
+                Sounds.Play(Sounds.SMenuBack);
                 WaitingForKey = false;
                 return;
             }
@@ -176,23 +190,37 @@ internal class ControlsMenu : Menu
             SettingsSystem.Save(); // save to settings file
             WaitingForKey = false; // unfreeze menu
             JustChangedAKey = true;
+            Sounds.Play(Sounds.SMenuConfirm);
             return;
         }
         
         if (Control.Interact.IsOnePressed()) // enter in changing mode
         {
+            Sounds.Play(Sounds.SMenuConfirm);
             WaitingForKey = true;
             return;
         }
         
         if (Control.MenuUp.IsOnePressed() && _selectionId > FirstChoice())
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId--;
+        }
         if (Control.MenuDown.IsOnePressed() && _selectionId < LastChoice())
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId++;
+        }
         if (Control.MenuRight.IsOnePressed() && _selectionId < ThirdColumn)
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId += SecondColumn;
+        }
         if (Control.MenuLeft.IsOnePressed() && _selectionId >= SecondColumn)
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId -= SecondColumn;
+        }
 
         _selection.SetPosition(GetPosition(_selectionId) + new Vector2(-8, -8));
     }
@@ -205,7 +233,6 @@ internal class ControlsMenu : Menu
         {
             spriteBatch.DrawString(Fonts.Font12, Names[i], GetPosition(i), Color.White);
             DrawKeyRectangle(spriteBatch, i);
-            //TODO: display current assigned keys
         }
         if (!WaitingForKey)
             return;

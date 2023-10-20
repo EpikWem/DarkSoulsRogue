@@ -25,7 +25,7 @@ public static class BonfireMenu
     {
         if (Control.Interact.IsOnePressed())
         {
-            Sounds.Play(Sounds.SConfirm);
+            Sounds.Play(Sounds.SMenuConfirm);
         }
         
         if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())

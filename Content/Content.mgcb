@@ -1348,6 +1348,18 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/lit.ogg
 
+#begin sounds/sfx/menuback.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/menuback.ogg
+
+#begin sounds/sfx/menumove.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/menumove.ogg
+
 #begin sounds/sfx/soulsuck1.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
