@@ -25,53 +25,62 @@ public static class TitleScreen
     private static readonly Rectangle AttributesSheetArea = new(620, 20, 320, Camera.Height - 40);
 
     private static bool _isActive;
-    private static Menu _currentMenu;
     private static bool _wantsToQuit;
-
-    private static readonly TitleMenu TitleM = new();
-    private static readonly GameSelectionMenu GameSelectionM = new();
-    private static readonly GameCreationMenu GameCreationM = new();
-    private static readonly SettingsMenu SettingsM = new();
+    private static Menu _currentMenu;
+    private enum Menu { Title, GameSelection, GameCreation, Settings }
 
     public static bool IsActive() => _isActive;
     public static void Activate()
     {
         _wantsToQuit = false;
         _isActive = true;
-        TitleM.Reinit();
+        TitleMenu.Reinit();
         Sounds.Play(Sounds.MTitle);
-        _currentMenu = TitleM;
+        _currentMenu = Menu.Title;
     }
 
     private static void ChangeMenu()
     {
-        switch (TitleM.SelectionId())
+        switch (TitleMenu.SelectionId())
         {
             case 0: _isActive = false; Sounds.StopMusic(); SaveSystem.Load(); return;
-            case 1: _currentMenu = GameSelectionM; break;
-            case 2: _currentMenu = GameCreationM; break;
-            case 3: _currentMenu = SettingsM; break;
+            case 1: _currentMenu = Menu.GameSelection; GameSelectionMenu.Reinit(); break;
+            case 2: _currentMenu = Menu.GameCreation; GameCreationMenu.Reinit(); break;
+            case 3: _currentMenu = Menu.Settings; SettingsMenu.Reinit(); break;
             case 4: _wantsToQuit = true; return;
             default: return;
         }
-        _currentMenu.Reinit();
     }
     
     //RETURNS: true to QuitApp()
     public static bool Update()
     {
-        if (_currentMenu == SettingsM && !SettingsM.IsWaitingForKey() && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
+        // the go back from settings menu (if settings is not waiting for a key change)
+        if (_currentMenu == Menu.Settings && !SettingsMenu.IsWaitingForKey() && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
         {
             Sounds.Play(Sounds.SMenuBack);
             Activate();
             return false;
         }
-        _currentMenu.Update();
-        return _currentMenu == TitleM && _wantsToQuit;
+        switch (_currentMenu)
+        {
+            case Menu.Title: TitleMenu.Update(); break;
+            case Menu.GameSelection: GameSelectionMenu.Update(); break;
+            case Menu.GameCreation: GameCreationMenu.Update(); break;
+            case Menu.Settings: SettingsMenu.Update(); break;
+        }
+        // to quit the game
+        return _currentMenu == Menu.Title && _wantsToQuit;
     }
 
     public static void Draw(SpriteBatch spriteBatch)
-        => _currentMenu.Draw(spriteBatch);
+        => switch (_currentMenu) 
+        {
+            Menu.Title => TitleMenu.Draw(spriteBatch),
+            Menu.GameSelection => GameSelectionMenu.Draw(spriteBatch),
+            Menu.GameCreation => GameCreationMenu.Draw(spriteBatch),
+            Menu.Settings => SettingsMenu.Draw(spriteBatch)
+        };
     
     
     
@@ -79,20 +88,19 @@ public static class TitleScreen
      *  MAIN TITLE MENU
      *===============================================================================================================*/
 
-    private class TitleMenu : Menu
+    private static class TitleMenu
     {
         
         private static readonly string[] Choices = { " Continue", "Load Game", " New Game", "  Settings", "Quit Game" };
-        private int _selectionId;
+        private static int _selectionId;
         
-        internal TitleMenu()
-            => Reinit();
+        static TitleMenu() => Reinit();
 
         //RETURNS: true to QuitApp()
-        internal sealed override void Reinit()
+        internal static void Reinit()
             => _selectionId = 0;
         
-        internal override void Update()
+        internal static void Update()
         {
             if (Control.Interact.IsOnePressed())
             {
@@ -117,7 +125,7 @@ public static class TitleScreen
             }
         }
 
-        internal override void Draw(SpriteBatch spriteBatch)
+        internal static void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(Textures.MTitle, Camera.AllScreen, Colors.White);
             var csx = (int)PositionOfTitleList.X - 30;
@@ -128,7 +136,7 @@ public static class TitleScreen
                 spriteBatch.DrawString(Fonts.Font12, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Colors.White);
         }
 
-        internal int SelectionId() => _selectionId;
+        internal static int SelectionId() => _selectionId;
         
         private static int FirstChoice() => 0;
         private static int LastChoice() => Choices.Length - 1;
@@ -141,36 +149,29 @@ public static class TitleScreen
      *  GAME SELECTION MENU
      *===============================================================================================================*/
     
-    private class GameSelectionMenu : Menu
+    private static class GameSelectionMenu
     {
 
-        private int _selectedGameId;
-        private readonly Integer _forNewSave;
-        private readonly Rectangle _titleRectangle;
-        private readonly string _titleString;
-        
-        internal GameSelectionMenu(Integer forNewSave = null)
+        private static int _selectedGameId;
+        private static Integer _forNewSave;
+        private static Rectangle _titleRectangle;
+        private static string _titleString;
+
+        internal static void Reinit()
+        {
+            _titleRectangle = new Rectangle(10, 10, 380, 40);
+            _titleString = "Select a Game to Load";
+            _selectedGameId = 0;
+        }
+        internal static void Reinit(Integer forNewSave)
         {
             _forNewSave = forNewSave;
-            if (_forNewSave == null)
-            {
-                _titleRectangle = new Rectangle(10, 10, 380, 40);
-                _titleString = "Select a Game to Load";
-            }
-            else
-            {
-                _titleRectangle = new Rectangle(10, 10, 480, 40);
-                _titleString = "Select a place for the new Save";
-            }
-            Reinit();
-        }
-
-        internal sealed override void Reinit()
-        {
+            _titleRectangle = new Rectangle(10, 10, 480, 40);
+            _titleString = "Select a place for the new Save";
             _selectedGameId = 0;
         }
 
-        internal override void Update()
+        internal static void Update()
         {
             if (Control.Interact.IsOnePressed())
             {
@@ -203,7 +204,7 @@ public static class TitleScreen
             }
         }
         
-        internal override void Draw(SpriteBatch spriteBatch)
+        internal static void Draw(SpriteBatch spriteBatch)
         {
             var cgx = (int)PositionOfGameList.X - 12;
             var cgy = (int)PositionOfGameList.Y + _selectedGameId*GameItemHeight - 12;
@@ -233,48 +234,39 @@ public static class TitleScreen
      *  GAME CREATION SCREEN
      *===============================================================================================================*/
 
-    private class GameCreationMenu : Menu
+    private static class GameCreationMenu
     {
 
         private enum Phase { PlaceSelection, Personalisation, Name, End }
         private static Phase _phase;
-        private readonly Integer _saveId;
-        private readonly GameSelectionMenu _selectionMenu;
-        private readonly PersonalisationMenu _personalisationMenu;
-        
-        internal GameCreationMenu()
+        private static Integer _saveId;
+
+        internal static void Reinit()
         {
             _saveId = new Integer(-1);
-            _selectionMenu = new GameSelectionMenu(_saveId);
-            _personalisationMenu = new PersonalisationMenu();
-            _phase = Phase.PlaceSelection;
-        }
-
-        internal sealed override void Reinit()
-        {
             _saveId.Value = -1;
-            _selectionMenu.Reinit();
-            _personalisationMenu.Reinit();
+            GameSelectionMenu.Reinit();
+            PersonalisationMenu.Reinit();
             NameArea.Reinit();
             _phase = Phase.PlaceSelection;
         }
 
-        internal override void Update()
+        internal static void Update()
         {
             switch (_phase)
             {
                 case Phase.PlaceSelection:
-                    _selectionMenu.Update();
+                    GameSelectionMenu.Update();
                     if (_saveId.Value != -1)
                         NextPhase();
                     return;
                 case Phase.Personalisation:
-                    _personalisationMenu.Update();
-                    if (!_personalisationMenu.IsConfirmed)
+                    PersonalisationMenu.Update();
+                    if (!PersonalisationMenu.IsConfirmed)
                         return;
                     NameArea.Reinit();
                     NextPhase();
-                    _personalisationMenu.IsConfirmed = false;
+                    PersonalisationMenu.IsConfirmed = false;
                     return;
                 case Phase.Name:
                     if (Control.Pause.IsOnePressed())
@@ -285,23 +277,23 @@ public static class TitleScreen
                 case Phase.End:
                     Sounds.StopMusic();
                     _isActive = false;
-                    SaveSystem.CreateNewSave(_saveId.Value, NameArea.TextArea.Read(), _personalisationMenu.GetChosenAttributes(), _personalisationMenu.GetChosenArmor());
+                    SaveSystem.CreateNewSave(_saveId.Value, NameArea.TextArea.Read(), PersonalisationMenu.GetChosenAttributes(), PersonalisationMenu.GetChosenArmor());
                     return;
             }
         }
 
-        internal override void Draw(SpriteBatch spriteBatch)
+        internal static void Draw(SpriteBatch spriteBatch)
         {
             switch (_phase)
             {
                 case Phase.PlaceSelection:
-                    _selectionMenu.Draw(spriteBatch);
+                    GameSelectionMenu.Draw(spriteBatch);
                     return;
                 case Phase.Personalisation:
-                    _personalisationMenu.Draw(spriteBatch);
+                    PersonalisationMenu.Draw(spriteBatch);
                     return;
                 case Phase.Name:
-                    _personalisationMenu.Draw(spriteBatch);
+                    PersonalisationMenu.Draw(spriteBatch);
                     NameArea.Draw(spriteBatch);
                     return;
                 case Phase.End:
@@ -309,7 +301,7 @@ public static class TitleScreen
             }
         }
 
-        private void NextPhase() =>
+        private static void NextPhase() =>
             _phase = _phase switch
             {
                 Phase.PlaceSelection => Phase.Personalisation,
@@ -334,7 +326,7 @@ public static class TitleScreen
             //=============
         }
 
-        private class PersonalisationMenu : Menu
+        private static class PersonalisationMenu
         {
             
             private static readonly string[] ClassNames = { "Warrior", "Knight", "Wanderer", "Thief", "Bandit", "Hunter", "Sorcerer", "Pyromancer", "Cleric", "Deprived" };
@@ -354,25 +346,18 @@ public static class TitleScreen
                 Armor.Warrior, Armor.Knight, Armor.Wanderer, Armor.Thief, Armor.Bandit, Armor.Hunter, Armor.Sorcerer, Armor.Pyromancer, Armor.Cleric, Armor.Naked
             };
 
-            private int _selectedClass;
-            internal bool IsConfirmed;
-            private readonly Rectangle _titleRectangle;
-            private readonly string _titleString;
+            private static int _selectedClass;
+            internal static bool IsConfirmed;
+            private static readonly Rectangle _titleRectangle = new(10, 10, 440, 40);
+            private static readonly string _titleString = "Choose your starting Class";
 
-            internal PersonalisationMenu()
-            {
-                _titleRectangle = new Rectangle(10, 10, 440, 40);
-                _titleString = "Choose your starting Class";
-                Reinit();
-            }
-
-            internal sealed override void Reinit()
+            internal static void Reinit()
             {
                 _selectedClass = 0;
                 IsConfirmed = false;
             }
 
-            internal override void Update()
+            internal static void Update()
             {
                 if (Control.Interact.IsOnePressed())
                 {
@@ -425,7 +410,7 @@ public static class TitleScreen
                 }
             }
         
-            internal override void Draw(SpriteBatch spriteBatch)
+            internal static void Draw(SpriteBatch spriteBatch)
             {
                 var posList = _selectedClass < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
                 var cgx = (int)posList.X - 8;
@@ -445,10 +430,10 @@ public static class TitleScreen
                 DrawAttributesSheet(spriteBatch, ClassNames[_selectedClass], BaseAttributesTable[_selectedClass]);
             }
 
-            public List<int> GetChosenAttributes()
+            public static List<int> GetChosenAttributes()
                 => new(BaseAttributesTable[_selectedClass]) { 0 };
 
-            public Armor GetChosenArmor()
+            public static Armor GetChosenArmor()
                 => ClassArmors[_selectedClass];
 
             private static Texture2D GetClassIcon(int index)

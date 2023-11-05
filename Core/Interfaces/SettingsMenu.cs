@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
@@ -8,62 +9,61 @@ using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
-public class SettingsMenu : Menu
+public static class SettingsMenu
 {
+    private static bool _inControlsMenu;
 
-    private readonly GeneralMenu _generalM;
-    private readonly ControlsMenu _controlsM;
-    private Menu _currentMenu;
-    
-    public SettingsMenu()
+    static SettingsMenu() { Reinit(); }
+
+    internal static void Reinit()
     {
-        _generalM = new GeneralMenu();
-        _controlsM = new ControlsMenu();
-        _currentMenu = _generalM;
+        GeneralMenu.Reinit();
+        ControlsMenu.Reinit();
+        _inControlsMenu = false;
     }
 
-    private void SwitchMenu()
+    private static void SwitchMenu()
     {
         Sounds.Play(Sounds.SMenuMove);
-        _currentMenu = _currentMenu == _generalM ? _controlsM : _generalM;
-        _currentMenu.Reinit();
-    }
-    
-    internal override void Reinit()
-    {
-        _generalM.Reinit();
-        _controlsM.Reinit();
-        _currentMenu = _generalM;
+        _inControlsMenu = !_inControlsMenu;
+        GeneralMenu.Reinit();
+        ControlsMenu.Reinit();
     }
 
-    internal override void Update()
+    internal static void Update()
     {
         if ((Control.Consumable.IsOnePressed() || Control.Catalyst.IsOnePressed() || Control.Weapon.IsOnePressed() || Control.Shield.IsOnePressed())
-            && !_controlsM.WaitingForKey && !_controlsM.JustChangedAKey)
+            && !ControlsMenu.WaitingForKey && !ControlsMenu.JustChangedAKey)
             SwitchMenu();
-        _currentMenu.Update();
-        if (!_controlsM.JustChangedAKey)
-            _controlsM.JustChangedAKey = false;
+        if (!_inControlsMenu)
+            GeneralMenu.Update();
+        else
+            ControlsMenu.Update();
+        if (!ControlsMenu.JustChangedAKey)
+            ControlsMenu.JustChangedAKey = false;
     }
 
-    internal override void Draw(SpriteBatch spriteBatch)
+    internal static void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(Main.PixelTexture, IngameMenu.Area, Colors.Black);
-        _currentMenu.Draw(spriteBatch);
+        if (!_inControlsMenu)
+            GeneralMenu.Draw(spriteBatch);
+        else
+            ControlsMenu.Draw(spriteBatch);
     }
-
-    public bool IsWaitingForKey() => _controlsM.WaitingForKey;
+    
+    public static bool IsWaitingForKey() => ControlsMenu.WaitingForKey;
 
 }
 
-internal class GeneralMenu : Menu
+internal static class GeneralMenu
 {
 
     private static int[] _levels;
     private static int _selection;
     private static Bar _musicBar, _sfxBar, _ambientBar, _feetBar;
 
-    internal override void Reinit()
+    internal static void Reinit()
     {
         _levels = Sounds.GetLevels();
         _selection = 0;
@@ -73,7 +73,7 @@ internal class GeneralMenu : Menu
         _feetBar = new Bar(new Vector2(40, 456), Colors.Orange, 2.0f);
     }
 
-    internal override void Update()
+    internal static void Update()
     {
         if (Control.MenuUp.IsOnePressed())
         {
@@ -115,7 +115,7 @@ internal class GeneralMenu : Menu
         }
     }
 
-    internal override void Draw(SpriteBatch spriteBatch)
+    internal static void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.Draw(Main.PixelTexture, new Rectangle(90, 298+50*_selection, 256, 40), Colors.Orange);
         spriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
@@ -137,7 +137,7 @@ internal class GeneralMenu : Menu
     
 }
 
-internal class ControlsMenu : Menu
+internal static class ControlsMenu
 {
 
     private static readonly Control[] Controls = {
@@ -155,21 +155,20 @@ internal class ControlsMenu : Menu
     private static readonly RectangleBordered CenteredRectangle
         = new((Camera.Width - CRWidth)/2, (Camera.Height - CRHeight)/2, CRWidth, CRHeight, Color.Gray, Colors.Black, 2);
 
-    internal bool WaitingForKey;
-    internal bool JustChangedAKey;
-    private RectangleBordered _selection;
-    private int _selectionId;
+    internal static bool WaitingForKey;
+    internal static bool JustChangedAKey;
+    private static RectangleBordered _selection;
+    private static int _selectionId;
 
-    internal ControlsMenu() => Reinit();
-    
-    internal sealed override void Reinit()
+    static ControlsMenu() => Reinit();
+    internal static void Reinit()
     {
         WaitingForKey = false;
         _selection = new RectangleBordered(0, 0, 144, 30, Colors.Orange, Colors.Orange, 2);
         _selectionId = 0;
     }
 
-    internal override void Update()
+    internal static void Update()
     {
         if (WaitingForKey) // get a key for replace
         {
@@ -225,7 +224,7 @@ internal class ControlsMenu : Menu
         _selection.SetPosition(GetPosition(_selectionId) + new Vector2(-8, -8));
     }
 
-    internal override void Draw(SpriteBatch spriteBatch)
+    internal static void Draw(SpriteBatch spriteBatch)
     {
         spriteBatch.DrawString(Fonts.FontHumanityCounter, "Controls Settings", new Vector2(Camera.Width/2 - 260, 20), Color.White);
         _selection.Draw(spriteBatch);
