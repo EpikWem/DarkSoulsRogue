@@ -10,7 +10,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
-public class GameScreen
+public static class GameScreen
 {
 
     public static int CurrentSaveId;
@@ -35,9 +35,9 @@ public class GameScreen
             return;
         }
 
-        if (Character.IsResting) // if player is resting to Bonfire, skip entities update
+        if (Bonfire.Menu.IsActive()) // if player is resting to Bonfire, skip entities update
         {
-            BonfireMenu.Update();
+            Bonfire.Menu.Update();
             return;
         }
         
@@ -82,8 +82,8 @@ public class GameScreen
         Ath.Draw(spriteBatch);
         if (IngameMenu.IsActive())
             IngameMenu.Draw(spriteBatch);
-        if (BonfireMenu.IsActive())
-            BonfireMenu.Draw(spriteBatch);
+        if (Bonfire.Menu.IsActive())
+            Bonfire.Menu.Draw(spriteBatch);
         ChatBox.Draw(spriteBatch);
     }
     

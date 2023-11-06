@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
-public class SelectionMenu
+public class SelectionBar
 {
 
     private const int SWidth = 180, SHeight = 30;
@@ -15,32 +15,45 @@ public class SelectionMenu
     private readonly string[] _choices;
     private readonly Rectangle _area;
     
+    private bool _isActive;
     private int _selectionId;
 
-    public SelectionMenu(string title, string[] choices)
+    public SelectionBar(string title, string[] choices)
     {
         _title = title;
         _choices = choices;
-        _area = new (100, 200, SWidth, SHeight*_choices.Length)
+        _area = new Rectangle(100, 200, SWidth, SHeight * _choices.Length);
         Reset();
+        _isActive = false;
     }
     
     public void Reset()
-        => _selectionId = 0;
+    {
+        _isActive = true;
+        _selectionId = 0;
+    }
 
+    public bool IsActive()
+        => _isActive;
     public int SelectionId()
         => _selectionId;
 
     /** 
      * Returns TRUE if player Confirmed his choice.
-     * Needs to implement the GoBack function out of this object.
      */
     public bool Update()
     {
         if (Control.Interact.IsOnePressed())
         {
             Sounds.Play(Sounds.SMenuConfirm);
+            _isActive = false;
             return true;
+        }
+        
+        if (Control.MenuBack.IsOnePressed())
+        {
+            Sounds.Play(Sounds.SMenuBack);
+            _isActive = false;
         }
 
         if (Control.MenuUp.IsOnePressed() && _selectionId > 0)

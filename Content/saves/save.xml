@@ -3,15 +3,15 @@
   <Asset>
     <lastSaveId>0</lastSaveId>
     <s0>
-      <map>101</map>
+      <map>104</map>
       <character>
         <name>LInk</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>448</x>
-          <y>300</y>
+          <x>544</x>
+          <y>366</y>
           <orientation>0</orientation>
         </position>
         <attributes>
@@ -61,8 +61,8 @@
         </inventory>
       </character>
       <objects>
-        <o0>0</o0>
-        <o1>0</o1>
+        <o0>1</o0>
+        <o1>1</o1>
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>

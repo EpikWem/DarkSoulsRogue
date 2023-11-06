@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/musics/title.ogg</SourceFile>
   <SourceTime>2021-11-04T14:52:52.7703133+01:00</SourceTime>
   <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/sounds/musics/title.xnb</DestFile>
-  <DestTime>2023-10-20T18:49:01.1347444+02:00</DestTime>
+  <DestTime>2023-11-06T19:18:47.8104625+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SongProcessor</Processor>

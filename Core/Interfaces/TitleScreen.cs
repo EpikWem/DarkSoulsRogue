@@ -74,13 +74,15 @@ public static class TitleScreen
     }
 
     public static void Draw(SpriteBatch spriteBatch)
-        => switch (_currentMenu) 
+    {
+        switch (_currentMenu)
         {
-            Menu.Title => TitleMenu.Draw(spriteBatch),
-            Menu.GameSelection => GameSelectionMenu.Draw(spriteBatch),
-            Menu.GameCreation => GameCreationMenu.Draw(spriteBatch),
-            Menu.Settings => SettingsMenu.Draw(spriteBatch)
-        };
+            case Menu.Title: TitleMenu.Draw(spriteBatch); break;
+            case Menu.GameSelection: GameSelectionMenu.Draw(spriteBatch); break;
+            case Menu.GameCreation: GameCreationMenu.Draw(spriteBatch); break;
+            case Menu.Settings: SettingsMenu.Draw(spriteBatch); break;
+        }
+    }
     
     
     

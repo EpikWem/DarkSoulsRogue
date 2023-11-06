@@ -27,7 +27,6 @@ public class Character : Entity
     private bool _running;
     public bool ShieldUp;
     public bool IsSpeaking;
-    public bool IsResting;
 
     public Character(string name) : base(Armor.Naked, new Hitbox(4, 20))
     {
@@ -44,7 +43,6 @@ public class Character : Entity
         _running = false;
         ShieldUp = false;
         IsSpeaking = false;
-        IsResting = false;
     }
 
     public new void Draw(SpriteBatch spriteBatch)

@@ -1306,6 +1306,12 @@
 /processorParam:Quality=Best
 /build:sounds/musics/title.ogg
 
+#begin sounds/sfx/bonfirerest.ogg
+/importer:OggImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/bonfirerest.ogg
+
 #begin sounds/sfx/confirm.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
@@ -1341,12 +1347,6 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/sfx/item.ogg
-
-#begin sounds/sfx/lit.ogg
-/importer:OggImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:sounds/sfx/lit.ogg
 
 #begin sounds/sfx/menuback.ogg
 /importer:OggImporter
