@@ -10,7 +10,7 @@ public class Bonfire : InteractiveObject
     public const string Name = "bonfire";
     public const int StateNumber = 5;
     
-    public static readonly SelectionBar Menu = new("Bonfire", new []{"Level Up", "Reverse Hollowing", "Kindle", "Bottomless Box", "Attune Magic", "Smith"});
+    public static readonly SelectionBar Menu = new("Bonfire", new []{"Level Up", "Warp", "Reverse Hollowing", "Kindle", "Bottomless Box", "Attune Magic", "Smith"});
     
     public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid, Textures.BonfireT)
     {

@@ -18,5 +18,5 @@ public static class ChatBox
     public static void Say(string text) => _text = text;
     public static void Clear() => _text = "";
 
-    public static void Draw(SpriteBatch spriteBatch) => spriteBatch.DrawString(Fonts.FontBold12, _text, Position, Color.WhiteSmoke);
+    public static void Draw() => Main.SpriteBatch.DrawString(Fonts.FontBold12, _text, Position, Color.WhiteSmoke);
 }

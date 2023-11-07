@@ -68,23 +68,23 @@ public static class GameScreen
         Character.ShieldUp = Control.Shield.IsPressed();
     }
     
-    public static void Draw(SpriteBatch spriteBatch)
+    public static void Draw()
     {   
-        _background.Draw(spriteBatch);
+        _background.Draw(Main.SpriteBatch);
         if (Main.DrawWalls)
             foreach (var w in Walls)
-                w.Draw(spriteBatch);
+                w.Draw(Main.SpriteBatch);
         foreach (var o in _currentMap.Objects)
-            o.Draw(spriteBatch);
+            o.Draw(Main.SpriteBatch);
         foreach (var e in _currentMap.Entities)
-            e.Draw(spriteBatch);
-        Character.Draw(spriteBatch);
-        Ath.Draw(spriteBatch);
+            e.Draw(Main.SpriteBatch);
+        Character.Draw(Main.SpriteBatch);
+        Ath.Draw();
         if (IngameMenu.IsActive())
-            IngameMenu.Draw(spriteBatch);
+            IngameMenu.Draw();
         if (Bonfire.Menu.IsActive())
-            Bonfire.Menu.Draw(spriteBatch);
-        ChatBox.Draw(spriteBatch);
+            Bonfire.Menu.Draw();
+        ChatBox.Draw();
     }
     
     public static void LoadMap(int mapId)

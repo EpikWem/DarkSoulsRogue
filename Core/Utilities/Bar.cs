@@ -19,12 +19,12 @@ public class Bar
         _scale = scale;
     }
 
-    public void Draw(SpriteBatch spriteBatch, int value, int maxValue)
+    public void Draw(int value, int maxValue)
     {
         value = (int)(value * _scale);
         maxValue = (int)(maxValue * _scale);
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin, value - 2*Margin, Thickness - 2*Margin), _color);
+        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
+        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin, value - 2*Margin, Thickness - 2*Margin), _color);
     }
         
 }

@@ -63,13 +63,13 @@ public class SelectionBar
         return false;
     }
 
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw()
     {
-        spriteBatch.Draw(Main.PixelTexture, _area, Colors.Black);
-        spriteBatch.DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 4, _area.Y + 2), Colors.White);
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), 100, SHeight), Colors.Black);
+        Main.SpriteBatch.Draw(Main.PixelTexture, _area, Colors.Black);
+        Main.SpriteBatch.DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 4, _area.Y + 2), Colors.White);
+        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), 100, SHeight), Colors.Orange);
         for (var i = 0; i < _choices.Length; i++)
-            spriteBatch.DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 2, Sy(i)), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 2, Sy(i)), Colors.White);
     }
 
     private int Sx()

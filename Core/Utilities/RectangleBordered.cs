@@ -32,10 +32,10 @@ public class RectangleBordered
         Thickness = thickness;
     }
     
-    public void Draw(SpriteBatch spriteBatch)
+    public void Draw()
     {
-        spriteBatch.Draw(Main.PixelTexture, Rectangle, ColorBorder);
-        spriteBatch.Draw(
+        Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, ColorBorder);
+        Main.SpriteBatch.Draw(
             Main.PixelTexture,
             new Rectangle(
                 Rectangle.X + Thickness,

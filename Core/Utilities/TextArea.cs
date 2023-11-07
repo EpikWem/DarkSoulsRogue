@@ -39,7 +39,7 @@ public class TextArea
 
     public void Draw(SpriteBatch spriteBatch)
     {
-        _area.Draw(spriteBatch);
+        _area.Draw();
         var pos = new Vector2(_area.Rectangle.X + _area.Thickness, _area.Rectangle.Y + _area.Thickness);
         spriteBatch.DrawString(Fonts.Font12, _value, pos, Colors.White);
     }

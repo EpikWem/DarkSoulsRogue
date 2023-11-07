@@ -12,13 +12,13 @@ public class Main : Game
 
     public const bool DrawWalls = true;
     public const bool CameraCentered = false;
-    public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
-    //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
+    //public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
+    public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
 
     private readonly GraphicsDeviceManager _graphics;
-    private SpriteBatch _spriteBatch;
     
     public static Texture2D PixelTexture;
+    public static SpriteBatch SpriteBatch;
     
     
     
@@ -39,6 +39,7 @@ public class Main : Game
     {
         PixelTexture = new Texture2D(GraphicsDevice, 1, 1);
         PixelTexture.SetData(new [] { Color.White });
+        SpriteBatch = new SpriteBatch(GraphicsDevice);
         
         Textures.Init(Content, GraphicsDevice);
         Fonts.Init(Content);
@@ -57,7 +58,6 @@ public class Main : Game
 
     protected override void LoadContent()
     {
-        _spriteBatch = new SpriteBatch(GraphicsDevice);
         //Use this.Content to load your game content here
     }
     
@@ -102,17 +102,17 @@ public class Main : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        _spriteBatch.Begin();
+        SpriteBatch.Begin();
         
         // draw title menu
         if (TitleScreen.IsActive())
-            TitleScreen.Draw(_spriteBatch);
+            TitleScreen.Draw(SpriteBatch);
 
         // or draw game
         else
-            GameScreen.Draw(_spriteBatch);
+            GameScreen.Draw();
         
-        _spriteBatch.End();
+        SpriteBatch.End();
         base.Draw(gameTime);
     }
 

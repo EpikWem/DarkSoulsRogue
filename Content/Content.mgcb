@@ -1308,7 +1308,7 @@
 
 #begin sounds/sfx/bonfirerest.ogg
 /importer:OggImporter
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/sfx/bonfirerest.ogg
 

@@ -24,12 +24,12 @@ public static class Ath
         _character = character;
     }
 
-    public static void Draw(SpriteBatch spriteBatch)
+    public static void Draw()
     {
-        _life.Draw(spriteBatch, _character.Life, _character.MaxLife());
-        _stamina.Draw(spriteBatch, _character.Stamina, _character.MaxStamina());
-        SoulCounter.Draw(spriteBatch, _character.Souls);
-        HumanityCounter.Draw(spriteBatch);
+        _life.Draw(_character.Life, _character.MaxLife());
+        _stamina.Draw(_character.Stamina, _character.MaxStamina());
+        SoulCounter.Draw(_character.Souls);
+        HumanityCounter.Draw();
     }
 
     private static class SoulCounter
@@ -39,15 +39,15 @@ public static class Ath
         private static readonly Vector2 Position = new(Camera.Width - Width - Margin, Camera.Height - Height - Margin);
         private static readonly Rectangle Rectangle = new((int)Position.X, (int)Position.Y, Width, Height);
 
-        public static void Draw(SpriteBatch spriteBatch, int souls)
+        public static void Draw(int souls)
         {
-            spriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
-            spriteBatch.DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
+            Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
+            Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
         }
-        public static void Draw(SpriteBatch spriteBatch, string text)
+        public static void Draw(string text)
         {
-            spriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
-            spriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0, Position.Y), Color.White);
+            Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
+            Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0, Position.Y), Color.White);
         }
 
         private static int XForDisplay(int souls)
@@ -68,11 +68,11 @@ public static class Ath
             CircleIn = new(new Vector2(Radius, Radius), Radius-Border),
             CircleOut = new(new Vector2(Radius, Radius), Radius);
 
-        public static void Draw(SpriteBatch spriteBatch)
+        public static void Draw()
         {
-            CircleOut.Draw(spriteBatch, GetHumanityColor());
-            CircleIn.Draw(spriteBatch, new Color(50, 50, 50));
-            spriteBatch.DrawString(
+            CircleOut.Draw(GetHumanityColor());
+            CircleIn.Draw(new Color(50, 50, 50));
+            Main.SpriteBatch.DrawString(
                 Fonts.FontHumanityCounter, 
                 _character.Attributes.Get(Attributes.Attribute.Humanity).ToString(), 
                 new Vector2(Border*2, 6), 

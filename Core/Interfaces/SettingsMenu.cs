@@ -43,13 +43,13 @@ public static class SettingsMenu
             ControlsMenu.JustChangedAKey = false;
     }
 
-    internal static void Draw(SpriteBatch spriteBatch)
+    internal static void Draw()
     {
-        spriteBatch.Draw(Main.PixelTexture, IngameMenu.Area, Colors.Black);
+        Main.SpriteBatch.Draw(Main.PixelTexture, IngameMenu.Area, Colors.Black);
         if (!_inControlsMenu)
-            GeneralMenu.Draw(spriteBatch);
+            GeneralMenu.Draw();
         else
-            ControlsMenu.Draw(spriteBatch);
+            ControlsMenu.Draw();
     }
     
     public static bool IsWaitingForKey() => ControlsMenu.WaitingForKey;
@@ -115,18 +115,18 @@ internal static class GeneralMenu
         }
     }
 
-    internal static void Draw(SpriteBatch spriteBatch)
+    internal static void Draw()
     {
-        spriteBatch.Draw(Main.PixelTexture, new Rectangle(90, 298+50*_selection, 256, 40), Colors.Orange);
-        spriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
-        _musicBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Music), 100);
-        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 300), Colors.White);
-        _sfxBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Sfx), 100);
-        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 350), Colors.White);
-        _ambientBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Ambient), 100);
-        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Ambient).ToString(), new Vector2(300, 400), Colors.White);
-        _feetBar.Draw(spriteBatch, Sounds.GetLevel(Sounds.Chanel.Feet), 100);
-        spriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Feet).ToString(), new Vector2(300, 450), Colors.White);
+        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(90, 298+50*_selection, 256, 40), Colors.Orange);
+        Main.SpriteBatch.DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
+        _musicBar.Draw(Sounds.GetLevel(Sounds.Chanel.Music), 100);
+        Main.SpriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 300), Colors.White);
+        _sfxBar.Draw(Sounds.GetLevel(Sounds.Chanel.Sfx), 100);
+        Main.SpriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 350), Colors.White);
+        _ambientBar.Draw(Sounds.GetLevel(Sounds.Chanel.Ambient), 100);
+        Main.SpriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Ambient).ToString(), new Vector2(300, 400), Colors.White);
+        _feetBar.Draw(Sounds.GetLevel(Sounds.Chanel.Feet), 100);
+        Main.SpriteBatch.DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Feet).ToString(), new Vector2(300, 450), Colors.White);
     }
 
     private static void ApplyChanges()
@@ -224,19 +224,19 @@ internal static class ControlsMenu
         _selection.SetPosition(GetPosition(_selectionId) + new Vector2(-8, -8));
     }
 
-    internal static void Draw(SpriteBatch spriteBatch)
+    internal static void Draw()
     {
-        spriteBatch.DrawString(Fonts.FontHumanityCounter, "Controls Settings", new Vector2(Camera.Width/2 - 260, 20), Color.White);
-        _selection.Draw(spriteBatch);
+        Main.SpriteBatch.DrawString(Fonts.FontHumanityCounter, "Controls Settings", new Vector2(Camera.Width/2 - 260, 20), Color.White);
+        _selection.Draw();
         for (var i = 0; i < Names.Length; i++)
         {
-            spriteBatch.DrawString(Fonts.Font12, Names[i], GetPosition(i), Color.White);
-            DrawKeyRectangle(spriteBatch, i);
+            Main.SpriteBatch.DrawString(Fonts.Font12, Names[i], GetPosition(i), Color.White);
+            DrawKeyRectangle(i);
         }
         if (!WaitingForKey)
             return;
-        CenteredRectangle.Draw(spriteBatch);
-        spriteBatch.DrawString(Fonts.FontSoulCounter, "Waiting for an unassigned Key...", CenteredRectangle.GetPosition()*1.06f, Color.White);
+        CenteredRectangle.Draw();
+        Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, "Waiting for an unassigned Key...", CenteredRectangle.GetPosition()*1.06f, Color.White);
     }
     
     private static Vector2 GetPosition(int index)
@@ -247,12 +247,12 @@ internal static class ControlsMenu
     private static int FirstChoice() => 0;
     private static int LastChoice() => Names.Length - 1;
 
-    private static void DrawKeyRectangle(SpriteBatch spriteBatch, int index)
+    private static void DrawKeyRectangle(int index)
     {
         var x = (int)GetPosition(index).X + 110;
         var y = (int)GetPosition(index).Y - 5;
         var k = Controls[index].KeyCode();
-        spriteBatch.Draw( k switch
+        Main.SpriteBatch.Draw( k switch
         {
             >= 65 and <= 90 => Textures.KeysChars[k-65],
             >= 48 and <= 57 => Textures.KeysNums[k-48],

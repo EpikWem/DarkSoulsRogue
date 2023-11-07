@@ -80,7 +80,7 @@ public static class TitleScreen
             case Menu.Title: TitleMenu.Draw(spriteBatch); break;
             case Menu.GameSelection: GameSelectionMenu.Draw(spriteBatch); break;
             case Menu.GameCreation: GameCreationMenu.Draw(spriteBatch); break;
-            case Menu.Settings: SettingsMenu.Draw(spriteBatch); break;
+            case Menu.Settings: SettingsMenu.Draw(); break;
         }
     }
     
