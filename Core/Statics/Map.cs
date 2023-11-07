@@ -3,6 +3,7 @@ using System.Linq;
 using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
 

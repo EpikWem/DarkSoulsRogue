@@ -28,7 +28,7 @@ public class Character : Entity
     public bool ShieldUp;
     public bool IsSpeaking;
 
-    public Character(string name) : base(Armor.Naked, new Hitbox(4, 20))
+    public Character(string name = "") : base(Armor.Naked, new Hitbox(4, 20))
     {
         Name = name;
         Attributes = new Attributes();

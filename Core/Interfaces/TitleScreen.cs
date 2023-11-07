@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;

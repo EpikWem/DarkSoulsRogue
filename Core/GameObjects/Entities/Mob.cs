@@ -1,4 +1,5 @@
 using DarkSoulsRogue.Core.Items;
+using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework.Graphics;
 

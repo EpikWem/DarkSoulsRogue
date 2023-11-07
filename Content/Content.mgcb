@@ -1312,11 +1312,35 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/bonfirerest.ogg
 
+#begin sounds/sfx/bowshot.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/bowshot.ogg
+
+#begin sounds/sfx/chest.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/chest.ogg
+
 #begin sounds/sfx/confirm.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/sfx/confirm.ogg
+
+#begin sounds/sfx/crossbowreload.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/crossbowreload.ogg
+
+#begin sounds/sfx/crossbowshot.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/crossbowshot.ogg
 
 #begin sounds/sfx/death.ogg
 /importer:OggImporter
@@ -1330,6 +1354,12 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/estus.ogg
 
+#begin sounds/sfx/firebomb.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/firebomb.ogg
+
 #begin sounds/sfx/fog.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
@@ -1341,6 +1371,12 @@
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/sfx/illusorywall.ogg
+
+#begin sounds/sfx/invasion.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/invasion.ogg
 
 #begin sounds/sfx/item.ogg
 /importer:OggImporter
@@ -1360,21 +1396,93 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/menumove.ogg
 
-#begin sounds/sfx/soulsuck1.ogg
+#begin sounds/sfx/miracle.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/soulsuck1.ogg
+/build:sounds/sfx/miracle.ogg
 
-#begin sounds/sfx/soulsuck2.ogg
+#begin sounds/sfx/moss.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/soulsuck2.ogg
+/build:sounds/sfx/moss.ogg
+
+#begin sounds/sfx/newarea.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/newarea.ogg
+
+#begin sounds/sfx/parry.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/parry.ogg
+
+#begin sounds/sfx/pyromancy.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/pyromancy.ogg
+
+#begin sounds/sfx/rollheavy.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/rollheavy.ogg
+
+#begin sounds/sfx/rolllight.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/rolllight.ogg
+
+#begin sounds/sfx/rollmedium.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/rollmedium.ogg
+
+#begin sounds/sfx/rollnaked.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/rollnaked.ogg
+
+#begin sounds/sfx/sorcery.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/sorcery.ogg
+
+#begin sounds/sfx/soulsgain.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/soulsgain.ogg
+
+#begin sounds/sfx/souluse.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/souluse.ogg
+
+#begin sounds/sfx/start.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/start.ogg
 
 #begin sounds/sfx/victory.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:sounds/sfx/victory.ogg
+
+#begin sounds/sfx/warp.ogg
+/importer:OggImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:sounds/sfx/warp.ogg
 

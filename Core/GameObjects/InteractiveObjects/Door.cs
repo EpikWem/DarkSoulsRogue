@@ -1,6 +1,4 @@
-﻿using DarkSoulsRogue.Core.GameObjects.Entities;
-using DarkSoulsRogue.Core.Statics;
-using DarkSoulsRogue.Core.Utilities;
+﻿using DarkSoulsRogue.Core.Statics;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
@@ -17,8 +15,10 @@ public class Door : InteractiveObject
 
     public override void Interact()
     {
-        if (State == 0)
-            IncreaseState();
+        if (State != 0)
+            return;
+        Sounds.Play(Sounds.SChest);
+        IncreaseState();
     }
     
 }

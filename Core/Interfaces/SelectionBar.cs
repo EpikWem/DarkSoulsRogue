@@ -22,7 +22,7 @@ public class SelectionBar
     {
         _title = title;
         _choices = choices;
-        _area = new Rectangle(100, 200, SWidth, SHeight*(_choices.Length + 1)+4);
+        _area = new Rectangle(100, 200, SWidth, SHeight*(_choices.Length+1) + 4);
         Reset();
         _isActive = false;
     }
@@ -46,7 +46,6 @@ public class SelectionBar
         if (Control.Interact.IsOnePressed())
         {
             Sounds.Play(Sounds.SMenuConfirm);
-            _isActive = false;
             return true;
         }
         if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())

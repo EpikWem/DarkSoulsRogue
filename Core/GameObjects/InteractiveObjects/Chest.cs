@@ -21,11 +21,12 @@ public class Chest : InteractiveObject
 
     public override void Interact()
     {
-        if (State == 0)
-        {
-            GameScreen.Character.Inventory.AddItem(_item.Item, _item.Quantity);
-            IncreaseState();
-        }
+        if (State != 0)
+            return;
+        Sounds.Play(Sounds.SChest);
+        Sounds.Play(Sounds.SItem);
+        GameScreen.Character.Inventory.AddItem(_item.Item, _item.Quantity);
+        IncreaseState();
     }
     
 }

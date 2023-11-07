@@ -11,29 +11,31 @@ public class Bonfire : InteractiveObject
     public const int StateNumber = 5;
     
     public static readonly SelectionBar Menu = new("Bonfire", new []{"Level Up", "Warp", "Reverse Hollowing", "Kindle", "Bottomless Box", "Attune Magic", "Smith"});
-    
+    private static Bonfire _activeBonfire;
+
     public Bonfire(int xInGrid, int yInGrid) : base(xInGrid, yInGrid, Textures.BonfireT)
     {
-        
+        // nothing to init
     }
 
     public override void Interact()
     {
         if (State == 0)
         {
-            //Sounds.Play(Sounds.SBonfireKindle);
+            Sounds.Play(Sounds.SPyromancy);
             IncreaseState();
             BigMessage.Reset("Bonfire Lit", 180, Colors.Gold);
             return;
         }
         
         Sounds.Play(Sounds.SBonfireRest);
+        _activeBonfire = this;
         Menu.Reset();
         GameScreen.Character.AddLife(GameScreen.Character.MaxLife());
         GameScreen.Character.AddStamina(GameScreen.Character.MaxStamina());
     }
 
-    public void Update(Character character)
+    public static void Update(Character character)
     {
         if (Menu.Update())
         {
@@ -42,7 +44,7 @@ public class Bonfire : InteractiveObject
                 case 0:  break;
                 case 1:  break;
                 case 2: RetrieveHumanity(character); break;
-                case 3: Kindle(character); break;
+                case 3: _activeBonfire.Kindle(character); break;
                 case 4:  break;
                 case 5:  break;
                 case 6:  break;
@@ -63,14 +65,13 @@ public class Bonfire : InteractiveObject
             Notification.Reset("Can't kindle more");
             return;
         }
-
         if (character.Attributes.Get(Attributes.Attribute.Humanity) < 1)
         {
             Notification.Reset("Humanity needed");
             return;
         }
         
-        //Sounds.Play(Sounds.SBonfireKindle);
+        Sounds.Play(Sounds.SPyromancy);
         character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
         IncreaseState();
     }
@@ -87,7 +88,6 @@ public class Bonfire : InteractiveObject
             Notification.Reset("Humanity needed");
             return;
         }
-        //Sounds.Play(Sounds.S);
         BigMessage.Reset("Humanity Retrieved", 180, Colors.Gold);
         character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
         character.IsHuman = true;

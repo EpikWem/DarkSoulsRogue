@@ -24,6 +24,7 @@ public class Loot : InteractiveObject
     {
         if (State == 1)
             return;
+        Sounds.Play(Sounds.SItem);
         GameScreen.Character.Inventory.AddItem(_item.Item, _item.Quantity);
         IncreaseState();
     }

@@ -10,7 +10,9 @@ public static class Sounds
     public static Music
         MTitle;
     public static Sfx
-        SMenuConfirm, SDeath, SEstus, SFog, SIllusoryWall, SItem, SBonfireRest, SMenuBack, SMenuMove, SSoul1, SSoul2, SVictory;
+        SBonfireRest, SBowShot, SChest, SMenuConfirm, SCrossbowReload, SCrossbowShot, SDeath, SEstus, SFirebomb, SFog,
+        SIllusoryWall, SInvasion, SItem, SMenuBack, SMenuMove, SMiracle, SMoss, SNewArea, SParry, SPyromancy, SRollHeavy,
+        SRollLight, SRollMedium, SRollNaked, SSorcery, SSoulsGain, SSoulUse, SStart, SVictory, SWarp;
 
     public class Music { internal Song Sound; internal Music(Song sound) => Sound = sound; }
     public class Sfx { internal SoundEffect Sound; internal Sfx(SoundEffect sound) => Sound = sound; }
@@ -31,18 +33,35 @@ public static class Sounds
         
         MTitle = new Music(LoadM("title", content));
 
+        SBonfireRest = new Sfx(LoadS("bonfirerest", content));
+        SBowShot = new Sfx(LoadS("bowshot", content));
+        SChest = new Sfx(LoadS("chest", content));
         SMenuConfirm = new Sfx(LoadS("confirm", content));
+        SCrossbowReload = new Sfx(LoadS("crossbowreload", content));
+        SCrossbowShot = new Sfx(LoadS("crossbowshot", content));
         SDeath = new Sfx(LoadS("death", content));
         SEstus = new Sfx(LoadS("estus", content));
+        SFirebomb = new Sfx(LoadS("firebomb", content));
         SFog = new Sfx(LoadS("fog", content));
         SIllusoryWall = new Sfx(LoadS("illusorywall", content));
         SItem = new Sfx(LoadS("item", content));
-        SBonfireRest = new Sfx(LoadS("bonfirerest", content));
         SMenuBack = new Sfx(LoadS("menuback", content));
         SMenuMove = new Sfx(LoadS("menumove", content));
-        SSoul1 = new Sfx(LoadS("soulsuck1", content));
-        SSoul2 = new Sfx(LoadS("soulsuck2", content));
+        SMiracle = new Sfx(LoadS("miracle", content));
+        SMoss = new Sfx(LoadS("moss", content));
+        SNewArea = new Sfx(LoadS("newarea", content));
+        SParry = new Sfx(LoadS("parry", content));
+        SPyromancy = new Sfx(LoadS("pyromancy", content));
+        SRollHeavy = new Sfx(LoadS("rollheavy", content));
+        SRollLight = new Sfx(LoadS("rolllight", content));
+        SRollMedium = new Sfx(LoadS("rollmedium", content));
+        SRollNaked = new Sfx(LoadS("rollnaked", content));
+        SSorcery = new Sfx(LoadS("sorcery", content));
+        SSoulsGain = new Sfx(LoadS("soulsgain", content));
+        SSoulUse = new Sfx(LoadS("souluse", content));
+        SStart = new Sfx(LoadS("start", content));
         SVictory = new Sfx(LoadS("victory", content));
+        SWarp = new Sfx(LoadS("warp", content));
     }
 
     private static Song LoadM(string name, ContentManager content)

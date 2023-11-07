@@ -18,6 +18,7 @@ public class Notification
     
     public static void Reset(string msg)
     {
+        Sounds.Play(Sounds.SMenuConfirm);
         _isActive = true;
         _msg = msg;
     }

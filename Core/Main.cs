@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.Interfaces;
+﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
@@ -12,8 +13,8 @@ public class Main : Game
 
     public const bool DrawWalls = true;
     public const bool CameraCentered = false;
-    //public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
-    public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
+    public const string ContentPath = @"C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\Content\";
+    //public const string ContentPath = @"C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\Content\";
 
     private readonly GraphicsDeviceManager _graphics;
     
@@ -41,6 +42,7 @@ public class Main : Game
         PixelTexture.SetData(new [] { Color.White });
         SpriteBatch = new SpriteBatch(GraphicsDevice);
         
+        Consumable.Init(GameScreen.Character);
         Textures.Init(Content, GraphicsDevice);
         Fonts.Init(Content);
         Langs.Init(Content);

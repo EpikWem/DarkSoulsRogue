@@ -15,15 +15,17 @@ public static class BigMessage
     private static string _msg;
     private static int _mrgX;
     private static Color _color;
-    
-    public static void Reset(string msg, int mrgX, Color color) //TODO:, Sfx sound)
+
+    public static void Reset(string msg, int mrgX, Color color)
+        => Reset(msg, mrgX, color, Sounds.SNewArea);
+    public static void Reset(string msg, int mrgX, Color color, Sounds.Sfx sound)
     {
         _isActive = true;
         _timer = 60 * 5;
         _msg = msg;
         _mrgX = mrgX;
         _color = color;
-        //Sounds.Play(sound);
+        Sounds.Play(sound);
     }
 
     public static void Draw()

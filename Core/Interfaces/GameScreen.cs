@@ -5,8 +5,8 @@ using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
+using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
@@ -23,19 +23,20 @@ public static class GameScreen
     {
         CurrentSaveId = 0;
         _background = new Background();
-        Character = new Character("");
+        Character = new Character();
     }
 
     public static void Update()
     {
+        if (Control.Debug1.IsOnePressed())
+            Character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
+        
         if (Character.IsSpeaking) // if player is speaking to a Npc, skip entities update
         {
             var npc = (Npc)_currentMap.Entities.First(e => e.GetType() == typeof(Npc) && ((Npc)e).IsSpeaking);
             npc.Interact(Character);
             return;
         }
-        
-        
         
         if (Notification.IsActive()) // if a notification is displayed, no other interaction
         {

@@ -1,8 +1,5 @@
-﻿using System;
-using DarkSoulsRogue.Core.GameObjects.Entities;
-using DarkSoulsRogue.Core.Interfaces;
+﻿using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Statics;
-using DarkSoulsRogue.Core.Utilities;
 
 namespace DarkSoulsRogue.Core.GameObjects.InteractiveObjects;
 
@@ -21,9 +18,12 @@ public class OnewayDoor : Door
         if (State != 0)
             return;
         if (GameScreen.Character.Orientation == _rightOrientation)
+        {
+            Sounds.Play(Sounds.SChest);
             IncreaseState();
+        }
         else
-            Console.WriteLine("It can't opened on this side.");
+            Notification.Reset("It can't opened on this side.");
     }
 
 }

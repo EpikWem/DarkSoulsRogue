@@ -20,6 +20,7 @@ public static class IngameMenu
     public static bool IsActive() => _isActive;
     public static void Activate()
     {
+        Sounds.Play(Sounds.SMenuConfirm);
         _isActive = true;
         _inItemsMenu = false;
         _quitting = false;
