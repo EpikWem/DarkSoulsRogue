@@ -34,10 +34,18 @@ public static class GameScreen
             npc.Interact(Character);
             return;
         }
-
+        
+        
+        
+        if (Notification.IsActive()) // if a notification is displayed, no other interaction
+        {
+            Notification.Update();
+            return;
+        }
+        
         if (Bonfire.Menu.IsActive()) // if player is resting to Bonfire, skip entities update
         {
-            Bonfire.Menu.Update();
+            Bonfire.Update(Character);
             return;
         }
         
@@ -84,6 +92,10 @@ public static class GameScreen
             IngameMenu.Draw();
         if (Bonfire.Menu.IsActive())
             Bonfire.Menu.Draw();
+        if (BigMessage.IsActive())
+            BigMessage.Draw();
+        if (Notification.IsActive())
+            Notification.Draw();
         ChatBox.Draw();
     }
     

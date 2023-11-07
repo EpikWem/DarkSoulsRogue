@@ -21,51 +21,76 @@ public class Bonfire : InteractiveObject
     {
         if (State == 0)
         {
-            //Sounds.Play(Sounds.SBonfireLit);
+            //Sounds.Play(Sounds.SBonfireKindle);
             IncreaseState();
-            // SAY: Fire Lit!
+            BigMessage.Reset("Bonfire Lit", 180, Colors.Gold);
             return;
         }
         
+        Sounds.Play(Sounds.SBonfireRest);
         Menu.Reset();
         GameScreen.Character.AddLife(GameScreen.Character.MaxLife());
         GameScreen.Character.AddStamina(GameScreen.Character.MaxStamina());
+    }
+
+    public void Update(Character character)
+    {
+        if (Menu.Update())
+        {
+            switch (Menu.SelectionId())
+            {
+                case 0:  break;
+                case 1:  break;
+                case 2: RetrieveHumanity(character); break;
+                case 3: Kindle(character); break;
+                case 4:  break;
+                case 5:  break;
+                case 6:  break;
+                default: return;
+            }
+        }
     }
 
     private void Kindle(Character character)
     {
         if (!character.IsHuman)
         {
-            //SAY: impossible d'embraser sous forme de carcasse
+            Notification.Reset("Can't kindle while Hollow");
             return;
         }
         if (State == 4 || (State == 2 && !character.Triggers.Get(Triggers.Trigger.HasRiteOfKindling)))
-        { 
-            //SAY: impossible d'embraser plus
+        {
+            Notification.Reset("Can't kindle more");
             return;
         }
 
         if (character.Attributes.Get(Attributes.Attribute.Humanity) < 1)
-        { 
-            //SAY: pas assez d'humanité
+        {
+            Notification.Reset("Humanity needed");
             return;
         }
         
-        //PLAYSOUND: Kindle
+        //Sounds.Play(Sounds.SBonfireKindle);
         character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
         IncreaseState();
     }
 
-    private void RetrieveHumanity(Character character)
+    private static void RetrieveHumanity(Character character)
     {
-        if (!character.IsHuman)
+        if (character.IsHuman)
         {
-            if (character.Attributes.Get(Attributes.Attribute.Humanity) > 0)
-            {
-                character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
-                character.IsHuman = true;
-            }   
+            Notification.Reset("Already Human");
+            return;
         }
+        if (character.Attributes.Get(Attributes.Attribute.Humanity) < 1)
+        {
+            Notification.Reset("Humanity needed");
+            return;
+        }
+        //Sounds.Play(Sounds.S);
+        BigMessage.Reset("Humanity Retrieved", 180, Colors.Gold);
+        character.Attributes.Increase(Attributes.Attribute.Humanity, -1);
+        character.IsHuman = true;
     }
     
 }

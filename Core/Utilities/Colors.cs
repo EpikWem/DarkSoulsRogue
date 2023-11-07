@@ -11,6 +11,7 @@ public static class Colors
         DarkGrayA = new(40, 40, 40),
         DarkGreen = new(0, 100, 0),
         DarkRed = new(130, 0, 0),
+        Gold = new(200, 150, 0),
         LightGray = new(200, 200, 200),
         Orange = new(160, 75, 15),
         White = new(255, 255, 255);

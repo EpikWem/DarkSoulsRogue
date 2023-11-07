@@ -246,8 +246,7 @@ public static class TitleScreen
         internal static void Reinit()
         {
             _saveId = new Integer(-1);
-            _saveId.Value = -1;
-            GameSelectionMenu.Reinit();
+            GameSelectionMenu.Reinit(_saveId);
             PersonalisationMenu.Reinit();
             NameArea.Reinit();
             _phase = Phase.PlaceSelection;

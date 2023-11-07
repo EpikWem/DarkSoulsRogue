@@ -9,7 +9,7 @@ namespace DarkSoulsRogue.Core.Interfaces;
 public class SelectionBar
 {
 
-    private const int SWidth = 180, SHeight = 30;
+    private const int SWidth = 180, SHeight = 24;
 
     private readonly string _title;
     private readonly string[] _choices;
@@ -22,7 +22,7 @@ public class SelectionBar
     {
         _title = title;
         _choices = choices;
-        _area = new Rectangle(100, 200, SWidth, SHeight * _choices.Length);
+        _area = new Rectangle(100, 200, SWidth, SHeight*(_choices.Length + 1)+4);
         Reset();
         _isActive = false;
     }
@@ -49,27 +49,31 @@ public class SelectionBar
             _isActive = false;
             return true;
         }
-        
-        if (Control.MenuBack.IsOnePressed())
+        if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
         {
             Sounds.Play(Sounds.SMenuBack);
             _isActive = false;
         }
-
         if (Control.MenuUp.IsOnePressed() && _selectionId > 0)
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId--;
-        if (Control.MenuDown.IsOnePressed() && _selectionId < _choices.Length)
+        }
+        if (Control.MenuDown.IsOnePressed() && _selectionId < _choices.Length-1)
+        {
+            Sounds.Play(Sounds.SMenuMove);
             _selectionId++;
+        }
         return false;
     }
 
     public void Draw()
     {
         Main.SpriteBatch.Draw(Main.PixelTexture, _area, Colors.Black);
-        Main.SpriteBatch.DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 4, _area.Y + 2), Colors.White);
-        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), 100, SHeight), Colors.Orange);
+        Main.SpriteBatch.DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 6, _area.Y + 2), Colors.White);
+        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), 172, SHeight), Colors.Orange);
         for (var i = 0; i < _choices.Length; i++)
-            Main.SpriteBatch.DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 2, Sy(i)), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 6, Sy(i)+4), Colors.LightGray);
     }
 
     private int Sx()
