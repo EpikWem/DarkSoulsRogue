@@ -10,9 +10,9 @@
         <souls>0</souls>
         <isHuman>True</isHuman>
         <position>
-          <x>512</x>
-          <y>184</y>
-          <orientation>1</orientation>
+          <x>520</x>
+          <y>311</y>
+          <orientation>3</orientation>
         </position>
         <attributes>
           <level>4</level>

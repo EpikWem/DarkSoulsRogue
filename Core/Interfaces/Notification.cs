@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core.Interfaces;
 
-public class Notification
+public static class Notification
 {
     private const int AreaWidth = 200, AreaHeight = 100;
     private const int SelectorWidth = 50, SelectorHeight = 24;

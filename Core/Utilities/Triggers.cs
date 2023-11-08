@@ -19,20 +19,18 @@ public class Triggers
             _values[i] = false;
     }
 
-    public bool[] GetAll() => _values;
-    public bool Get(Trigger trigger) => _values[(int)trigger];
+    public bool[] GetAll()
+        => _values;
+    public bool Get(Trigger trigger)
+        => _values[(int)trigger];
 
     public void Activate(Trigger trigger)
-    {
-        _values[(int)trigger] = true;
-    }
+        => _values[(int)trigger] = true;
     
     public void Set(bool[] values)
     {
         for (var i = 0; i < NumTriggers; i++)
-        {
             _values[i] = values[i];
-        }
     }
 
 }
