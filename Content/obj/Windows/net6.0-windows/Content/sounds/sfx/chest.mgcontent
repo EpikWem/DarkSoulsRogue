@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/chest.ogg</SourceFile>
-  <SourceTime>2023-11-07T19:53:48.3106302+01:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/chest.xnb</DestFile>
-  <DestTime>2023-11-07T20:48:00.7577138+01:00</DestTime>
+  <SourceFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/sounds/sfx/chest.ogg</SourceFile>
+  <SourceTime>2023-11-09T14:51:24.5775648+01:00</SourceTime>
+  <DestFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/chest.xnb</DestFile>
+  <DestTime>2023-11-09T15:06:59.1924241+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -16,9 +16,7 @@ public class Loot : InteractiveObject
     
     
     public Loot(int xInGrid, int yInGrid, Stack stack) : base(xInGrid, yInGrid, Textures.BonfireT)
-    {
-        _item = stack;
-    }
+        => _item = stack;
 
     public override void Interact()
     {

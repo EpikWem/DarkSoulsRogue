@@ -102,7 +102,7 @@ public static class SaveSystem
 
         node = root["character"]["attributes"];
         for (var i = 0; i < Attributes.NumAttributes; i++)
-            node!.ChildNodes[i]!.InnerText = character.Attributes.GetAll()[i].ToString();
+            node!.ChildNodes[i]!.InnerText = character.Attributes.GetValues()[i].ToString();
         
         node = root["character"]["triggers"];
         for (var i = 0; i < Triggers.NumTriggers; i++)

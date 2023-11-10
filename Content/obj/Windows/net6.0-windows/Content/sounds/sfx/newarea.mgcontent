@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/newarea.ogg</SourceFile>
-  <SourceTime>2023-11-07T19:51:42.5145325+01:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/newarea.xnb</DestFile>
-  <DestTime>2023-11-07T20:48:01.739186+01:00</DestTime>
+  <SourceFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/sounds/sfx/newarea.ogg</SourceFile>
+  <SourceTime>2023-11-09T14:51:24.6385836+01:00</SourceTime>
+  <DestFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/newarea.xnb</DestFile>
+  <DestTime>2023-11-09T15:07:02.8526637+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -5,26 +5,26 @@
     <s0>
       <map>104</map>
       <character>
-        <name>Test</name>
-        <life>66500</life>
+        <name>M</name>
+        <life>65000</life>
         <souls>0</souls>
-        <isHuman>True</isHuman>
+        <isHuman>False</isHuman>
         <position>
-          <x>520</x>
-          <y>311</y>
-          <orientation>3</orientation>
+          <x>450</x>
+          <y>300</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
-          <level>4</level>
-          <vitality>11</vitality>
-          <attunement>9</attunement>
-          <endurance>11</endurance>
-          <strength>12</strength>
+          <level>3</level>
+          <vitality>10</vitality>
+          <attunement>11</attunement>
+          <endurance>10</endurance>
+          <strength>10</strength>
           <dexterity>14</dexterity>
-          <resistance>11</resistance>
-          <intelligence>9</intelligence>
-          <faith>9</faith>
-          <humanity>16</humanity>
+          <resistance>12</resistance>
+          <intelligence>11</intelligence>
+          <faith>8</faith>
+          <humanity>0</humanity>
         </attributes>
         <triggers>
           <finishedFirstAsylum>False</finishedFirstAsylum>
@@ -52,7 +52,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>6</equippedArmor>
+          <equippedArmor>12</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -66,7 +66,7 @@
         <o2>0</o2>
         <o3>1</o3>
         <o4>0</o4>
-        <o5>2</o5>
+        <o5>1</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>
@@ -79,8 +79,8 @@
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>565</x>
-          <y>300</y>
+          <x>373</x>
+          <y>362</y>
           <orientation>2</orientation>
         </position>
         <attributes>
@@ -141,16 +141,16 @@
       </objects>
     </s1>
     <s2>
-      <map>104</map>
+      <map>105</map>
       <character>
-        <name>Lancelot</name>
+        <name>Batman</name>
         <life>71000</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>448</x>
-          <y>301</y>
-          <orientation>0</orientation>
+          <x>469</x>
+          <y>388</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
           <level>5</level>
@@ -190,7 +190,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>5</equippedArmor>
+          <equippedArmor>7</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -202,7 +202,7 @@
         <o0>1</o0>
         <o1>1</o1>
         <o2>0</o2>
-        <o3>0</o3>
+        <o3>1</o3>
         <o4>0</o4>
         <o5>1</o5>
         <o6>0</o6>
@@ -210,27 +210,27 @@
       </objects>
     </s2>
     <s3>
-      <map>104</map>
+      <map>101</map>
       <character>
-        <name>Jesus</name>
+        <name>K</name>
         <life>66500</life>
         <souls>0</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>472</x>
-          <y>345</y>
+          <x>514</x>
+          <y>202</y>
           <orientation>0</orientation>
         </position>
         <attributes>
-          <level>2</level>
+          <level>6</level>
           <vitality>11</vitality>
           <attunement>11</attunement>
-          <endurance>9</endurance>
-          <strength>12</strength>
-          <dexterity>8</dexterity>
+          <endurance>11</endurance>
+          <strength>11</strength>
+          <dexterity>11</dexterity>
           <resistance>11</resistance>
-          <intelligence>8</intelligence>
-          <faith>14</faith>
+          <intelligence>11</intelligence>
+          <faith>11</faith>
           <humanity>0</humanity>
         </attributes>
         <triggers>
@@ -259,7 +259,7 @@
             <i3>0</i3>
             <i4>0</i4>
           </quickItems>
-          <equippedArmor>4</equippedArmor>
+          <equippedArmor>0</equippedArmor>
           <equippedWeapon>0</equippedWeapon>
           <equippedShield>0</equippedShield>
           <equippedCatalyst>0</equippedCatalyst>
@@ -268,12 +268,12 @@
         </inventory>
       </character>
       <objects>
-        <o0>1</o0>
-        <o1>1</o1>
+        <o0>0</o0>
+        <o1>0</o1>
         <o2>0</o2>
         <o3>0</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>0</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>

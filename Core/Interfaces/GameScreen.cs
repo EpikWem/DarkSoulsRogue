@@ -46,7 +46,13 @@ public static class GameScreen
         
         if (Bonfire.Menu.IsActive()) // if player is resting to Bonfire, skip entities update
         {
-            Bonfire.Update(Character);
+            if (Bonfire.IsLevelUpping())
+            {
+                Bonfire.LevelUpMenu.Update();
+                return;
+            }
+           
+            Bonfire.Update();
             return;
         }
         
@@ -72,6 +78,12 @@ public static class GameScreen
             foreach (var entity in _currentMap.Entities.Where(e => e.GetType() == typeof(Npc) && e.GetGraphicbox().Contains(Character.GetLookingPoint())))
                 ((Npc)entity).Interact(Character);
         }
+        
+        // roll key test
+        if (Control.Run.IsOnePressed())
+        {
+            Character.Roll();
+        }
             
         // shield key test
         Character.ShieldUp = Control.Shield.IsPressed();
@@ -92,7 +104,13 @@ public static class GameScreen
         if (IngameMenu.IsActive())
             IngameMenu.Draw();
         if (Bonfire.Menu.IsActive())
+        {
             Bonfire.Menu.Draw();
+            if (Bonfire.IsLevelUpping())
+            {
+                Bonfire.LevelUpMenu.Draw();
+            }
+        }
         if (BigMessage.IsActive())
             BigMessage.Draw();
         if (Notification.IsActive())

@@ -23,7 +23,7 @@ public class OnewayDoor : Door
             IncreaseState();
         }
         else
-            Notification.Reset("It can't opened on this side.");
+            Notification.Reset("Cannot open from this side.");
     }
 
 }

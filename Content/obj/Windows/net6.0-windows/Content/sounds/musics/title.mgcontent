@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/musics/title.ogg</SourceFile>
-  <SourceTime>2021-11-04T14:52:52.7703133+01:00</SourceTime>
-  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/musics/title.xnb</DestFile>
-  <DestTime>2023-11-07T18:33:15.7104858+01:00</DestTime>
+  <SourceFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/sounds/musics/title.ogg</SourceFile>
+  <SourceTime>2023-07-14T19:41:02.1963676+02:00</SourceTime>
+  <DestFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/musics/title.xnb</DestFile>
+  <DestTime>2023-11-09T15:06:58.4196437+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SongProcessor</Processor>
@@ -15,6 +15,6 @@
   <Dependencies />
   <BuildAsset />
   <BuildOutput>
-    <string>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/musics/title.wma</string>
+    <string>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/musics/title.wma</string>
   </BuildOutput>
 </PipelineBuildEvent>

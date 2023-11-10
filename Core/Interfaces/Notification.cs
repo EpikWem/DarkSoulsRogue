@@ -7,11 +7,12 @@ namespace DarkSoulsRogue.Core.Interfaces;
 
 public static class Notification
 {
-    private const int AreaWidth = 200, AreaHeight = 100;
-    private const int SelectorWidth = 50, SelectorHeight = 24;
-    private static readonly Rectangle Area =
-        new((Camera.Width - AreaWidth)/2, (Camera.Height - AreaHeight)/2, AreaWidth, AreaHeight);
-    private static readonly Rectangle Selector = new((Camera.Width - SelectorWidth)/2, (Camera.Height - SelectorHeight)/2, SelectorWidth, SelectorHeight);
+    private const int AreaWidth = 350, AreaHeight = 150;
+    private const int SelectorWidth = 50, SelectorHeight = 30;
+    private static readonly Rectangle Area
+        = new((Camera.Width - AreaWidth)/2, (Camera.Height - AreaHeight)/2, AreaWidth, AreaHeight);
+    private static readonly Rectangle Selector
+        = new((Camera.Width - SelectorWidth)/2, (Area.Y+AreaHeight) - (SelectorHeight+8), SelectorWidth, SelectorHeight);
 
     private static bool _isActive;
     private static string _msg;

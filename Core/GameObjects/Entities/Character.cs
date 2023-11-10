@@ -1,3 +1,4 @@
+ using System;
  using System.Collections.Generic;
  using DarkSoulsRogue.Core.Interfaces;
  using DarkSoulsRogue.Core.Items;
@@ -12,8 +13,7 @@ namespace DarkSoulsRogue.Core.GameObjects.Entities;
 
 public class Character : Entity
 {
-
-    //private const int MarginS = 4, MarginU = 12, MarginD = 6;
+    
     private const int ExhaustionTime = 120;
     private const int BaseStaminaLoss = -20, BaseStaminaGain = 45;
 
@@ -163,6 +163,17 @@ public class Character : Entity
         GameScreen.LoadMap(dest.MapId);
     }
 
+    public void Roll()
+    {
+        Sounds.Play(EquipLoadRatio() switch {
+               0.00f    =>  Sounds.SRollNaked,
+            <= 0.25f    =>  Sounds.SRollLight,
+            <= 0.50f    =>  Sounds.SRollMedium,
+            <= 0.75f    =>  Sounds.SRollHeavy,
+               _ => throw new ArgumentOutOfRangeException()
+        });
+    }
+
     public int MaxLife() => (int)((500 + Attributes.Get(Attributes.Attribute.Vitality) * 15) * 100
          * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f)
          * (Inventory.EquippedRing == Ring.TinyBeing ? 1.05f : 1f));
@@ -180,11 +191,11 @@ public class Character : Entity
         * (Inventory.EquippedRing == Ring.Havel ? 1.5f : 1f)
         * (Inventory.EquippedRing == Ring.Favor ? 1.2f : 1f);
 
-    public float EquipLoadRatio() =>
+    private float EquipLoadRatio() =>
         (Inventory.EquippedArmor.Weight + Inventory.EquippedWeapon.Weight) //TODO: add shields, etc load...
         / MaxEquipLoad();
 
-    public int MovementSpeed() => (GetNumberOfPressedMovements() > 1 && EquipLoadRatio() <= 0.75f ? -1 : 0) + EquipLoadRatio() switch {
+    private int MovementSpeed() => (GetNumberOfPressedMovements() > 1 && EquipLoadRatio() <= 0.75f ? -1 : 0) + EquipLoadRatio() switch {
         <= 0.25f    =>  _running ? 4 : 3,
         <= 0.50f    =>  _running ? 3 : 2,
         <= 0.75f    =>  _running ? 2 : 1,

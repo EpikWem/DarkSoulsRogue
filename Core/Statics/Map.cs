@@ -97,7 +97,7 @@ public class Map
                 null }
         ),
         UndeadAsylum5 = new( 105, new[] {
-                new[] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
+                new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1},
@@ -110,7 +110,9 @@ public class Map
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1},
                 new[] {1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1} },
-            new List<InteractiveObject> (), 
+            new List<InteractiveObject> {
+                new LockedDoor(7, 0, Key.AsylumGuardian)
+            }, 
             new List<Entity> {
                 new Npc(7, 2, Armor.Naked, Orientation.Down, Speaks.Solarius) },
             new Destination[] {

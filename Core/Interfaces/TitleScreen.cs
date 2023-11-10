@@ -23,7 +23,6 @@ public static class TitleScreen
     private static readonly Vector2 PositionOfClassList2 = PositionOfClassList1 + new Vector2(ClassItemWidth, -ClassItemHeight*5);
     private const int ClassItemWidth = 210;
     private const int ClassItemHeight = 104;
-    private static readonly Rectangle AttributesSheetArea = new(620, 20, 320, Camera.Height - 40);
 
     private static bool _isActive;
     private static bool _wantsToQuit;
@@ -223,7 +222,7 @@ public static class TitleScreen
                 spriteBatch.DrawString(Fonts.Font14, "Level " + SaveSystem.GetGameLevel(i), PositionOfGameList + new Vector2(70, i*GameItemHeight + 36), Colors.LightGray);
             }
             
-            DrawAttributesSheet(spriteBatch, SaveSystem.GetGameName(_selectedGameId), SaveSystem.GetGameAttributes(_selectedGameId));
+            Attributes.DrawMenuAttributesSheet(SaveSystem.GetGameName(_selectedGameId), SaveSystem.GetGameAttributes(_selectedGameId));
         }
         
         private static int FirstGameChoice() => 0;
@@ -350,8 +349,8 @@ public static class TitleScreen
 
             private static int _selectedClass;
             internal static bool IsConfirmed;
-            private static readonly Rectangle _titleRectangle = new(10, 10, 440, 40);
-            private static readonly string _titleString = "Choose your starting Class";
+            private static readonly Rectangle TitleRectangle = new(10, 10, 440, 40);
+            private const string _titleString = "Choose your starting Class";
 
             internal static void Reinit()
             {
@@ -418,7 +417,7 @@ public static class TitleScreen
                 var cgx = (int)posList.X - 8;
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
                 
-                spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
+                spriteBatch.Draw(Main.PixelTexture, TitleRectangle, Colors.DarkGray);
                 spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
                 
                 spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, ClassItemWidth, ClassItemHeight+4), Colors.Orange);
@@ -429,7 +428,7 @@ public static class TitleScreen
                     spriteBatch.DrawString(Fonts.FontBold16, ClassNames[i], posItem + new Vector2(70, i * ClassItemHeight), Colors.White);
                 }
                 
-                DrawAttributesSheet(spriteBatch, ClassNames[_selectedClass], BaseAttributesTable[_selectedClass]);
+                Attributes.DrawMenuAttributesSheet(ClassNames[_selectedClass], BaseAttributesTable[_selectedClass]);
             }
 
             public static List<int> GetChosenAttributes()
@@ -468,20 +467,6 @@ public static class TitleScreen
             TextArea.Draw(spriteBatch);
         }
         
-    } 
-
-    private static void DrawAttributesSheet(SpriteBatch spriteBatch, string name, int[] values)
-    {
-        var pos = new Vector2(AttributesSheetArea.X, AttributesSheetArea.Y);
-        spriteBatch.Draw(Main.PixelTexture, AttributesSheetArea, Colors.DarkGray);
-        spriteBatch.DrawString(Fonts.FontBold18, name, pos + new Vector2(10, 10), Colors.White);
-        for (var i = 0; i < Attributes.NumAttributes; i++)
-        {
-            var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
-            spriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
-            spriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
-            spriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(280, dY+1), Colors.White);
-        }
     }
     
 }
