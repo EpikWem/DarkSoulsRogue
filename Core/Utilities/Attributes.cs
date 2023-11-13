@@ -11,7 +11,7 @@ namespace DarkSoulsRogue.Core.Utilities;
 public class Attributes
 {
         
-    private static readonly Rectangle MenuAttributesSheetArea = new(620, 20, 320, Camera.Height - 40);
+    private static readonly Rectangle MenuAttributesSheetArea = new(700, 20, 220, Camera.Height - 40);
     
     public enum Attribute { Level, Vitality, Attunement, Endurance, Strength, Dexterity, Resistance, Intelligence, Faith, Humanity }
 
@@ -99,7 +99,7 @@ public class Attributes
             var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
             Main.SpriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
             Main.SpriteBatch.DrawString(Fonts.Font16, GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
-            Main.SpriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(280, dY+1), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(182, dY+1), Colors.White);
         }
     }
 

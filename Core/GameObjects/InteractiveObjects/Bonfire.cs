@@ -108,7 +108,7 @@ public class Bonfire : InteractiveObject
     internal static class LevelUpMenu
     {
         
-        private static readonly Rectangle LevelUpSheetArea = new(620, 20, 320, Camera.Height - 40);
+        private static readonly Rectangle LevelUpSheetArea = new(700, 20, 220, Camera.Height - 40);
         private const int SHeight = 32;
         private static int Sx()
             => LevelUpSheetArea.X + 2;
@@ -116,13 +116,14 @@ public class Bonfire : InteractiveObject
         private static int Sy(int row)
             => LevelUpSheetArea.Y + (row+3) * SHeight + 3;
 
-        private static int[] _newValues;
+        private static int[] _oldValues, _addedValues;
         private static int _selectionId;
         
         internal static void Reset()
         {
             _isLevelUpping = true;
-            _newValues = GameScreen.Character.Attributes.GetValues();
+            _oldValues = GameScreen.Character.Attributes.GetValues();
+            _addedValues = new int[10];
             _selectionId = 1;
         }
 
@@ -131,7 +132,8 @@ public class Bonfire : InteractiveObject
             if (Control.Interact.IsOnePressed())
             {
                 Sounds.Play(Sounds.SMenuConfirm);
-                
+                GameScreen.Character.Attributes.Increase(_addedValues);
+                _isLevelUpping = false;
             }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
@@ -143,10 +145,22 @@ public class Bonfire : InteractiveObject
                 Sounds.Play(Sounds.SMenuMove);
                 _selectionId--;
             }
-            if (Control.MenuDown.IsOnePressed() && _selectionId < _newValues.Length-2)
+            if (Control.MenuDown.IsOnePressed() && _selectionId < _oldValues.Length-2)
             {
                 Sounds.Play(Sounds.SMenuMove);
                 _selectionId++;
+            }
+            if (Control.MenuRight.IsOnePressed())
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _addedValues[_selectionId]++;
+                _addedValues[0]++;
+            }
+            if (Control.MenuLeft.IsOnePressed() && _addedValues[_selectionId] > 0)
+            {
+                Sounds.Play(Sounds.SMenuMove);
+                _addedValues[_selectionId]--;
+                _addedValues[0]--;
             }
         }
 
@@ -161,12 +175,24 @@ public class Bonfire : InteractiveObject
                 var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
                 Main.SpriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
                 Main.SpriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
-                Main.SpriteBatch.DrawString(Fonts.FontBold18, _newValues[i].ToString(), pos + new Vector2(280, dY+1), Colors.White);
+                if (i == _selectionId)
+                    Main.SpriteBatch.DrawString(Fonts.FontBold18, "< "+DrewValue(i)+" >", pos + new Vector2(170, dY+1), DrewColor(i)); 
+                else
+                    Main.SpriteBatch.DrawString(Fonts.FontBold18, DrewValue(i), pos + new Vector2(182, dY+1), DrewColor(i));
             }
             
         }
-        
-        
+
+        private static string DrewValue(int i)
+            => (_oldValues[i] + _addedValues[i]).ToString();
+
+        private static Color DrewColor(int i)
+            => _addedValues[i] > 0 ?
+                Colors.Blue :
+                _addedValues[i] < 0 ?
+                    Colors.DarkRed :
+                    Colors.White;
+
     }
     
 }

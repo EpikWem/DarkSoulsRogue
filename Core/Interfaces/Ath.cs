@@ -20,7 +20,7 @@ public static class Ath
     public static void Init(Character character)
     {
         _life = new Bar(new Vector2(20, 20), Colors.DarkRed, 0.005f);
-        _stamina = new Bar(new Vector2(20, 40), Colors.DarkGreen, 0.02f);
+        _stamina = new Bar(new Vector2(20, 40), Colors.GreenStamina, 0.02f);
         _character = character;
     }
 
