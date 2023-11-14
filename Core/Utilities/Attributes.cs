@@ -95,14 +95,14 @@ public class Attributes
     public static void DrawMenuAttributesSheet(string name, int[] values)
     {
         var pos = new Vector2(MenuAttributesSheetArea.X, MenuAttributesSheetArea.Y);
-        Main.SpriteBatch.Draw(Main.PixelTexture, MenuAttributesSheetArea, Colors.DarkGray);
-        Main.SpriteBatch.DrawString(Fonts.FontBold18, name, pos + new Vector2(10, 10), Colors.White);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), MenuAttributesSheetArea, Colors.DarkGray);
+        Main.SpriteBatch().DrawString(Fonts.FontBold18, name, pos + new Vector2(10, 10), Colors.White);
         for (var i = 0; i < NumAttributes; i++)
         {
             var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
-            Main.SpriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
-            Main.SpriteBatch.DrawString(Fonts.Font16, GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
-            Main.SpriteBatch.DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(182, dY+1), Colors.White);
+            Main.SpriteBatch().Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
+            Main.SpriteBatch().DrawString(Fonts.Font16, GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
+            Main.SpriteBatch().DrawString(Fonts.FontBold18, values[i].ToString(), pos + new Vector2(182, dY+1), Colors.White);
         }
     }
 

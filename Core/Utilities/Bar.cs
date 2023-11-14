@@ -23,8 +23,8 @@ public class Bar
     {
         value = (int)(value * _scale);
         maxValue = (int)(maxValue * _scale);
-        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
-        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin, value - 2*Margin, Thickness - 2*Margin), _color);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle((int)_position.X+54, (int)_position.Y, maxValue, Thickness), Color.Black);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle((int)_position.X+Margin+54, (int)_position.Y+Margin, value - 2*Margin, Thickness - 2*Margin), _color);
     }
         
 }

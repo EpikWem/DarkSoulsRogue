@@ -75,17 +75,17 @@
       <map>104</map>
       <character>
         <name>Karim</name>
-        <life>83000</life>
-        <souls>3214</souls>
+        <life>105500</life>
+        <souls>9344</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>443</x>
-          <y>301</y>
-          <orientation>0</orientation>
+          <x>452</x>
+          <y>180</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
-          <level>22</level>
-          <vitality>22</vitality>
+          <level>37</level>
+          <vitality>37</vitality>
           <attunement>14</attunement>
           <endurance>16</endurance>
           <strength>14</strength>

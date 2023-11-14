@@ -12,8 +12,7 @@ namespace DarkSoulsRogue.Core.Interfaces;
 
 public static class GameScreen
 {
-
-    public static int CurrentSaveId;
+    private static int _currentSaveId; public static int CurrentSaveId() => _currentSaveId; public static int SetCurrentSaveId(int id) => _currentSaveId = id;
     private static Background _background;
     public static Character Character;
     private static readonly List<Wall> Walls = new();
@@ -21,7 +20,7 @@ public static class GameScreen
 
     public static void Init()
     {
-        CurrentSaveId = 0;
+        _currentSaveId = 0;
         _background = new Background();
         Character = new Character();
     }
@@ -93,15 +92,15 @@ public static class GameScreen
     
     public static void Draw()
     {   
-        _background.Draw(Main.SpriteBatch);
+        _background.Draw(Main.SpriteBatch());
         if (Main.DrawWalls)
             foreach (var w in Walls)
-                w.Draw(Main.SpriteBatch);
+                w.Draw(Main.SpriteBatch());
         foreach (var o in _currentMap.Objects)
-            o.Draw(Main.SpriteBatch);
+            o.Draw(Main.SpriteBatch());
         foreach (var e in _currentMap.Entities)
-            e.Draw(Main.SpriteBatch);
-        Character.Draw(Main.SpriteBatch);
+            e.Draw(Main.SpriteBatch());
+        Character.Draw(Main.SpriteBatch());
         Ath.Draw();
         if (IngameMenu.IsActive())
             IngameMenu.Draw();

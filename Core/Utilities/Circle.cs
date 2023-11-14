@@ -42,7 +42,7 @@ public class Circle
         for(var y = (int)Center.Y-Radius; y < (int)Center.Y+Radius; y++)
             for(var x = (int)Center.X-Radius; x < (int)Center.X+Radius; x++)
                 if (Contains(new Vector2(x, y)))
-                    Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, 1, 1), color);
+                    Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle(x, y, 1, 1), color);
     }
 
 }

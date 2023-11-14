@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Xml;
 using DarkSoulsRogue.Core.GameObjects.Entities;
 using DarkSoulsRogue.Core.Interfaces;
-using DarkSoulsRogue.Core.Items;
 using DarkSoulsRogue.Core.Items.Equipments;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.Utilities;
@@ -34,7 +34,7 @@ public static class SaveSystem
     {
         var character = GameScreen.Character;
         
-        GameScreen.CurrentSaveId = saveId;
+        GameScreen.SetCurrentSaveId(saveId);
         
         var root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
         
@@ -83,7 +83,7 @@ public static class SaveSystem
     {
         var character = GameScreen.Character;
         
-        SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = GameScreen.CurrentSaveId.ToString();
+        SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = GameScreen.CurrentSaveId().ToString();
         
         XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
         
@@ -96,8 +96,8 @@ public static class SaveSystem
         node["isHuman"]!.InnerText = character.IsHuman.ToString();
         
         node = root["character"]?["position"];
-        node!["x"]!.InnerText = character.GetPosition().X.ToString();
-        node["y"]!.InnerText = character.GetPosition().Y.ToString();
+        node!["x"]!.InnerText = character.GetPosition().X.ToString(CultureInfo.CurrentCulture);
+        node["y"]!.InnerText = character.GetPosition().Y.ToString(CultureInfo.CurrentCulture);
         node["orientation"]!.InnerText = character.Orientation.Index.ToString();
 
         node = root["character"]["attributes"];
@@ -138,7 +138,7 @@ public static class SaveSystem
             Map.GetObject(i).SetState(0);
         GameScreen.Character.Life = GameScreen.Character.MaxLife();
         Ath.Init(GameScreen.Character);
-        GameScreen.CurrentSaveId = newSaveId;
+        GameScreen.SetCurrentSaveId(newSaveId);
     }
 
     public static Texture2D GetGameIcon(int gameId) =>

@@ -79,9 +79,9 @@
         <souls>9344</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>443</x>
-          <y>301</y>
-          <orientation>0</orientation>
+          <x>452</x>
+          <y>180</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
           <level>37</level>

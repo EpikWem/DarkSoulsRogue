@@ -133,7 +133,7 @@ public static class TitleScreen
             var csx = (int)PositionOfTitleList.X - 30;
             var csy = (int)PositionOfTitleList.Y + _selectionId * TitleItemHeight - 2;
             
-            spriteBatch.Draw(Main.PixelTexture, new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight - 4), Colors.Orange);
+            spriteBatch.Draw(Main.PixelTexture(), new Rectangle(csx, csy, TitleItemWidth + 40, TitleItemHeight - 4), Colors.Orange);
             for (var i = 0; i < Choices.Length; i++)
                 spriteBatch.DrawString(Fonts.Font12, Choices[i],  PositionOfTitleList + new Vector2(0, i*TitleItemHeight + 4), Colors.White);
         }
@@ -211,10 +211,10 @@ public static class TitleScreen
             var cgx = (int)PositionOfGameList.X - 12;
             var cgy = (int)PositionOfGameList.Y + _selectedGameId*GameItemHeight - 12;
             
-            spriteBatch.Draw(Main.PixelTexture, _titleRectangle, Colors.DarkGray);
+            spriteBatch.Draw(Main.PixelTexture(), _titleRectangle, Colors.DarkGray);
             spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
             
-            spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, GameItemWidth, GameItemHeight - 16), Colors.Orange);
+            spriteBatch.Draw(Main.PixelTexture(), new Rectangle(cgx, cgy, GameItemWidth, GameItemHeight - 16), Colors.Orange);
             for (var i = 0; i < SaveSystem.SavesCount; i++)
             {
                 spriteBatch.Draw(SaveSystem.GetGameIcon(i), PositionOfGameList + new Vector2(0, i * GameItemHeight - 8), Colors.White);
@@ -417,10 +417,10 @@ public static class TitleScreen
                 var cgx = (int)posList.X - 8;
                 var cgy = (int)posList.Y + _selectedClass * ClassItemHeight - 14;
                 
-                spriteBatch.Draw(Main.PixelTexture, TitleRectangle, Colors.DarkGray);
+                spriteBatch.Draw(Main.PixelTexture(), TitleRectangle, Colors.DarkGray);
                 spriteBatch.DrawString(Fonts.FontBold24, _titleString, new Vector2(16, 12), Colors.White);
                 
-                spriteBatch.Draw(Main.PixelTexture, new Rectangle(cgx, cgy, ClassItemWidth, ClassItemHeight+4), Colors.Orange);
+                spriteBatch.Draw(Main.PixelTexture(), new Rectangle(cgx, cgy, ClassItemWidth, ClassItemHeight+4), Colors.Orange);
                 for (var i = 0; i < ClassNames.Length; i++)
                 {
                     var posItem = i < ClassNames.Length / 2 ? PositionOfClassList1 : PositionOfClassList2;
@@ -463,7 +463,7 @@ public static class TitleScreen
 
         internal static void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Main.PixelTexture, BlackRectangle, Colors.DarkGrayA);
+            spriteBatch.Draw(Main.PixelTexture(), BlackRectangle, Colors.DarkGrayA);
             TextArea.Draw(spriteBatch);
         }
         

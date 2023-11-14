@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework;
 
 namespace DarkSoulsRogue.Core.System;
 
-public class Camera
+public static class Camera
 {
     
     public const int GridWidth = 15, GridHeight = 10, CellSize = 64;

@@ -35,10 +35,10 @@ public static class Notification
 
     public static void Draw()
     {
-        Main.SpriteBatch.Draw(Main.PixelTexture, Area, Colors.Black);
-        Main.SpriteBatch.DrawString(Fonts.Font14, _msg, new Vector2(Area.X+8, Area.Y+6), Colors.White);
-        Main.SpriteBatch.Draw(Main.PixelTexture, Selector, Colors.Orange);
-        Main.SpriteBatch.DrawString(Fonts.Font16, "OK", new Vector2(Selector.X+8, Selector.Y+6), Colors.White);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), Area, Colors.Black);
+        Main.SpriteBatch().DrawString(Fonts.Font14, _msg, new Vector2(Area.X+8, Area.Y+6), Colors.White);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), Selector, Colors.Orange);
+        Main.SpriteBatch().DrawString(Fonts.Font16, "OK", new Vector2(Selector.X+8, Selector.Y+6), Colors.White);
     }
 
     public static bool IsActive()

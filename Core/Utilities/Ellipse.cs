@@ -51,7 +51,7 @@ public class Ellipse
         for(var y = (int)Center.Y - RadiusY; y < (int)Center.Y + RadiusY; y++)
             for(var x = (int)Center.X - RadiusX; x < (int)Center.X + RadiusX; x++)
                 if (Contains(new Vector2(x, y)))
-                    spriteBatch.Draw(Main.PixelTexture, new Rectangle(x, y, 1, 1), color);
+                    spriteBatch.Draw(Main.PixelTexture(), new Rectangle(x, y, 1, 1), color);
     }
 
 }

@@ -73,7 +73,7 @@ public static class IngameMenu
 
     public static void Draw()
     {
-        Main.SpriteBatch.Draw(Main.PixelTexture, Area, Color.Black);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), Area, Color.Black);
         if (_inItemsMenu)
             ItemsMenu.Draw();
         else
@@ -100,7 +100,7 @@ internal static class EquipmentMenu
     
     internal static void Draw()
     {
-        Main.SpriteBatch.DrawString(Fonts.FontHumanityCounter, "EQUIPMENTS", new Vector2(IngameMenu.Area.X + 40, IngameMenu.Area.Y + 40), Color.White);
+        Main.SpriteBatch().DrawString(Fonts.FontHumanityCounter, "EQUIPMENTS", new Vector2(IngameMenu.Area.X + 40, IngameMenu.Area.Y + 40), Color.White);
     }
     
 }
@@ -123,7 +123,7 @@ internal static class ItemsMenu
     
     internal static void Draw()
     {
-        Main.SpriteBatch.DrawString(Fonts.FontHumanityCounter, "I T E M S", new Vector2(IngameMenu.Area.X + 40, IngameMenu.Area.Y + 40), Color.White);
+        Main.SpriteBatch().DrawString(Fonts.FontHumanityCounter, "I T E M S", new Vector2(IngameMenu.Area.X + 40, IngameMenu.Area.Y + 40), Color.White);
     }
     
 }
@@ -172,9 +172,9 @@ internal static class QuitMenu
     internal static void Draw()
     {
         QArea.Draw();
-        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(QArea.Rectangle.X + 30 + (_selection ? 90 : 0), QArea.Rectangle.Y + 62, 70, 30), Colors.Orange);
-        Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, "Quit to Title ?", new Vector2(QArea.Rectangle.X+10, QArea.Rectangle.Y+10), Colors.White);
-        Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, "Back     Yes", new Vector2(QArea.Rectangle.X+30, QArea.Rectangle.Y+64), Colors.White);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle(QArea.Rectangle.X + 30 + (_selection ? 90 : 0), QArea.Rectangle.Y + 62, 70, 30), Colors.Orange);
+        Main.SpriteBatch().DrawString(Fonts.FontSoulCounter, "Quit to Title ?", new Vector2(QArea.Rectangle.X+10, QArea.Rectangle.Y+10), Colors.White);
+        Main.SpriteBatch().DrawString(Fonts.FontSoulCounter, "Back     Yes", new Vector2(QArea.Rectangle.X+30, QArea.Rectangle.Y+64), Colors.White);
     }
     
 }

@@ -178,22 +178,22 @@ public class Bonfire : InteractiveObject
         internal static void Draw()
         {
             var pos = new Vector2(LevelUpSheetArea.X, LevelUpSheetArea.Y);
-            Main.SpriteBatch.Draw(Main.PixelTexture, LevelUpSheetArea, Colors.Black);
-            Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), LevelUpSheetArea.Width-8, SHeight), Colors.DarkGray);
-            Main.SpriteBatch.DrawString(Fonts.FontBold18, GameScreen.Character.Name, pos + new Vector2(10, 10), Colors.White);
-            Main.SpriteBatch.DrawString(Fonts.Font16, "Souls :", pos + new Vector2(10, 40), Colors.White);
-            Main.SpriteBatch.DrawString(Fonts.Font18, _newSouls.ToString(), pos + new Vector2(100, 40), Colors.Yellow);
-            Main.SpriteBatch.DrawString(Fonts.Font16, "Needed :", pos + new Vector2(10, 60), Colors.White);
-            Main.SpriteBatch.DrawString(Fonts.Font18, SoulsToLevelUp().ToString(), pos + new Vector2(100, 60), _newSouls < SoulsToLevelUp() ? Colors.DarkRed : Colors.White);
+            Main.SpriteBatch().Draw(Main.PixelTexture(), LevelUpSheetArea, Colors.Black);
+            Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle(Sx(), Sy(_selectionId), LevelUpSheetArea.Width-8, SHeight), Colors.DarkGray);
+            Main.SpriteBatch().DrawString(Fonts.FontBold18, GameScreen.Character.Name, pos + new Vector2(10, 10), Colors.White);
+            Main.SpriteBatch().DrawString(Fonts.Font16, "Souls :", pos + new Vector2(10, 40), Colors.White);
+            Main.SpriteBatch().DrawString(Fonts.Font18, _newSouls.ToString(), pos + new Vector2(100, 40), Colors.Yellow);
+            Main.SpriteBatch().DrawString(Fonts.Font16, "Needed :", pos + new Vector2(10, 60), Colors.White);
+            Main.SpriteBatch().DrawString(Fonts.Font18, SoulsToLevelUp().ToString(), pos + new Vector2(100, 60), _newSouls < SoulsToLevelUp() ? Colors.DarkRed : Colors.White);
             for (var i = 0; i < Attributes.NumAttributes; i++)
             {
                 var dY = i == 0 ? pos.Y+60 : pos.Y+80 + i*32;
-                Main.SpriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
-                Main.SpriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
+                Main.SpriteBatch().Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
+                Main.SpriteBatch().DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
                 if (i == _selectionId)
-                    Main.SpriteBatch.DrawString(Fonts.FontBold18, "< "+DrewValue(i)+" >", pos + new Vector2(170, dY+1), DrewColor(i)); 
+                    Main.SpriteBatch().DrawString(Fonts.FontBold18, "< "+DrewValue(i)+" >", pos + new Vector2(170, dY+1), DrewColor(i)); 
                 else
-                    Main.SpriteBatch.DrawString(Fonts.FontBold18, DrewValue(i), pos + new Vector2(182, dY+1), DrewColor(i));
+                    Main.SpriteBatch().DrawString(Fonts.FontBold18, DrewValue(i), pos + new Vector2(182, dY+1), DrewColor(i));
             }
         }
         

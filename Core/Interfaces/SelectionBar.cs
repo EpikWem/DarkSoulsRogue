@@ -68,11 +68,11 @@ public class SelectionBar
 
     public void Draw()
     {
-        Main.SpriteBatch.Draw(Main.PixelTexture, _area, Colors.Black);
-        Main.SpriteBatch.DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 6, _area.Y + 2), Colors.White);
-        Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), 172, SHeight), Colors.Orange);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), _area, Colors.Black);
+        Main.SpriteBatch().DrawString(Fonts.FontBold18, _title, new Vector2(_area.X + 6, _area.Y + 2), Colors.White);
+        Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle(Sx(), Sy(_selectionId), 172, SHeight), Colors.Orange);
         for (var i = 0; i < _choices.Length; i++)
-            Main.SpriteBatch.DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 6, Sy(i)+4), Colors.LightGray);
+            Main.SpriteBatch().DrawString(Fonts.Font12, _choices[i],  new Vector2(Sx() + 6, Sy(i)+4), Colors.LightGray);
     }
 
     private int Sx()

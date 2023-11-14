@@ -41,13 +41,13 @@ public static class Ath
 
         public static void Draw(int souls)
         {
-            Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
-            Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
+            Main.SpriteBatch().Draw(Main.PixelTexture(), Rectangle, Color.Black);
+            Main.SpriteBatch().DrawString(Fonts.FontSoulCounter, souls.ToString(), new Vector2(Position.X+Margin, Position.Y), Color.White);
         }
         public static void Draw(string text)
         {
-            Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, Color.Black);
-            Main.SpriteBatch.DrawString(Fonts.FontSoulCounter, text, new Vector2(0, Position.Y), Color.White);
+            Main.SpriteBatch().Draw(Main.PixelTexture(), Rectangle, Color.Black);
+            Main.SpriteBatch().DrawString(Fonts.FontSoulCounter, text, new Vector2(0, Position.Y), Color.White);
         }
 
         private static int XForDisplay(int souls)
@@ -72,7 +72,7 @@ public static class Ath
         {
             CircleOut.Draw(GetHumanityColor());
             CircleIn.Draw(new Color(50, 50, 50));
-            Main.SpriteBatch.DrawString(
+            Main.SpriteBatch().DrawString(
                 Fonts.FontHumanityCounter, 
                 _character.Attributes.Get(Attributes.Attribute.Humanity).ToString(), 
                 new Vector2(Border*2, 6), 

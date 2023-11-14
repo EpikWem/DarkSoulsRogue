@@ -35,7 +35,7 @@ public static class BigMessage
             _isActive = false;
             return;
         }
-        Main.SpriteBatch.DrawString(Fonts.FontHumanityCounter, "-" + _msg + "-", new Vector2(Camera.Width / 2 - _mrgX, PosY), _color);
+        Main.SpriteBatch().DrawString(Fonts.FontHumanityCounter, "-" + _msg + "-", new Vector2(Camera.Width / 2 - _mrgX, PosY), _color);
         _timer--;
     }
 

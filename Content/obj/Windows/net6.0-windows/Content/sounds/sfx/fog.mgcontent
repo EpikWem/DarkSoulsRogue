@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/sounds/sfx/fog.ogg</SourceFile>
-  <SourceTime>2023-07-14T19:41:02.2048784+02:00</SourceTime>
-  <DestFile>C:/Users/lucas/Documents/$_DIVERS/Code/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/fog.xnb</DestFile>
-  <DestTime>2023-11-09T15:07:00.9056189+01:00</DestTime>
+  <SourceFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/sounds/sfx/fog.ogg</SourceFile>
+  <SourceTime>2023-07-10T16:58:27.2550371+02:00</SourceTime>
+  <DestFile>C:/Users/Lucas/Documents/2_DEVELOP/CS/DarkSoulsRogue/Content/bin/Windows/Content/sounds/sfx/fog.xnb</DestFile>
+  <DestTime>2023-11-14T18:46:04.0184223+01:00</DestTime>
   <Importer>OggImporter</Importer>
   <ImporterTime>2022-07-26T13:44:56+02:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -36,10 +36,10 @@ public abstract class Entity : GameObject
 
     public void Draw(SpriteBatch batch, Armor equippedArmor = null)
     {
-        //batch.Draw(Main.PixelTexture, GetGraphicbox(), Color.Orange);
-        //batch.Draw(Main.PixelTexture, GetHitbox(), Color.Purple);
+        //batch.Draw(Main.PixelTexture(), GetGraphicbox(), Color.Orange);
+        //batch.Draw(Main.PixelTexture(), GetHitbox(), Color.Purple);
         batch.Draw((equippedArmor ?? _baseArmor).GetWearingTextures()[Orientation.Index], Position, Color.White);
-        //batch.Draw(Main.PixelTexture, new Rectangle((int)GetLookingPoint().X, (int)GetLookingPoint().Y, 4, 4), Color.Red);
+        //batch.Draw(Main.PixelTexture(), new Rectangle((int)GetLookingPoint().X, (int)GetLookingPoint().Y, 4, 4), Color.Red);
     }
 
     public Vector2 GetLookingPoint() => Orientation.Index switch {

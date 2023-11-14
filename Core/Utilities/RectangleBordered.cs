@@ -34,9 +34,9 @@ public class RectangleBordered
     
     public void Draw()
     {
-        Main.SpriteBatch.Draw(Main.PixelTexture, Rectangle, ColorBorder);
-        Main.SpriteBatch.Draw(
-            Main.PixelTexture,
+        Main.SpriteBatch().Draw(Main.PixelTexture(), Rectangle, ColorBorder);
+        Main.SpriteBatch().Draw(
+            Main.PixelTexture(),
             new Rectangle(
                 Rectangle.X + Thickness,
                 Rectangle.Y + Thickness,
