@@ -61,6 +61,7 @@ public class Control
         Z = new(Keys.Z),
         D6 = new(Keys.D6),
         D8 = new(Keys.D8);
+
     private static readonly Control[] Array =
     {
         Up, Down, Right, Left, Interact, Run, Weapon, Shield, Consumable, Catalyst,
@@ -68,7 +69,7 @@ public class Control
         KillApp, ToggleFullscreen, Pause, Enter, Backspace, Debug1, Debug2, Debug3,
         A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, D6, D8
     };
-    
+
     private Keys _keyCode;
     private bool _isPressed;
     private bool _isOnePressed;
@@ -79,7 +80,7 @@ public class Control
         _isPressed = false;
         _isOnePressed = false;
     }
-    
+
     public static void UpdateKeyListener()
     {
         foreach (var c in Array)
@@ -102,11 +103,24 @@ public class Control
         return Up.IsPressed() || Down.IsPressed() || Right.IsPressed() || Left.IsPressed();
     }
 
-    public void Set(Keys keyCode) => _keyCode = keyCode;
+    public void Set(Keys keyCode)
+        => _keyCode = keyCode;
 
-    public int KeyCode() => (int)_keyCode;
-    public bool IsPressed() => _isPressed;
-    public bool IsOnePressed() => _isOnePressed;
-    public static bool IsPressed(Keys key) => Keyboard.GetState().IsKeyDown(key);
+    public int KeyCode()
+        => (int)_keyCode;
+
+    public bool IsPressed()
+        => _isPressed;
+
+    public bool IsOnePressed()
+        => _isOnePressed;
+
+    public static bool IsPressed(Keys key)
+        => Keyboard.GetState().IsKeyDown(key);
+
+    public static bool IsClicked(bool right)
+        => right ?
+        Mouse.GetState().RightButton == ButtonState.Pressed:
+        Mouse.GetState().LeftButton == ButtonState.Pressed;
     
 }
