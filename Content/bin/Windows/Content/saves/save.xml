@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>0</lastSaveId>
+    <lastSaveId>1</lastSaveId>
     <s0>
       <map>104</map>
       <character>
         <name>M</name>
         <life>86000</life>
-        <souls>0</souls>
+        <souls>61000</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>452</x>
-          <y>303</y>
-          <orientation>0</orientation>
+          <x>509</x>
+          <y>318</y>
+          <orientation>1</orientation>
         </position>
         <attributes>
           <level>63</level>
@@ -75,19 +75,19 @@
       <map>104</map>
       <character>
         <name>Karim</name>
-        <life>68000</life>
-        <souls>0</souls>
+        <life>83000</life>
+        <souls>3214</souls>
         <isHuman>False</isHuman>
         <position>
-          <x>373</x>
-          <y>362</y>
-          <orientation>2</orientation>
+          <x>443</x>
+          <y>301</y>
+          <orientation>0</orientation>
         </position>
         <attributes>
-          <level>4</level>
-          <vitality>12</vitality>
-          <attunement>8</attunement>
-          <endurance>14</endurance>
+          <level>22</level>
+          <vitality>22</vitality>
+          <attunement>14</attunement>
+          <endurance>16</endurance>
           <strength>14</strength>
           <dexterity>9</dexterity>
           <resistance>11</resistance>

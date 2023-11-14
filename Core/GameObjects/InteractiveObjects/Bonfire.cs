@@ -1,4 +1,5 @@
-﻿using DarkSoulsRogue.Core.Interfaces;
+﻿using DarkSoulsRogue.Core.GameObjects.Entities;
+using DarkSoulsRogue.Core.Interfaces;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
@@ -117,6 +118,7 @@ public class Bonfire : InteractiveObject
             => LevelUpSheetArea.Y + (row+3) * SHeight + 3;
 
         private static int[] _oldValues, _addedValues;
+        private static int _newSouls;
         private static int _selectionId;
         
         internal static void Reset()
@@ -124,6 +126,7 @@ public class Bonfire : InteractiveObject
             _isLevelUpping = true;
             _oldValues = GameScreen.Character.Attributes.GetValues();
             _addedValues = new int[10];
+            _newSouls = GameScreen.Character.Souls;
             _selectionId = 1;
         }
 
@@ -132,6 +135,7 @@ public class Bonfire : InteractiveObject
             if (Control.Interact.IsOnePressed())
             {
                 Sounds.Play(Sounds.SMenuConfirm);
+                GameScreen.Character.Souls = _newSouls;
                 GameScreen.Character.Attributes.Increase(_addedValues);
                 _isLevelUpping = false;
             }
@@ -152,13 +156,20 @@ public class Bonfire : InteractiveObject
             }
             if (Control.MenuRight.IsOnePressed())
             {
+                if (_newSouls < SoulsToLevelUp())
+                {
+                    Sounds.Play(Sounds.SMenuBack);
+                    return;
+                }
                 Sounds.Play(Sounds.SMenuMove);
+                _newSouls -= SoulsToLevelUp();
                 _addedValues[_selectionId]++;
                 _addedValues[0]++;
             }
             if (Control.MenuLeft.IsOnePressed() && _addedValues[_selectionId] > 0)
             {
                 Sounds.Play(Sounds.SMenuMove);
+                _newSouls += SoulsToLevelUp();
                 _addedValues[_selectionId]--;
                 _addedValues[0]--;
             }
@@ -170,9 +181,13 @@ public class Bonfire : InteractiveObject
             Main.SpriteBatch.Draw(Main.PixelTexture, LevelUpSheetArea, Colors.Black);
             Main.SpriteBatch.Draw(Main.PixelTexture, new Rectangle(Sx(), Sy(_selectionId), LevelUpSheetArea.Width-8, SHeight), Colors.DarkGray);
             Main.SpriteBatch.DrawString(Fonts.FontBold18, GameScreen.Character.Name, pos + new Vector2(10, 10), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.Font16, "Souls :", pos + new Vector2(10, 40), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.Font18, _newSouls.ToString(), pos + new Vector2(100, 40), Colors.Yellow);
+            Main.SpriteBatch.DrawString(Fonts.Font16, "Needed :", pos + new Vector2(10, 60), Colors.White);
+            Main.SpriteBatch.DrawString(Fonts.Font18, SoulsToLevelUp().ToString(), pos + new Vector2(100, 60), _newSouls < SoulsToLevelUp() ? Colors.DarkRed : Colors.White);
             for (var i = 0; i < Attributes.NumAttributes; i++)
             {
-                var dY = i == 0 ? pos.Y + 60 : pos.Y + 80 + i * 32;
+                var dY = i == 0 ? pos.Y+60 : pos.Y+80 + i*32;
                 Main.SpriteBatch.Draw(Textures.IconsAttributes[i], pos + new Vector2(10, dY), Colors.White);
                 Main.SpriteBatch.DrawString(Fonts.Font16, Attributes.GetName(i), pos + new Vector2(45, dY+4), Colors.LightGray);
                 if (i == _selectionId)
@@ -180,8 +195,10 @@ public class Bonfire : InteractiveObject
                 else
                     Main.SpriteBatch.DrawString(Fonts.FontBold18, DrewValue(i), pos + new Vector2(182, dY+1), DrewColor(i));
             }
-            
         }
+        
+        private static int SoulsToLevelUp()
+            => GameScreen.Character.Attributes.SoulsToLevelUp(_oldValues[0] + _addedValues[0] + 1);
 
         private static string DrewValue(int i)
             => (_oldValues[i] + _addedValues[i]).ToString();

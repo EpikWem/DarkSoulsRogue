@@ -30,6 +30,8 @@ public static class GameScreen
     {
         if (Control.Debug1.IsOnePressed())
             Character.Attributes.Increase(Attributes.Attribute.Humanity, 1);
+        if (Control.Debug3.IsOnePressed())
+            Character.AddSouls(1000);
         
         if (Character.IsSpeaking) // if player is speaking to a Npc, skip entities update
         {

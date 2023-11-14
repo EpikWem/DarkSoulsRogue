@@ -49,7 +49,9 @@ public class Attributes
             _values[i] += values[i];
     }
 
-    public int SoulsToLevelUp(int newLevel) => newLevel switch
+    public int SoulsToLevelUp(int newLevel)
+    {
+        return newLevel switch
         {
             2 => 673,
             3 => 690,
@@ -61,9 +63,10 @@ public class Attributes
             9 => 793,
             10 => 811,
             11 => 829,
-            >= 12 => (int)Math.Ceiling(0.02 * (newLevel ^ 3) + 3.06 * (newLevel ^ 2) + 105.6 * newLevel - 895),
+            >= 12 => 1 + (int)(0.02f * Math.Pow((float)newLevel, 3) + 3.06f * Math.Pow((float)newLevel, 2) + 105.6f * newLevel - 895),
             _ => 1
         };
+    }
 
     public int[] GetValues()
     {
