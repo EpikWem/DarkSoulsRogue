@@ -36,7 +36,7 @@ public static class SaveSystem
         
         GameScreen.SetCurrentSaveId(saveId);
         
-        var root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
+        var root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId()];
         
         XmlNode node = root?["character"];
         character.Name = GetString(node?["name"]);
@@ -85,7 +85,7 @@ public static class SaveSystem
         
         SaveFile["XnaContent"]!["Asset"]!["lastSaveId"]!.InnerText = GameScreen.CurrentSaveId().ToString();
         
-        XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId];
+        XmlNode root = SaveFile["XnaContent"]?["Asset"]?["s" + GameScreen.CurrentSaveId()];
         
         root!["map"]!.InnerText = GameScreen.CurrentMap().Id.ToString();
 

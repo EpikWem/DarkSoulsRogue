@@ -47,9 +47,9 @@ public static class GameScreen
         
         if (Bonfire.Menu.IsActive()) // if player is resting to Bonfire, skip entities update
         {
-            if (Bonfire.IsLevelUpping())
+            if (LevelUpMenu.IsLevelUpping())
             {
-                Bonfire.LevelUpMenu.Update();
+                LevelUpMenu.Update();
                 return;
             }
            
@@ -107,9 +107,9 @@ public static class GameScreen
         if (Bonfire.Menu.IsActive())
         {
             Bonfire.Menu.Draw();
-            if (Bonfire.IsLevelUpping())
+            if (LevelUpMenu.IsLevelUpping())
             {
-                Bonfire.LevelUpMenu.Draw();
+                LevelUpMenu.Draw();
             }
         }
         if (BigMessage.IsActive())

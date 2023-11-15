@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent>
   <Asset>
-    <lastSaveId>1</lastSaveId>
+    <lastSaveId>2</lastSaveId>
     <s0>
       <map>104</map>
       <character>
@@ -141,20 +141,20 @@
       </objects>
     </s1>
     <s2>
-      <map>105</map>
+      <map>104</map>
       <character>
         <name>Batman</name>
-        <life>71000</life>
-        <souls>0</souls>
-        <isHuman>False</isHuman>
+        <life>74000</life>
+        <souls>535</souls>
+        <isHuman>True</isHuman>
         <position>
-          <x>469</x>
-          <y>388</y>
+          <x>461</x>
+          <y>180</y>
           <orientation>1</orientation>
         </position>
         <attributes>
-          <level>5</level>
-          <vitality>14</vitality>
+          <level>7</level>
+          <vitality>16</vitality>
           <attunement>10</attunement>
           <endurance>10</endurance>
           <strength>11</strength>
@@ -204,7 +204,7 @@
         <o2>0</o2>
         <o3>1</o3>
         <o4>0</o4>
-        <o5>1</o5>
+        <o5>2</o5>
         <o6>0</o6>
         <o7>0</o7>
       </objects>

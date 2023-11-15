@@ -45,22 +45,22 @@ public class SelectionBar
     {
         if (Control.Interact.IsOnePressed())
         {
-            Sounds.Play(Sounds.SMenuConfirm);
+            Sounds.Play(Sounds.IMenuConfirm);
             return true;
         }
         if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
         {
-            Sounds.Play(Sounds.SMenuBack);
+            Sounds.Play(Sounds.IMenuBack);
             _isActive = false;
         }
         if (Control.MenuUp.IsOnePressed() && _selectionId > 0)
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId--;
         }
         if (Control.MenuDown.IsOnePressed() && _selectionId < _choices.Length-1)
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId++;
         }
         return false;

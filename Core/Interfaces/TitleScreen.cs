@@ -58,7 +58,7 @@ public static class TitleScreen
         // the go back from settings menu (if settings is not waiting for a key change)
         if (_currentMenu == Menu.Settings && !SettingsMenu.IsWaitingForKey() && (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed()))
         {
-            Sounds.Play(Sounds.SMenuBack);
+            Sounds.Play(Sounds.IMenuBack);
             Activate();
             return false;
         }
@@ -106,23 +106,23 @@ public static class TitleScreen
         {
             if (Control.Interact.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuConfirm);
+                Sounds.Play(Sounds.IMenuConfirm);
                 ChangeMenu();
             }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _selectionId = LastChoice();
             }
 
             if (Control.MenuUp.IsOnePressed() && _selectionId > FirstChoice())
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _selectionId--;
             }
             if (Control.MenuDown.IsOnePressed() && _selectionId < LastChoice())
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _selectionId++;
             }
         }
@@ -177,7 +177,7 @@ public static class TitleScreen
         {
             if (Control.Interact.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuConfirm);
+                Sounds.Play(Sounds.IMenuConfirm);
                 if (_forNewSave != null)
                     _forNewSave.Value = _selectedGameId;
                 else
@@ -189,19 +189,19 @@ public static class TitleScreen
             }
             if (Control.MenuUp.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 if (_selectedGameId > FirstGameChoice())
                     _selectedGameId--;
             }
             if (Control.MenuDown.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 if (_selectedGameId < LastGameChoice())
                     _selectedGameId++;
             }
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuBack);
+                Sounds.Play(Sounds.IMenuBack);
                 Activate();
             }
         }
@@ -312,7 +312,7 @@ public static class TitleScreen
 
         private static void LastPhase()
         {
-            Sounds.Play(Sounds.SMenuBack);
+            Sounds.Play(Sounds.IMenuBack);
             switch (_phase)
             {
                 case Phase.Personalisation:
@@ -362,48 +362,48 @@ public static class TitleScreen
             {
                 if (Control.Interact.IsOnePressed())
                 {
-                    Sounds.Play(Sounds.SMenuConfirm);
+                    Sounds.Play(Sounds.IMenuConfirm);
                     IsConfirmed = true;
                 }
                 if (Control.MenuUp.IsOnePressed())
                 {
                     if (_selectedClass > FirstClassChoice())
                     {
-                        Sounds.Play(Sounds.SMenuMove);
+                        Sounds.Play(Sounds.IMenuMove);
                         _selectedClass--;
                     }
                     else
-                        Sounds.Play(Sounds.SMenuBack);
+                        Sounds.Play(Sounds.IMenuBack);
                 }
                 if (Control.MenuDown.IsOnePressed())
                 {
                     if (_selectedClass < LastClassChoice())
                     {
-                        Sounds.Play(Sounds.SMenuMove);
+                        Sounds.Play(Sounds.IMenuMove);
                         _selectedClass++;
                     }
                     else
-                        Sounds.Play(Sounds.SMenuBack);
+                        Sounds.Play(Sounds.IMenuBack);
                 }
                 if (Control.MenuRight.IsOnePressed())
                 {
                     if (_selectedClass < 5)
                     {
-                        Sounds.Play(Sounds.SMenuMove);
+                        Sounds.Play(Sounds.IMenuMove);
                         _selectedClass += 5;
                     }
                     else
-                        Sounds.Play(Sounds.SMenuBack);
+                        Sounds.Play(Sounds.IMenuBack);
                 }
                 if (Control.MenuLeft.IsOnePressed())
                 {
                     if (_selectedClass >= 5)
                     {
-                        Sounds.Play(Sounds.SMenuMove);
+                        Sounds.Play(Sounds.IMenuMove);
                         _selectedClass -= 5;
                     }
                     else
-                        Sounds.Play(Sounds.SMenuBack);
+                        Sounds.Play(Sounds.IMenuBack);
                 }
                 if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
                 {

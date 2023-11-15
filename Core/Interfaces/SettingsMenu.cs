@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using DarkSoulsRogue.Core.Statics;
 using DarkSoulsRogue.Core.System;
 using DarkSoulsRogue.Core.Utilities;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace DarkSoulsRogue.Core.Interfaces;
@@ -24,7 +22,7 @@ public static class SettingsMenu
 
     private static void SwitchMenu()
     {
-        Sounds.Play(Sounds.SMenuMove);
+        Sounds.Play(Sounds.IMenuMove);
         _inControlsMenu = !_inControlsMenu;
         GeneralMenu.Reinit();
         ControlsMenu.Reinit();
@@ -61,16 +59,17 @@ internal static class GeneralMenu
 
     private static int[] _levels;
     private static int _selection;
-    private static Bar _musicBar, _sfxBar, _ambientBar, _feetBar;
+    private static Bar _masterBar, _musicBar, _sfxBar, _ambientBar, _interfaceBar;
 
     internal static void Reinit()
     {
         _levels = Sounds.GetLevels();
         _selection = 0;
-        _musicBar = new Bar(new Vector2(40, 306), Colors.Orange, 2.0f);
-        _sfxBar = new Bar(new Vector2(40, 356), Colors.Orange, 2.0f);
-        _ambientBar = new Bar(new Vector2(40, 406), Colors.Orange, 2.0f);
-        _feetBar = new Bar(new Vector2(40, 456), Colors.Orange, 2.0f);
+        _masterBar = new Bar(new Vector2(40, 306), Colors.Orange, 2.0f);
+        _musicBar = new Bar(new Vector2(40, 356), Colors.Orange, 2.0f);
+        _sfxBar = new Bar(new Vector2(40, 406), Colors.Orange, 2.0f);
+        _ambientBar = new Bar(new Vector2(40, 456), Colors.Orange, 2.0f);
+        _interfaceBar = new Bar(new Vector2(40, 506), Colors.Orange, 2.0f);
     }
 
     internal static void Update()
@@ -79,7 +78,7 @@ internal static class GeneralMenu
         {
             if (_selection > 0)
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _selection--;
             }
         }
@@ -87,7 +86,7 @@ internal static class GeneralMenu
         {
             if (_selection < 3)
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _selection++;
             }
         }
@@ -95,23 +94,23 @@ internal static class GeneralMenu
         {
             if (_levels[_selection] < 100)
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _levels[_selection] += 10;
                 ApplyChanges();
             }
             else
-                Sounds.Play(Sounds.SMenuBack);
+                Sounds.Play(Sounds.IMenuBack);
         }
         if (Control.MenuLeft.IsOnePressed())
         {
             if (_levels[_selection] > 0)
             {
-                Sounds.Play(Sounds.SMenuMove);
+                Sounds.Play(Sounds.IMenuMove);
                 _levels[_selection] -= 10;
                 ApplyChanges();
             }
             else
-                Sounds.Play(Sounds.SMenuBack);
+                Sounds.Play(Sounds.IMenuBack);
         }
     }
 
@@ -119,14 +118,16 @@ internal static class GeneralMenu
     {
         Main.SpriteBatch().Draw(Main.PixelTexture(), new Rectangle(90, 298+50*_selection, 256, 40), Colors.Orange);
         Main.SpriteBatch().DrawString(Fonts.FontHumanityCounter, "General Settings", new Vector2(Camera.Width/2 - 260, 100), Colors.White);
+        _masterBar.Draw(Sounds.GetLevel(Sounds.Chanel.Master), 100);
+        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Master).ToString(), new Vector2(300, 300), Colors.White);
         _musicBar.Draw(Sounds.GetLevel(Sounds.Chanel.Music), 100);
-        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 300), Colors.White);
+        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Music).ToString(), new Vector2(300, 350), Colors.White);
         _sfxBar.Draw(Sounds.GetLevel(Sounds.Chanel.Sfx), 100);
-        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 350), Colors.White);
+        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Sfx).ToString(), new Vector2(300, 400), Colors.White);
         _ambientBar.Draw(Sounds.GetLevel(Sounds.Chanel.Ambient), 100);
-        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Ambient).ToString(), new Vector2(300, 400), Colors.White);
-        _feetBar.Draw(Sounds.GetLevel(Sounds.Chanel.Feet), 100);
-        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Feet).ToString(), new Vector2(300, 450), Colors.White);
+        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Ambient).ToString(), new Vector2(300, 450), Colors.White);
+        _interfaceBar.Draw(Sounds.GetLevel(Sounds.Chanel.Interface), 100);
+        Main.SpriteBatch().DrawString(Fonts.Font24, Sounds.GetLevel(Sounds.Chanel.Interface).ToString(), new Vector2(300, 500), Colors.White);
     }
 
     private static void ApplyChanges()
@@ -174,7 +175,7 @@ internal static class ControlsMenu
         {
             if (Control.MenuBack.IsOnePressed() || Control.Pause.IsOnePressed())
             {
-                Sounds.Play(Sounds.SMenuBack);
+                Sounds.Play(Sounds.IMenuBack);
                 WaitingForKey = false;
                 return;
             }
@@ -189,35 +190,35 @@ internal static class ControlsMenu
             SettingsSystem.Save(); // save to settings file
             WaitingForKey = false; // unfreeze menu
             JustChangedAKey = true;
-            Sounds.Play(Sounds.SMenuConfirm);
+            Sounds.Play(Sounds.IMenuConfirm);
             return;
         }
         
         if (Control.Interact.IsOnePressed()) // enter in changing mode
         {
-            Sounds.Play(Sounds.SMenuConfirm);
+            Sounds.Play(Sounds.IMenuConfirm);
             WaitingForKey = true;
             return;
         }
         
         if (Control.MenuUp.IsOnePressed() && _selectionId > FirstChoice())
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId--;
         }
         if (Control.MenuDown.IsOnePressed() && _selectionId < LastChoice())
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId++;
         }
         if (Control.MenuRight.IsOnePressed() && _selectionId < ThirdColumn)
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId += SecondColumn;
         }
         if (Control.MenuLeft.IsOnePressed() && _selectionId >= SecondColumn)
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selectionId -= SecondColumn;
         }
 

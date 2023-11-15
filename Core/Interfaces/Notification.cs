@@ -19,7 +19,7 @@ public static class Notification
     
     public static void Reset(string msg)
     {
-        Sounds.Play(Sounds.SMenuConfirm);
+        Sounds.Play(Sounds.IMenuConfirm);
         _isActive = true;
         _msg = msg;
     }
@@ -28,7 +28,7 @@ public static class Notification
     {
         if (Control.Interact.IsOnePressed())
         {
-            Sounds.Play(Sounds.SMenuConfirm);
+            Sounds.Play(Sounds.IMenuConfirm);
             _isActive = false;
         }
     }

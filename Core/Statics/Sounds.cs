@@ -10,18 +10,20 @@ public static class Sounds
     public static Music
         MTitle;
     public static Sfx
-        SBonfireRest, SBowShot, SChest, SMenuConfirm, SCrossbowReload, SCrossbowShot, SDeath, SEstus, SFirebomb, SFog,
-        SIllusoryWall, SInvasion, SItem, SMenuBack, SMenuMove, SMiracle, SMoss, SNewArea, SParry, SPyromancy, SRollHeavy,
-        SRollLight, SRollMedium, SRollNaked, SSorcery, SSoulsGain, SSoulUse, SStart, SVictory, SWarp;
-
+        SBonfireRest, SBowShot, SChest, SCrossbowReload, SCrossbowShot, SEstus, SFirebomb, SFog,
+        SIllusoryWall, SInvasion, SItem, SMiracle, SMoss, SParry, SPyromancy, SRollHeavy,
+        SRollLight, SRollMedium, SRollNaked, SSorcery, SSoulsGain, SSoulUse, SWarp;
+    public static Interface
+        IMenuConfirm, IDeath, IMenuBack, IMenuMove, INewArea, IStart, IVictory;
+    
     public class Music { internal Song Sound; internal Music(Song sound) => Sound = sound; }
     public class Sfx { internal SoundEffect Sound; internal Sfx(SoundEffect sound) => Sound = sound; }
     public class Ambient { internal Song Sound; internal Ambient(Song sound) => Sound = sound; }
-    public class Feet { internal SoundEffect Sound; internal Feet(SoundEffect sound) => Sound = sound; }
+    public class Interface { internal SoundEffect Sound; internal Interface(SoundEffect sound) => Sound = sound; }
 
     private static Music _currentSong;
     private static Ambient _currentAmbience;
-    public enum Chanel { Music, Sfx, Ambient, Feet }
+    public enum Chanel { Master, Music, Sfx, Ambient, Interface }
     private static int[] _levels;
 
     public static void Init(ContentManager content)
@@ -29,27 +31,23 @@ public static class Sounds
         MediaPlayer.IsRepeating = true;
         _currentSong = null;
         _currentAmbience = null;
-        _levels = new[] { 100, 100, 100, 100 };
+        _levels = new[] { 100, 100, 100, 100, 100 };
         
         MTitle = new Music(LoadM("title", content));
 
         SBonfireRest = new Sfx(LoadS("bonfirerest", content));
         SBowShot = new Sfx(LoadS("bowshot", content));
         SChest = new Sfx(LoadS("chest", content));
-        SMenuConfirm = new Sfx(LoadS("confirm", content));
         SCrossbowReload = new Sfx(LoadS("crossbowreload", content));
         SCrossbowShot = new Sfx(LoadS("crossbowshot", content));
-        SDeath = new Sfx(LoadS("death", content));
+        IDeath = new Interface(LoadS("death", content));
         SEstus = new Sfx(LoadS("estus", content));
         SFirebomb = new Sfx(LoadS("firebomb", content));
         SFog = new Sfx(LoadS("fog", content));
         SIllusoryWall = new Sfx(LoadS("illusorywall", content));
         SItem = new Sfx(LoadS("item", content));
-        SMenuBack = new Sfx(LoadS("menuback", content));
-        SMenuMove = new Sfx(LoadS("menumove", content));
         SMiracle = new Sfx(LoadS("miracle", content));
         SMoss = new Sfx(LoadS("moss", content));
-        SNewArea = new Sfx(LoadS("newarea", content));
         SParry = new Sfx(LoadS("parry", content));
         SPyromancy = new Sfx(LoadS("pyromancy", content));
         SRollHeavy = new Sfx(LoadS("rollheavy", content));
@@ -59,9 +57,14 @@ public static class Sounds
         SSorcery = new Sfx(LoadS("sorcery", content));
         SSoulsGain = new Sfx(LoadS("soulsgain", content));
         SSoulUse = new Sfx(LoadS("souluse", content));
-        SStart = new Sfx(LoadS("start", content));
-        SVictory = new Sfx(LoadS("victory", content));
         SWarp = new Sfx(LoadS("warp", content));
+        
+        IMenuConfirm = new Interface(LoadS("confirm", content));
+        IMenuBack = new Interface(LoadS("menuback", content));
+        IMenuMove = new Interface(LoadS("menumove", content));
+        INewArea = new Interface(LoadS("newarea", content));
+        IStart = new Interface(LoadS("start", content));
+        IVictory = new Interface(LoadS("victory", content));
     }
 
     private static Song LoadM(string name, ContentManager content)
@@ -85,8 +88,8 @@ public static class Sounds
     }
     public static void Play(Sfx sfx)
         => sfx.Sound.CreateInstance().Play();
-    public static void Play(Feet feet)
-        => feet.Sound.CreateInstance().Play();
+    public static void Play(Interface sound)
+        => sound.Sound.CreateInstance().Play();
 
     public static void StopMusic()
     {
@@ -101,8 +104,8 @@ public static class Sounds
     public static void SetLevels(int[] levels)
     {
         _levels = levels;
-        MediaPlayer.Volume = (float)_levels[(int)Chanel.Music] / 500;
-        SoundEffect.MasterVolume = (float)_levels[(int)Chanel.Sfx] / 100;
+        MediaPlayer.Volume = _levels[(int)Chanel.Music]*_levels[(int)Chanel.Master] / 40000f;
+        SoundEffect.MasterVolume = _levels[(int)Chanel.Sfx]*_levels[(int)Chanel.Master] / 50000f;
     }
 
 }

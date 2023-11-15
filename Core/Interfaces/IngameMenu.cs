@@ -20,7 +20,7 @@ public static class IngameMenu
     public static bool IsActive() => _isActive;
     public static void Activate()
     {
-        Sounds.Play(Sounds.SMenuConfirm);
+        Sounds.Play(Sounds.IMenuConfirm);
         _isActive = true;
         _inItemsMenu = false;
         _quitting = false;
@@ -30,7 +30,7 @@ public static class IngameMenu
     
     private static void SwitchMenu()
     {
-        Sounds.Play(Sounds.SMenuMove);
+        Sounds.Play(Sounds.IMenuMove);
         _inItemsMenu = !_inItemsMenu;
         if (_inItemsMenu)
             ItemsMenu.Reinit();
@@ -42,11 +42,11 @@ public static class IngameMenu
     {
         if (_quitting)
         {
-            Sounds.Play(Sounds.SMenuBack);
+            Sounds.Play(Sounds.IMenuBack);
         }
         else
         {
-            Sounds.Play(Sounds.SMenuConfirm);
+            Sounds.Play(Sounds.IMenuConfirm);
             QuitMenu.Reinit();
         }
         _quitting = !_quitting;
@@ -56,7 +56,7 @@ public static class IngameMenu
     {
         if (Control.Pause.IsOnePressed())
         {
-            Sounds.Play(Sounds.SMenuBack);
+            Sounds.Play(Sounds.IMenuBack);
             _isActive = false;
             return;
         }
@@ -148,7 +148,7 @@ internal static class QuitMenu
         {
             if (_selection) // if OK
             {
-                Sounds.Play(Sounds.SMenuConfirm);
+                Sounds.Play(Sounds.IMenuConfirm);
                 IngameMenu.Deactivate();
                 Main.GotoTitle();
                 return;
@@ -164,7 +164,7 @@ internal static class QuitMenu
         }
         if (Control.MenuRight.IsOnePressed() || Control.MenuLeft.IsOnePressed())
         {
-            Sounds.Play(Sounds.SMenuMove);
+            Sounds.Play(Sounds.IMenuMove);
             _selection = !_selection;
         }
     }

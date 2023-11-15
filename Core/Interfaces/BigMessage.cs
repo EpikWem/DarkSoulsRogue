@@ -17,8 +17,8 @@ public static class BigMessage
     private static Color _color;
 
     public static void Reset(string msg, int mrgX, Color color)
-        => Reset(msg, mrgX, color, Sounds.SNewArea);
-    public static void Reset(string msg, int mrgX, Color color, Sounds.Sfx sound)
+        => Reset(msg, mrgX, color, Sounds.INewArea);
+    public static void Reset(string msg, int mrgX, Color color, Sounds.Interface sound)
     {
         _isActive = true;
         _timer = 60 * 5;

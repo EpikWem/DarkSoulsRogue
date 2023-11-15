@@ -44,7 +44,7 @@ public static class SettingsSystem
         SetupControl(Control.MenuLeft, "menuLeft");
         SetupControl(Control.MenuBack, "menuBack");
         Sounds.SetLevels( new [] {
-            LoadLevel("music"), LoadLevel("sfx"), LoadLevel("ambient"), LoadLevel("feet")
+            LoadLevel("master"), LoadLevel("music"), LoadLevel("sfx"), LoadLevel("ambient"), LoadLevel("interface")
         });
     }
 
@@ -74,10 +74,11 @@ public static class SettingsSystem
         SaveControl(Control.MenuRight, "menuRight");
         SaveControl(Control.MenuLeft, "menuLeft");
         SaveControl(Control.MenuBack, "menuBack");
+        SaveLevel(Sounds.GetLevel(Sounds.Chanel.Master), "master");
         SaveLevel(Sounds.GetLevel(Sounds.Chanel.Music), "music");
         SaveLevel(Sounds.GetLevel(Sounds.Chanel.Sfx), "sfx");
         SaveLevel(Sounds.GetLevel(Sounds.Chanel.Ambient), "ambient");
-        SaveLevel(Sounds.GetLevel(Sounds.Chanel.Feet), "feet");
+        SaveLevel(Sounds.GetLevel(Sounds.Chanel.Interface), "interface");
         SettingsFile.Save(SettingsFilePath);
     }
 

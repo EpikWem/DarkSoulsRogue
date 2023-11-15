@@ -1324,11 +1324,11 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/chest.ogg
 
-#begin sounds/sfx/confirm.ogg
+#begin sounds/interface/confirm.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/confirm.ogg
+/build:sounds/interface/confirm.ogg
 
 #begin sounds/sfx/crossbowreload.ogg
 /importer:OggImporter
@@ -1342,11 +1342,11 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/crossbowshot.ogg
 
-#begin sounds/sfx/death.ogg
+#begin sounds/interface/death.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/death.ogg
+/build:sounds/interface/death.ogg
 
 #begin sounds/sfx/estus.ogg
 /importer:OggImporter
@@ -1384,17 +1384,17 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/item.ogg
 
-#begin sounds/sfx/menuback.ogg
+#begin sounds/interface/menuback.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/menuback.ogg
+/build:sounds/interface/menuback.ogg
 
-#begin sounds/sfx/menumove.ogg
+#begin sounds/interface/menumove.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/menumove.ogg
+/build:sounds/interface/menumove.ogg
 
 #begin sounds/sfx/miracle.ogg
 /importer:OggImporter
@@ -1408,11 +1408,11 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/moss.ogg
 
-#begin sounds/sfx/newarea.ogg
+#begin sounds/interface/newarea.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/newarea.ogg
+/build:sounds/interface/newarea.ogg
 
 #begin sounds/sfx/parry.ogg
 /importer:OggImporter
@@ -1468,17 +1468,17 @@
 /processorParam:Quality=Best
 /build:sounds/sfx/souluse.ogg
 
-#begin sounds/sfx/start.ogg
+#begin sounds/interface/start.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/start.ogg
+/build:sounds/interface/start.ogg
 
-#begin sounds/sfx/victory.ogg
+#begin sounds/interface/victory.ogg
 /importer:OggImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:sounds/sfx/victory.ogg
+/build:sounds/interface/victory.ogg
 
 #begin sounds/sfx/warp.ogg
 /importer:OggImporter

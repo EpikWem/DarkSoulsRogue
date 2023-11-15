@@ -22,10 +22,11 @@
       <menuBack>65</menuBack>
     </controls>
     <levels>
+      <master>100</master>
       <music>100</music>
       <sfx>100</sfx>
       <ambient>100</ambient>
-      <feet>100</feet>
+      <interface>100</interface>
     </levels>
   </Asset>
 </XnaContent>
