@@ -493,3 +493,10 @@ C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Co
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\newarea.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\start.xnb
 C:\Users\Lucas\Documents\2_DEVELOP\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\victory.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\confirm.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\death.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\menuback.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\menumove.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\newarea.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\start.xnb
+C:\Users\lucas\Documents\$_DIVERS\Code\CS\DarkSoulsRogue\bin\Debug\net6.0-windows\Content\sounds\interface\victory.xnb

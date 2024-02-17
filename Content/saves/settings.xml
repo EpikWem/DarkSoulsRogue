@@ -22,9 +22,9 @@
       <menuBack>65</menuBack>
     </controls>
     <levels>
-      <master>60</master>
-      <music>70</music>
-      <sfx>90</sfx>
+      <master>100</master>
+      <music>100</music>
+      <sfx>100</sfx>
       <ambient>100</ambient>
       <interface>100</interface>
     </levels>

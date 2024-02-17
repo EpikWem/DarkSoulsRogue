@@ -104,8 +104,8 @@ public static class Sounds
     public static void SetLevels(int[] levels)
     {
         _levels = levels;
-        MediaPlayer.Volume = _levels[(int)Chanel.Music]*_levels[(int)Chanel.Master] / 40000f;
-        SoundEffect.MasterVolume = _levels[(int)Chanel.Sfx]*_levels[(int)Chanel.Master] / 50000f;
+        MediaPlayer.Volume = _levels[(int)Chanel.Music]/100f * _levels[(int)Chanel.Master]/100f /8f;
+        SoundEffect.MasterVolume = _levels[(int)Chanel.Sfx]/100f * _levels[(int)Chanel.Master]/100f /8f;
     }
 
 }
